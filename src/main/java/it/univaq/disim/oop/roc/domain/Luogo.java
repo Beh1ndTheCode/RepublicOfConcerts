@@ -1,9 +1,18 @@
 package it.univaq.disim.oop.roc.domain;
 
 public abstract class Luogo {
-	
+
 	private Integer capienza;
 	private String settore;
+	private String citta;
+
+	public String getCitta() {
+		return citta;
+	}
+
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
 
 	public Integer getCapienza() {
 		return capienza;
