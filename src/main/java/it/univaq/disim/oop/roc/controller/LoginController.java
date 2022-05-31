@@ -11,32 +11,35 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 
 public class LoginController{
 	
 	@FXML
-	ImageView logo, imageView;
+	private Label loginErrorLabel;
 	
-	Text usarnameText, passwordText;
+	private ImageView logo, imageView;
 	
-	TextField usernameField;
+	private Text usarnameText, passwordText;
 	
-	PasswordField passwordField;
+	private TextField usernameField;
 	
-	Button loginButton;
+	private PasswordField passwordField;
+	
+	private Button loginButton;
 	
 	public void initialize(URL url, ResourceBundle rb) {
 		loginButton.disableProperty().bind(usernameField.textProperty().isEmpty().or(passwordField.textProperty().isEmpty()));
 	}
 	
 	public void loginAction(ActionEvent event) {
-		/* if(!("docente".equals(username.getText()) && ("docente".equals(password.getText())))) {
+	/*	 if(!("docente".equals(usernameField.getText()) && ("docente".equals(passwordField.getText())))) {
 			loginErrorLabel.setText("Username e/o password errati!");
 			} 
 		else {
 				Bisogna caricare la vista successiva
 		}
-		*/
+	*/
 	}
 }
 	
