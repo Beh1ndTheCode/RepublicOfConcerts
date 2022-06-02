@@ -4,7 +4,6 @@ public class Recensione {
 
 	private String titolo;
 	private String descrizione;
-
 	private Spettatore spettatore;
 	private Concerto concerto;
 

@@ -5,15 +5,33 @@ import java.util.Set;
 
 public class Artista {
 
-	private Set<Concerto> concerto = new HashSet<>();
+	private String nome;
+	private String descrizione;
+	private Set<Concerto> concerti = new HashSet<>();
 	private Set<Tour> tour = new HashSet<>();
 
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public Set<Concerto> getConcerto() {
-		return concerto;
+		return concerti;
 	}
 
 	public void setConcerto(Set<Concerto> concerto) {
-		this.concerto = concerto;
+		this.concerti = concerto;
 	}
 
 	public Set<Tour> getTour() {
