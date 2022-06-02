@@ -3,9 +3,9 @@ package it.univaq.disim.oop.roc.domain;
 public class Biglietto {
 
 	private Integer numeroBiglietto;
-	private Integer posto;
 	private String settore;
-
+	private Integer fila;
+	private Integer posto;
 	private Concerto concerto;
 	private Spettatore spettatore;
 
@@ -48,4 +48,13 @@ public class Biglietto {
 	public void setSettore(String settore) {
 		this.settore = settore;
 	}
+
+	public Integer getFila() {
+		return fila;
+	}
+
+	public void setFila(Integer fila) {
+		this.fila = fila;
+	}
+
 }

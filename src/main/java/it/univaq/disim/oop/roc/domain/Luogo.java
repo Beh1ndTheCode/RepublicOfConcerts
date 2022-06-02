@@ -1,10 +1,13 @@
 package it.univaq.disim.oop.roc.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Luogo {
 
-	private Integer capienza;
-	private String settore;
 	private String citta;
+	private Set<Concerto> concerti = new HashSet<>();
+	private Set<Settore> settori = new HashSet<>();
 
 	public String getCitta() {
 		return citta;
@@ -14,19 +17,20 @@ public abstract class Luogo {
 		this.citta = citta;
 	}
 
-	public Integer getCapienza() {
-		return capienza;
+	public Set<Concerto> getConcerti() {
+		return concerti;
 	}
 
-	public void setCapienza(Integer capienza) {
-		this.capienza = capienza;
+	public void setConcerti(Set<Concerto> concerti) {
+		this.concerti = concerti;
 	}
 
-	public String getSettore() {
-		return settore;
+	public Set<Settore> getSettori() {
+		return settori;
 	}
 
-	public void setSettore(String settore) {
-		this.settore = settore;
+	public void setSettori(Set<Settore> settori) {
+		this.settori = settori;
 	}
+
 }

@@ -6,31 +6,29 @@ import java.util.Set;
 
 public class Concerto {
 
-	private Integer prezzo;
 	private String scaletta;
-
 	private MetodoDiPagamento metodo;
 	private Tour tour;
 	private Luogo luogo;
 	private LocalDate dataConcerto;
-
-	private Set<Recensione> recensione = new HashSet<>();
-	private Set<Artista> artista = new HashSet<>();
+	private Set<Recensione> recensioni = new HashSet<>();
+	private Set<Artista> artisti = new HashSet<>();
+	private Set<Tariffa> tariffe = new HashSet<>();
 
 	public Set<Artista> getArtista() {
-		return artista;
+		return artisti;
 	}
 
 	public void setArtista(Set<Artista> artista) {
-		this.artista = artista;
+		this.artisti = artista;
 	}
 
 	public Set<Recensione> getRecensione() {
-		return recensione;
+		return recensioni;
 	}
 
 	public void setRecensione(Set<Recensione> recensione) {
-		this.recensione = recensione;
+		this.recensioni = recensione;
 	}
 
 	public MetodoDiPagamento getMetodo() {
@@ -65,14 +63,6 @@ public class Concerto {
 		this.metodo = metodo;
 	}
 
-	public Integer getPrezzo() {
-		return prezzo;
-	}
-
-	public void setPrezzo(Integer prezzo) {
-		this.prezzo = prezzo;
-	}
-
 	public String getScaletta() {
 		return scaletta;
 	}
@@ -80,4 +70,13 @@ public class Concerto {
 	public void setScaletta(String scaletta) {
 		this.scaletta = scaletta;
 	}
+
+	public Set<Tariffa> getTariffa() {
+		return tariffe;
+	}
+
+	public void setTariffa(Set<Tariffa> tariffa) {
+		this.tariffe = tariffa;
+	}
+
 }
