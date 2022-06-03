@@ -1,5 +1,6 @@
 package it.univaq.disim.oop.roc.controller;
 
+import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class LoginController{
+	
+	private ViewDispatcher dispatcher;
+	
+	public LoginController() {
+		dispatcher = ViewDispatcher.getInstance();
+	}
 	
 	@FXML
 	private Label loginErrorLabel;
@@ -45,7 +52,7 @@ public class LoginController{
 			loginErrorLabel.setText("Username e/o password errati!");
 			} 
 		else {
-				//Bisogna caricare la vista successiva
+			dispatcher.loggedIn();
 		}
 	}
 }
