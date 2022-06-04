@@ -9,7 +9,7 @@ public class Spettatore extends Utente {
 	private Set<MetodoDiPagamento> metodo = new HashSet<>();
 	private Set<Recensione> recensioniLasciate = new HashSet<>();
 	private Set<Biglietto> bigliettiPrenotati = new HashSet<>();
-	
+
 	public Set<Biglietto> getBigliettiPrenotati() {
 		return bigliettiPrenotati;
 	}
@@ -42,5 +42,4 @@ public class Spettatore extends Utente {
 		this.metodo = metodo;
 	}
 
-	
 }

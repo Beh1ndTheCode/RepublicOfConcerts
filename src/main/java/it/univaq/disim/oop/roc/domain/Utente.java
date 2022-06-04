@@ -4,7 +4,6 @@ public abstract class Utente {
 
 	private String nome;
 	private String cognome;
-	private Integer ID;
 	private String username;
 	private String password;
 
@@ -22,14 +21,6 @@ public abstract class Utente {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
-	}
-
-	public Integer getID() {
-		return ID;
-	}
-
-	public void setID(Integer iD) {
-		ID = iD;
 	}
 
 	public String getUsername() {

@@ -1,5 +1,10 @@
 package it.univaq.disim.oop.roc.controller;
 
+import it.univaq.disim.oop.roc.business.BusinessException;
+import it.univaq.disim.oop.roc.business.UtenteNotFoundException;
+import it.univaq.disim.oop.roc.business.UtenteService;
+import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,50 +15,55 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
-public class LoginController{
-	
-	private ViewDispatcher dispatcher;
-	
-	public LoginController() {
-		dispatcher = ViewDispatcher.getInstance();
-	}
-	
+public class LoginController {
+
 	@FXML
 	private Label loginErrorLabel;
-	
+
 	@FXML
 	private ImageView logo, imageView;
-	
+
 	@FXML
 	private Text usernameText, passwordText;
-	
+
 	@FXML
 	private TextField usernameField;
-	
+
 	@FXML
 	private PasswordField passwordField;
-	
+
 	@FXML
 	private Button loginButton;
-	
+
+	private UtenteService utenteService;
+
+	private ViewDispatcher dispatcher;
+
+	public LoginController() {
+		dispatcher = ViewDispatcher.getInstance();
+		utenteService = new RAMUtenteServiceImpl();
+	}
+
 	public void initialize() {
 		loginButton.setDisable(true);
 	}
-	
+
 	public void blockLoginButton() {
 		String username = usernameField.getText();
 		String password = passwordField.getText();
 		boolean isDisable = username.isEmpty() || password.isEmpty();
 		loginButton.setDisable(isDisable);
 	}
-	
+
 	public void loginAction(ActionEvent event) {
-		if(!("docente".equals(usernameField.getText()) && ("docente".equals(passwordField.getText())))) {
+		try {
+			Utente utente = utenteService.authenticate(usernameField.getText(), passwordField.getText());
+			dispatcher.loggedIn(utente);
+		} catch (UtenteNotFoundException e) {
 			loginErrorLabel.setText("Username e/o password errati!");
-			} 
-		else {
-			dispatcher.loggedIn();
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
 		}
 	}
+
 }
-	
