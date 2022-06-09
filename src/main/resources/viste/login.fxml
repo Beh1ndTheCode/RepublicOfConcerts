@@ -62,7 +62,7 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Button>
-      <ImageView fx:id="logo" fitHeight="202.0" fitWidth="251.0" layoutX="226.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logo" fitHeight="202.0" fitWidth="251.0" layoutX="220.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Rock-music-elements-on-transparent-background-PNG.png" />
          </image>

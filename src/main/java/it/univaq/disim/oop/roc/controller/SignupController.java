@@ -2,6 +2,7 @@
 package it.univaq.disim.oop.roc.controller;
 
 import it.univaq.disim.oop.roc.business.UtenteService;
+import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
@@ -28,6 +29,11 @@ public class SignupController {
 	private UtenteService utenteService;
 
 	private ViewDispatcher dispatcher;
+	
+	public SignupController() {
+		dispatcher = ViewDispatcher.getInstance();
+		utenteService = new RAMUtenteServiceImpl();
+	}
 
 	public void initialize() {
 		signupButton.setDisable(true);
@@ -50,5 +56,9 @@ public class SignupController {
 		// crea un oggetto utente invocando il metodo registration di utenteService
 		dispatcher.signedUp(utente);
 	}
-
+	
+	public void goToLoginView(ActionEvent event) throws Exception {
+		dispatcher.toLoginView();
+	}
+	
 }

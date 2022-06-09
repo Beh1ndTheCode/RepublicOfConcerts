@@ -14,7 +14,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class LoginController {
 
@@ -67,7 +66,7 @@ public class LoginController {
 		}
 	}
 	
-	public void goToSignupView(ActionEvent event, Stage stage) throws Exception {
-		dispatcher.signupView(stage);
+	public void goToSignupView(ActionEvent event) throws Exception {
+		dispatcher.toSignupView();
 	}
 }
