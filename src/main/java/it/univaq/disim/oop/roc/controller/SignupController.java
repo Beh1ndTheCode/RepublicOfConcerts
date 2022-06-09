@@ -11,25 +11,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class SigupController {
+public class SignupController {
 
 	@FXML
-	private Text usernameText, passwordText;
+	private Text usernameText, passwordText, ripetiPasswordText, nameText, surnameText, ageText;
 
 	@FXML
-	private TextField usernameField;
+	private TextField usernameField, nameField, ageField, surnameField;
 
 	@FXML
-	private PasswordField passwordField;
-
-	@FXML
-	private TextField nameField;
-
-	@FXML
-	private TextField surnameField;
-
-	@FXML
-	private TextField ageField;
+	private PasswordField passwordField, ripetiPasswordField;
 
 	@FXML
 	private Button signupButton;

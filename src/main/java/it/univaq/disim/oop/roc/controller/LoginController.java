@@ -14,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class LoginController {
 
@@ -33,7 +34,7 @@ public class LoginController {
 	private PasswordField passwordField;
 
 	@FXML
-	private Button loginButton;
+	private Button loginButton, signupViewButton;
 
 	private UtenteService utenteService;
 
@@ -65,5 +66,8 @@ public class LoginController {
 			dispatcher.renderError(e);
 		}
 	}
-
+	
+	public void goToSignupView(ActionEvent event, Stage stage) throws Exception {
+		dispatcher.signupView(stage);
+	}
 }

@@ -30,6 +30,14 @@ public class ViewDispatcher {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	public void signupView(Stage stage) throws ViewException {
+		this.stage = stage;
+		Parent SignupView = loadView("signup");
+		Scene scene = new Scene(SignupView);
+		stage.setScene(scene);
+		stage.show();
+	}
 
 	private BorderPane layout;
 

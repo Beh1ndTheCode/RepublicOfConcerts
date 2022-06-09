@@ -27,8 +27,8 @@ public class RAMUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public Utente registration(String username, String password, String nome, String cognome, Integer eta) {
-		Utente spettatore = new Spettatore();
+	public Spettatore registration(String username, String password, String nome, String cognome, Integer eta) {
+		Spettatore spettatore = new Spettatore();
 		spettatore.setUsername(username);
 		spettatore.setPassword(password);
 		spettatore.setNome(nome);
