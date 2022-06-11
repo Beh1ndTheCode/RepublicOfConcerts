@@ -13,7 +13,7 @@ import it.univaq.disim.oop.roc.domain.Tour;
 
 public interface ConcertoService {
 
-	Concerto add(String scaletta, MetodoDiPagamento metodo, Tour tour, Luogo luogo, LocalDate dataConcerto,
+	void add(String scaletta, MetodoDiPagamento metodo, Tour tour, Luogo luogo, LocalDate dataConcerto,
 			Set<Artista> artisti, Set<Tariffa> tariffe);
 
 	List<Concerto> findAllConcerti() throws BusinessException;

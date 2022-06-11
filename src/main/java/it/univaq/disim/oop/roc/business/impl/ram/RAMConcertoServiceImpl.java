@@ -20,7 +20,7 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	private Set<Concerto> concerti = new HashSet<>();
 
 	@Override
-	public Concerto add(String scaletta, MetodoDiPagamento metodo, Tour tour, Luogo luogo, LocalDate dataConcerto,
+	public void add(String scaletta, MetodoDiPagamento metodo, Tour tour, Luogo luogo, LocalDate dataConcerto,
 			Set<Artista> artisti, Set<Tariffa> tariffe) {
 		Concerto concerto = new Concerto();
 		concerto.setScaletta(scaletta);
@@ -29,7 +29,6 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		concerto.setLuogo(luogo);
 		concerto.setDataConcerto(dataConcerto);
 		concerto.setArtista(artisti);
-		return concerto;
 	}
 
 	@Override

@@ -16,11 +16,10 @@ public class RAMTourServiceImpl implements TourService {
 	private Set<Tour> tours = new HashSet<>();
 
 	@Override
-	public Tour add(Artista artista, Set<Concerto> concerti) {
+	public void add(Artista artista, Set<Concerto> concerti) {
 		Tour tour = new Tour();
 		tour.setArtista(artista);
 		tour.setConcerti(concerti);
-		return tour;
 	}
 
 	@Override

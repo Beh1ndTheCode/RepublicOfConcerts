@@ -9,7 +9,7 @@ import it.univaq.disim.oop.roc.domain.Tour;
 
 public interface TourService {
 
-	Tour add(Artista artista, Set<Concerto> concerti);
+	void add(Artista artista, Set<Concerto> concerti);
 
 	List<Tour> findAllTours() throws BusinessException;
 }
