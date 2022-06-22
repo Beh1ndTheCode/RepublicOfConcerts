@@ -4,7 +4,6 @@ public class Settore {
 
 	private String nome;
 	private Integer capienza;
-	private Integer fila;
 	private Integer posto;
 	private Luogo luogo;
 
@@ -22,14 +21,6 @@ public class Settore {
 
 	public void setCapienza(Integer capienza) {
 		this.capienza = capienza;
-	}
-
-	public Integer getFila() {
-		return fila;
-	}
-
-	public void setFila(Integer fila) {
-		this.fila = fila;
 	}
 
 	public Integer getPosto() {

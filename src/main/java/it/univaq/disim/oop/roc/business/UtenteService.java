@@ -12,6 +12,8 @@ public interface UtenteService {
 	void review(Concerto concerto, Recensione recensione, String titolo, String descrizione);
 
 	/*
-	 * void addMetodo(MetodoDiPagamento metodo, String nome, String nomeTitolare, String cognomeTitolare);
+	 * void addMetodo(MetodoDiPagamento metodo, String nome, String nomeTitolare,
+	 * String cognomeTitolare);
 	 */
+	
 }

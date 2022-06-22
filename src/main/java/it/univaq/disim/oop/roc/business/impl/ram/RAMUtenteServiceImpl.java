@@ -50,14 +50,16 @@ public class RAMUtenteServiceImpl implements UtenteService {
 		recensione.setDescrizione(descrizione);
 		recensioni.add(recensione);
 	}
-
+	
 	/*
-	 * public void addMetodo(MetodoDiPagamento metodo, String nome, String nomeTitolare, String cognomeTitolare) { 
-	 * metodo.setNome(nome);
-	 * metodo.setNomeTitolare(nomeTitolare);
-	 * metodo.setCognomeTitolare(cognomeTitolare); 
-	 * metodi.add(metodo); 
-	 * }
+	 * public void addMetodo(String tipo, MetodoDiPagamento metodo, String nome,
+	 * String nomeTitolare, String cognomeTitolare) {
+	 * if("bonifico".equalsIgnoreCase(tipo) { Bonifico bonifico = new Bonifico();
+	 * bonifico.setNome(nome); bonifico.setNomeTitolare(nomeTitolare);
+	 * bonifico.setCognomeTitolare(cognomeTitolare); metodi.add(bonifico); } else {
+	 * Carta carta = new Carta(); carta.setNome(nome);
+	 * carta.setNomeTitolare(nomeTitolare);
+	 * carta.setCognomeTitolare(cognomeTitolare); metodi.add(bonifico); }
 	 */
 
 }
