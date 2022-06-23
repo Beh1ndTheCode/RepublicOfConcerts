@@ -16,19 +16,27 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 	private Set<Luogo> luoghi = new HashSet<>();
 
+	private Set<Settore> settori = new HashSet<>();
+
 	@Override
-	public void add(String tipo, String citta, Set<Settore> settori) {
+	public void add(String tipo, String citta) {
 		if ("stadio".equalsIgnoreCase(tipo)) {
 			Stadio stadio = new Stadio();
 			stadio.setCitta(citta);
-			stadio.setSettori(settori);
+			luoghi.add(stadio);
 		}
 		if ("teatro".equalsIgnoreCase(tipo)) {
 			Teatro teatro = new Teatro();
 			teatro.setCitta(citta);
-			teatro.setSettori(settori);
+			luoghi.add(teatro);
 		}
 
+	}
+
+	public void updateSettore(Settore settore, String nome, Integer capienza) {
+		settore.setNome(nome);
+		settore.setCapienza(capienza);
+		settori.add(settore);
 	}
 
 	@Override
