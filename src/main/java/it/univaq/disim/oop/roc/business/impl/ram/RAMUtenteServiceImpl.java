@@ -16,9 +16,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 
 	private static Set<Recensione> recensioni = new HashSet<>();
 
-	/*
-	 * private static Set<MetodoDiPagamento> metodi = new HashSet<>();
-	 */
+	// private static Set<MetodoDiPagamento> metodi = new HashSet<>();
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {
@@ -34,32 +32,45 @@ public class RAMUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public Spettatore registration(String username, String password, String nome, String cognome, Integer eta) {
+	public Spettatore registration(String username, String password, String nome, String cognome, Integer eta)
+			throws BusinessException {
 		Spettatore spettatore = new Spettatore();
 		spettatore.setUsername(username);
 		spettatore.setPassword(password);
 		spettatore.setNome(nome);
 		spettatore.setCognome(cognome);
 		return spettatore;
-		// prende in input i valori inseriti dall'utente e crea un oggetto spettatore
 	}
 
-	public void review(Concerto concerto, Recensione recensione, String titolo, String descrizione) {
+	public void review(Recensione recensione, Spettatore spettatore, Concerto concerto, String titolo,
+			String descrizione) throws BusinessException {
+		recensione.setSpettatore(spettatore);
 		recensione.setConcerto(concerto);
 		recensione.setTitolo(titolo);
 		recensione.setDescrizione(descrizione);
 		recensioni.add(recensione);
 	}
-	
-	/*
-	 * public void addMetodo(String tipo, MetodoDiPagamento metodo, String nome,
-	 * String nomeTitolare, String cognomeTitolare) {
-	 * if("bonifico".equalsIgnoreCase(tipo) { Bonifico bonifico = new Bonifico();
-	 * bonifico.setNome(nome); bonifico.setNomeTitolare(nomeTitolare);
-	 * bonifico.setCognomeTitolare(cognomeTitolare); metodi.add(bonifico); } else {
-	 * Carta carta = new Carta(); carta.setNome(nome);
-	 * carta.setNomeTitolare(nomeTitolare);
-	 * carta.setCognomeTitolare(cognomeTitolare); metodi.add(bonifico); }
-	 */
 
+	/*
+	@Override
+	public void addMetodo(String tipo, MetodoDiPagamento metodo, String nome) throws BusinessException {
+		if ("bonifico".equalsIgnoreCase(tipo)) {
+			Bonifico bonifico = new Bonifico();
+			bonifico.setNome(nome);
+			// bonifico.getUtente().setNome();
+			// bonifico.getUtente().setCognome();
+			// bonifico.setIban();
+			metodi.add(bonifico);
+		} else {
+			Carta carta = new Carta();
+			carta.setNome(nome);
+			// carta.getUtente().setNome();
+			// carta.getUtente().setCognome();
+			// carta.setNumero();
+			// carta.setMeseScadenza();
+			// carta.setAnnoScadenza();
+			metodi.add(carta);
+		}
+	}
+	*/
 }

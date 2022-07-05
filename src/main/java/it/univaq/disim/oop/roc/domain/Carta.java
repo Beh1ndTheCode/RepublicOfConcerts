@@ -5,15 +5,6 @@ public class Carta extends MetodoDiPagamento {
 	private Integer numero;
 	private Integer meseScadenza;
 	private Integer annoScadenza;
-	private String indirizzoFatturazione;
-
-	public String getIndirizzoFatturazione() {
-		return indirizzoFatturazione;
-	}
-
-	public void setIndirizzoFatturazione(String indirizzoFatturazione) {
-		this.indirizzoFatturazione = indirizzoFatturazione;
-	}
 
 	public Integer getNumero() {
 		return numero;

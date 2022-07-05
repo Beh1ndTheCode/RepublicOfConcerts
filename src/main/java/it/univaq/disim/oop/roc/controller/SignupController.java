@@ -1,6 +1,7 @@
 
 package it.univaq.disim.oop.roc.controller;
 
+import it.univaq.disim.oop.roc.business.BusinessException;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.domain.Utente;
@@ -29,7 +30,7 @@ public class SignupController {
 	private UtenteService utenteService;
 
 	private ViewDispatcher dispatcher;
-	
+
 	public SignupController() {
 		dispatcher = ViewDispatcher.getInstance();
 		utenteService = new RAMUtenteServiceImpl();
@@ -51,14 +52,18 @@ public class SignupController {
 	}
 
 	public void signupAction(ActionEvent event) {
-		Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
-				nameField.getText(), surnameField.getText(), Integer.parseInt(ageField.getText()));
-		// crea un oggetto utente invocando il metodo registration di utenteService
-		dispatcher.signedUp(utente);
+		try {
+			Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
+					nameField.getText(), surnameField.getText(), Integer.parseInt(ageField.getText()));
+			// crea un oggetto utente invocando il metodo registration di utenteService
+			dispatcher.signedUp(utente);
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
 	}
-	
+
 	public void goToLoginView(ActionEvent event) throws Exception {
 		dispatcher.toLoginView();
 	}
-	
+
 }
