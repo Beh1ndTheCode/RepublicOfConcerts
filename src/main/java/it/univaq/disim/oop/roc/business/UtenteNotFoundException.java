@@ -1,5 +1,6 @@
 package it.univaq.disim.oop.roc.business;
 
+@SuppressWarnings("serial")
 public class UtenteNotFoundException extends BusinessException {
 
 	public UtenteNotFoundException() {

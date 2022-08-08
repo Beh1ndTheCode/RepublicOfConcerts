@@ -5,6 +5,7 @@ import it.univaq.disim.oop.roc.business.BusinessException;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.domain.Utente;
+import it.univaq.disim.oop.roc.exception.ViewException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class SignupController {
+public class SignupController implements DataInitializable<Utente> {
 
 	@FXML
 	private Text usernameText, passwordText, ripetiPasswordText, nameText, surnameText, ageText;
@@ -63,7 +64,12 @@ public class SignupController {
 	}
 
 	public void goToLoginView(ActionEvent event) throws Exception {
-		dispatcher.toLoginView();
+		try {
+			dispatcher.loginView();
+		} catch (ViewException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

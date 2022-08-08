@@ -2,6 +2,7 @@ package it.univaq.disim.oop.roc.viste;
 
 import java.io.IOException;
 
+import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exception.ViewException;
 import javafx.fxml.FXMLLoader;
@@ -12,59 +13,48 @@ import javafx.stage.Stage;
 
 public class ViewDispatcher {
 
+	private static final String RESOURCE_BASE = "/viste/";
+	private static final String FXML_SUFFIX = ".fxml";
+
 	private static ViewDispatcher instance = new ViewDispatcher();
+
+	private Stage stage;
+	private BorderPane layout;
 
 	private ViewDispatcher() {
 	}
 
-	public static ViewDispatcher getInstance() {
-		return instance;
-	}
-
-	private Stage stage;
-
 	public void loginView(Stage stage) throws ViewException {
 		this.stage = stage;
-		Parent loginView = loadView("login");
+		Parent loginView = loadView("login").getView();
 		Scene scene = new Scene(loginView);
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	public void toSignupView() throws ViewException {
-		Parent SignupView = loadView("signup");
-		Scene scene = new Scene(SignupView);
-		stage.setScene(scene);
-	}
-	
-	public void toLoginView() throws ViewException {
-		Parent LoginView = loadView("login");
-		Scene scene = new Scene(LoginView);
-		stage.setScene(scene);
-	}
 
-	private BorderPane layout;
+	public void loginView() throws ViewException {
+		Parent loginView = loadView("login").getView();
+		Scene scene = new Scene(loginView);
+		stage.setScene(scene);
+	}
 
 	public void loggedIn(Utente utente) {
 		try {
-			layout = (BorderPane) loadView("layout");
-			Parent home = loadView("home");
-			layout.setCenter(home);
+			View<Utente> layoutView = loadView("layout");
+			DataInitializable<Utente> layoutController = layoutView.getController();
+			layoutController.initializeData(utente);
+			layout = (BorderPane) layoutView.getView();
+			renderView("home", utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
 		} catch (ViewException e) {
-			e.printStackTrace();
 			renderError(e);
 		}
 	}
 
-	public void signedUp(Utente utente) {
-		// dovrà caricare una schermata di avvenuta registrazione o tornare al menu
-	}
-
 	public void logout() {
 		try {
-			Parent loginView = loadView("login");
+			Parent loginView = loadView("login").getView();
 			Scene scene = new Scene(loginView);
 			stage.setScene(scene);
 		} catch (ViewException e) {
@@ -72,31 +62,44 @@ public class ViewDispatcher {
 		}
 	}
 
-	public void renderView(String viewName) {
+	public <T> void renderView(String viewName, T data) {
 		try {
-			Parent view = loadView(viewName);
-			layout.setCenter(view);
+			View<T> view = loadView(viewName);
+			DataInitializable<T> controller = view.getController();
+			controller.initializeData(data);
+			layout.setCenter(view.getView());
 		} catch (ViewException e) {
 			renderError(e);
 		}
 	}
-
-	private static final String FXML_SUFFIX = ".fxml";
-	private static final String RESOURCE_BASE = "/viste/";
 
 	public void renderError(Exception e) {
 		e.printStackTrace();
 		System.exit(1);
 	}
 
-	private Parent loadView(String view) throws ViewException {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(RESOURCE_BASE + view + FXML_SUFFIX));
+	public static ViewDispatcher getInstance() {
+		return instance;
+	}
 
-			return loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new ViewException(e);
+	private <T> View<T> loadView(String viewName) throws ViewException {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(RESOURCE_BASE + viewName + FXML_SUFFIX));
+			Parent parent = (Parent) loader.load();
+			return new View<>(parent, loader.getController());
+
+		} catch (IOException ex) {
+			throw new ViewException(ex);
 		}
+	}
+
+	public void signupView() throws ViewException {
+		Parent SignupView = loadView("signup").getView();
+		Scene scene = new Scene(SignupView);
+		stage.setScene(scene);
+	}
+
+	public void signedUp(Utente utente) {
+		// dovrà caricare una schermata di avvenuta registrazione o tornare al menu
 	}
 }

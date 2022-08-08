@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
-public class LoginController {
+public class LoginController implements DataInitializable<Object> {
 
 	@FXML
 	private Label loginErrorLabel;
@@ -65,8 +65,8 @@ public class LoginController {
 			dispatcher.renderError(e);
 		}
 	}
-	
+
 	public void goToSignupView(ActionEvent event) throws Exception {
-		dispatcher.toSignupView();
+		dispatcher.signupView();
 	}
 }

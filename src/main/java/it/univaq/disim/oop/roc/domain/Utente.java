@@ -2,6 +2,7 @@ package it.univaq.disim.oop.roc.domain;
 
 public abstract class Utente {
 
+	private Integer id;
 	private String nome;
 	private String cognome;
 	private String username;
@@ -21,6 +22,14 @@ public abstract class Utente {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

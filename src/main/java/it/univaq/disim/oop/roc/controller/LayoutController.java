@@ -1,5 +1,6 @@
 package it.univaq.disim.oop.roc.controller;
 
+import it.univaq.disim.oop.roc.domain.Utente;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -9,32 +10,27 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class LayoutController {
-	
+public class LayoutController implements DataInitializable<Utente> {
+
 	@FXML
 	private BorderPane layout;
-	
+
 	@FXML
 	private Pane barraSuperiore;
-	
+
 	@FXML
 	private MenuButton buttoneMenu;
-	
+
 	@FXML
-	private MenuItem bottoneConcerti,bottoneTour,bottoneRecensioni,bottoneStrutture;
-	
+	private MenuItem bottoneConcerti, bottoneTour, bottoneRecensioni, bottoneStrutture;
+
 	@FXML
-	private ImageView iconaDiRicerca,bottoneProfilo;
-	
+	private ImageView iconaDiRicerca, bottoneProfilo;
+
 	@FXML
 	private TextField barraDiRicerca;
-	
+
 	@FXML
 	private Text titoloPagina;
-	
-	
-	
-	
-	
-	
+
 }
