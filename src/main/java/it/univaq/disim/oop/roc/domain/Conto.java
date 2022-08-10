@@ -1,6 +1,6 @@
 package it.univaq.disim.oop.roc.domain;
 
-public class Bonifico extends MetodoDiPagamento {
+public class Conto extends MetodoDiPagamento {
 
 	private String iban;
 

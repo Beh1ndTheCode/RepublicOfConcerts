@@ -18,9 +18,9 @@ public interface UtenteService {
 	void review(Recensione recensione, Spettatore spettatore, Concerto concerto, String titolo, String descrizione)
 			throws BusinessException;
 
-	/*
-	 * // TROVARE IL MODO DI SEPARARE GLI INPUT DI BONIFICI E CARTE void
-	 * addMetodo(String tipo, MetodoDiPagamento metodo, String nome) throws
-	 * BusinessException;
-	 */
+	void addConto(String nome, Spettatore spettatore, String iban) throws BusinessException;
+
+	void addCarta(String nome, Spettatore spettatore, Integer numero, Integer meseScadenza, Integer annoScadenza)
+			throws BusinessException;
+
 }
