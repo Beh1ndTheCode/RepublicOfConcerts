@@ -1,20 +1,26 @@
 
 package it.univaq.disim.oop.roc.controller;
 
-import it.univaq.disim.oop.roc.business.BusinessException;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.domain.Utente;
-import it.univaq.disim.oop.roc.exception.ViewException;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.EtaFormatException;
+import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class SignupController implements DataInitializable<Utente> {
+
+	@FXML
+	private Label etaErrorLabel, passwordErrorLabel;
 
 	@FXML
 	private Text usernameText, passwordText, ripetiPasswordText, nameText, surnameText, ageText;
@@ -55,9 +61,14 @@ public class SignupController implements DataInitializable<Utente> {
 	public void signupAction(ActionEvent event) {
 		try {
 			Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
-					nameField.getText(), surnameField.getText(), Integer.parseInt(ageField.getText()));
+					ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(),
+					Integer.parseInt(ageField.getText()));
 			// crea un oggetto utente invocando il metodo registration di utenteService
 			dispatcher.signedUp(utente);
+		} catch (InvalidPasswordException e) {
+			passwordErrorLabel.setText("Le password inserite non coincidono!");
+		} catch (EtaFormatException e) {
+			etaErrorLabel.setText("Inserisci un numero valido");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

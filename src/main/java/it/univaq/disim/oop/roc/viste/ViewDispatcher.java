@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Utente;
-import it.univaq.disim.oop.roc.exception.ViewException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

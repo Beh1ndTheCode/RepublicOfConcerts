@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import it.univaq.disim.oop.roc.business.BusinessException;
-import it.univaq.disim.oop.roc.business.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.domain.Amministratore;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 
 public class FileUtenteServiceImpl implements UtenteService {
 
@@ -19,7 +19,8 @@ public class FileUtenteServiceImpl implements UtenteService {
 			+ File.separator + "dati";
 	private static final String UTENTI_FILE_NAME = REPOSITORY_BASE + File.separator + "utenti.txt";
 	private static final String RECENSIONI_FILE_NAME = REPOSITORY_BASE + File.separator + "recensioni.txt";
-	// private static final String METODI_FILE_NAME = REPOSITORY_BASE + File.separator + "metodi.txt";
+	// private static final String METODI_FILE_NAME = REPOSITORY_BASE +
+	// File.separator + "metodi.txt";
 
 	@Override
 	public Utente authenticate(String username, String password) throws UtenteNotFoundException, BusinessException {
@@ -58,11 +59,10 @@ public class FileUtenteServiceImpl implements UtenteService {
 
 	}
 
-	
 	@Override
 	// TROVARE IL MODO PER COSTRUIRE L'OGGETTO SPETTATORE E RESTITUIRLO
-	public Utente registration(String username, String password, String nome, String cognome, Integer eta)
-			throws BusinessException {
+	public Utente registration(String username, String password, String confermaPassword, String nome, String cognome,
+			Integer eta) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
 
@@ -94,7 +94,6 @@ public class FileUtenteServiceImpl implements UtenteService {
 			throw new BusinessException(e);
 		}
 	}
-	
 
 	@Override
 	// AGGIUNGERE NOME CONCERTO NEL DOMAIN
@@ -127,47 +126,25 @@ public class FileUtenteServiceImpl implements UtenteService {
 	}
 
 	/*
-	@Override
-	public void addMetodo(String tipo, MetodoDiPagamento metodo, String nome) throws BusinessException {
-		try {
-			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {
-				Long contatore = fileData.getContatore();
-				writer.println(contatore + 1);
-				for (String[] righe : fileData.getRighe()) {
-					writer.println(String.join(Utility.SEPARATORE, righe));
-				}
-				StringBuilder row = new StringBuilder();
-				if("bonifico".equalsIgnoreCase(tipo)) {
-					row.append(contatore);
-					row.append(Utility.SEPARATORE);
-					row.append(nome);
-					row.append(Utility.SEPARATORE);
-					row.append(metodo.getUtente().getNome());
-					row.append(Utility.SEPARATORE);
-					row.append(metodo.getUtente().getCognome());
-					row.append(Utility.SEPARATORE);
-					//row.append(iban);
-					writer.println(row.toString());
-				} else {
-					row.append(contatore);
-					row.append(Utility.SEPARATORE);
-					row.append(nome);
-					row.append(Utility.SEPARATORE);
-					row.append(metodo.getUtente().getNome());
-					row.append(Utility.SEPARATORE);
-					row.append(metodo.getUtente().getCognome());
-					row.append(Utility.SEPARATORE);
-					//row.append(numero);
-					//row.append(meseScadenza);
-					//row.append(annoScadenza);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new BusinessException(e);
-			}
-		}
-	}
-	*/
+	 * @Override public void addMetodo(String tipo, MetodoDiPagamento metodo, String
+	 * nome) throws BusinessException { try { FileData fileData =
+	 * Utility.readAllRows(METODI_FILE_NAME); try (PrintWriter writer = new
+	 * PrintWriter(new File(METODI_FILE_NAME))) { Long contatore =
+	 * fileData.getContatore(); writer.println(contatore + 1); for (String[] righe :
+	 * fileData.getRighe()) { writer.println(String.join(Utility.SEPARATORE,
+	 * righe)); } StringBuilder row = new StringBuilder();
+	 * if("bonifico".equalsIgnoreCase(tipo)) { row.append(contatore);
+	 * row.append(Utility.SEPARATORE); row.append(nome);
+	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getNome());
+	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getCognome());
+	 * row.append(Utility.SEPARATORE); //row.append(iban);
+	 * writer.println(row.toString()); } else { row.append(contatore);
+	 * row.append(Utility.SEPARATORE); row.append(nome);
+	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getNome());
+	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getCognome());
+	 * row.append(Utility.SEPARATORE); //row.append(numero);
+	 * //row.append(meseScadenza); //row.append(annoScadenza); } } catch
+	 * (IOException e) { e.printStackTrace(); throw new BusinessException(e); } } }
+	 */
 
 }

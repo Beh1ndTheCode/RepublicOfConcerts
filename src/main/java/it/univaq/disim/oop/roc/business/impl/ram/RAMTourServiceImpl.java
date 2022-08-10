@@ -5,11 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import it.univaq.disim.oop.roc.business.BusinessException;
 import it.univaq.disim.oop.roc.business.TourService;
 import it.univaq.disim.oop.roc.domain.Artista;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tour;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMTourServiceImpl implements TourService {
 

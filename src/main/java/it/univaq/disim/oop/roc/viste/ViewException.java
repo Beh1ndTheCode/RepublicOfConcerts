@@ -1,4 +1,4 @@
-package it.univaq.disim.oop.roc.exception;
+package it.univaq.disim.oop.roc.viste;
 
 @SuppressWarnings("serial")
 public class ViewException extends Exception {

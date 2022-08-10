@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import it.univaq.disim.oop.roc.business.BusinessException;
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.domain.Artista;
 import it.univaq.disim.oop.roc.domain.Biglietto;
@@ -17,6 +16,7 @@ import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.domain.Tour;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMConcertoServiceImpl implements ConcertoService {
 

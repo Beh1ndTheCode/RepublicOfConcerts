@@ -1,10 +1,10 @@
 package it.univaq.disim.oop.roc.controller;
 
-import it.univaq.disim.oop.roc.business.BusinessException;
-import it.univaq.disim.oop.roc.business.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.domain.Utente;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -5,12 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import it.univaq.disim.oop.roc.business.BusinessException;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 

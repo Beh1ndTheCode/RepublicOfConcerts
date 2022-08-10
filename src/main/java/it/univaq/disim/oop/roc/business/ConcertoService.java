@@ -13,6 +13,7 @@ import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.domain.Tour;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface ConcertoService {
 

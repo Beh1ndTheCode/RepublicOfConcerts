@@ -1,7 +1,7 @@
 package it.univaq.disim.oop.roc;
 
-import it.univaq.disim.oop.roc.exception.ViewException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
