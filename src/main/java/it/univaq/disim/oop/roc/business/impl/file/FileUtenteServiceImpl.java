@@ -19,8 +19,7 @@ public class FileUtenteServiceImpl implements UtenteService {
 			+ File.separator + "dati";
 	private static final String UTENTI_FILE_NAME = REPOSITORY_BASE + File.separator + "utenti.txt";
 	private static final String RECENSIONI_FILE_NAME = REPOSITORY_BASE + File.separator + "recensioni.txt";
-	// private static final String METODI_FILE_NAME = REPOSITORY_BASE +
-	// File.separator + "metodi.txt";
+	private static final String METODI_FILE_NAME = REPOSITORY_BASE + File.separator + "metodi.txt";
 
 	@Override
 	public Utente authenticate(String username, String password) throws UtenteNotFoundException, BusinessException {
@@ -124,7 +123,6 @@ public class FileUtenteServiceImpl implements UtenteService {
 			throw new BusinessException(e);
 		}
 	}
-
 	/*
 	 * @Override public void addMetodo(String tipo, MetodoDiPagamento metodo, String
 	 * nome) throws BusinessException { try { FileData fileData =
@@ -137,14 +135,69 @@ public class FileUtenteServiceImpl implements UtenteService {
 	 * row.append(Utility.SEPARATORE); row.append(nome);
 	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getNome());
 	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getCognome());
-	 * row.append(Utility.SEPARATORE); //row.append(iban);
+	 * row.append(Utility.SEPARATORE); row.append(iban);
 	 * writer.println(row.toString()); } else { row.append(contatore);
 	 * row.append(Utility.SEPARATORE); row.append(nome);
 	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getNome());
 	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getCognome());
-	 * row.append(Utility.SEPARATORE); //row.append(numero);
-	 * //row.append(meseScadenza); //row.append(annoScadenza); } } catch
-	 * (IOException e) { e.printStackTrace(); throw new BusinessException(e); } } }
+	 * row.append(Utility.SEPARATORE); row.append(numero); row.append(meseScadenza);
+	 * row.append(annoScadenza); } } catch (IOException e) { e.printStackTrace();
+	 * throw new BusinessException(e); } } }
 	 */
 
+	@Override
+	public void addConto(String nome, Spettatore spettatore, String iban) throws BusinessException {
+		try {
+			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
+			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {
+				Long contatore = fileData.getContatore();
+				writer.println(contatore + 1);
+				for (String[] righe : fileData.getRighe()) {
+					writer.println(String.join(Utility.SEPARATORE, righe));
+				}
+				StringBuilder row = new StringBuilder();
+				row.append(contatore);
+				row.append(Utility.SEPARATORE);
+				row.append(nome);
+				row.append(Utility.SEPARATORE);
+				row.append(spettatore);
+				row.append(Utility.SEPARATORE);
+				row.append(iban);
+				writer.println(row.toString());
+			}
+		} catch (IOException e) {
+			throw new BusinessException(e);
+		}
+	}
+
+	@Override
+	public void addCarta(String nome, Spettatore spettatore, Integer numero, Integer meseScadenza, Integer annoScadenza)
+			throws BusinessException {
+		try {
+			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
+			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {
+				Long contatore = fileData.getContatore();
+				writer.println(contatore + 1);
+				for (String[] righe : fileData.getRighe()) {
+					writer.println(String.join(Utility.SEPARATORE, righe));
+				}
+				StringBuilder row = new StringBuilder();
+				row.append(contatore);
+				row.append(Utility.SEPARATORE);
+				row.append(nome);
+				row.append(Utility.SEPARATORE);
+				row.append(spettatore);
+				row.append(Utility.SEPARATORE);
+				row.append(numero);
+				row.append(Utility.SEPARATORE);
+				row.append(meseScadenza);
+				row.append(Utility.SEPARATORE);
+				row.append(annoScadenza);
+				writer.println(row.toString());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
+	}
 }

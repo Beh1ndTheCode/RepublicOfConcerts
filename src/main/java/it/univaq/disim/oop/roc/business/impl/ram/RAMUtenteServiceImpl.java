@@ -5,7 +5,10 @@ import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.domain.Amministratore;
+import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Conto;
+import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
@@ -18,7 +21,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 
 	private static Set<Recensione> recensioni = new HashSet<>();
 
-	// private static Set<MetodoDiPagamento> metodi = new HashSet<>();
+	private static Set<MetodoDiPagamento> metodi = new HashSet<>();
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {
@@ -29,6 +32,14 @@ public class RAMUtenteServiceImpl implements UtenteService {
 			amministratore.setNome("mario");
 			amministratore.setCognome("rossi");
 			return amministratore;
+		}
+		if ("spettatore".equalsIgnoreCase(username)) {
+			Utente spettatore = new Spettatore();
+			spettatore.setUsername(username);
+			spettatore.setPassword(password);
+			spettatore.setNome("luigi");
+			spettatore.setCognome("bianchi");
+			return spettatore;
 		}
 		throw new UtenteNotFoundException();
 	}
@@ -59,14 +70,24 @@ public class RAMUtenteServiceImpl implements UtenteService {
 		recensioni.add(recensione);
 	}
 
-	/*
-	 * @Override public void addMetodo(String tipo, MetodoDiPagamento metodo, String
-	 * nome) throws BusinessException { if ("bonifico".equalsIgnoreCase(tipo)) {
-	 * Bonifico bonifico = new Bonifico(); bonifico.setNome(nome); //
-	 * bonifico.getUtente().setNome(); // bonifico.getUtente().setCognome(); //
-	 * bonifico.setIban(); metodi.add(bonifico); } else { Carta carta = new Carta();
-	 * carta.setNome(nome); // carta.getUtente().setNome(); //
-	 * carta.getUtente().setCognome(); // carta.setNumero(); //
-	 * carta.setMeseScadenza(); // carta.setAnnoScadenza(); metodi.add(carta); } }
-	 */
+	@Override
+	public void addConto(String nome, Spettatore spettatore, String iban) throws BusinessException {
+		Conto conto = new Conto();
+		conto.setNome(nome);
+		conto.setUtente(spettatore);
+		conto.setIban(iban);
+		metodi.add(conto);
+	}
+
+	public void addCarta(String nome, Spettatore spettatore, Integer numero, Integer meseScadenza, Integer annoScadenza)
+			throws BusinessException {
+		Carta carta = new Carta();
+		carta.setNome(nome);
+		carta.setUtente(spettatore);
+		carta.setNumero(numero);
+		carta.setMeseScadenza(meseScadenza);
+		carta.setAnnoScadenza(annoScadenza);
+		metodi.add(carta);
+	}
+
 }
