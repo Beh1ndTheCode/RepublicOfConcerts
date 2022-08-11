@@ -54,7 +54,7 @@
                   </Lighting>
                </effect>
             </ImageView>
-            <ImageView fx:id="bottoneUscita" fitHeight="36.0" fitWidth="36.0" layoutX="544.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bottoneUscita" fitHeight="36.0" fitWidth="36.0" layoutX="544.0" layoutY="12.0" onMousePressed="#exitToLoginVIew" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/exit%20icon.png" />
                </image>

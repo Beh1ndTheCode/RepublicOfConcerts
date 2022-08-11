@@ -4,6 +4,8 @@ import it.univaq.disim.oop.roc.domain.Amministratore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import it.univaq.disim.oop.roc.viste.ViewException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -14,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class LayoutController implements DataInitializable<Utente> {
+	
 	
 	@FXML
 	private BorderPane layout;
@@ -36,9 +39,10 @@ public class LayoutController implements DataInitializable<Utente> {
 	@FXML
 	private Text titoloPagina;
 
+	private ViewDispatcher dispatcher;
 	
 	public LayoutController() {
-		ViewDispatcher.getInstance();
+		dispatcher = ViewDispatcher.getInstance();
 	}
 	
 	public void initializeData(Utente utente){
@@ -54,6 +58,14 @@ public class LayoutController implements DataInitializable<Utente> {
 			bottoneMenu.getItems().add(new MenuItem("concerti"));
 			bottoneMenu.getItems().add(new MenuItem("tour"));
 			bottoneMenu.getItems().add(new MenuItem("artisti"));
+		}
+	}
+	
+	public void exitToLoginVIew() throws Exception {
+		try {
+			dispatcher.loginView();
+		} catch (ViewException e) {
+			e.printStackTrace();
 		}
 	}
 }
