@@ -10,11 +10,11 @@ public class HomeController implements DataInitializable<Utente> {
 	private Label benvenutoLabel;
 	
 	 public void initializeData(Utente utente) { 
-	 StringBuilder testo = new StringBuilder(); 
-	 testo.append("Benvenuto "); 
-	 testo.append(utente.getNome());
-	 testo.append(" "); 
-	 testo.append(utente.getCognome());
-	 benvenutoLabel.setText(testo.toString()); 
+		 StringBuilder testo = new StringBuilder(); 
+		 testo.append("Benvenuto "); 
+		 testo.append(utente.getNome());
+		 testo.append(" "); 
+		 testo.append(utente.getCognome());
+		 benvenutoLabel.setText(testo.toString()); 
 	 }
 }
