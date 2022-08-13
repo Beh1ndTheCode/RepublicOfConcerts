@@ -2,8 +2,17 @@ package it.univaq.disim.oop.roc.domain;
 
 public abstract class MetodoDiPagamento {
 
+	private Integer id;
 	private String nome;
 	private Utente utente;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;

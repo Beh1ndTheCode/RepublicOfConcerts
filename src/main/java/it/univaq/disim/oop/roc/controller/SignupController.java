@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -64,12 +63,11 @@ public class SignupController implements DataInitializable<Utente> {
 			Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
 					ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(),
 					Integer.parseInt(ageField.getText()));
-			// crea un oggetto utente invocando il metodo registration di utenteService
 			dispatcher.signedUp(utente);
 		} catch (InvalidPasswordException e) {
 			passwordErrorLabel.setText("Le password non coincidono!");
 		} catch (EtaFormatException e) {
-			etaErrorLabel.setText("età non valido");
+			etaErrorLabel.setText("Età non valida");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
@@ -81,7 +79,6 @@ public class SignupController implements DataInitializable<Utente> {
 		} catch (ViewException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

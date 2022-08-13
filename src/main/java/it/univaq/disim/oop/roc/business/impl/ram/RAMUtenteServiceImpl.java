@@ -1,13 +1,13 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.domain.Amministratore;
-import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;
@@ -21,7 +21,8 @@ public class RAMUtenteServiceImpl implements UtenteService {
 
 	private static Set<Recensione> recensioni = new HashSet<>();
 
-	private static Set<MetodoDiPagamento> metodi = new HashSet<>();
+	private static List<MetodoDiPagamento> metodiAggiunti = new ArrayList<>();
+	private static int idCounterMetodi = 1;
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {
@@ -71,23 +72,18 @@ public class RAMUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public void addConto(String nome, Spettatore spettatore, String iban) throws BusinessException {
-		Conto conto = new Conto();
-		conto.setNome(nome);
-		conto.setUtente(spettatore);
-		conto.setIban(iban);
-		metodi.add(conto);
+	// Differenziare tra Conto e Carta
+	public void addMetodo(MetodoDiPagamento metodo) throws BusinessException {
+		metodo.setId(idCounterMetodi++);
+		metodiAggiunti.add(metodo);
 	}
 
-	public void addCarta(String nome, Spettatore spettatore, Integer numero, Integer meseScadenza, Integer annoScadenza)
-			throws BusinessException {
-		Carta carta = new Carta();
-		carta.setNome(nome);
-		carta.setUtente(spettatore);
-		carta.setNumero(numero);
-		carta.setMeseScadenza(meseScadenza);
-		carta.setAnnoScadenza(annoScadenza);
-		metodi.add(carta);
+	@Override
+	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
+		for (MetodoDiPagamento met : metodiAggiunti) {
+			if (metodo.getId() == met.getId()) {
+				metodiAggiunti.remove(met);
+			}
+		}
 	}
-
 }

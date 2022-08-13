@@ -1,6 +1,7 @@
 package it.univaq.disim.oop.roc.business;
 
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
@@ -18,9 +19,7 @@ public interface UtenteService {
 	void review(Recensione recensione, Spettatore spettatore, Concerto concerto, String titolo, String descrizione)
 			throws BusinessException;
 
-	void addConto(String nome, Spettatore spettatore, String iban) throws BusinessException;
+	void addMetodo(MetodoDiPagamento metodo) throws BusinessException;
 
-	void addCarta(String nome, Spettatore spettatore, Integer numero, Integer meseScadenza, Integer annoScadenza)
-			throws BusinessException;
-
+	void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException;
 }

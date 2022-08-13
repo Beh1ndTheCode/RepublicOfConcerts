@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.domain.Amministratore;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
@@ -95,7 +96,6 @@ public class FileUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	// AGGIUNGERE NOME CONCERTO NEL DOMAIN
 	public void review(Recensione recensione, Spettatore spettatore, Concerto concerto, String titolo,
 			String descrizione) throws BusinessException {
 		try {
@@ -111,8 +111,8 @@ public class FileUtenteServiceImpl implements UtenteService {
 				row.append(Utility.SEPARATORE);
 				row.append(spettatore.getUsername());
 				row.append(Utility.SEPARATORE);
-				// row.append(concerto);
-				// row.append(Utility.SEPARATORE);
+				row.append(concerto);
+				row.append(Utility.SEPARATORE);
 				row.append(titolo);
 				row.append(Utility.SEPARATORE);
 				row.append(descrizione);
@@ -123,30 +123,10 @@ public class FileUtenteServiceImpl implements UtenteService {
 			throw new BusinessException(e);
 		}
 	}
-	/*
-	 * @Override public void addMetodo(String tipo, MetodoDiPagamento metodo, String
-	 * nome) throws BusinessException { try { FileData fileData =
-	 * Utility.readAllRows(METODI_FILE_NAME); try (PrintWriter writer = new
-	 * PrintWriter(new File(METODI_FILE_NAME))) { Long contatore =
-	 * fileData.getContatore(); writer.println(contatore + 1); for (String[] righe :
-	 * fileData.getRighe()) { writer.println(String.join(Utility.SEPARATORE,
-	 * righe)); } StringBuilder row = new StringBuilder();
-	 * if("bonifico".equalsIgnoreCase(tipo)) { row.append(contatore);
-	 * row.append(Utility.SEPARATORE); row.append(nome);
-	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getNome());
-	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getCognome());
-	 * row.append(Utility.SEPARATORE); row.append(iban);
-	 * writer.println(row.toString()); } else { row.append(contatore);
-	 * row.append(Utility.SEPARATORE); row.append(nome);
-	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getNome());
-	 * row.append(Utility.SEPARATORE); row.append(metodo.getUtente().getCognome());
-	 * row.append(Utility.SEPARATORE); row.append(numero); row.append(meseScadenza);
-	 * row.append(annoScadenza); } } catch (IOException e) { e.printStackTrace();
-	 * throw new BusinessException(e); } } }
-	 */
 
 	@Override
-	public void addConto(String nome, Spettatore spettatore, String iban) throws BusinessException {
+	// Differenziare tra Conto e Carta
+	public void addMetodo(MetodoDiPagamento metodo) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
 			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {
@@ -158,11 +138,11 @@ public class FileUtenteServiceImpl implements UtenteService {
 				StringBuilder row = new StringBuilder();
 				row.append(contatore);
 				row.append(Utility.SEPARATORE);
-				row.append(nome);
+				row.append(metodo.getNome());
 				row.append(Utility.SEPARATORE);
-				row.append(spettatore);
+				row.append(metodo.getUtente().getNome());
 				row.append(Utility.SEPARATORE);
-				row.append(iban);
+				row.append(metodo.getUtente().getCognome());
 				writer.println(row.toString());
 			}
 		} catch (IOException e) {
@@ -171,33 +151,8 @@ public class FileUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public void addCarta(String nome, Spettatore spettatore, Integer numero, Integer meseScadenza, Integer annoScadenza)
-			throws BusinessException {
-		try {
-			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {
-				Long contatore = fileData.getContatore();
-				writer.println(contatore + 1);
-				for (String[] righe : fileData.getRighe()) {
-					writer.println(String.join(Utility.SEPARATORE, righe));
-				}
-				StringBuilder row = new StringBuilder();
-				row.append(contatore);
-				row.append(Utility.SEPARATORE);
-				row.append(nome);
-				row.append(Utility.SEPARATORE);
-				row.append(spettatore);
-				row.append(Utility.SEPARATORE);
-				row.append(numero);
-				row.append(Utility.SEPARATORE);
-				row.append(meseScadenza);
-				row.append(Utility.SEPARATORE);
-				row.append(annoScadenza);
-				writer.println(row.toString());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new BusinessException(e);
-		}
+	// Completare
+	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
+
 	}
 }
