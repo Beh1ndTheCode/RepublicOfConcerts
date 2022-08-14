@@ -1,15 +1,7 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.domain.Amministratore;
-import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
-import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -18,11 +10,6 @@ import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 
 public class RAMUtenteServiceImpl implements UtenteService {
-
-	private static Set<Recensione> recensioni = new HashSet<>();
-
-	private static List<MetodoDiPagamento> metodiAggiunti = new ArrayList<>();
-	private static int idCounterMetodi = 1;
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {
@@ -62,28 +49,4 @@ public class RAMUtenteServiceImpl implements UtenteService {
 		throw new EtaFormatException();
 	}
 
-	public void review(Recensione recensione, Spettatore spettatore, Concerto concerto, String titolo,
-			String descrizione) throws BusinessException {
-		recensione.setSpettatore(spettatore);
-		recensione.setConcerto(concerto);
-		recensione.setTitolo(titolo);
-		recensione.setDescrizione(descrizione);
-		recensioni.add(recensione);
-	}
-
-	@Override
-	// Differenziare tra Conto e Carta
-	public void addMetodo(MetodoDiPagamento metodo) throws BusinessException {
-		metodo.setId(idCounterMetodi++);
-		metodiAggiunti.add(metodo);
-	}
-
-	@Override
-	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
-		for (MetodoDiPagamento met : metodiAggiunti) {
-			if (metodo.getId() == met.getId()) {
-				metodiAggiunti.remove(met);
-			}
-		}
-	}
 }
