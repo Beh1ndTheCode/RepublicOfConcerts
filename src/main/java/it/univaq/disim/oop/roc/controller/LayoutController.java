@@ -5,7 +5,9 @@ import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import it.univaq.disim.oop.roc.viste.ViewException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -40,7 +42,10 @@ public class LayoutController implements DataInitializable<Utente> {
 	private ViewDispatcher dispatcher;
 
 	private Utente profilo;
-		
+	
+	private static final MenuItem[] MENU_AMMINISTRATORE = {new MenuItem("concerti"), new MenuItem("tour"), new MenuItem("artisti"), new MenuItem("recensioni")};
+	private static final MenuItem[] MENU_SPETTATORE = {new MenuItem("concerti"), new MenuItem("tour"), new MenuItem("artisti")};	
+	
 	public LayoutController() {
 		dispatcher = ViewDispatcher.getInstance(); 
 	}
@@ -48,18 +53,19 @@ public class LayoutController implements DataInitializable<Utente> {
 	public void initializeData(Utente utente) {
 		profilo = utente;
 		if (utente instanceof Amministratore) {
-			bottoneMenu.setText("gestisci");
-			bottoneMenu.getItems().add(new MenuItem("concerti"));
-			bottoneMenu.getItems().add(new MenuItem("tour"));
-			bottoneMenu.getItems().add(new MenuItem("artisti"));
-			bottoneMenu.getItems().add(new MenuItem("recensioni"));
+			bottoneMenu.setText("gestione");
+			for (MenuItem menu:MENU_AMMINISTRATORE) {
+				bottoneMenu.getItems().add(menu);
+				menu.setOnAction(e -> dispatcher.renderView("gestione "+menu.getText(), profilo));
+			}
 			bottoneProfilo.setVisible(false);
 		}
 		if (utente instanceof Spettatore) {
-			bottoneMenu.setText("menu");
-			bottoneMenu.getItems().add(new MenuItem("concerti"));
-			bottoneMenu.getItems().add(new MenuItem("tour"));
-			bottoneMenu.getItems().add(new MenuItem("artisti"));
+			bottoneMenu.setText("menù");
+			for (MenuItem menu:MENU_SPETTATORE) {
+				bottoneMenu.getItems().add(menu);
+				menu.setOnAction(event -> dispatcher.renderView(menu.getText(), profilo));
+			}
 		}
 	}
 
@@ -73,5 +79,6 @@ public class LayoutController implements DataInitializable<Utente> {
 	
 	public void goToProgiloView() throws Exception {
 			dispatcher.renderView("profilo", profilo);
+			titoloPagina.setText("Profilo");
 	}
 }

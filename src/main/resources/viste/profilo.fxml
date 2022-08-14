@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.ProfiloController" />
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="it.univaq.disim.oop.roc.controller.ProfiloController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="585.0">
+         <children>
+            <Text layoutX="83.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nome" wrappingWidth="103.43359375" />
+            <Text layoutX="83.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cognome" wrappingWidth="73.43359375" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>
