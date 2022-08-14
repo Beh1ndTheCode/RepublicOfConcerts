@@ -1,4 +1,4 @@
-package it.univaq.disim.oop.roc.business.impl;
+package it.univaq.disim.oop.roc.business;
 
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Recensione;

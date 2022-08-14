@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import it.univaq.disim.oop.roc.business.impl.RecensioniService;
+import it.univaq.disim.oop.roc.business.RecensioniService;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;

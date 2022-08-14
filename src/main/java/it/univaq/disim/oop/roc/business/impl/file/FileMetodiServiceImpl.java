@@ -3,9 +3,12 @@ package it.univaq.disim.oop.roc.business.impl.file;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import it.univaq.disim.oop.roc.business.impl.MetodiService;
+import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class FileMetodiServiceImpl implements MetodiService {
@@ -46,5 +49,9 @@ public class FileMetodiServiceImpl implements MetodiService {
 	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
 
 	}
-
+	
+	@Override
+	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
+		return new ArrayList<>();
+	}
 }

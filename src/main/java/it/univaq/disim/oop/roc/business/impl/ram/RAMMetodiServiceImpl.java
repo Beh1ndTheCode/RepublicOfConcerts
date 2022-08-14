@@ -3,14 +3,14 @@ package it.univaq.disim.oop.roc.business.impl.ram;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.univaq.disim.oop.roc.business.impl.MetodiService;
+import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMMetodiServiceImpl implements MetodiService {
 
 	private static List<MetodoDiPagamento> metodiAggiunti = new ArrayList<>();
-
 	private static int idCounterMetodi = 1;
 
 	@Override
@@ -27,6 +27,11 @@ public class RAMMetodiServiceImpl implements MetodiService {
 				metodiAggiunti.remove(met);
 			}
 		}
+	}
+
+	@Override
+	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
+		return new ArrayList<>(metodiAggiunti);
 	}
 
 }

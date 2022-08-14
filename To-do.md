@@ -1,6 +1,6 @@
 # Logica di Business
 ### Implementazione su RAM
-	- Metodi di Pagamento: Differenziare Conto e Carta, funzione per visualizzare lista dei metodi
+	- Metodi di Pagamento: Differenziare Conto e Carta
 ### Implementazione su File
 	- Metodi di Pagamento: completare funzione eliminazione di un metodo
 ### Accesso come spettatore

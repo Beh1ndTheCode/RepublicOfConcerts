@@ -3,7 +3,7 @@ package it.univaq.disim.oop.roc.business.impl.ram;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.univaq.disim.oop.roc.business.impl.RecensioniService;
+import it.univaq.disim.oop.roc.business.RecensioniService;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Recensione;
 import it.univaq.disim.oop.roc.domain.Spettatore;
