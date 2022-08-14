@@ -64,7 +64,7 @@ public class LayoutController implements DataInitializable<Utente> {
 			bottoneMenu.setText("menù");
 			for (MenuItem menu:MENU_SPETTATORE) {
 				bottoneMenu.getItems().add(menu);
-				menu.setOnAction(event -> dispatcher.renderView(menu.getText(), profilo));
+				menu.setOnAction(e -> dispatcher.renderView(menu.getText(), profilo));
 			}
 		}
 	}
