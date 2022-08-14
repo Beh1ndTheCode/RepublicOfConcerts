@@ -6,8 +6,8 @@ import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -16,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class LayoutController implements DataInitializable<Utente> {
+public class LayoutController implements DataInitializable<Utente>{
 
 	@FXML
 	private BorderPane layout;
@@ -26,9 +26,6 @@ public class LayoutController implements DataInitializable<Utente> {
 
 	@FXML
 	private MenuButton bottoneMenu;
-
-	@FXML
-	private MenuItem bottoneConcerti, bottoneTour, bottoneRecensioni, bottoneStrutture;
 
 	@FXML
 	private ImageView iconaDiRicerca, bottoneProfilo, bottoneUscita;
@@ -56,7 +53,10 @@ public class LayoutController implements DataInitializable<Utente> {
 			bottoneMenu.setText("gestione");
 			for (MenuItem menu:MENU_AMMINISTRATORE) {
 				bottoneMenu.getItems().add(menu);
-				menu.setOnAction(e -> dispatcher.renderView("gestione "+menu.getText(), profilo));
+				menu.setOnAction(e -> {
+					dispatcher.renderView("gestione "+ menu.getText(), profilo);
+					titoloPagina.setText(menu.getText());
+				});
 			}
 			bottoneProfilo.setVisible(false);
 		}
@@ -64,11 +64,14 @@ public class LayoutController implements DataInitializable<Utente> {
 			bottoneMenu.setText("menù");
 			for (MenuItem menu:MENU_SPETTATORE) {
 				bottoneMenu.getItems().add(menu);
-				menu.setOnAction(e -> dispatcher.renderView(menu.getText(), profilo));
+				menu.setOnAction(e -> {
+					dispatcher.renderView(menu.getText(), profilo);
+					titoloPagina.setText(menu.getText());
+				});
 			}
 		}
 	}
-
+	
 	public void exitToLoginVIew() throws Exception {
 		try {
 			dispatcher.loginView();
@@ -77,8 +80,8 @@ public class LayoutController implements DataInitializable<Utente> {
 		}
 	}
 	
-	public void goToProgiloView() throws Exception {
+	public void goToProfiloView() throws Exception {
 			dispatcher.renderView("profilo", profilo);
-			titoloPagina.setText("Profilo");
+			titoloPagina.setText("profilo");
 	}
 }
