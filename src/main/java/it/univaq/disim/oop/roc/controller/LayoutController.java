@@ -39,17 +39,21 @@ public class LayoutController implements DataInitializable<Utente> {
 
 	private ViewDispatcher dispatcher;
 
+	private Utente profilo;
+		
 	public LayoutController() {
-		dispatcher = ViewDispatcher.getInstance();
+		dispatcher = ViewDispatcher.getInstance(); 
 	}
 
 	public void initializeData(Utente utente) {
+		profilo = utente;
 		if (utente instanceof Amministratore) {
 			bottoneMenu.setText("gestisci");
 			bottoneMenu.getItems().add(new MenuItem("concerti"));
 			bottoneMenu.getItems().add(new MenuItem("tour"));
 			bottoneMenu.getItems().add(new MenuItem("artisti"));
 			bottoneMenu.getItems().add(new MenuItem("recensioni"));
+			bottoneProfilo.setVisible(false);
 		}
 		if (utente instanceof Spettatore) {
 			bottoneMenu.setText("menu");
@@ -65,5 +69,9 @@ public class LayoutController implements DataInitializable<Utente> {
 		} catch (ViewException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void goToProgiloView() throws Exception {
+			dispatcher.renderView("profilo", profilo);
 	}
 }

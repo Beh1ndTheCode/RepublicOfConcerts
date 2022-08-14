@@ -10,7 +10,7 @@
  
 # JavaFX
 ### Realizzare viste
-     - Area utente: Disabilitare menù utente per amministratore, Scroll Bar
+     - Area utente: Scroll Bar
      - Concerti
      - Recensioni
      - Luoghi
