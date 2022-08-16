@@ -2,7 +2,6 @@
 ### Implementazione su RAM
 	- Metodi di Pagamento: Differenziare Conto e Carta
 ### Implementazione su File
-	- Metodi di Pagamento: completare funzione eliminazione di un metodo
 ### Accesso come spettatore
 
 # Eccezioni
@@ -10,7 +9,7 @@
  
 # JavaFX
 ### Realizzare viste
-     - Area utente: Scroll Bar
+     - Area utente: implementare Labels e metodo per modifica dati, vista per aggiungere metodi di pagamento(?)
      - Concerti
      - Recensioni
      - Luoghi

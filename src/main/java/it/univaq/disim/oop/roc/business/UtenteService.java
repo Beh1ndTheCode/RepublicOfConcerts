@@ -12,4 +12,6 @@ public interface UtenteService {
 	Utente registration(String username, String password, String confermaPassword, String nome, String cognome,
 			Integer eta) throws EtaFormatException, InvalidPasswordException, BusinessException;
 
+	public void updateDati(Utente utente, String oldPassword, String newPassword, String repeatPassword)
+			throws InvalidPasswordException, BusinessException;
 }
