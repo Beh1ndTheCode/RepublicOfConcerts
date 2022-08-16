@@ -1,15 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="it.univaq.disim.oop.roc.controller.ProfiloController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="585.0">
          <children>
-            <Text layoutX="83.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nome" wrappingWidth="103.43359375" />
-            <Text layoutX="83.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cognome" wrappingWidth="73.43359375" />
+            <Text layoutX="19.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nome" wrappingWidth="103.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="19.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cognome" wrappingWidth="90.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nameTextField" layoutX="119.0" layoutY="87.0" />
+            <TextField fx:id="cognomeTextField" layoutX="119.0" layoutY="110.0" />
+            <Text layoutX="19.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="età" wrappingWidth="90.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="etàTextField" layoutX="119.0" layoutY="134.0" />
+            <Text layoutX="19.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="103.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="usernameTextField" layoutX="119.0" layoutY="63.0" />
+            <TableView fx:id="metodiTableView" layoutX="37.0" layoutY="276.0" prefHeight="324.0" prefWidth="506.0">
+              <columns>
+                <TableColumn fx:id="tipoTableColumn" prefWidth="87.0" text="Tipo" />
+                <TableColumn fx:id="nomeTableColumn" prefWidth="296.0" text="Nome" />
+                  <TableColumn fx:id="azioniTableColumn" prefWidth="122.0" text="Azioni" />
+              </columns>
+            </TableView>
+            <Text layoutX="37.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI METODI DI PAGAMENTO" wrappingWidth="274.43359375">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="modificaDatiButton" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="modifica">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="modificaMetodiButton" layoutX="306.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="237.0" text="Aggiungi o modifica">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Button>
+            <Text layoutX="283.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vecchia passwod" wrappingWidth="133.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="vecchiaPTextField" layoutX="417.0" layoutY="63.0" />
+            <Text layoutX="283.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nuovaPTextField" layoutX="417.0" layoutY="98.0" />
+            <Text layoutX="283.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ripeti password" wrappingWidth="133.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="ripetiPTextField" layoutX="417.0" layoutY="123.0" />
+            <Text layoutX="16.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI DATI" wrappingWidth="108.43359375">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Text>
          </children></AnchorPane>
   </content>
 </ScrollPane>
