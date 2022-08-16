@@ -17,7 +17,6 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	public void addMetodo(MetodoDiPagamento metodo) throws BusinessException {
 		metodo.setId(idCounterMetodi++);
 		metodiAggiunti.add(metodo);
-
 	}
 
 	@Override

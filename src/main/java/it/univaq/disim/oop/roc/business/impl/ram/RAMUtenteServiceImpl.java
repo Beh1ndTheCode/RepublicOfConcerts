@@ -22,11 +22,12 @@ public class RAMUtenteServiceImpl implements UtenteService {
 			return amministratore;
 		}
 		if ("spettatore".equalsIgnoreCase(username)) {
-			Utente spettatore = new Spettatore();
+			Spettatore spettatore = new Spettatore();
 			spettatore.setUsername(username);
 			spettatore.setPassword(password);
 			spettatore.setNome("luigi");
 			spettatore.setCognome("bianchi");
+			spettatore.setEta(25);
 			return spettatore;
 		}
 		throw new UtenteNotFoundException();

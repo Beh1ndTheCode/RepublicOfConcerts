@@ -49,7 +49,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
 
 	}
-	
+
 	@Override
 	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
 		return new ArrayList<>();

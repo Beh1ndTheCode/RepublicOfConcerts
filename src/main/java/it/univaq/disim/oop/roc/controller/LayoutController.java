@@ -4,7 +4,6 @@ import it.univaq.disim.oop.roc.domain.Amministratore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
-import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -36,7 +35,7 @@ public class LayoutController implements DataInitializable<Utente> {
 
 	private ViewDispatcher dispatcher;
 
-	private Utente profilo;
+	private Utente utente;
 
 	private static final MenuItem[] MENU_AMMINISTRATORE = { new MenuItem("concerti"), new MenuItem("tour"),
 			new MenuItem("artisti"), new MenuItem("recensioni") };
@@ -48,6 +47,7 @@ public class LayoutController implements DataInitializable<Utente> {
 	}
 
 	public void initializeData(Utente utente) {
+		this.utente = utente;
 		if (utente instanceof Amministratore) {
 			bottoneMenu.setText("gestione");
 			for (MenuItem menu : MENU_AMMINISTRATORE) {
@@ -71,16 +71,12 @@ public class LayoutController implements DataInitializable<Utente> {
 		}
 	}
 
-	public void exitToLoginVIew() throws Exception {
-		try {
-			dispatcher.loginView();
-		} catch (ViewException e) {
-			e.printStackTrace();
-		}
+	public void exitToLoginVIew() {
+		dispatcher.logout();
 	}
 
 	public void goToProfiloView() throws Exception {
-		dispatcher.renderView("profilo", profilo);
+		dispatcher.renderView("profilo", utente);
 		titoloPagina.setText("profilo");
 	}
 }
