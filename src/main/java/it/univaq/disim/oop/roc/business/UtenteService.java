@@ -14,5 +14,5 @@ public interface UtenteService {
 
 	public void updateDati(Utente utente, String name, String surname, String username, Integer age, String oldPassword,
 			String newPassword, String repeatPassword)
-			throws UtenteNotFoundException, InvalidPasswordException, BusinessException;
+			throws EtaFormatException, UtenteNotFoundException, InvalidPasswordException, BusinessException;
 }

@@ -29,40 +29,6 @@
             </BoxBlur>
          </effect>
       </ImageView>
-      <TextField fx:id="usernameField" alignment="CENTER" layoutX="163.0" layoutY="240.0" onKeyReleased="#blockSignupButton" style="-fx-background-color: FFFFFF;">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <effect>
-            <DropShadow />
-         </effect>
-      </TextField>
-      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="163.0" layoutY="288.0" onKeyReleased="#blockSignupButton" style="-fx-background-color: FFFFFF;">
-         <effect>
-            <DropShadow />
-         </effect>
-      </PasswordField>
-      <Text fx:id="usernameText" fill="WHITE" layoutX="65.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-         <font>
-            <Font name="Arial Black" size="16.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Text>
-      <Text fx:id="passwordText" fill="WHITE" layoutX="65.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
-         <font>
-            <Font name="Arial Black" size="16.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Text>
-      <Button fx:id="signupButton" alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="378.0" mnemonicParsing="false" onAction="#signupAction" prefHeight="32.0" prefWidth="135.0" text="REGISTRATI" textAlignment="CENTER">
-         <font>
-            <Font name="Arial Black" size="16.0" />
-         </font>
-      </Button>
       <ImageView fx:id="logo" fitHeight="202.0" fitWidth="251.0" layoutX="220.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Rock-music-elements-on-transparent-background-PNG.png" />
@@ -71,12 +37,49 @@
             <InnerShadow choke="1.0" height="0.0" radius="4.5" width="20.0" />
          </effect>
       </ImageView>
-      <PasswordField fx:id="ripetiPasswordField" alignment="CENTER" layoutX="164.0" layoutY="337.0" onKeyReleased="#blockSignupButton" style="-fx-background-color: FFFFFF;">
+      <Text fx:id="usernameText" fill="WHITE" layoutX="65.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <TextField fx:id="usernameField" alignment="CENTER" layoutX="163.0" layoutY="240.0" onKeyReleased="#blockSignupButton" style="-fx-background-color: FFFFFF;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <Text fx:id="passwordText" fill="WHITE" layoutX="65.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="163.0" layoutY="288.0" onKeyReleased="#blockSignupButton" style="-fx-background-color: FFFFFF;">
          <effect>
             <DropShadow />
          </effect>
       </PasswordField>
       <Text fx:id="ripetiPasswordText" fill="WHITE" layoutX="14.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ripeti password">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <PasswordField fx:id="ripetiPasswordField" alignment="CENTER" layoutX="164.0" layoutY="337.0" onKeyReleased="#blockSignupButton" style="-fx-background-color: FFFFFF;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </PasswordField>
+      <Text fx:id="nameText" fill="WHITE" layoutX="389.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font>
@@ -92,7 +95,7 @@
             <DropShadow />
          </effect>
       </TextField>
-      <Text fx:id="nameText" fill="WHITE" layoutX="389.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+      <Text fx:id="surnameText" fill="WHITE" layoutX="362.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font>
@@ -108,14 +111,6 @@
             <DropShadow />
          </effect>
       </TextField>
-      <Text fx:id="surnameText" fill="WHITE" layoutX="362.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome">
-         <font>
-            <Font name="Arial Black" size="16.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Text>
       <Text fx:id="ageText" fill="WHITE" layoutX="407.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Età">
          <font>
             <Font name="Arial Black" size="16.0" />
@@ -124,6 +119,12 @@
             <DropShadow />
          </effect>
       </Text>
+      <TextField fx:id="ageField" alignment="CENTER" layoutX="448.0" layoutY="336.0" onKeyReleased="#blockSignupButton" />
+      <Button fx:id="signupButton" alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="378.0" mnemonicParsing="false" onAction="#signupAction" prefHeight="32.0" prefWidth="135.0" text="REGISTRATI" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
       <Button fx:id="loginViewButton" alignment="CENTER" contentDisplay="CENTER" layoutX="287.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToLoginView" prefHeight="24.0" prefWidth="94.0" text="INDIETRO" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="11.0" />
@@ -138,6 +139,5 @@
          <font>
             <Font name="Arial Black" size="15.0" />
          </font></Label>
-      <TextField fx:id="ageField" alignment="CENTER" layoutX="448.0" layoutY="336.0" onKeyReleased="#blockSignupButton" />
    </children>
 </AnchorPane>

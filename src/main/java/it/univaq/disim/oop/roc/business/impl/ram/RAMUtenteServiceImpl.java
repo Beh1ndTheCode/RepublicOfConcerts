@@ -63,21 +63,24 @@ public class RAMUtenteServiceImpl implements UtenteService {
 	public void updateDati(Utente utente, String name, String surname, String username, Integer age, String oldPassword,
 			String newPassword, String repeatPassword) throws BusinessException {
 		if (utente.getPassword().equals(oldPassword)) {
-			if(!username.isEmpty())
-				utente.setUsername(username);
-			if(!name.isEmpty())
-				utente.setNome(name);
-			if(!surname.isEmpty())
-				utente.setCognome(surname);
-			utente.setEta(age);
-			if (!newPassword.isEmpty()) {
-				if (newPassword.equals(repeatPassword)) {
-					utente.setPassword(newPassword);
-					return;
+			if (age > 0 && age < 100) {
+				if (!username.isEmpty())
+					utente.setUsername(username);
+				if (!name.isEmpty())
+					utente.setNome(name);
+				if (!surname.isEmpty())
+					utente.setCognome(surname);
+				utente.setEta(age);
+				if (!newPassword.isEmpty()) {
+					if (newPassword.equals(repeatPassword)) {
+						utente.setPassword(newPassword);
+						return;
+					}
+					throw new InvalidPasswordException();
 				}
-				throw new InvalidPasswordException();
+				return;
 			}
-			return;
+			throw new EtaFormatException();
 		}
 		throw new UtenteNotFoundException();
 	}

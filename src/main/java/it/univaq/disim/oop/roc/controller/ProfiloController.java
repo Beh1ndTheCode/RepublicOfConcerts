@@ -9,6 +9,7 @@ import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.EtaFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
@@ -37,7 +38,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 	private PasswordField oldPswField, newPswField, repeatPswField;
 
 	@FXML
-	private Label oldPswErrorLabel, repeatPswErrorLabel;
+	private Label oldPswErrorLabel, repeatPswErrorLabel, ageErrorLabel;
 
 	@FXML
 	private Button aggiungiDatiButton, modificaMetodiButton;
@@ -89,7 +90,9 @@ public class ProfiloController implements DataInitializable<Utente> {
 					Integer.parseInt(ageField.getText()), oldPswField.getText(), newPswField.getText(),
 					repeatPswField.getText());
 			initializeData(utente);
-		} catch (UtenteNotFoundException ex) {
+		} catch (EtaFormatException e) {
+			ageErrorLabel.setText("Età non valida!");
+		} catch (UtenteNotFoundException e) {
 			oldPswErrorLabel.setText("Password errata!");
 		} catch (InvalidPasswordException e) {
 			repeatPswErrorLabel.setText("Le password non coincidono!");

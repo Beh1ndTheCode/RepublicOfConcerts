@@ -59,6 +59,8 @@ public class SignupController implements DataInitializable<Utente> {
 
 	public void signupAction(ActionEvent event) {
 		try {
+			passwordErrorLabel.setText("");
+			etaErrorLabel.setText("");
 			Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
 					ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(),
 					Integer.parseInt(ageField.getText()));
