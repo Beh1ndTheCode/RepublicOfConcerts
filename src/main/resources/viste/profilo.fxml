@@ -11,16 +11,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.ProfiloController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.ProfiloController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="585.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="585.0">
          <children>
             <Text fx:id="datiText" layoutX="16.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI DATI" wrappingWidth="108.43359375">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="modificaDatiButton" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" onAction="#updateDatiAction" prefHeight="25.0" prefWidth="100.0" text="modifica">
+            <Button fx:id="modificaDatiButton" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" onAction="#updateDatiAction" onMouseClicked="#blockModificaDatiButton" prefHeight="25.0" prefWidth="100.0" text="modifica">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <PasswordField fx:id="oldPswField" layoutX="425.0" layoutY="67.0" />
+            <PasswordField fx:id="oldPswField" layoutX="425.0" layoutY="67.0" onKeyReleased="#blockModificaDatiButton" />
             <Text fx:id="newPswText" layoutX="288.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
@@ -68,25 +68,26 @@
             </Text>
             <PasswordField fx:id="repeatPswField" layoutX="425.0" layoutY="124.0" />
             <Label fx:id="oldPswErrorLabel" layoutX="456.0" layoutY="45.0" />
-            <Label fx:id="repeatPswErrorLabel" layoutX="424.0" layoutY="154.0" />
-            <Text fx:id="metodiText" layoutX="37.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI METODI DI PAGAMENTO" wrappingWidth="274.43359375">
+            <Label fx:id="repeatPswErrorLabel" layoutX="422.0" layoutY="154.0" />
+            <Label fx:id="ageErrorLabel" layoutX="100.0" layoutY="171.0" />
+            <Text fx:id="metodiText" layoutX="35.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI METODI DI PAGAMENTO" wrappingWidth="274.43359375">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="aggiungiMetodiButton" layoutX="306.0" layoutY="237.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
+            <Button fx:id="aggiungiMetodiButton" layoutX="304.0" layoutY="221.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <TableView fx:id="metodiTableView" layoutX="37.0" layoutY="276.0" prefHeight="324.0" prefWidth="506.0">
+            <TableView fx:id="metodiTableView" layoutX="35.0" layoutY="260.0" prefHeight="324.0" prefWidth="506.0">
               <columns>
                 <TableColumn fx:id="tipoTableColumn" prefWidth="87.0" text="Tipo" />
                 <TableColumn fx:id="nomeTableColumn" prefWidth="296.0" text="Nome" />
                   <TableColumn fx:id="azioniTableColumn" prefWidth="122.0" text="Azioni" />
               </columns>
             </TableView>
-            <Label fx:id="ageErrorLabel" layoutX="160.0" layoutY="171.0" />
+            <Text fill="#7c7c7c" layoutX="255.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="per modificare i dati bisogna inserire la vecchia password" wrappingWidth="153.13671875" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

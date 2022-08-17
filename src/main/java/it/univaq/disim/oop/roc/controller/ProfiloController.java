@@ -41,7 +41,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 	private Label oldPswErrorLabel, repeatPswErrorLabel, ageErrorLabel;
 
 	@FXML
-	private Button aggiungiDatiButton, modificaMetodiButton;
+	private Button modificaDatiButton, aggiungiMetodiButton;
 
 	@FXML
 	private TableView<MetodoDiPagamento> metodiTableView;
@@ -65,6 +65,10 @@ public class ProfiloController implements DataInitializable<Utente> {
 		utenteService = new RAMUtenteServiceImpl();
 		metodiService = new RAMMetodiServiceImpl();
 	}
+	
+	public void initialize() {
+		modificaDatiButton.setDisable(true);
+	}
 
 	@Override
 	public void initializeData(Utente utente) {
@@ -81,9 +85,16 @@ public class ProfiloController implements DataInitializable<Utente> {
 			dispatcher.renderError(e);
 		}
 	}
+	
+	public void blockModificaDatiButton() {
+		String password = oldPswField.getText();
+		boolean isDisable = password.isEmpty();
+		modificaDatiButton.setDisable(isDisable);
+	}
 
 	public void updateDatiAction(ActionEvent event) {
 		try {
+			ageErrorLabel.setText("");
 			oldPswErrorLabel.setText("");
 			repeatPswErrorLabel.setText("");
 			if (!(ageField.getText() == null || ageField.getText().length() == 0)) {
@@ -95,6 +106,14 @@ public class ProfiloController implements DataInitializable<Utente> {
 						utente.getEta(), oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
 			}
 			initializeData(utente);
+			//azzero tutti i campi così da mostrare i dati modificati nel promptText
+			nameField.setText("");
+			surnameField.setText("");
+			usernameField.setText("");
+			ageField.setText("");
+			oldPswField.setText("");
+			newPswField.setText("");
+			repeatPswField.setText("");
 		} catch (EtaFormatException e) {
 			ageErrorLabel.setText("Età non valida!");
 		} catch (UtenteNotFoundException e) {
