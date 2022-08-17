@@ -14,7 +14,7 @@ import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 
 public class RAMUtenteServiceImpl implements UtenteService {
 
-	private static List<Spettatore> utentiAggiunti = new ArrayList<>();
+	private static List<Utente> utentiAggiunti = new ArrayList<>();
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {
@@ -24,6 +24,8 @@ public class RAMUtenteServiceImpl implements UtenteService {
 			amministratore.setPassword(password);
 			amministratore.setNome("mario");
 			amministratore.setCognome("rossi");
+			amministratore.setEta(37);
+			utentiAggiunti.add(amministratore);
 			return amministratore;
 		}
 		if ("spettatore".equalsIgnoreCase(username)) {
@@ -33,6 +35,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 			spettatore.setNome("luigi");
 			spettatore.setCognome("bianchi");
 			spettatore.setEta(25);
+			utentiAggiunti.add(spettatore);
 			return spettatore;
 		}
 		throw new UtenteNotFoundException();
@@ -48,7 +51,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 				spettatore.setPassword(password);
 				spettatore.setNome(nome);
 				spettatore.setCognome(cognome);
-				utentiAggiunti.add(spettatore);
+				// utentiAggiunti.add(spettatore);
 				return spettatore;
 			}
 			throw new InvalidPasswordException();
@@ -57,22 +60,19 @@ public class RAMUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public void updateDati(Utente utente, String oldPassword, String newPassword, String repeatPassword)
-			throws BusinessException {
-		for (Spettatore user : utentiAggiunti) {
-			if (utente.getId() == user.getId()) {
-				if (oldPassword == user.getPassword()) {
-					if (newPassword.equals(repeatPassword)) {
-						user.setUsername(utente.getUsername());
-						user.setNome(utente.getNome());
-						user.setCognome(utente.getCognome());
-						user.setPassword(utente.getPassword());
-					}
-					throw new InvalidPasswordException();
-				}
-				throw new InvalidPasswordException();
+	public void updateDati(Utente utente, String name, String surname, String username, Integer age, String oldPassword,
+			String newPassword, String repeatPassword) throws BusinessException {
+		if (utente.getPassword() == oldPassword) {
+			if (newPassword.equals(repeatPassword)) {
+				utente.setUsername(username);
+				utente.setNome(name);
+				utente.setCognome(surname);
+				utente.setEta(age);
+				utente.setPassword(newPassword);
 			}
+			throw new InvalidPasswordException();
 		}
+		throw new UtenteNotFoundException();
 	}
 
 }

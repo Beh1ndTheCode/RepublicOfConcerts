@@ -71,6 +71,8 @@ public class ProfiloController implements DataInitializable<Utente> {
 		usernameField.setPromptText(utente.getUsername());
 		nameField.setPromptText(utente.getNome());
 		surnameField.setPromptText(utente.getCognome());
+		ageField.setPromptText(String.valueOf(utente.getEta()));
+		oldPswField.setPromptText(utente.getPassword());
 		try {
 			List<MetodoDiPagamento> metodi = metodiService.findAllMetodi(utente);
 			ObservableList<MetodoDiPagamento> metodiData = FXCollections.observableArrayList(metodi);
@@ -82,11 +84,11 @@ public class ProfiloController implements DataInitializable<Utente> {
 
 	public void updateDatiAction(ActionEvent event) {
 		try {
-			utenteService.updateDati(utente, oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
-			usernameField.setPromptText(utente.getUsername());
-			nameField.setPromptText(utente.getNome());
-			surnameField.setPromptText(utente.getCognome());
-		} catch (UtenteNotFoundException e) {
+			utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
+					Integer.parseInt(ageField.getText()), oldPswField.getText(), newPswField.getText(),
+					repeatPswField.getText());
+			initializeData(utente);
+		} catch (UtenteNotFoundException ex) {
 			oldPswErrorLabel.setText("Password errata!");
 		} catch (InvalidPasswordException e) {
 			repeatPswErrorLabel.setText("Le password non coincidono!");

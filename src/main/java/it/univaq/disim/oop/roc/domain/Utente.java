@@ -7,6 +7,7 @@ public abstract class Utente {
 	private String cognome;
 	private String username;
 	private String password;
+	private Integer eta;
 
 	public String getNome() {
 		return nome;
@@ -22,6 +23,14 @@ public abstract class Utente {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
+	}
+
+	public Integer getEta() {
+		return eta;
+	}
+
+	public void setEta(Integer eta) {
+		this.eta = eta;
 	}
 
 	public Integer getId() {

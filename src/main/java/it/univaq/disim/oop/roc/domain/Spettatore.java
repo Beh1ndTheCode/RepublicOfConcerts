@@ -5,7 +5,6 @@ import java.util.Set;
 
 public class Spettatore extends Utente {
 
-	private Integer eta;
 	private Set<MetodoDiPagamento> metodo = new HashSet<>();
 	private Set<Recensione> recensioniLasciate = new HashSet<>();
 	private Set<Biglietto> bigliettiPrenotati = new HashSet<>();
@@ -24,14 +23,6 @@ public class Spettatore extends Utente {
 
 	public void setRecensioniLasciate(Set<Recensione> recensioniLasciate) {
 		this.recensioniLasciate = recensioniLasciate;
-	}
-
-	public Integer getEta() {
-		return eta;
-	}
-
-	public void setEta(Integer eta) {
-		this.eta = eta;
 	}
 
 	public Set<MetodoDiPagamento> getMetodo() {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,38 +15,7 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="585.0">
          <children>
-            <Text fx:id="nameText" layoutX="19.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nome" wrappingWidth="103.43359375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="surnameText" layoutX="19.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cognome" wrappingWidth="90.43359375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="nameField" layoutX="100.0" layoutY="90.0" />
-            <TextField fx:id="surnameField" layoutX="100.0" layoutY="113.0" />
-            <Text fx:id="ageText" layoutX="19.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="età" wrappingWidth="90.43359375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="ageField" layoutX="100.0" layoutY="137.0" />
-            <Text fx:id="usernameText" layoutX="19.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="103.43359375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="usernameField" layoutX="100.0" layoutY="66.0" />
-            <TableView fx:id="metodiTableView" layoutX="37.0" layoutY="276.0" prefHeight="324.0" prefWidth="506.0">
-              <columns>
-                <TableColumn fx:id="tipoTableColumn" prefWidth="87.0" text="Tipo" />
-                <TableColumn fx:id="nomeTableColumn" prefWidth="296.0" text="Nome" />
-                  <TableColumn fx:id="azioniTableColumn" prefWidth="122.0" text="Azioni" />
-              </columns>
-            </TableView>
-            <Text fx:id="metodiText" layoutX="37.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI METODI DI PAGAMENTO" wrappingWidth="274.43359375">
+            <Text fx:id="datiText" layoutX="16.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI DATI" wrappingWidth="108.43359375">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
@@ -55,34 +25,67 @@
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="aggiungiMetodiButton" layoutX="306.0" layoutY="237.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
+            <Text fx:id="usernameText" layoutX="19.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="103.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
-            </Button>
+            </Text>
+            <TextField fx:id="usernameField" layoutX="100.0" layoutY="66.0" />
+            <Text fx:id="nameText" layoutX="19.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nome" wrappingWidth="103.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nameField" layoutX="100.0" layoutY="90.0" />
+            <Text fx:id="surnameText" layoutX="19.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cognome" wrappingWidth="90.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="surnameField" layoutX="100.0" layoutY="113.0" />
+            <Text fx:id="ageText" layoutX="19.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="età" wrappingWidth="90.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="ageField" layoutX="100.0" layoutY="137.0" />
             <Text fx:id="oldPswText" layoutX="285.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vecchia password" wrappingWidth="139.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
+            <PasswordField fx:id="oldPswField" layoutX="425.0" layoutY="67.0" />
             <Text fx:id="newPswText" layoutX="288.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
+            <PasswordField fx:id="newPswField" layoutX="425.0" layoutY="102.0" />
             <Text fx:id="repeatPswText" layoutX="288.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ripeti password" wrappingWidth="133.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="datiText" layoutX="16.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI DATI" wrappingWidth="108.43359375">
+            <PasswordField fx:id="repeatPswField" layoutX="425.0" layoutY="124.0" />
+            <Label fx:id="oldPswErrorLabel" layoutX="472.0" layoutY="162.0" />
+            <Label fx:id="repeatPswErrorLabel" layoutX="472.0" layoutY="189.0" />
+            <Text fx:id="metodiText" layoutX="37.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI METODI DI PAGAMENTO" wrappingWidth="274.43359375">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <PasswordField fx:id="oldPswField" layoutX="425.0" layoutY="67.0" />
-            <PasswordField fx:id="newPswField" layoutX="425.0" layoutY="102.0" />
-            <PasswordField fx:id="repeatPswField" layoutX="425.0" layoutY="124.0" />
+            <Button fx:id="aggiungiMetodiButton" layoutX="306.0" layoutY="237.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Button>
+            <TableView fx:id="metodiTableView" layoutX="37.0" layoutY="276.0" prefHeight="324.0" prefWidth="506.0">
+              <columns>
+                <TableColumn fx:id="tipoTableColumn" prefWidth="87.0" text="Tipo" />
+                <TableColumn fx:id="nomeTableColumn" prefWidth="296.0" text="Nome" />
+                  <TableColumn fx:id="azioniTableColumn" prefWidth="122.0" text="Azioni" />
+              </columns>
+            </TableView>
          </children></AnchorPane>
   </content>
 </ScrollPane>
