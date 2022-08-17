@@ -72,7 +72,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 		usernameField.setPromptText(utente.getUsername());
 		nameField.setPromptText(utente.getNome());
 		surnameField.setPromptText(utente.getCognome());
-		ageField.setText(String.valueOf(utente.getEta()));
+		ageField.setPromptText(String.valueOf(utente.getEta()));
 		try {
 			List<MetodoDiPagamento> metodi = metodiService.findAllMetodi(utente);
 			ObservableList<MetodoDiPagamento> metodiData = FXCollections.observableArrayList(metodi);
@@ -86,9 +86,14 @@ public class ProfiloController implements DataInitializable<Utente> {
 		try {
 			oldPswErrorLabel.setText("");
 			repeatPswErrorLabel.setText("");
-			utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
-					Integer.parseInt(ageField.getText()), oldPswField.getText(), newPswField.getText(),
-					repeatPswField.getText());
+			if (!(ageField.getText() == null || ageField.getText().length() == 0)) {
+				utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
+						Integer.parseInt(ageField.getText()), oldPswField.getText(), newPswField.getText(),
+						repeatPswField.getText());
+			} else {
+				utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
+						utente.getEta(), oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
+			}
 			initializeData(utente);
 		} catch (EtaFormatException e) {
 			ageErrorLabel.setText("Età non valida!");
