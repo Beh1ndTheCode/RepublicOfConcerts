@@ -62,13 +62,17 @@ public class RAMUtenteServiceImpl implements UtenteService {
 	@Override
 	public void updateDati(Utente utente, String name, String surname, String username, Integer age, String oldPassword,
 			String newPassword, String repeatPassword) throws BusinessException {
-		if (utente.getPassword() == oldPassword) {
-			if (newPassword.equals(repeatPassword)) {
+		if (utente.getPassword().equals(oldPassword)) {
+			if(!username.isEmpty())
 				utente.setUsername(username);
+			if(!name.isEmpty())
 				utente.setNome(name);
+			if(!surname.isEmpty())
 				utente.setCognome(surname);
 				utente.setEta(age);
+			if (newPassword.equals(repeatPassword)) {
 				utente.setPassword(newPassword);
+				return;
 			}
 			throw new InvalidPasswordException();
 		}

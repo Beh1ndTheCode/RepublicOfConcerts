@@ -71,8 +71,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 		usernameField.setPromptText(utente.getUsername());
 		nameField.setPromptText(utente.getNome());
 		surnameField.setPromptText(utente.getCognome());
-		ageField.setPromptText(String.valueOf(utente.getEta()));
-		oldPswField.setPromptText(utente.getPassword());
+		ageField.setText(String.valueOf(utente.getEta()));
 		try {
 			List<MetodoDiPagamento> metodi = metodiService.findAllMetodi(utente);
 			ObservableList<MetodoDiPagamento> metodiData = FXCollections.observableArrayList(metodi);
