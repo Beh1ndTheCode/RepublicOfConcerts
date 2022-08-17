@@ -83,6 +83,8 @@ public class ProfiloController implements DataInitializable<Utente> {
 
 	public void updateDatiAction(ActionEvent event) {
 		try {
+			oldPswErrorLabel.setText("");
+			repeatPswErrorLabel.setText("");
 			utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
 					Integer.parseInt(ageField.getText()), oldPswField.getText(), newPswField.getText(),
 					repeatPswField.getText());

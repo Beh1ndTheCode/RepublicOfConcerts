@@ -69,12 +69,15 @@ public class RAMUtenteServiceImpl implements UtenteService {
 				utente.setNome(name);
 			if(!surname.isEmpty())
 				utente.setCognome(surname);
-				utente.setEta(age);
-			if (newPassword.equals(repeatPassword)) {
-				utente.setPassword(newPassword);
-				return;
+			utente.setEta(age);
+			if (!newPassword.isEmpty()) {
+				if (newPassword.equals(repeatPassword)) {
+					utente.setPassword(newPassword);
+					return;
+				}
+				throw new InvalidPasswordException();
 			}
-			throw new InvalidPasswordException();
+			return;
 		}
 		throw new UtenteNotFoundException();
 	}
