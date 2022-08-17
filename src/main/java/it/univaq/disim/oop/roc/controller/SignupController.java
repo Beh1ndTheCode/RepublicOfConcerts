@@ -57,14 +57,27 @@ public class SignupController implements DataInitializable<Utente> {
 		signupButton.setDisable(isDisable);
 	}
 
+	// Revisionare
 	public void signupAction(ActionEvent event) {
 		try {
 			passwordErrorLabel.setText("");
 			etaErrorLabel.setText("");
-			Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
-					ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(),
-					Integer.parseInt(ageField.getText()));
-			dispatcher.signedUp(utente);
+			if (!ageField.getText().equals("\\d*")) {
+				String ageInput;
+				ageInput = (ageField.getText().replaceAll("[^\\d]", ""));
+				if (!(ageInput == null || ageInput.length() == 0)) {
+					Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
+							ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(),
+							Integer.parseInt(ageInput));
+					dispatcher.signedUp(utente);
+
+				}
+			} else {
+				Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
+						ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(), 28);
+				dispatcher.signedUp(utente);
+
+			}
 		} catch (InvalidPasswordException e) {
 			passwordErrorLabel.setText("Le password non coincidono!");
 		} catch (EtaFormatException e) {

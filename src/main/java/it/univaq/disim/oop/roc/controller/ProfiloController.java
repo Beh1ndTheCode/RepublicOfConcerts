@@ -65,7 +65,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 		utenteService = new RAMUtenteServiceImpl();
 		metodiService = new RAMMetodiServiceImpl();
 	}
-	
+
 	public void initialize() {
 		modificaDatiButton.setDisable(true);
 	}
@@ -85,28 +85,33 @@ public class ProfiloController implements DataInitializable<Utente> {
 			dispatcher.renderError(e);
 		}
 	}
-	
+
 	public void blockModificaDatiButton() {
 		String password = oldPswField.getText();
 		boolean isDisable = password.isEmpty();
 		modificaDatiButton.setDisable(isDisable);
 	}
 
+	// Revisionare
 	public void updateDatiAction(ActionEvent event) {
 		try {
 			ageErrorLabel.setText("");
 			oldPswErrorLabel.setText("");
 			repeatPswErrorLabel.setText("");
-			if (!(ageField.getText() == null || ageField.getText().length() == 0)) {
-				utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
-						Integer.parseInt(ageField.getText()), oldPswField.getText(), newPswField.getText(),
-						repeatPswField.getText());
+			if (!ageField.getText().equals("\\d*")) {
+				String ageInput;
+				ageInput = (ageField.getText().replaceAll("[^\\d]", ""));
+				if (!(ageInput == null || ageInput.length() == 0)) {
+					utenteService.updateDati(utente, nameField.getText(), surnameField.getText(),
+							usernameField.getText(), Integer.parseInt(ageInput), oldPswField.getText(),
+							newPswField.getText(), repeatPswField.getText());
+				}
 			} else {
 				utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
 						utente.getEta(), oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
 			}
 			initializeData(utente);
-			//azzero tutti i campi così da mostrare i dati modificati nel promptText
+			// azzero tutti i campi così da mostrare i dati modificati nel promptText
 			nameField.setText("");
 			surnameField.setText("");
 			usernameField.setText("");

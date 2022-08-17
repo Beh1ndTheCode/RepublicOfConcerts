@@ -5,11 +5,11 @@
 ### Accesso come spettatore
 
 # Eccezioni
-### Eccezione per valori non-numerici nel campo età della schermata di registrazione
+### Eccezione per valori non-numerici nel campo età della schermata di registrazione: DA COMPLETARE
  
 # JavaFX
 ### Realizzare viste
-     - Area utente: implementare Labels e metodo per modifica dati, vista per aggiungere metodi di pagamento(?)
+     - Area utente: vista per aggiungere metodi di pagamento
      - Concerti
      - Recensioni
      - Luoghi

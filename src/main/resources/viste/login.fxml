@@ -28,40 +28,6 @@
                </input></BoxBlur>
          </effect>
       </ImageView>
-      <TextField fx:id="usernameField" alignment="CENTER" layoutX="247.0" layoutY="266.0" onKeyReleased="#blockLoginButton" style="-fx-background-color: FFFFFF;">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <effect>
-            <DropShadow />
-         </effect>
-      </TextField>
-      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="247.0" layoutY="318.0" onKeyReleased="#blockLoginButton" style="-fx-background-color: FFFFFF;">
-         <effect>
-            <DropShadow />
-         </effect>
-      </PasswordField>
-      <Text fx:id="usernameText" fill="WHITE" layoutX="143.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-         <font>
-            <Font name="Arial Black" size="17.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Text>
-      <Text fx:id="passwordText" fill="WHITE" layoutX="143.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
-         <font>
-            <Font name="Arial Black" size="17.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Text>
-      <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="384.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="32.0" prefWidth="135.0" text="LOGIN" textAlignment="CENTER">
-         <font>
-            <Font name="Arial Black" size="16.0" />
-         </font>
-      </Button>
       <ImageView fx:id="logo" fitHeight="202.0" fitWidth="251.0" layoutX="220.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Rock-music-elements-on-transparent-background-PNG.png" />
@@ -70,11 +36,45 @@
             <InnerShadow choke="1.0" height="0.0" radius="4.5" width="20.0" />
          </effect>
       </ImageView>
+      <Text fx:id="usernameText" fill="WHITE" layoutX="143.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font name="Arial Black" size="17.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <TextField fx:id="usernameField" alignment="CENTER" layoutX="247.0" layoutY="266.0" onKeyReleased="#blockLoginButton" style="-fx-background-color: FFFFFF;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <Text fx:id="passwordText" fill="WHITE" layoutX="143.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+         <font>
+            <Font name="Arial Black" size="17.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="247.0" layoutY="318.0" onKeyReleased="#blockLoginButton" style="-fx-background-color: FFFFFF;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </PasswordField>
       <Label fx:id="loginErrorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="343.0" prefHeight="47.0" prefWidth="337.0" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Label>
+      <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="384.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="32.0" prefWidth="135.0" text="LOGIN" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
       <Button fx:id="signupViewButton" alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="428.0" mnemonicParsing="false" onAction="#goToSignupView" prefHeight="24.0" prefWidth="94.0" text="REGISTRATI" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="11.0" />
