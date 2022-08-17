@@ -40,7 +40,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 	private Label oldPswErrorLabel, repeatPswErrorLabel;
 
 	@FXML
-	private Button modificaDatiButton, modificaMetodiButton;
+	private Button aggiungiDatiButton, modificaMetodiButton;
 
 	@FXML
 	private TableView<MetodoDiPagamento> metodiTableView;
@@ -67,6 +67,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 
 	@Override
 	public void initializeData(Utente utente) {
+		this.utente = utente;
 		usernameField.setPromptText(utente.getUsername());
 		nameField.setPromptText(utente.getNome());
 		surnameField.setPromptText(utente.getCognome());
@@ -82,6 +83,9 @@ public class ProfiloController implements DataInitializable<Utente> {
 	public void updateDatiAction(ActionEvent event) {
 		try {
 			utenteService.updateDati(utente, oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
+			usernameField.setPromptText(utente.getUsername());
+			nameField.setPromptText(utente.getNome());
+			surnameField.setPromptText(utente.getCognome());
 		} catch (UtenteNotFoundException e) {
 			oldPswErrorLabel.setText("Password errata!");
 		} catch (InvalidPasswordException e) {

@@ -24,20 +24,20 @@
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="nameField" layoutX="119.0" layoutY="87.0" />
-            <TextField fx:id="surnameField" layoutX="119.0" layoutY="110.0" />
+            <TextField fx:id="nameField" layoutX="100.0" layoutY="90.0" />
+            <TextField fx:id="surnameField" layoutX="100.0" layoutY="113.0" />
             <Text fx:id="ageText" layoutX="19.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="età" wrappingWidth="90.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="ageField" layoutX="119.0" layoutY="134.0" />
+            <TextField fx:id="ageField" layoutX="100.0" layoutY="137.0" />
             <Text fx:id="usernameText" layoutX="19.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="103.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="usernameField" layoutX="119.0" layoutY="63.0" />
+            <TextField fx:id="usernameField" layoutX="100.0" layoutY="66.0" />
             <TableView fx:id="metodiTableView" layoutX="37.0" layoutY="276.0" prefHeight="324.0" prefWidth="506.0">
               <columns>
                 <TableColumn fx:id="tipoTableColumn" prefWidth="87.0" text="Tipo" />
@@ -50,27 +50,27 @@
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="modificaDatiButton" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="modifica">
+            <Button fx:id="modificaDatiButton" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" onAction="#updateDatiAction" prefHeight="25.0" prefWidth="100.0" text="modifica">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="modificaMetodiButton" layoutX="306.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="237.0" text="Aggiungi o modifica">
+            <Button fx:id="aggiungiMetodiButton" layoutX="306.0" layoutY="237.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <Text fx:id="oldPswText" layoutX="283.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vecchia passwod" wrappingWidth="133.43359375">
+            <Text fx:id="oldPswText" layoutX="285.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vecchia password" wrappingWidth="139.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="newPswText" layoutX="283.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
+            <Text fx:id="newPswText" layoutX="288.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="repeatPswText" layoutX="283.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ripeti password" wrappingWidth="133.43359375">
+            <Text fx:id="repeatPswText" layoutX="288.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ripeti password" wrappingWidth="133.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
@@ -80,9 +80,9 @@
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <PasswordField fx:id="oldPswField" layoutX="417.0" layoutY="63.0" />
-            <PasswordField fx:id="newPswField" layoutX="417.0" layoutY="98.0" />
-            <PasswordField fx:id="repeatPswField" layoutX="417.0" layoutY="125.0" />
+            <PasswordField fx:id="oldPswField" layoutX="425.0" layoutY="67.0" />
+            <PasswordField fx:id="newPswField" layoutX="425.0" layoutY="102.0" />
+            <PasswordField fx:id="repeatPswField" layoutX="425.0" layoutY="124.0" />
          </children></AnchorPane>
   </content>
 </ScrollPane>
