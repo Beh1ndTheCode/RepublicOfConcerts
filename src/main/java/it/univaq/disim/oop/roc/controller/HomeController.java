@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 public class HomeController implements DataInitializable<Utente> {
 
 	@FXML
-	private Label benvenutoLabel;
+	private Label benvenutoLabel, registrazioneLabel;
 	
 	 public void initializeData(Utente utente) { 
 		 StringBuilder testo = new StringBuilder(); 
@@ -17,4 +17,10 @@ public class HomeController implements DataInitializable<Utente> {
 		 testo.append(utente.getCognome());
 		 benvenutoLabel.setText(testo.toString()); 
 	 }
+	 
+	 public void initializeBool(boolean registrazione) {
+		 if (registrazione) {
+			 registrazioneLabel.setText("Registrazione avvenuta con successo");
+		 }
+	}
 }

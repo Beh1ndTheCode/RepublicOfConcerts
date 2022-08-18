@@ -43,7 +43,7 @@ public class ViewDispatcher {
 			DataInitializable<Utente> layoutController = layoutView.getController();
 			layoutController.initializeData(utente);
 			layout = (BorderPane) layoutView.getView();
-			renderView("home", utente);
+			renderHome(false,utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
 		} catch (ViewException e) {
@@ -99,6 +99,28 @@ public class ViewDispatcher {
 	}
 
 	public void signedUp(Utente utente) {
-		// dovrà caricare una schermata di avvenuta registrazione o tornare al menu
+		try {
+			View<Utente> layoutView = loadView("layout");
+			DataInitializable<Utente> layoutController = layoutView.getController();
+			layoutController.initializeData(utente);
+			layout = (BorderPane) layoutView.getView();
+			renderHome(true,utente);
+			Scene scene = new Scene(layout);
+			stage.setScene(scene);
+		} catch (ViewException e) {
+			renderError(e);
+		}
+	}
+	
+	public <T> void renderHome(boolean registrazione, T data) {
+		try {
+			View<T> view = loadView("home");
+			DataInitializable<T> controller = view.getController();
+			controller.initializeData(data);
+			controller.initializeBool(registrazione);
+			layout.setCenter(view.getView());
+		} catch (ViewException e) {
+			renderError(e);
+		}
 	}
 }

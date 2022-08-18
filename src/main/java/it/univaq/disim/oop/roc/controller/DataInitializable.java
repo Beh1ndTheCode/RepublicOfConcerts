@@ -5,4 +5,9 @@ public interface DataInitializable<T> {
 	default void initializeData(T t) {
 
 	}
+	
+	default void initializeBool(boolean t) {
+
+	}
+	
 }
