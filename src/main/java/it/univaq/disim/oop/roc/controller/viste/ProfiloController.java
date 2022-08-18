@@ -1,4 +1,4 @@
-package it.univaq.disim.oop.roc.controller;
+package it.univaq.disim.oop.roc.controller.viste;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
+import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -130,8 +131,8 @@ public class ProfiloController implements DataInitializable<Utente> {
 		}
 	}
 
-	public void addMetodoAction(ActionEvent event) throws Exception {
-		dispatcher.renderView("aggiungiMetodi", utente);
+	public void openAggiungiMetodoWindow(ActionEvent event) throws Exception {
+		dispatcher.windowView("aggiungimetodo");
 	}
 
 }

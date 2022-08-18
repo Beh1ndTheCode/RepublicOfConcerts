@@ -1,5 +1,6 @@
-package it.univaq.disim.oop.roc.controller;
+package it.univaq.disim.oop.roc.controller.viste;
 
+import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Amministratore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;

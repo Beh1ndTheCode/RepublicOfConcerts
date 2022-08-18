@@ -12,12 +12,13 @@ import javafx.stage.Stage;
 
 public class ViewDispatcher {
 
-	private static final String RESOURCE_BASE = "/viste/";
+	private static final String VISTE_BASE = "/viste/";
+	private static final String FINESTRE_BASE = "/finestre/";
 	private static final String FXML_SUFFIX = ".fxml";
 
 	private static ViewDispatcher instance = new ViewDispatcher();
 
-	private Stage stage;
+	private Stage stage,window;
 	private BorderPane layout;
 
 	private ViewDispatcher() {
@@ -83,7 +84,7 @@ public class ViewDispatcher {
 
 	private <T> View<T> loadView(String viewName) throws ViewException {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(RESOURCE_BASE + viewName + FXML_SUFFIX));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(VISTE_BASE + viewName + FXML_SUFFIX));
 			Parent parent = (Parent) loader.load();
 			return new View<>(parent, loader.getController());
 
@@ -121,6 +122,24 @@ public class ViewDispatcher {
 			layout.setCenter(view.getView());
 		} catch (ViewException e) {
 			renderError(e);
+		}
+	}
+	
+	public void windowView(String windowName) throws ViewException {
+		window = new Stage();
+		Parent windowView = loadWindow(windowName).getView();
+		Scene scene = new Scene(windowView);
+		window.setScene(scene);
+		window.show();
+	}
+	
+	private <T> View<T> loadWindow(String windowName) throws ViewException {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(FINESTRE_BASE + windowName + FXML_SUFFIX));
+			Parent parent = (Parent) loader.load();
+			return new View<>(parent, loader.getController());
+		} catch (IOException ex) {
+			throw new ViewException(ex);
 		}
 	}
 }

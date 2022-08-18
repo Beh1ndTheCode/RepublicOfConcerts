@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.ProfiloController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.ProfiloController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="585.0">
          <children>
@@ -75,7 +75,7 @@
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="aggiungiMetodiButton" layoutX="304.0" layoutY="221.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
+            <Button fx:id="aggiungiMetodiButton" layoutX="304.0" layoutY="221.0" mnemonicParsing="false" onAction="#openAggiungiMetodoWindow" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>

@@ -1,4 +1,6 @@
-package it.univaq.disim.oop.roc.controller;
+package it.univaq.disim.oop.roc.controller.viste;
+
+import it.univaq.disim.oop.roc.controller.DataInitializable;
 
 public class GestioneRecensioniController implements DataInitializable<Object> {
 

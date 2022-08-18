@@ -1,5 +1,6 @@
-package it.univaq.disim.oop.roc.controller;
+package it.univaq.disim.oop.roc.controller.viste;
 
+import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Utente;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
