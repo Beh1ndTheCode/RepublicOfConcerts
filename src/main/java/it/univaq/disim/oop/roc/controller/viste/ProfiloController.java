@@ -99,18 +99,14 @@ public class ProfiloController implements DataInitializable<Utente> {
 			ageErrorLabel.setText("");
 			oldPswErrorLabel.setText("");
 			repeatPswErrorLabel.setText("");
-			if (!ageField.getText().equals("\\d*")) {
-				String ageInput;
-				ageInput = (ageField.getText().replaceAll("[^\\d]", ""));
-				if (!(ageInput == null || ageInput.length() == 0)) {
-					utenteService.updateDati(utente, nameField.getText(), surnameField.getText(),
-							usernameField.getText(), Integer.parseInt(ageInput), oldPswField.getText(),
-							newPswField.getText(), repeatPswField.getText());
-				}
-			} else {
-				utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
-						utente.getEta(), oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
+			Integer ageInput;
+			try {
+				ageInput = Integer.parseInt(ageField.getText());
+			} catch (NumberFormatException n) {
+				throw new EtaFormatException();
 			}
+			utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
+					ageInput, oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
 			initializeData(utente);
 			// azzero tutti i campi così da mostrare i dati modificati nel promptText
 			nameField.setText("");

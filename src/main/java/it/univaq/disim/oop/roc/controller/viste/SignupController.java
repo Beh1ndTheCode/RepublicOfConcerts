@@ -38,6 +38,8 @@ public class SignupController implements DataInitializable<Utente> {
 
 	private ViewDispatcher dispatcher;
 
+	private Utente utente;
+
 	public SignupController() {
 		dispatcher = ViewDispatcher.getInstance();
 		utenteService = new RAMUtenteServiceImpl();
@@ -63,22 +65,16 @@ public class SignupController implements DataInitializable<Utente> {
 		try {
 			passwordErrorLabel.setText("");
 			etaErrorLabel.setText("");
-			if (!ageField.getText().equals("\\d*")) {
-				String ageInput;
-				ageInput = (ageField.getText().replaceAll("[^\\d]", ""));
-				if (!(ageInput == null || ageInput.length() == 0)) {
-					Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
-							ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(),
-							Integer.parseInt(ageInput));
-					dispatcher.signedUp(utente);
-
-				}
-			} else {
-				Utente utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
-						ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(), 28);
-				dispatcher.signedUp(utente);
-
+			Integer ageInput;
+			try {
+				ageInput = Integer.parseInt(ageField.getText());
+			} catch (NumberFormatException n) {
+				throw new EtaFormatException();
 			}
+			utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
+					ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(), ageInput);
+			dispatcher.signedUp(utente);
+
 		} catch (InvalidPasswordException e) {
 			passwordErrorLabel.setText("Le password non coincidono!");
 		} catch (EtaFormatException e) {

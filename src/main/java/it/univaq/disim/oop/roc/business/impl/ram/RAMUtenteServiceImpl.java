@@ -51,6 +51,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 				spettatore.setPassword(password);
 				spettatore.setNome(nome);
 				spettatore.setCognome(cognome);
+				spettatore.setEta(eta);
 				// utentiAggiunti.add(spettatore);
 				return spettatore;
 			}
@@ -58,21 +59,21 @@ public class RAMUtenteServiceImpl implements UtenteService {
 		}
 		throw new EtaFormatException();
 	}
-	
+
 	@Override
 	public void updateDati(Utente utente, String name, String surname, String username, Integer age, String oldPassword,
 			String newPassword, String repeatPassword) throws BusinessException {
 		if (utente.getPassword().equals(oldPassword)) {
 			if (newPassword.equals(repeatPassword)) {
 				if (age > 0 && age < 100) {
-					utente.setEta(age);	
+					utente.setEta(age);
 					if (!username.isEmpty())
 						utente.setUsername(username);
 					if (!name.isEmpty())
 						utente.setNome(name);
 					if (!surname.isEmpty())
 						utente.setCognome(surname);
-					if (!newPassword.isEmpty()) 
+					if (!newPassword.isEmpty())
 						utente.setPassword(newPassword);
 					return;
 				}
