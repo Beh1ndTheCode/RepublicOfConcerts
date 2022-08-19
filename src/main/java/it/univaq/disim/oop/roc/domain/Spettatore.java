@@ -1,11 +1,13 @@
 package it.univaq.disim.oop.roc.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Spettatore extends Utente {
 
-	private Set<MetodoDiPagamento> metodo = new HashSet<>();
+	private List<MetodoDiPagamento> metodo = new ArrayList<>();
 	private Set<Recensione> recensioniLasciate = new HashSet<>();
 	private Set<Biglietto> bigliettiPrenotati = new HashSet<>();
 
@@ -25,11 +27,11 @@ public class Spettatore extends Utente {
 		this.recensioniLasciate = recensioniLasciate;
 	}
 
-	public Set<MetodoDiPagamento> getMetodo() {
+	public List<MetodoDiPagamento> getMetodo() {
 		return metodo;
 	}
 
-	public void setMetodo(Set<MetodoDiPagamento> metodo) {
+	public void setMetodo(List<MetodoDiPagamento> metodo) {
 		this.metodo = metodo;
 	}
 

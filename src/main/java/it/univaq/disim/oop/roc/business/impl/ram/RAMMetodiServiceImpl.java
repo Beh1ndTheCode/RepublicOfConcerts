@@ -17,14 +17,14 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	private static int idCounterMetodi = 1;
 
 	@Override
-	public Carta addCarta(Carta carta, String nomeCarta, String intestatario, Integer numero, Integer meseScadenza,
+	public Carta addCarta(Carta carta, String nomeCarta, String intestatario, Long numero, Integer meseScadenza,
 			Integer annoScadenza, Integer cvv) throws BusinessException {
-		String cvvControl = String.valueOf(cvv);
+		String numeroControl = String.valueOf(numero);
 		String meseScadenzaControl = String.valueOf(meseScadenza);
 		String annoScadenzaControl = String.valueOf(annoScadenza);
-		String numeroControl = String.valueOf(numero);
-		if (cvvControl.length() == 3 && meseScadenzaControl.length() == 2 && annoScadenzaControl.length() == 2
-				&& numeroControl.length() == 16) {
+		String cvvControl = String.valueOf(cvv);
+		if (numeroControl.length() == 16 && meseScadenzaControl.length() == 2 && annoScadenzaControl.length() == 2
+				&& cvvControl.length() == 3) {
 			if ((meseScadenza >= 01 && meseScadenza <= 12) && (annoScadenza >= 00 && annoScadenza <= 99)) {
 				carta.setId(idCounterMetodi++);
 				carta.setNome(nomeCarta);
@@ -61,9 +61,35 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		}
 	}
 
+/*
 	@Override
 	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
 		return new ArrayList<>(metodiAggiunti);
 	}
+*/
 
+	@Override
+	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
+		List<MetodoDiPagamento> metodoDiPagamento = new ArrayList<>();
+
+		Carta cartaProva = new Carta();
+		cartaProva.setId(idCounterMetodi++);
+		cartaProva.setNome("Carta prova");
+		cartaProva.setIntestatario("Giovanni Storti");
+		cartaProva.setNumero(123456789875432L);
+		cartaProva.setMeseScadenza(06);
+		cartaProva.setAnnoScadenza(23);
+		cartaProva.setCvv(578);
+		cartaProva.setUtente(utente);
+		metodoDiPagamento.add(cartaProva);
+
+		Conto contoProva = new Conto();
+		contoProva.setId(idCounterMetodi++);
+		contoProva.setNome("Conto prova");
+		contoProva.setIban("IT85I8284863987145289597634");
+		contoProva.setUtente(utente);
+		metodoDiPagamento.add(contoProva);
+
+		return metodoDiPagamento;
+	}
 }

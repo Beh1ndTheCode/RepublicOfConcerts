@@ -70,16 +70,18 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 
 	public void aggiungiCartaAction(ActionEvent event) {
 		try {
-			Integer cvvInput, meseScadenzaInput, annoScadenzaInput;
+			Long numeroInput;
+			Integer meseScadenzaInput, annoScadenzaInput, cvvInput;
 			try {
-				cvvInput = Integer.parseInt(cvvField.getText());
+				numeroInput = Long.parseLong(numeroField.getText());
 				meseScadenzaInput = Integer.parseInt(meseScadenzaField.getText());
 				annoScadenzaInput = Integer.parseInt(annoScadenzaField.getText());
+				cvvInput = Integer.parseInt(cvvField.getText());
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
 			carta = new Carta();
-			metodiService.addCarta(carta, nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
+			metodiService.addCarta(carta, nomeCartaField.getText(), intestatarioField.getText(), numeroInput,
 					meseScadenzaInput, annoScadenzaInput, cvvInput);
 			throw new IntegerFormatException();
 		} catch (IntegerFormatException e) {
