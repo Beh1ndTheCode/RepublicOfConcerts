@@ -8,8 +8,7 @@
  
 # JavaFX
 ### Realizzare viste
-     - Area utente: vista per aggiungere metodi di pagamento
      - Concerti
      - Recensioni
      - Luoghi
-### Messaggio o vista per avvenuta registrazione
+### Correggere tabella metodi di pagamento

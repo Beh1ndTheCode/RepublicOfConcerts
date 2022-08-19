@@ -18,6 +18,12 @@ public class RAMUtenteServiceImpl implements UtenteService {
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {
+		for (Utente user : utentiAggiunti) {
+			if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+				return user;
+			}
+		}
+
 		if ("amministratore".equalsIgnoreCase(username)) {
 			Utente amministratore = new Amministratore();
 			amministratore.setUsername(username);
@@ -26,8 +32,10 @@ public class RAMUtenteServiceImpl implements UtenteService {
 			amministratore.setCognome("rossi");
 			amministratore.setEta(37);
 			utentiAggiunti.add(amministratore);
+
 			return amministratore;
 		}
+
 		if ("spettatore".equalsIgnoreCase(username)) {
 			Spettatore spettatore = new Spettatore();
 			spettatore.setUsername(username);
@@ -36,8 +44,10 @@ public class RAMUtenteServiceImpl implements UtenteService {
 			spettatore.setCognome("bianchi");
 			spettatore.setEta(25);
 			utentiAggiunti.add(spettatore);
+
 			return spettatore;
 		}
+
 		throw new UtenteNotFoundException();
 	}
 
@@ -52,11 +62,14 @@ public class RAMUtenteServiceImpl implements UtenteService {
 				spettatore.setNome(nome);
 				spettatore.setCognome(cognome);
 				spettatore.setEta(eta);
-				// utentiAggiunti.add(spettatore);
+				utentiAggiunti.add(spettatore);
+
 				return spettatore;
 			}
+
 			throw new InvalidPasswordException();
 		}
+
 		throw new IntegerFormatException();
 	}
 
@@ -75,12 +88,16 @@ public class RAMUtenteServiceImpl implements UtenteService {
 						utente.setCognome(surname);
 					if (!newPassword.isEmpty())
 						utente.setPassword(newPassword);
+
 					return;
 				}
+
 				throw new IntegerFormatException();
 			}
+
 			throw new InvalidPasswordException();
 		}
+
 		throw new UtenteNotFoundException();
 	}
 
