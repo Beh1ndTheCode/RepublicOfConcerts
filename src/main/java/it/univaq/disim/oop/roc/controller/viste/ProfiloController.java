@@ -10,7 +10,7 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.EtaFormatException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
@@ -109,7 +109,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 				try {
 					ageInput = Integer.parseInt(ageField.getText());
 				} catch (NumberFormatException n) {
-					throw new EtaFormatException();
+					throw new IntegerFormatException();
 				}
 			} else
 				ageInput = utente.getEta();
@@ -124,7 +124,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 			oldPswField.setText("");
 			newPswField.setText("");
 			repeatPswField.setText("");
-		} catch (EtaFormatException e) {
+		} catch (IntegerFormatException e) {
 			ageErrorLabel.setText("Età non valida!");
 		} catch (UtenteNotFoundException e) {
 			oldPswErrorLabel.setText("Password errata!");

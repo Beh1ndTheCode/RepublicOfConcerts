@@ -9,6 +9,7 @@ import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 
 public class RAMMetodiServiceImpl implements MetodiService {
 
@@ -16,16 +17,23 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	private static int idCounterMetodi = 1;
 
 	@Override
-	public Carta addCarta(Carta carta, String nomeCarta, String intestatario, String numero, String scadenza,
-			Integer cvv) throws BusinessException {
-		carta.setId(idCounterMetodi++);
-		carta.setNome(nomeCarta);
-		carta.setIntestatario(intestatario);
-		carta.setNumero(numero);
-		carta.setScadenza(scadenza);
-		carta.setCvv(cvv);
-		metodiAggiunti.add(carta);
-		return carta;
+	public Carta addCarta(Carta carta, String nomeCarta, String intestatario, String numero, Integer meseScadenza,
+			Integer annoScadenza, Integer cvv) throws BusinessException {
+		String cvvControl = String.valueOf(cvv);
+		String meseScadenzaControl = String.valueOf(meseScadenza);
+		String annoScadenzaControl = String.valueOf(annoScadenza);
+		if (cvvControl.length() == 3 && meseScadenzaControl.length() == 2 && annoScadenzaControl.length() == 2) {
+			carta.setId(idCounterMetodi++);
+			carta.setNome(nomeCarta);
+			carta.setIntestatario(intestatario);
+			carta.setNumero(numero);
+			carta.setMeseScadenza(meseScadenza);
+			carta.setAnnoScadenza(annoScadenza);
+			carta.setCvv(cvv);
+			metodiAggiunti.add(carta);
+			return carta;
+		}
+		throw new IntegerFormatException();
 	}
 
 	@Override

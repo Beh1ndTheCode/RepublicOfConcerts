@@ -5,7 +5,6 @@
 ### Accesso come spettatore
 
 # Eccezioni
-### Eccezione per valori non-numerici nel campo età della schermata di registrazione: DA COMPLETARE
  
 # JavaFX
 ### Realizzare viste

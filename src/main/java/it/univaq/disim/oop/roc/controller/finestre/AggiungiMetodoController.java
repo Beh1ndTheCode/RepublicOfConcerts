@@ -5,19 +5,24 @@ import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Conto;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.EtaFormatException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AggiungiMetodoController implements DataInitializable<Object> {
 
 	@FXML
-	private TextField nomeCartaField, intestatarioField, numeroField, scadenzaField, cvvField, nomeContoField,
-			ibanField, swiftField;
+	private TextField nomeCartaField, intestatarioField, numeroField, scadenzaField, meseScadenzaField,
+			annoScadenzaField, cvvField, nomeContoField, ibanField, swiftField;
+
+	@FXML
+	private Label cvvErrorLabel;
 
 	@FXML
 	private Button aggiungiCartaButton, aggiungiContoButton;
@@ -35,14 +40,24 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 		metodiService = new RAMMetodiServiceImpl();
 	}
 
+	public void initialize() {
+		aggiungiCartaButton.setDisable(true);
+		aggiungiContoButton.setDisable(true);
+	}
+
+	public void initializeData(Utente utente) {
+
+	}
+
 	public void blockAggiungiCartaButton() {
 		String nomeCarta = nomeCartaField.getText();
 		String intestatario = intestatarioField.getText();
 		String numero = numeroField.getText();
-		String scadenza = scadenzaField.getText();
+		String meseScadenza = meseScadenzaField.getText();
+		String annoScadenza = annoScadenzaField.getText();
 		String cvv = cvvField.getText();
-		boolean isDisable = nomeCarta.isEmpty() || intestatario.isEmpty() || numero.isEmpty() || scadenza.isEmpty()
-				|| cvv.isEmpty();
+		boolean isDisable = nomeCarta.isEmpty() || intestatario.isEmpty() || numero.isEmpty() || meseScadenza.isEmpty()
+				|| annoScadenza.isEmpty() || cvv.isEmpty();
 		aggiungiCartaButton.setDisable(isDisable);
 	}
 
@@ -55,15 +70,20 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 
 	public void aggiungiCartaAction(ActionEvent event) {
 		try {
-			Integer cvvInput;
+			Integer cvvInput, meseScadenzaInput, annoScadenzaInput;
 			try {
 				cvvInput = Integer.parseInt(cvvField.getText());
+				meseScadenzaInput = Integer.parseInt(meseScadenzaField.getText());
+				annoScadenzaInput = Integer.parseInt(annoScadenzaField.getText());
 			} catch (NumberFormatException n) {
-				throw new EtaFormatException();
+				throw new IntegerFormatException();
 			}
 			carta = new Carta();
 			metodiService.addCarta(carta, nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
-					scadenzaField.getText(), cvvInput);
+					meseScadenzaInput, annoScadenzaInput, cvvInput);
+			throw new IntegerFormatException();
+		} catch (IntegerFormatException e) {
+			cvvErrorLabel.setText("Inserisci un numero valido");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

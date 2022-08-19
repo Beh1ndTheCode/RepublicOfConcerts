@@ -4,8 +4,8 @@ public class Carta extends MetodoDiPagamento {
 
 	private String numero;
 	private String intestatario;
-	private String Scadenza;
-
+	private Integer meseScadenza;
+	private Integer annoScadenza;
 	private Integer cvv;
 
 	public String getNumero() {
@@ -24,12 +24,20 @@ public class Carta extends MetodoDiPagamento {
 		this.intestatario = intestatario;
 	}
 
-	public String getScadenza() {
-		return Scadenza;
+	public Integer getMeseScadenza() {
+		return meseScadenza;
 	}
 
-	public void setScadenza(String Scadenza) {
-		this.Scadenza = Scadenza;
+	public void setMeseScadenza(Integer meseScadenza) {
+		this.meseScadenza = meseScadenza;
+	}
+
+	public Integer getAnnoScadenza() {
+		return annoScadenza;
+	}
+
+	public void setAnnoScadenza(Integer annoScadenza) {
+		this.annoScadenza = annoScadenza;
 	}
 
 	public Integer getCvv() {

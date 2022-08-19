@@ -5,7 +5,7 @@ import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.EtaFormatException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import it.univaq.disim.oop.roc.viste.ViewException;
@@ -68,7 +68,7 @@ public class SignupController implements DataInitializable<Utente> {
 			try {
 				ageInput = Integer.parseInt(ageField.getText());
 			} catch (NumberFormatException n) {
-				throw new EtaFormatException();
+				throw new IntegerFormatException();
 			}
 			utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
 					ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(), ageInput);
@@ -76,7 +76,7 @@ public class SignupController implements DataInitializable<Utente> {
 
 		} catch (InvalidPasswordException e) {
 			passwordErrorLabel.setText("Le password non coincidono!");
-		} catch (EtaFormatException e) {
+		} catch (IntegerFormatException e) {
 			etaErrorLabel.setText("Età non valida");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);

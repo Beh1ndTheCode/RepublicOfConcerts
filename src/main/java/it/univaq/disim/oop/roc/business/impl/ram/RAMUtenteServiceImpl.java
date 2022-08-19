@@ -8,7 +8,7 @@ import it.univaq.disim.oop.roc.domain.Amministratore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.EtaFormatException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 
@@ -57,7 +57,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 			}
 			throw new InvalidPasswordException();
 		}
-		throw new EtaFormatException();
+		throw new IntegerFormatException();
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 						utente.setPassword(newPassword);
 					return;
 				}
-				throw new EtaFormatException();
+				throw new IntegerFormatException();
 			}
 			throw new InvalidPasswordException();
 		}
