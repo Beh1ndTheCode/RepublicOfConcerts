@@ -2,17 +2,17 @@ package it.univaq.disim.oop.roc.domain;
 
 public class Carta extends MetodoDiPagamento {
 
-	private String numero;
+	private Integer numero;
 	private String intestatario;
 	private Integer meseScadenza;
 	private Integer annoScadenza;
 	private Integer cvv;
 
-	public String getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
