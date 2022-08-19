@@ -94,11 +94,11 @@ public class ProfiloController implements DataInitializable<Utente> {
 		String surname = surnameField.getText();
 		String username = usernameField.getText();
 		String età = ageField.getText();
-		boolean isDisable = oldpassword.isEmpty() || (newpassword.isEmpty() && name.isEmpty() && surname.isEmpty() && username.isEmpty() && età.isEmpty());
+		boolean isDisable = oldpassword.isEmpty() || (newpassword.isEmpty() && name.isEmpty() && surname.isEmpty()
+				&& username.isEmpty() && età.isEmpty());
 		modificaDatiButton.setDisable(isDisable);
 	}
 
-	// Revisionare
 	public void updateDatiAction(ActionEvent event) {
 		try {
 			ageErrorLabel.setText("");
@@ -111,8 +111,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 				} catch (NumberFormatException n) {
 					throw new EtaFormatException();
 				}
-			}
-			else 
+			} else
 				ageInput = utente.getEta();
 			utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
 					ageInput, oldPswField.getText(), newPswField.getText(), repeatPswField.getText());

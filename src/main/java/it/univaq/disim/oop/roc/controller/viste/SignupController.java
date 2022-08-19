@@ -60,7 +60,6 @@ public class SignupController implements DataInitializable<Utente> {
 		signupButton.setDisable(isDisable);
 	}
 
-	// Revisionare
 	public void signupAction(ActionEvent event) {
 		try {
 			passwordErrorLabel.setText("");

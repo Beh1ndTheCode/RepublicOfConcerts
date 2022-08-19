@@ -3,8 +3,10 @@ package it.univaq.disim.oop.roc.domain;
 public class Carta extends MetodoDiPagamento {
 
 	private String numero;
-	private Integer meseScadenza;
-	private Integer annoScadenza;
+	private String intestatario;
+	private String Scadenza;
+
+	private Integer cvv;
 
 	public String getNumero() {
 		return numero;
@@ -14,20 +16,28 @@ public class Carta extends MetodoDiPagamento {
 		this.numero = numero;
 	}
 
-	public Integer getMeseScadenza() {
-		return meseScadenza;
+	public String getIntestatario() {
+		return intestatario;
 	}
 
-	public void setMeseScadenza(Integer meseScadenza) {
-		this.meseScadenza = meseScadenza;
+	public void setIntestatario(String intestatario) {
+		this.intestatario = intestatario;
 	}
 
-	public Integer getAnnoScadenza() {
-		return annoScadenza;
+	public String getScadenza() {
+		return Scadenza;
 	}
 
-	public void setAnnoScadenza(Integer annoScadenza) {
-		this.annoScadenza = annoScadenza;
+	public void setScadenza(String Scadenza) {
+		this.Scadenza = Scadenza;
+	}
+
+	public Integer getCvv() {
+		return cvv;
+	}
+
+	public void setCvv(Integer cvv) {
+		this.cvv = cvv;
 	}
 
 }
