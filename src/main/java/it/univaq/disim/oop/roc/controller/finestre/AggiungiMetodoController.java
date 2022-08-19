@@ -22,12 +22,12 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 			annoScadenzaField, cvvField, nomeContoField, ibanField, swiftField;
 
 	@FXML
-	private Label cvvErrorLabel;
+	private Label ibanErrorLabel, numCartaErrorLabel;
 
 	@FXML
 	private Button aggiungiCartaButton, aggiungiContoButton;
 
-	private MetodiService metodiService;
+	private RAMMetodiServiceImpl metodiService;
 
 	private ViewDispatcher dispatcher;
 
@@ -65,38 +65,42 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 		String nomeConto = nomeContoField.getText();
 		String iban = ibanField.getText();
 		boolean isDisable = nomeConto.isEmpty() || iban.isEmpty();
-		aggiungiCartaButton.setDisable(isDisable);
+		aggiungiContoButton.setDisable(isDisable);
 	}
 
 	public void aggiungiCartaAction(ActionEvent event) {
 		try {
-			Long numeroInput;
-			Integer meseScadenzaInput, annoScadenzaInput, cvvInput;
-			try {
-				numeroInput = Long.parseLong(numeroField.getText());
-				meseScadenzaInput = Integer.parseInt(meseScadenzaField.getText());
-				annoScadenzaInput = Integer.parseInt(annoScadenzaField.getText());
-				cvvInput = Integer.parseInt(cvvField.getText());
-			} catch (NumberFormatException n) {
-				throw new IntegerFormatException();
-			}
+			numCartaErrorLabel.setText("");
 			carta = new Carta();
-			metodiService.addCarta(carta, nomeCartaField.getText(), intestatarioField.getText(), numeroInput,
-					meseScadenzaInput, annoScadenzaInput, cvvInput);
-			throw new IntegerFormatException();
+			metodiService.addCarta(carta, nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
+					meseScadenzaField.getText(), annoScadenzaField.getText(), cvvField.getText());
+			nomeCartaField.setText("");
+			intestatarioField.setText("");
+			numeroField.setText("");
+			meseScadenzaField.setText("");
+			annoScadenzaField.setText("");
+			cvvField.setText("");
 		} catch (IntegerFormatException e) {
-			cvvErrorLabel.setText("Inserisci un numero valido");
+			numCartaErrorLabel.setText("Inserisci un numero valido");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
+		
 	}
 
 	public void aggiungiContoAction(ActionEvent event) {
 		try {
+			ibanErrorLabel.setText("");
 			conto = new Conto();
 			metodiService.addConto(conto, nomeContoField.getText(), ibanField.getText());
+		} catch (IntegerFormatException e) {
+			ibanErrorLabel.setText("Iban non valido");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
+	}
+	
+	public void closeWindow() {
+		dispatcher.closeWindowView();
 	}
 }

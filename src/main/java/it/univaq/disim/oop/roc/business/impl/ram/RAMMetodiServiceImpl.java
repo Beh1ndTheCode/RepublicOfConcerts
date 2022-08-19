@@ -17,22 +17,28 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	private static int idCounterMetodi = 1;
 
 	@Override
-	public Carta addCarta(Carta carta, String nomeCarta, String intestatario, Long numero, Integer meseScadenza,
-			Integer annoScadenza, Integer cvv) throws BusinessException {
-		String numeroControl = String.valueOf(numero);
-		String meseScadenzaControl = String.valueOf(meseScadenza);
-		String annoScadenzaControl = String.valueOf(annoScadenza);
-		String cvvControl = String.valueOf(cvv);
-		if (numeroControl.length() == 16 && meseScadenzaControl.length() == 2 && annoScadenzaControl.length() == 2
-				&& cvvControl.length() == 3) {
-			if ((meseScadenza >= 01 && meseScadenza <= 12) && (annoScadenza >= 00 && annoScadenza <= 99)) {
+	public Carta addCarta(Carta carta, String nomeCarta, String intestatario, String numero, String meseScadenza,
+			String annoScadenza, String cvv) throws BusinessException {
+		if (cvv.length() == 3 && meseScadenza.length() == 2 && annoScadenza.length() == 2
+				&& numero.length() == 16) {
+			Integer meseScadenzaInput, annoScadenzaInput, cvvInput;
+			Long numeroInput;
+			try {
+				numeroInput = Long.parseLong(numero);
+				meseScadenzaInput = Integer.parseInt(meseScadenza);
+				annoScadenzaInput = Integer.parseInt(annoScadenza);
+				cvvInput = Integer.parseInt(cvv);
+			} catch (NumberFormatException n) {
+				throw new IntegerFormatException();
+			}
+			if ((meseScadenzaInput >= 01 && meseScadenzaInput <= 12) && (annoScadenzaInput >= 00 && annoScadenzaInput <= 99)) {
 				carta.setId(idCounterMetodi++);
 				carta.setNome(nomeCarta);
 				carta.setIntestatario(intestatario);
-				carta.setNumero(numero);
-				carta.setMeseScadenza(meseScadenza);
-				carta.setAnnoScadenza(annoScadenza);
-				carta.setCvv(cvv);
+				carta.setNumero(numeroInput);
+				carta.setMeseScadenza(meseScadenzaInput);
+				carta.setAnnoScadenza(annoScadenzaInput);
+				carta.setCvv(cvvInput);
 				metodiAggiunti.add(carta);
 				return carta;
 			}

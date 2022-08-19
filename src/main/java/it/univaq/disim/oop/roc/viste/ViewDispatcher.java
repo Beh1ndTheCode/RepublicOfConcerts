@@ -142,4 +142,8 @@ public class ViewDispatcher {
 			throw new ViewException(ex);
 		}
 	}
+	
+	public void closeWindowView() {
+		window.close();
+	}
 }

@@ -10,8 +10,8 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface MetodiService {
 
-	Carta addCarta(Carta carta, String nomeCarta, String intestatario, Long numero, Integer meseScadenza,
-			Integer annoScadenza, Integer cvv) throws BusinessException;
+	Carta addCarta(Carta carta, String nomeCarta, String intestatario, String numero, String meseScadenza,
+			String annoScadenza, String cvv) throws BusinessException;
 
 	Conto addConto(Conto conto, String nomeConto, String iban) throws BusinessException;
 
