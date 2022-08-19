@@ -88,8 +88,13 @@ public class ProfiloController implements DataInitializable<Utente> {
 	}
 
 	public void blockModificaDatiButton() {
-		String password = oldPswField.getText();
-		boolean isDisable = password.isEmpty();
+		String oldpassword = oldPswField.getText();
+		String newpassword = newPswField.getText();
+		String name = nameField.getText();
+		String surname = surnameField.getText();
+		String username = usernameField.getText();
+		String età = ageField.getText();
+		boolean isDisable = oldpassword.isEmpty() || (newpassword.isEmpty() && name.isEmpty() && surname.isEmpty() && username.isEmpty() && età.isEmpty());
 		modificaDatiButton.setDisable(isDisable);
 	}
 
@@ -100,11 +105,15 @@ public class ProfiloController implements DataInitializable<Utente> {
 			oldPswErrorLabel.setText("");
 			repeatPswErrorLabel.setText("");
 			Integer ageInput;
-			try {
-				ageInput = Integer.parseInt(ageField.getText());
-			} catch (NumberFormatException n) {
-				throw new EtaFormatException();
+			if (!ageField.getText().equals("")) {
+				try {
+					ageInput = Integer.parseInt(ageField.getText());
+				} catch (NumberFormatException n) {
+					throw new EtaFormatException();
+				}
 			}
+			else 
+				ageInput = utente.getEta();
 			utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
 					ageInput, oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
 			initializeData(utente);
