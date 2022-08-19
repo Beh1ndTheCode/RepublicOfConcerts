@@ -9,92 +9,92 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.AggiungiMetodoController">
    <children>
-      <Text layoutX="12.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome carta" textAlignment="RIGHT" wrappingWidth="67.43359375">
+      <Text layoutX="12.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome carta" textAlignment="RIGHT" wrappingWidth="67.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="86.0" layoutY="36.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. PostePay">
+      <TextField fx:id="nomeCartaField" layoutX="86.0" layoutY="33.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. PostePay">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Text layoutX="8.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero carta" textAlignment="RIGHT" wrappingWidth="74.43359375">
+      <Text fx:id="numeroCartaField" layoutX="8.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero carta" textAlignment="RIGHT" wrappingWidth="74.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="86.0" layoutY="85.0" prefHeight="25.0" prefWidth="152.0">
+      <TextField fx:id="numeroField" layoutX="86.0" layoutY="83.0" prefHeight="25.0" prefWidth="152.0">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Text layoutX="260.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome conto" textAlignment="RIGHT" wrappingWidth="67.43359375">
+      <Text layoutX="260.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome conto" textAlignment="RIGHT" wrappingWidth="67.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="334.0" layoutY="59.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. ContoIntesa">
+      <TextField fx:id="nomeContoField" layoutX="334.0" layoutY="52.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. ContoIntesa">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Text layoutX="12.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scadenza" textAlignment="RIGHT" wrappingWidth="67.43359375">
+      <Text layoutX="12.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scadenza" textAlignment="RIGHT" wrappingWidth="67.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="86.0" layoutY="110.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. 31/12/2030">
+      <TextField fx:id="scadenzaField" layoutX="86.0" layoutY="108.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. 31/12/2030">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Text layoutX="12.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intestatario" textAlignment="RIGHT" wrappingWidth="67.43359375">
+      <Text layoutX="12.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intestatario" textAlignment="RIGHT" wrappingWidth="67.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="86.0" layoutY="61.0" prefHeight="25.0" prefWidth="152.0" promptText="Nome e Cognome">
+      <TextField fx:id="intestatarioField" layoutX="86.0" layoutY="58.0" prefHeight="25.0" prefWidth="152.0" promptText="Nome e Cognome">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Text layoutX="12.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVV" textAlignment="RIGHT" wrappingWidth="67.43359375">
+      <Text layoutX="11.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVV" textAlignment="RIGHT" wrappingWidth="67.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="86.0" layoutY="135.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. 123">
+      <TextField fx:id="cvvField" layoutX="86.0" layoutY="133.0" prefHeight="25.0" prefWidth="152.0" promptText="Es. 123">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Button layoutX="64.0" layoutY="184.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Aggiungi carta">
+      <Button fx:id="aggiungiCartaButton" layoutX="64.0" layoutY="184.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Aggiungi carta">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
       </Button>
-      <Text layoutX="260.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iban" textAlignment="RIGHT" wrappingWidth="67.43359375">
+      <Text layoutX="260.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iban" textAlignment="RIGHT" wrappingWidth="67.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="334.0" layoutY="84.0" prefHeight="25.0" prefWidth="152.0">
+      <TextField fx:id="ibanField" layoutX="334.0" layoutY="77.0" prefHeight="25.0" prefWidth="152.0">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Text layoutX="260.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Swift" textAlignment="RIGHT" wrappingWidth="67.43359375">
+      <Text layoutX="260.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Swift" textAlignment="RIGHT" wrappingWidth="67.43359375">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Text>
-      <TextField layoutX="334.0" layoutY="108.0" prefHeight="25.0" prefWidth="152.0">
+      <TextField fx:id="swiftField" layoutX="334.0" layoutY="102.0" prefHeight="25.0" prefWidth="152.0">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Button layoutX="312.0" layoutY="155.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Aggiungi conto">
+      <Button fx:id="aggiungiContoButton" layoutX="312.0" layoutY="148.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Aggiungi conto">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
