@@ -43,7 +43,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	public void initializeData(Utente utente) {
 		this.utente = utente;
-		System.out.println(utente.getNome());	}
+		}
 
 	public void blockAggiungiCartaButton() {
 		String nomeCarta = nomeCartaField.getText();

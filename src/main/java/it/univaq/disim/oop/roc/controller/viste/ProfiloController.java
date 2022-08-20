@@ -14,6 +14,7 @@ import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -79,11 +80,15 @@ public class ProfiloController implements DataInitializable<Utente> {
 			return new SimpleStringProperty(param.getValue().getNome());
 		});
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, Button> param) -> {
-			final Button metodiButton = new Button("Di più");
-			metodiButton.setOnAction((ActionEvent event) -> {
-				oldPswErrorLabel.setText("Successo");
+			final Button InfoButton = new Button("info");
+			InfoButton.setOnAction(e-> {
+				try {
+					dispatcher.openNewWindow("infocartametodo",utente);
+				} catch (ViewException ex) {
+					ex.printStackTrace();
+				}
 			});
-			return new SimpleObjectProperty<Button>(metodiButton);
+			return new SimpleObjectProperty<Button>(InfoButton);
 		});
 	}
 
