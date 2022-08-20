@@ -125,7 +125,14 @@ public class ViewDispatcher {
 		}
 	}
 	
-	public void windowView(String windowName) throws ViewException {
+	public <T> void openNewWindow(String windowName, T data) throws ViewException {
+		createWindow(windowName);
+		View<T> view = loadWindow(windowName);
+		DataInitializable<T> controller = view.getController();
+		controller.initializeData(data);
+	}
+	
+	public void createWindow(String windowName) throws ViewException{
 		window = new Stage();
 		Parent windowView = loadWindow(windowName).getView();
 		Scene scene = new Scene(windowView);

@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class AggiungiMetodoController implements DataInitializable<Object> {
+public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	@FXML
 	private TextField nomeCartaField, intestatarioField, numeroField, scadenzaField, meseScadenzaField,
@@ -43,7 +43,7 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 
 	public void initializeData(Utente utente) {
 		this.utente = utente;
-	}
+		System.out.println(utente.getNome());	}
 
 	public void blockAggiungiCartaButton() {
 		String nomeCarta = nomeCartaField.getText();

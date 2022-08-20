@@ -152,7 +152,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 	}
 
 	public void openAggiungiMetodoWindow(ActionEvent event) throws Exception {
-		dispatcher.windowView("aggiungimetodo");
+		dispatcher.openNewWindow("aggiungimetodo",utente);
 	}
 
 }
