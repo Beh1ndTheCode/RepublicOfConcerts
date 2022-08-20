@@ -18,7 +18,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 	private static final String METODI_FILE_NAME = REPOSITORY_BASE + File.separator + "metodi.txt";
 
 	@Override
-	public void addCarta(String nomeCarta, String intestatario, String numero, String meseScadenza, String annoScadenza,
+	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza, String annoScadenza,
 			String cvv) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
@@ -53,7 +53,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 
 	}
 
-	public void addConto(String nomeConto, String iban) throws BusinessException {
+	public void addConto(Utente utente, String nomeConto, String iban) throws BusinessException {
 
 	}
 

@@ -43,7 +43,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	public void initializeData(Utente utente) {
 		this.utente = utente;
-		}
+	}
 
 	public void blockAggiungiCartaButton() {
 		String nomeCarta = nomeCartaField.getText();
@@ -68,7 +68,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public void aggiungiCartaAction(ActionEvent event) {
 		try {
 			numCartaErrorLabel.setText("");
-			metodiService.addCarta(nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
+			metodiService.addCarta(utente, nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
 					meseScadenzaField.getText(), annoScadenzaField.getText(), cvvField.getText());
 
 			nomeCartaField.setText("");
@@ -88,7 +88,12 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public void aggiungiContoAction(ActionEvent event) {
 		try {
 			ibanErrorLabel.setText("");
-			metodiService.addConto(nomeContoField.getText(), ibanField.getText());
+			metodiService.addConto(utente, nomeContoField.getText(), ibanField.getText());
+
+			nomeContoField.setText("");
+			ibanField.setText("");
+			swiftField.setText("");
+
 		} catch (IntegerFormatException e) {
 			ibanErrorLabel.setText("Iban non valido");
 		} catch (BusinessException e) {
@@ -98,5 +103,6 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	public void closeWindow() {
 		dispatcher.closeWindowView();
+		// dispatcher.renderView("profilo", utente);
 	}
 }

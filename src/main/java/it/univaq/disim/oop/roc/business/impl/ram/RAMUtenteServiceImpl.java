@@ -15,6 +15,7 @@ import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 public class RAMUtenteServiceImpl implements UtenteService {
 
 	private static List<Utente> utentiAggiunti = new ArrayList<>();
+	private static int idCounterUtenti = 1;
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {
@@ -26,6 +27,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 
 		if ("amministratore".equalsIgnoreCase(username)) {
 			Utente amministratore = new Amministratore();
+			amministratore.setId(idCounterUtenti++);
 			amministratore.setUsername(username);
 			amministratore.setPassword(password);
 			amministratore.setNome("mario");
@@ -38,6 +40,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 
 		if ("spettatore".equalsIgnoreCase(username)) {
 			Spettatore spettatore = new Spettatore();
+			spettatore.setId(idCounterUtenti++);
 			spettatore.setUsername(username);
 			spettatore.setPassword(password);
 			spettatore.setNome("luigi");
@@ -57,6 +60,7 @@ public class RAMUtenteServiceImpl implements UtenteService {
 		if (eta > 0 && eta < 100) {
 			if (password.equals(confermaPassword)) {
 				Spettatore spettatore = new Spettatore();
+				spettatore.setId(idCounterUtenti++);
 				spettatore.setUsername(username);
 				spettatore.setPassword(password);
 				spettatore.setNome(nome);

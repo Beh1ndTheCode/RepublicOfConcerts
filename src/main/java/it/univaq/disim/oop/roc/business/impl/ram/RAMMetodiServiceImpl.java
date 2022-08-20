@@ -17,8 +17,8 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	private static int idCounterMetodi = 1;
 
 	@Override
-	public void addCarta(String nomeCarta, String intestatario, String numero, String meseScadenza, String annoScadenza,
-			String cvv) throws BusinessException {
+	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,
+			String annoScadenza, String cvv) throws BusinessException {
 		if (cvv.length() == 3 && (meseScadenza.length() == 1 || meseScadenza.length() == 2)
 				&& (annoScadenza.length() == 1 || annoScadenza.length() == 2) && numero.length() == 16) {
 			Integer meseScadenzaInput, annoScadenzaInput, cvvInput;
@@ -37,7 +37,9 @@ public class RAMMetodiServiceImpl implements MetodiService {
 					&& (annoScadenzaInput >= 0 && annoScadenzaInput <= 99)) {
 				Carta carta = new Carta();
 				carta.setId(idCounterMetodi++);
+				carta.setTipo("Carta");
 				carta.setNome(nomeCarta);
+				carta.setUtente(utente);
 				carta.setIntestatario(intestatario);
 				carta.setNumero(numeroInput);
 				carta.setMeseScadenza(meseScadenzaInput);
@@ -53,13 +55,17 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	}
 
 	@Override
-	public void addConto(String nomeConto, String iban) throws BusinessException {
+	public void addConto(Utente utente, String nomeConto, String iban) throws BusinessException {
 		if (iban.length() == 27) {
 			Conto conto = new Conto();
 			conto.setId(idCounterMetodi++);
+			conto.setTipo("Conto");
 			conto.setNome(nomeConto);
 			conto.setIban(iban);
+			conto.setUtente(utente);
 			metodiAggiunti.add(conto);
+
+			return;
 		}
 
 		throw new IntegerFormatException();
@@ -104,8 +110,8 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		metodoDiPagamento.add(contoProva);
 
 		for (MetodoDiPagamento met : metodiAggiunti) {
-			if (met.getUtente() == utente)
-				metodoDiPagamento.add(met);
+			// if (met.getUtente().equals(utente))
+			metodoDiPagamento.add(met);
 		}
 
 		return metodoDiPagamento;

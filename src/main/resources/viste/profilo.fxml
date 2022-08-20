@@ -25,6 +25,7 @@
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
+            <Text fill="#7c7c7c" layoutX="255.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="per modificare i dati bisogna inserire la vecchia password" wrappingWidth="153.13671875" />
             <Text fx:id="usernameText" layoutX="19.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="103.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
@@ -87,7 +88,6 @@
                   <TableColumn fx:id="azioniTableColumn" prefWidth="122.0" text="Azioni" />
               </columns>
             </TableView>
-            <Text fill="#7c7c7c" layoutX="255.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="per modificare i dati bisogna inserire la vecchia password" wrappingWidth="153.13671875" />
          </children></AnchorPane>
   </content>
 </ScrollPane>
