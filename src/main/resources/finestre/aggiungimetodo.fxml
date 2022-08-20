@@ -22,6 +22,16 @@
             <Font name="Arial" size="14.0" />
          </font>
       </TextField>
+      <Text layoutX="8.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intestatario" textAlignment="RIGHT" wrappingWidth="88.43359375">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="intestatarioField" layoutX="106.0" layoutY="40.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="190.0" promptText="Nome e Cognome">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </TextField>
       <Text fx:id="numeroCartaField" layoutX="8.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero carta" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial" size="14.0" />
@@ -30,16 +40,6 @@
       <TextField fx:id="numeroField" layoutX="106.0" layoutY="65.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="134.0">
          <font>
             <Font name="Arial" size="12.0" />
-         </font>
-      </TextField>
-      <Text layoutX="14.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome conto" textAlignment="RIGHT" wrappingWidth="88.43359375">
-         <font>
-            <Font name="Arial" size="14.0" />
-         </font>
-      </Text>
-      <TextField fx:id="nomeContoField" layoutX="114.0" layoutY="167.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="26.0" prefWidth="204.0" promptText="Es. ContoIntesa">
-         <font>
-            <Font name="Arial" size="14.0" />
          </font>
       </TextField>
       <Text layoutX="8.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scadenza" textAlignment="RIGHT" wrappingWidth="88.43359375">
@@ -52,14 +52,14 @@
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Text layoutX="8.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intestatario" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text layoutX="141.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="CENTER" wrappingWidth="22.43359375">
          <font>
-            <Font name="Arial" size="14.0" />
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="intestatarioField" layoutX="106.0" layoutY="40.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="190.0" promptText="Nome e Cognome">
+      <TextField fx:id="annoScadenzaField" layoutX="166.0" layoutY="90.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="30.0">
          <font>
-            <Font name="Arial" size="14.0" />
+            <Font name="Arial" size="12.0" />
          </font>
       </TextField>
       <Text layoutX="8.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVV" textAlignment="RIGHT" wrappingWidth="88.43359375">
@@ -72,11 +72,22 @@
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Button fx:id="aggiungiCartaButton" layoutX="314.0" layoutY="61.0" mnemonicParsing="false" onAction="#aggiungiCartaAction" prefHeight="39.0" prefWidth="128.0" text="Aggiungi carta" textOverrun="CLIP">
+      <Label fx:id="numCartaErrorLabel" layoutX="203.0" layoutY="103.0" prefHeight="39.0" prefWidth="95.0" textAlignment="RIGHT" textFill="RED" wrapText="true">
          <font>
-            <Font name="Arial Black" size="12.0" />
+            <Font name="Arial" size="12.0" />
          </font>
-      </Button>
+      </Label>
+      <Line endX="213.00006103515625" endY="10.5" layoutX="240.0" layoutY="144.0" startX="-243.5" startY="10.5" stroke="#00000088" />
+      <Text layoutX="14.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome conto" textAlignment="RIGHT" wrappingWidth="88.43359375">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nomeContoField" layoutX="114.0" layoutY="167.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="26.0" prefWidth="204.0" promptText="Es. ContoIntesa">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </TextField>
       <Text layoutX="14.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iban" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial" size="14.0" />
@@ -97,42 +108,31 @@
             <Font name="Arial" size="12.0" />
          </font>
       </TextField>
-      <Button fx:id="aggiungiContoButton" layoutX="314.0" layoutY="103.0" mnemonicParsing="false" onAction="#aggiungiContoAction" prefHeight="39.0" prefWidth="128.0" text="Aggiungi conto">
-         <font>
-            <Font name="Arial Black" size="12.0" />
-         </font>
-      </Button>
-      <Line endX="22.0" endY="53.50001525878906" layoutX="284.0" layoutY="101.0" startX="22.0" startY="-107.0" stroke="#00000088" />
-      <TextField fx:id="annoScadenzaField" layoutX="166.0" layoutY="90.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="30.0">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </TextField>
-      <Text layoutX="141.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="CENTER" wrappingWidth="22.43359375">
-         <font>
-            <Font name="Arial Bold" size="17.0" />
-         </font>
-      </Text>
-      <Line endX="213.00006103515625" endY="10.5" layoutX="240.0" layoutY="144.0" startX="-243.5" startY="10.5" stroke="#00000088" />
-      <ImageView fx:id="esciButton" fitHeight="39.0" fitWidth="43.0" layoutX="389.0" layoutY="11.0" onMousePressed="#closeWindow" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/exit%20icon.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="337.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esci" wrappingWidth="51.13671875">
-         <font>
-            <Font name="Arial Black" size="19.0" />
-         </font>
-      </Text>
-      <Label fx:id="numCartaErrorLabel" layoutX="203.0" layoutY="103.0" prefHeight="39.0" prefWidth="95.0" textAlignment="RIGHT" textFill="RED" wrapText="true">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </Label>
       <Label fx:id="ibanErrorLabel" layoutX="251.0" layoutY="221.0" prefHeight="17.0" prefWidth="190.0" textAlignment="RIGHT" textFill="RED">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Label>
+      <Line endX="22.0" endY="53.50001525878906" layoutX="284.0" layoutY="101.0" startX="22.0" startY="-107.0" stroke="#00000088" />
+      <Text layoutX="337.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esci" wrappingWidth="51.13671875">
+         <font>
+            <Font name="Arial Black" size="19.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="esciButton" fitHeight="39.0" fitWidth="43.0" layoutX="389.0" layoutY="11.0" onMousePressed="#closeWindow" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/exit%20icon.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="aggiungiCartaButton" layoutX="314.0" layoutY="61.0" mnemonicParsing="false" onAction="#aggiungiCartaAction" prefHeight="39.0" prefWidth="128.0" text="Aggiungi carta" textOverrun="CLIP">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="aggiungiContoButton" layoutX="314.0" layoutY="103.0" mnemonicParsing="false" onAction="#aggiungiContoAction" prefHeight="39.0" prefWidth="128.0" text="Aggiungi conto">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

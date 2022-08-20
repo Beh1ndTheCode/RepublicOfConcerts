@@ -3,8 +3,6 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
-import it.univaq.disim.oop.roc.domain.Carta;
-import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
@@ -27,13 +25,11 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 	@FXML
 	private Button aggiungiCartaButton, aggiungiContoButton;
 
-	private RAMMetodiServiceImpl metodiService;
+	private MetodiService metodiService;
 
 	private ViewDispatcher dispatcher;
 
-	private Carta carta;
-
-	private Conto conto;
+	private Utente utente;
 
 	public AggiungiMetodoController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -46,7 +42,7 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 	}
 
 	public void initializeData(Utente utente) {
-
+		this.utente = utente;
 	}
 
 	public void blockAggiungiCartaButton() {
@@ -56,6 +52,7 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 		String meseScadenza = meseScadenzaField.getText();
 		String annoScadenza = annoScadenzaField.getText();
 		String cvv = cvvField.getText();
+
 		boolean isDisable = nomeCarta.isEmpty() || intestatario.isEmpty() || numero.isEmpty() || meseScadenza.isEmpty()
 				|| annoScadenza.isEmpty() || cvv.isEmpty();
 		aggiungiCartaButton.setDisable(isDisable);
@@ -71,35 +68,34 @@ public class AggiungiMetodoController implements DataInitializable<Object> {
 	public void aggiungiCartaAction(ActionEvent event) {
 		try {
 			numCartaErrorLabel.setText("");
-			carta = new Carta();
-			metodiService.addCarta(carta, nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
+			metodiService.addCarta(nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
 					meseScadenzaField.getText(), annoScadenzaField.getText(), cvvField.getText());
+
 			nomeCartaField.setText("");
 			intestatarioField.setText("");
 			numeroField.setText("");
 			meseScadenzaField.setText("");
 			annoScadenzaField.setText("");
 			cvvField.setText("");
+
 		} catch (IntegerFormatException e) {
 			numCartaErrorLabel.setText("Inserisci un numero valido");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
-		
 	}
 
 	public void aggiungiContoAction(ActionEvent event) {
 		try {
 			ibanErrorLabel.setText("");
-			conto = new Conto();
-			metodiService.addConto(conto, nomeContoField.getText(), ibanField.getText());
+			metodiService.addConto(nomeContoField.getText(), ibanField.getText());
 		} catch (IntegerFormatException e) {
 			ibanErrorLabel.setText("Iban non valido");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
 	}
-	
+
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

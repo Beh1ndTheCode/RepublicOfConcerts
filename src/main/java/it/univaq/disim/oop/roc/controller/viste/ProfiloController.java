@@ -14,6 +14,8 @@ import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -69,6 +72,19 @@ public class ProfiloController implements DataInitializable<Utente> {
 
 	public void initialize() {
 		modificaDatiButton.setDisable(true);
+		tipoTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, String> param) -> {
+			return new SimpleStringProperty(param.getValue().getTipo());
+		});
+		nomeTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, String> param) -> {
+			return new SimpleStringProperty(param.getValue().getNome());
+		});
+		azioniTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, Button> param) -> {
+			final Button metodiButton = new Button("Di più");
+			metodiButton.setOnAction((ActionEvent event) -> {
+				oldPswErrorLabel.setText("Successo");
+			});
+			return new SimpleObjectProperty<Button>(metodiButton);
+		});
 	}
 
 	@Override
