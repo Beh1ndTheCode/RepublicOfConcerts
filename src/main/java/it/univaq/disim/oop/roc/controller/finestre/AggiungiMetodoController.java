@@ -77,6 +77,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 			meseScadenzaField.setText("");
 			annoScadenzaField.setText("");
 			cvvField.setText("");
+			blockAggiungiCartaButton();
 			dispatcher.renderView("profilo", utente);
 		} catch (IntegerFormatException e) {
 			numCartaErrorLabel.setText("Inserisci un numero valido");
@@ -93,6 +94,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 			nomeContoField.setText("");
 			ibanField.setText("");
 			swiftField.setText("");
+			blockAggiungiContoButton();
 			dispatcher.renderView("profilo", utente);
 		} catch (IntegerFormatException e) {
 			ibanErrorLabel.setText("Iban non valido");
