@@ -30,7 +30,6 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	private ViewDispatcher dispatcher;
 
 	private Utente utente;
-
 	public AggiungiMetodoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		metodiService = new RAMMetodiServiceImpl();
@@ -89,7 +88,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public void aggiungiContoAction(ActionEvent event) {
 		try {
 			ibanErrorLabel.setText("");
-			metodiService.addConto(utente, nomeContoField.getText(), ibanField.getText());
+			metodiService.addConto(utente, nomeContoField.getText(), ibanField.getText(), swiftField.getText());
 
 			nomeContoField.setText("");
 			ibanField.setText("");

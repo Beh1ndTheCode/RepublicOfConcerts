@@ -11,7 +11,7 @@ public interface MetodiService {
 	void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,
 			String annoScadenza, String cvv) throws BusinessException;
 
-	void addConto(Utente utente, String nomeConto, String iban) throws BusinessException;
+	void addConto(Utente utente, String nomeConto, String iban, String swift) throws BusinessException;
 
 	void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException;
 

@@ -7,7 +7,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.InfoMetodoController">
    <children>
       <Text fx:id="nomeCartaText" layoutX="42.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome carta" textAlignment="RIGHT" visible="false" wrappingWidth="88.43359375">
@@ -85,7 +84,7 @@
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="ibanLabel" layoutX="170.0" layoutY="109.0" prefHeight="24.0" prefWidth="222.0">
+      <Label fx:id="ibanLabel" layoutX="170.0" layoutY="109.0" prefHeight="24.0" prefWidth="258.0">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>

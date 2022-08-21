@@ -55,13 +55,14 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	}
 
 	@Override
-	public void addConto(Utente utente, String nomeConto, String iban) throws BusinessException {
+	public void addConto(Utente utente, String nomeConto, String iban, String swift) throws BusinessException {
 		if (iban.length() == 27) {
 			Conto conto = new Conto();
 			conto.setId(idCounterMetodi++);
 			conto.setTipo("Conto");
 			conto.setNome(nomeConto);
 			conto.setIban(iban);
+			conto.setSwift(swift);
 			conto.setUtente(utente);
 			metodiAggiunti.add(conto);
 
@@ -94,7 +95,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		cartaProva.setTipo("Carta");
 		cartaProva.setNome("Carta prova");
 		cartaProva.setIntestatario("Giovanni Storti");
-		cartaProva.setNumero(123456789875432L);
+		cartaProva.setNumero(1234567890123456l);
 		cartaProva.setMeseScadenza(06);
 		cartaProva.setAnnoScadenza(23);
 		cartaProva.setCvv(578);

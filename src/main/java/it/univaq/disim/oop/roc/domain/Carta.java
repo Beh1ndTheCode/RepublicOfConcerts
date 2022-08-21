@@ -12,7 +12,7 @@ public class Carta extends MetodoDiPagamento {
 		return numero;
 	}
 
-	public void setNumero(Long numero) {
+	public void setNumero(long numero) {
 		this.numero = numero;
 	}
 

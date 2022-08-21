@@ -1,6 +1,8 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.UtenteService;
@@ -64,6 +66,8 @@ public class ProfiloController implements DataInitializable<Utente> {
 	private Utente utente;
 
 	private UtenteService utenteService;
+	
+	private MetodoDiPagamento metodo;
 
 	public ProfiloController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -80,15 +84,15 @@ public class ProfiloController implements DataInitializable<Utente> {
 			return new SimpleStringProperty(param.getValue().getNome());
 		});
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, Button> param) -> {
-			final Button InfoButton = new Button("info");
-			InfoButton.setOnAction(e-> {
+			final Button infoButton = new Button("info");
+			infoButton.setOnAction(e-> {
 				try {
-					dispatcher.openNewWindow("infometodo",utente);
+					dispatcher.openNewWindow("infometodo",param.getValue());
 				} catch (ViewException ex) {
 					ex.printStackTrace();
 				}
 			});
-			return new SimpleObjectProperty<Button>(InfoButton);
+			return new SimpleObjectProperty<Button>(infoButton);
 		});
 	}
 
