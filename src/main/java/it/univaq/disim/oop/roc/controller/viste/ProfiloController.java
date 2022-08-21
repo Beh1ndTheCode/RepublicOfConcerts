@@ -83,7 +83,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 			final Button InfoButton = new Button("info");
 			InfoButton.setOnAction(e-> {
 				try {
-					dispatcher.openNewWindow("infocartametodo",utente);
+					dispatcher.openNewWindow("infometodo",utente);
 				} catch (ViewException ex) {
 					ex.printStackTrace();
 				}
