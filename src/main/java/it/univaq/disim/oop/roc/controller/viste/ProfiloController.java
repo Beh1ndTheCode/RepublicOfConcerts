@@ -1,8 +1,6 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.UtenteService;
@@ -66,8 +64,6 @@ public class ProfiloController implements DataInitializable<Utente> {
 	private Utente utente;
 
 	private UtenteService utenteService;
-	
-	private MetodoDiPagamento metodo;
 
 	public ProfiloController() {
 		dispatcher = ViewDispatcher.getInstance();

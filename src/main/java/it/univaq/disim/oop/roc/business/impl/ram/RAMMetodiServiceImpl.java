@@ -88,7 +88,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 
 	@Override
 	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
-		List<MetodoDiPagamento> metodoDiPagamento = new ArrayList<>();
+		List<MetodoDiPagamento> metodiDiPagamento = new ArrayList<>();
 
 		Carta cartaProva = new Carta();
 		cartaProva.setId(idCounterMetodi++);
@@ -100,7 +100,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		cartaProva.setAnnoScadenza(23);
 		cartaProva.setCvv(578);
 		cartaProva.setUtente(utente);
-		metodoDiPagamento.add(cartaProva);
+		metodiDiPagamento.add(cartaProva);
 
 		Conto contoProva = new Conto();
 		contoProva.setId(idCounterMetodi++);
@@ -108,14 +108,14 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		contoProva.setNome("Conto prova");
 		contoProva.setIban("IT85I8284863987145289597634");
 		contoProva.setUtente(utente);
-		metodoDiPagamento.add(contoProva);
+		metodiDiPagamento.add(contoProva);
 
 		for (MetodoDiPagamento met : metodiAggiunti) {
 			if (met.getUtente().equals(utente))
-				metodoDiPagamento.add(met);
+				metodiDiPagamento.add(met);
 		}
 
-		return metodoDiPagamento;
+		return metodiDiPagamento;
 	}
 
 }

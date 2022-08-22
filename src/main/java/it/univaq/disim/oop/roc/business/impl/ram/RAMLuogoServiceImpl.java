@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.LuogoService;
+import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
@@ -17,6 +18,10 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	private Set<Luogo> luoghi = new HashSet<>();
 
 	private Set<Settore> settori = new HashSet<>();
+	
+	private Set<Concerto> concerti = new HashSet<>();
+	
+	private static int idCounterLuoghi = 1;
 
 	@Override
 	public void add(String tipo, String citta) {
@@ -41,7 +46,23 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 	@Override
 	public List<Luogo> findAllLuoghi() throws BusinessException {
-		return new ArrayList<>(luoghi);
+		List<Luogo> Luoghi = new ArrayList<>(luoghi);
+		
+		Integer Capienza = 0;
+		for (Settore met : settori) {
+			Capienza = Capienza + met.getCapienza();
+		}
+		
+		Teatro teatroProva = new Teatro();
+		teatroProva.setId(idCounterLuoghi++);
+		teatroProva.setTipo("Teatro");
+		teatroProva.setNome("Teatro prova");
+		teatroProva.setCitta("Pettino");
+		teatroProva.setSettori(settori);
+		teatroProva.setCapienza(Capienza);
+		teatroProva.setConcerti(concerti);
+		
+		return Luoghi;
 	}
 
 }

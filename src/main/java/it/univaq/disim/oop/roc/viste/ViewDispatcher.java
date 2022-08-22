@@ -136,6 +136,14 @@ public class ViewDispatcher {
 		window.show();
 	}
 	
+	public <T> void openNewWindow(String windowName) throws ViewException {
+		window = new Stage();
+		Parent windowView = loadWindow(windowName).getView();
+		Scene scene = new Scene(windowView);
+		window.setScene(scene);
+		window.show();
+	}
+	
 	private <T> View<T> loadWindow(String windowName) throws ViewException {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(FINESTRE_BASE + windowName + FXML_SUFFIX));
