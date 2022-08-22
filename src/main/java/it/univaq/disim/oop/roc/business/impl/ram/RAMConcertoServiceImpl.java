@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.domain.Artista;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
@@ -26,7 +25,7 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 	@Override
 	public void addConcerto(MetodoDiPagamento metodo, Tour tour, Luogo luogo, LocalDate dataConcerto,
-			Set<Artista> artisti) {
+			Set<String> artisti) {
 		Concerto concerto = new Concerto();
 		concerto.setMetodo(metodo);
 		concerto.setTour(tour);

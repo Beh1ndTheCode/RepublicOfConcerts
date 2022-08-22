@@ -4,6 +4,7 @@ public class Biglietto {
 
 	private Integer numeroBiglietto;
 	private Settore settore;
+	private Integer posto;
 	private Concerto concerto;
 	private Spettatore spettatore;
 
@@ -37,6 +38,14 @@ public class Biglietto {
 
 	public void setSettore(Settore settore) {
 		this.settore = settore;
+	}
+	
+	public Integer getPosto() {
+		return posto;
+	}
+
+	public void setPosto(Integer posto) {
+		this.posto = posto;
 	}
 
 }

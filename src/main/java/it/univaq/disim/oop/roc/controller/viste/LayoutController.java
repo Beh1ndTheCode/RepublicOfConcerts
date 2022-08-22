@@ -39,9 +39,8 @@ public class LayoutController implements DataInitializable<Utente> {
 	private Utente utente;
 
 	private static final MenuItem[] MENU_AMMINISTRATORE = { new MenuItem("concerti"), new MenuItem("tour"),
-			new MenuItem("artisti"), new MenuItem("recensioni") };
-	private static final MenuItem[] MENU_SPETTATORE = { new MenuItem("concerti"), new MenuItem("tour"),
-			new MenuItem("artisti") };
+			new MenuItem("luoghi"), new MenuItem("recensioni") };
+	private static final MenuItem[] MENU_SPETTATORE = { new MenuItem("concerti"), new MenuItem("tour")};
 
 	public LayoutController() {
 		dispatcher = ViewDispatcher.getInstance();

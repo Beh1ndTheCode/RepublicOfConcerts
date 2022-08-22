@@ -6,6 +6,7 @@ import java.util.Set;
 public abstract class Luogo {
 
 	private String citta;
+	private Integer capienza;
 	private Set<Concerto> concerti = new HashSet<>();
 	private Set<Settore> settori = new HashSet<>();
 
@@ -15,6 +16,14 @@ public abstract class Luogo {
 
 	public void setCitta(String citta) {
 		this.citta = citta;
+	}
+	
+	public Integer getCapienza() {
+		return capienza;
+	}
+
+	public void setCapienza(Integer capienza) {
+		this.capienza = capienza;
 	}
 
 	public Set<Concerto> getConcerti() {

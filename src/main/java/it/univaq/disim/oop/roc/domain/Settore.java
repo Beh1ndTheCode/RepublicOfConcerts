@@ -4,7 +4,6 @@ public class Settore {
 
 	private String nome;
 	private Integer capienza;
-	private Integer posto;
 	private Luogo luogo;
 
 	public String getNome() {
@@ -21,14 +20,6 @@ public class Settore {
 
 	public void setCapienza(Integer capienza) {
 		this.capienza = capienza;
-	}
-
-	public Integer getPosto() {
-		return posto;
-	}
-
-	public void setPosto(Integer posto) {
-		this.posto = posto;
 	}
 
 	public Luogo getLuogo() {

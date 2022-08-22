@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.TourService;
-import it.univaq.disim.oop.roc.domain.Artista;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -16,7 +15,7 @@ public class RAMTourServiceImpl implements TourService {
 	private Set<Tour> tours = new HashSet<>();
 
 	@Override
-	public void add(Artista artista, Set<Concerto> concerti) {
+	public void add(String artista, Set<Concerto> concerti) {
 		Tour tour = new Tour();
 		tour.setArtista(artista);
 		tour.setConcerti(concerti);

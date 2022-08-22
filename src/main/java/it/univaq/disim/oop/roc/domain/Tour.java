@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Tour {
 
-	private Artista artista;
+	private String artista;
 	private Set<Concerto> concerti = new HashSet<>();
 
 	public Set<Concerto> getConcerti() {
@@ -16,11 +16,11 @@ public class Tour {
 		this.concerti = concerti;
 	}
 
-	public Artista getArtista() {
+	public String getArtista() {
 		return artista;
 	}
 
-	public void setArtista(Artista artista) {
+	public void setArtista(String artista) {
 		this.artista = artista;
 	}
 

@@ -12,14 +12,14 @@ public class Concerto {
 	private Luogo luogo;
 	private LocalDate dataConcerto;
 	private Set<Recensione> recensioni = new HashSet<>();
-	private Set<Artista> artisti = new HashSet<>();
+	private Set<String> artisti = new HashSet<>();
 	private Set<Tariffa> tariffe = new HashSet<>();
 
-	public Set<Artista> getArtista() {
+	public Set<String> getArtista() {
 		return artisti;
 	}
 
-	public void setArtista(Set<Artista> artista) {
+	public void setArtista(Set<String> artista) {
 		this.artisti = artista;
 	}
 
