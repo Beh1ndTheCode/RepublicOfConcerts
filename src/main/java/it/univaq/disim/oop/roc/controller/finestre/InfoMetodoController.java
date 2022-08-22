@@ -4,7 +4,6 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
-import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -21,12 +20,6 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 
 	private ViewDispatcher dispatcher;
 
-	private MetodoDiPagamento metodoDiPagamento;
-	
-	private Carta carta;
-	
-	private Conto conto;
-
 	public InfoMetodoController() {
 		dispatcher = ViewDispatcher.getInstance();
 	}
@@ -35,24 +28,27 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 	}
 
 	public void initializeData(MetodoDiPagamento metodoDiPagamento) {
-		this.metodoDiPagamento = metodoDiPagamento;
 		if (metodoDiPagamento instanceof Carta) {
+			Carta carta = (Carta) metodoDiPagamento;
 			nomeCartaText.setVisible(true);
 			numeroCartaText.setVisible(true);
 			intestatarioText.setVisible(true);
 			scadenzaText.setVisible(true);
-			numeroCartaLabel.setText(Long.toString(((Carta) metodoDiPagamento).getNumero()));
-			intestatarioLabel.setText(((Carta) metodoDiPagamento).getIntestatario());
-			nomeCartaLabel.setText(((Carta) metodoDiPagamento).getNome());
-			scadenzaLabel.setText((Integer.toString(((Carta) metodoDiPagamento).getMeseScadenza())) + " / " + (Integer.toString(((Carta) metodoDiPagamento).getAnnoScadenza())));
+			numeroCartaLabel.setText(Long.toString(carta.getNumero()));
+			intestatarioLabel.setText(carta.getIntestatario());
+			nomeCartaLabel.setText(carta.getNome());
+			scadenzaLabel.setText(
+					(Integer.toString(carta.getMeseScadenza())) + " / " + (Integer.toString(carta.getAnnoScadenza())));
 		}
+
 		if (metodoDiPagamento instanceof Conto) {
+			Conto conto = (Conto) metodoDiPagamento;
 			nomeContoText.setVisible(true);
 			ibanText.setVisible(true);
 			swiftText.setVisible(true);
-			nomeContoLabel.setText(((Conto) metodoDiPagamento).getNome());
-			ibanLabel.setText(((Conto) metodoDiPagamento).getIban());
-			swiftLabel.setText(((Conto) metodoDiPagamento).getSwift());
+			nomeContoLabel.setText(conto.getNome());
+			ibanLabel.setText(conto.getIban());
+			swiftLabel.setText(conto.getSwift());
 		}
 	}
 

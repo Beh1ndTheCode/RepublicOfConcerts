@@ -81,11 +81,6 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		}
 	}
 
-	/*
-	 * @Override public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws
-	 * BusinessException { return new ArrayList<>(metodiAggiunti); }
-	 */
-
 	@Override
 	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
 		List<MetodoDiPagamento> metodiDiPagamento = new ArrayList<>();

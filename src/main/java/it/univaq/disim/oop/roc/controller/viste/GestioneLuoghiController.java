@@ -4,10 +4,8 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
-import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import it.univaq.disim.oop.roc.viste.ViewException;
@@ -22,8 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 
-public class GestioneLuoghiController implements DataInitializable<Object> {
-	
+public class GestioneLuoghiController implements DataInitializable<Luogo> {
+
 	@FXML
 	private TableView<Luogo> luoghiTableView;
 
@@ -32,16 +30,16 @@ public class GestioneLuoghiController implements DataInitializable<Object> {
 
 	@FXML
 	private TableColumn<Luogo, Button> azioniTableColumn;
-	
+
 	private ViewDispatcher dispatcher;
-	
+
 	private LuogoService luoghiService;
 
 	public GestioneLuoghiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		luoghiService = new RAMLuogoServiceImpl();
 	}
-	
+
 	public void initialize() {
 		tipoTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getTipo());
@@ -54,30 +52,27 @@ public class GestioneLuoghiController implements DataInitializable<Object> {
 		});
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
 			final Button infoButton = new Button("info");
-			infoButton.setOnAction(e-> {
+			infoButton.setOnAction(e -> {
 				try {
-					dispatcher.openNewWindow("infometodo",param.getValue());
+					dispatcher.openNewWindow("infoluogo", param.getValue());
 				} catch (ViewException ex) {
 					ex.printStackTrace();
 				}
 			});
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
-		
-		 try {
+
+		try {
 			List<Luogo> luoghi = luoghiService.findAllLuoghi();
 			ObservableList<Luogo> luoghiData = FXCollections.observableArrayList(luoghi);
 			luoghiTableView.setItems(luoghiData);
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
-		
 	}
-	
-	
-	
+
 	public void openAggiungiLuogoWindow(ActionEvent event) throws Exception {
-		//dispatcher.openNewWindow("aggiungiluogo");
+		// dispatcher.openNewWindow("aggiungiluogo");
 	}
 
 }

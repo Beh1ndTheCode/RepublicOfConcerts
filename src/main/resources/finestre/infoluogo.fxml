@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.InfoLuogoController">
+   <children>
+      <Text fx:id="nomeText" layoutX="52.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" textAlignment="RIGHT" visible="false" wrappingWidth="88.43359375">
+         <font>
+            <Font name="Arial Italic" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="cittaText" layoutX="52.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Città" textAlignment="RIGHT" visible="false" wrappingWidth="88.43359375">
+         <font>
+            <Font name="Arial Italic" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="capienzaText" layoutX="24.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capienza" textAlignment="RIGHT" visible="false" wrappingWidth="120.43359375">
+         <font>
+            <Font name="Arial Italic" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="353.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esci" wrappingWidth="51.13671875">
+         <font>
+            <Font name="Arial Black" size="19.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="esciButton" fitHeight="39.0" fitWidth="43.0" layoutX="409.0" layoutY="31.0" onMousePressed="#closeWindow" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/exit%20icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

@@ -1,12 +1,9 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.LuogoService;
-import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
@@ -15,54 +12,68 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 
-	private Set<Luogo> luoghi = new HashSet<>();
+	private static List<Luogo> luoghiAggiunti = new ArrayList<>();
+	private static List<Settore> settoriAggiunti = new ArrayList<>();
 
-	private Set<Settore> settori = new HashSet<>();
-	
-	private Set<Concerto> concerti = new HashSet<>();
-	
 	private static int idCounterLuoghi = 1;
 
 	@Override
-	public void add(String tipo, String citta) {
-		if ("stadio".equalsIgnoreCase(tipo)) {
-			Stadio stadio = new Stadio();
-			stadio.setCitta(citta);
-			luoghi.add(stadio);
-		}
-		if ("teatro".equalsIgnoreCase(tipo)) {
+	public void addLuogo(String tipo, String nome, String citta, Integer capienza) {
+		if ("teatro".equals(tipo)) {
 			Teatro teatro = new Teatro();
+			teatro.setId(idCounterLuoghi++);
+			teatro.setNome(nome);
 			teatro.setCitta(citta);
-			luoghi.add(teatro);
+			teatro.setCapienza(capienza);
+			luoghiAggiunti.add(teatro);
 		}
 
-	}
+		if ("stadio".equals(tipo)) {
+			Stadio stadio = new Stadio();
+			stadio.setId(idCounterLuoghi++);
+			stadio.setNome(nome);
+			stadio.setCitta(citta);
+			stadio.setCapienza(capienza);
+			luoghiAggiunti.add(stadio);
+		}
 
-	public void updateSettore(Settore settore, String nome, Integer capienza) {
-		settore.setNome(nome);
-		settore.setCapienza(capienza);
-		settori.add(settore);
+		return;
 	}
 
 	@Override
 	public List<Luogo> findAllLuoghi() throws BusinessException {
-		List<Luogo> Luoghi = new ArrayList<>(luoghi);
-		
-		Integer Capienza = 0;
-		for (Settore met : settori) {
-			Capienza = Capienza + met.getCapienza();
-		}
-		
+		List<Luogo> luoghi = new ArrayList<>();
+
 		Teatro teatroProva = new Teatro();
 		teatroProva.setId(idCounterLuoghi++);
 		teatroProva.setTipo("Teatro");
 		teatroProva.setNome("Teatro prova");
 		teatroProva.setCitta("Pettino");
-		teatroProva.setSettori(settori);
-		teatroProva.setCapienza(Capienza);
-		teatroProva.setConcerti(concerti);
-		
-		return Luoghi;
+		teatroProva.setCapienza(150);
+		luoghi.add(teatroProva);
+
+		for (Luogo place : luoghiAggiunti) {
+			luoghi.add(place);
+		}
+
+		return luoghi;
+	}
+
+	@Override
+	public void addSettore(String nome, Integer capienza, Luogo luogo) throws BusinessException {
+		Settore settore = new Settore();
+		settore.setNome(nome);
+		settore.setLuogo(luogo);
+		settore.setCapienza(capienza);
+		settoriAggiunti.add(settore);
+
+		return;
+	}
+
+	@Override
+	public void updateSettore(Settore settore, String nome, Integer capienza) {
+		settore.setNome(nome);
+		settore.setCapienza(capienza);
 	}
 
 }
