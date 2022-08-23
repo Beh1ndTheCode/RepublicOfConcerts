@@ -53,7 +53,7 @@ public class LayoutController implements DataInitializable<Utente> {
 			for (MenuItem menu : MENU_AMMINISTRATORE) {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {
-					dispatcher.renderView("gestione" + menu.getText(), utente);
+					dispatcher.renderView("gestione" + menu.getText());
 					titoloPagina.setText(menu.getText());
 				});
 			}

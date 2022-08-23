@@ -8,7 +8,9 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 
@@ -68,6 +70,15 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		settoriAggiunti.add(settore);
 
 		return;
+	}
+	
+	@Override
+	public void updateDati(Luogo luogo, String name, String citta, Integer capienza) {
+		luogo.setCapienza(capienza);
+		if (!citta.isEmpty())
+			luogo.setCitta(citta);
+		if (!name.isEmpty())
+			luogo.setNome(name);
 	}
 
 	@Override

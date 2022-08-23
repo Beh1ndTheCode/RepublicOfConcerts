@@ -16,4 +16,6 @@ public interface LuogoService {
 
 	List<Luogo> findAllLuoghi() throws BusinessException;
 
+	void updateDati(Luogo luogo, String text, String text2, Integer capienza);
+
 }

@@ -72,6 +72,15 @@ public class ViewDispatcher {
 			renderError(e);
 		}
 	}
+	
+	public <T> void renderView(String viewName) {
+		try {
+			View<T> view = loadView(viewName);
+			layout.setCenter(view.getView());
+		} catch (ViewException e) {
+			renderError(e);
+		}
+	}
 
 	public void renderError(Exception e) {
 		e.printStackTrace();
