@@ -9,7 +9,7 @@ import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.TipeFormatException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 
@@ -19,28 +19,57 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	private static int idCounterLuoghi = 1;
 
 	@Override
-	public void addLuogo(String tipo, String nome, String citta, Integer capienza) throws BusinessException, TipeFormatException {
-		if (!"teatro".equalsIgnoreCase(tipo) && !"stadio".equalsIgnoreCase(tipo))
-			throw new TipeFormatException();
-		else {
-			if ("teatro".equalsIgnoreCase(tipo)) {
-				Teatro teatro = new Teatro();
-				teatro.setId(idCounterLuoghi++);
-				teatro.setTipo("Teatro");
-				teatro.setNome(nome);
-				teatro.setCitta(citta);
-				teatro.setCapienza(capienza);
-				luoghiAggiunti.add(teatro);
+	public void addLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException {
+		if (capienza.length() > 0) {
+			Integer capienzaInput;
+			try {
+				capienzaInput = Integer.parseInt(capienza);
+			} catch (NumberFormatException n) {
+				throw new IntegerFormatException();
 			}
-			if ("stadio".equalsIgnoreCase(tipo)) {
-				Stadio stadio = new Stadio();
-				stadio.setId(idCounterLuoghi++);
-				stadio.setTipo("Stadio");
-				stadio.setNome(nome);
-				stadio.setCitta(citta);
-				stadio.setCapienza(capienza);
-				luoghiAggiunti.add(stadio);
+
+			if (capienzaInput >= 1) {
+
+				if (luogo instanceof Teatro) {
+					luogo.setId(idCounterLuoghi++);
+					luogo.setTipo("Teatro");
+					luogo.setNome(nome);
+					luogo.setCitta(citta);
+					luogo.setCapienza(capienzaInput);
+					luoghiAggiunti.add(luogo);
+				}
+
+				if (luogo instanceof Stadio) {
+					luogo.setId(idCounterLuoghi++);
+					luogo.setTipo("Stadio");
+					luogo.setNome(nome);
+					luogo.setCitta(citta);
+					luogo.setCapienza(capienzaInput);
+					luoghiAggiunti.add(luogo);
+				}
+
+				return;
 			}
+		}
+
+		throw new IntegerFormatException();
+	}
+
+	@Override
+	public void updateDati(Luogo luogo, String nome, String citta, String capienza) throws BusinessException {
+		if (capienza.length() > 0) {
+			Integer capienzaInput;
+			try {
+				capienzaInput = Integer.parseInt(capienza);
+			} catch (NumberFormatException n) {
+				throw new IntegerFormatException();
+			}
+
+			luogo.setCapienza(capienzaInput);
+			if (!nome.equals(null))
+				luogo.setNome(nome);
+			if (!citta.equals(null))
+				luogo.setCitta(citta);
 
 			return;
 		}
@@ -74,15 +103,6 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		settoriAggiunti.add(settore);
 
 		return;
-	}
-	
-	@Override
-	public void updateDati(Luogo luogo, String name, String citta, Integer capienza) {
-		luogo.setCapienza(capienza);
-		if (!citta.isEmpty())
-			luogo.setCitta(citta);
-		if (!name.isEmpty())
-			luogo.setNome(name);
 	}
 
 	@Override
