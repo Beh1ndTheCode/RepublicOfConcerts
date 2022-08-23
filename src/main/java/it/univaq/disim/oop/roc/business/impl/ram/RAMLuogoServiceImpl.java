@@ -8,9 +8,8 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
-import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
+import it.univaq.disim.oop.roc.exceptions.TipeFormatException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 
@@ -20,26 +19,31 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	private static int idCounterLuoghi = 1;
 
 	@Override
-	public void addLuogo(String tipo, String nome, String citta, Integer capienza) {
-		if ("teatro".equals(tipo)) {
-			Teatro teatro = new Teatro();
-			teatro.setId(idCounterLuoghi++);
-			teatro.setNome(nome);
-			teatro.setCitta(citta);
-			teatro.setCapienza(capienza);
-			luoghiAggiunti.add(teatro);
-		}
+	public void addLuogo(String tipo, String nome, String citta, Integer capienza) throws BusinessException, TipeFormatException {
+		if (!"teatro".equalsIgnoreCase(tipo) && !"stadio".equalsIgnoreCase(tipo))
+			throw new TipeFormatException();
+		else {
+			if ("teatro".equalsIgnoreCase(tipo)) {
+				Teatro teatro = new Teatro();
+				teatro.setId(idCounterLuoghi++);
+				teatro.setTipo("Teatro");
+				teatro.setNome(nome);
+				teatro.setCitta(citta);
+				teatro.setCapienza(capienza);
+				luoghiAggiunti.add(teatro);
+			}
+			if ("stadio".equalsIgnoreCase(tipo)) {
+				Stadio stadio = new Stadio();
+				stadio.setId(idCounterLuoghi++);
+				stadio.setTipo("Stadio");
+				stadio.setNome(nome);
+				stadio.setCitta(citta);
+				stadio.setCapienza(capienza);
+				luoghiAggiunti.add(stadio);
+			}
 
-		if ("stadio".equals(tipo)) {
-			Stadio stadio = new Stadio();
-			stadio.setId(idCounterLuoghi++);
-			stadio.setNome(nome);
-			stadio.setCitta(citta);
-			stadio.setCapienza(capienza);
-			luoghiAggiunti.add(stadio);
+			return;
 		}
-
-		return;
 	}
 
 	@Override

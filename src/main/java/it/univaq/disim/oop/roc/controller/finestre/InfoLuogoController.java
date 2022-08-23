@@ -55,9 +55,11 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 		String nome = nomeTextField.getText();
 		String citta = cittaTextField.getText();
 		String capienza = capienzaTextField.getText();
-		boolean isDisable = nome.isEmpty() || citta.isEmpty() || capienza.isEmpty();
+		boolean isDisable = nome.isEmpty() && citta.isEmpty() && capienza.isEmpty();
 		modificaButton.setDisable(isDisable);
 	}
+	
+	
 	
 	public void updateDatiAction(ActionEvent event){
 		capienzaErrorLabel.setText("");
@@ -77,6 +79,7 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 		nomeTextField.setText("");
 		cittaTextField.setText("");
 		capienzaTextField.setText("");
+		blockModificaButton();
 		dispatcher.renderView("gestioneluoghi");
 	} catch (IntegerFormatException e) {
 		capienzaErrorLabel.setText("capienza non valida!");

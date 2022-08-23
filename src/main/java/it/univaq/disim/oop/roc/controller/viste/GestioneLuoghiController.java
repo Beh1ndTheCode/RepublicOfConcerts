@@ -44,7 +44,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 		tipoTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getTipo());
 		});
-		tipoTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
+		cittaTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getCitta());
 		});
 		nomeTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
@@ -72,7 +72,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 	}
 
 	public void openAggiungiLuogoWindow(ActionEvent event) throws Exception {
-		// dispatcher.openNewWindow("aggiungiluogo");
+		dispatcher.openNewWindow("aggiungiluogo");
 	}
 
 }
