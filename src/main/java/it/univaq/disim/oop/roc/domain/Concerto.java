@@ -7,13 +7,54 @@ import java.util.Set;
 public class Concerto {
 
 	private String scaletta;
+	private LocalDate data;
+
+	private Luogo luogo;
 	private MetodoDiPagamento metodo;
 	private Tour tour;
-	private Luogo luogo;
-	private LocalDate dataConcerto;
-	private Set<Recensione> recensioni = new HashSet<>();
+
 	private Set<String> artisti = new HashSet<>();
-	private Set<Tariffa> tariffe = new HashSet<>();
+	private Set<Recensione> recensioni = new HashSet<>();
+
+	public String getScaletta() {
+		return scaletta;
+	}
+
+	public void setScaletta(String scaletta) {
+		this.scaletta = scaletta;
+	}
+
+	public LocalDate getDataConcerto() {
+		return data;
+	}
+
+	public void setDataConcerto(LocalDate dataConcerto) {
+		this.data = dataConcerto;
+	}
+
+	public Luogo getLuogo() {
+		return luogo;
+	}
+
+	public void setLuogo(Luogo luogo) {
+		this.luogo = luogo;
+	}
+
+	public MetodoDiPagamento getMetodo() {
+		return metodo;
+	}
+
+	public void setMetodo(MetodoDiPagamento metodo) {
+		this.metodo = metodo;
+	}
+
+	public Tour getTour() {
+		return tour;
+	}
+
+	public void setTour(Tour tour) {
+		this.tour = tour;
+	}
 
 	public Set<String> getArtista() {
 		return artisti;
@@ -29,54 +70,6 @@ public class Concerto {
 
 	public void setRecensione(Set<Recensione> recensione) {
 		this.recensioni = recensione;
-	}
-
-	public MetodoDiPagamento getMetodo() {
-		return metodo;
-	}
-
-	public LocalDate getDataConcerto() {
-		return dataConcerto;
-	}
-
-	public Tour getTour() {
-		return tour;
-	}
-
-	public void setTour(Tour tour) {
-		this.tour = tour;
-	}
-
-	public Luogo getLuogo() {
-		return luogo;
-	}
-
-	public void setLuogo(Luogo luogo) {
-		this.luogo = luogo;
-	}
-
-	public void setDataConcerto(LocalDate dataConcerto) {
-		this.dataConcerto = dataConcerto;
-	}
-
-	public void setMetodo(MetodoDiPagamento metodo) {
-		this.metodo = metodo;
-	}
-
-	public String getScaletta() {
-		return scaletta;
-	}
-
-	public void setScaletta(String scaletta) {
-		this.scaletta = scaletta;
-	}
-
-	public Set<Tariffa> getTariffa() {
-		return tariffe;
-	}
-
-	public void setTariffa(Set<Tariffa> tariffa) {
-		this.tariffe = tariffa;
 	}
 
 }

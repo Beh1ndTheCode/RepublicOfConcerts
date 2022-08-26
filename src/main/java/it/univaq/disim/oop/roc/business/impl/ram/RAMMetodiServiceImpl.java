@@ -105,9 +105,9 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		contoProva.setUtente(utente);
 		metodiDiPagamento.add(contoProva);
 
-		for (MetodoDiPagamento met : metodiAggiunti) {
-			if (met.getUtente().equals(utente))
-				metodiDiPagamento.add(met);
+		for (MetodoDiPagamento method : metodiAggiunti) {
+			if (method.getUtente().equals(utente))
+				metodiDiPagamento.add(method);
 		}
 
 		return metodiDiPagamento;

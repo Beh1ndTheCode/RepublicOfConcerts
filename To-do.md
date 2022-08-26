@@ -1,5 +1,6 @@
 # Logica di Business
-	- Scegliere tipo di implementazione per tipologia metodi di pagamento
+	- Scegliere tipo di implementazione per tipologia metodi di pagamento/luoghi
+	- Scegliere quali variabili inizializzare in addConcerto e quali in updateMetodo
 	
 # Eccezioni
 	- Differenziare eccezioni in AggiungiMetodo
@@ -9,6 +10,4 @@
 ## Realizzare altre viste
 
 ## Luoghi
-	- Non viene visualizzato nome della città nella lista
-	- Finestra per aggiungere luoghi
-	- Correggere pulsante "info"
+	- Schermate per visualizzare/aggiungere settori

@@ -10,12 +10,13 @@ public interface LuogoService {
 
 	void addLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException;
 
+	void updateDati(Luogo luogo, String nome, String citta, String capienza) throws BusinessException;
+
+	List<Luogo> findAllLuoghi() throws BusinessException;
+
 	void addSettore(String nome, Integer capienza, Luogo luogo) throws BusinessException;
 
 	void updateSettore(Settore settore, String nome, Integer capienza) throws BusinessException;
 
-	List<Luogo> findAllLuoghi() throws BusinessException;
-
-	void updateDati(Luogo luogo, String nome, String citta, String capienza) throws BusinessException;
-
+	List<Settore> findAllSettori(Luogo luogo) throws BusinessException;
 }

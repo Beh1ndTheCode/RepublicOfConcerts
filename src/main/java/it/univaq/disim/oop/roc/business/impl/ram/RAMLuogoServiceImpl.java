@@ -109,6 +109,26 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	public void updateSettore(Settore settore, String nome, Integer capienza) {
 		settore.setNome(nome);
 		settore.setCapienza(capienza);
+
+		return;
+	}
+
+	@Override
+	public List<Settore> findAllSettori(Luogo luogo) throws BusinessException {
+		List<Settore> settori = new ArrayList<>();
+
+		Settore settoreProva = new Settore();
+		settoreProva.setNome("Settore prova");
+		settoreProva.setCapienza(50);
+		settoreProva.setLuogo(luogo);
+		settori.add(settoreProva);
+
+		for (Settore sector : settoriAggiunti) {
+			if (sector.getLuogo().equals(luogo))
+				settori.add(sector);
+		}
+
+		return settori;
 	}
 
 }

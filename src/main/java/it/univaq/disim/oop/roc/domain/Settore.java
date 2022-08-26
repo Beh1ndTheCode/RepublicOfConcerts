@@ -4,6 +4,7 @@ public class Settore {
 
 	private String nome;
 	private Integer capienza;
+	private Float tariffa;
 	private Luogo luogo;
 
 	public String getNome() {
@@ -20,6 +21,14 @@ public class Settore {
 
 	public void setCapienza(Integer capienza) {
 		this.capienza = capienza;
+	}
+
+	public Float getTariffa() {
+		return tariffa;
+	}
+
+	public void setTariffa(Float tariffa) {
+		this.tariffa = tariffa;
 	}
 
 	public Luogo getLuogo() {
