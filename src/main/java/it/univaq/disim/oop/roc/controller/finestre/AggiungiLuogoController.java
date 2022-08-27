@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class AggiungiLuogoController implements DataInitializable<Object> {
+public class AggiungiLuogoController implements DataInitializable<Luogo> {
 
 	@FXML
 	private Label capienzaErrorLabel;

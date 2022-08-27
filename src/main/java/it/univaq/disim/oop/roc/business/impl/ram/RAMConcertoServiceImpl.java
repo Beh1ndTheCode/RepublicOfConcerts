@@ -11,6 +11,7 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
+import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMConcertoServiceImpl implements ConcertoService {
@@ -23,7 +24,7 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	public void addConcerto(Luogo luogo, LocalDate data) {
 		Concerto concerto = new Concerto();
 		concerto.setLuogo(luogo);
-		concerto.setDataConcerto(data);
+		concerto.setData(data);
 
 		return;
 	}
@@ -35,15 +36,18 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		return;
 	}
 
-	// Inizializzare variabili nulle
 	@Override
 	public List<Concerto> findAllConcerti() throws BusinessException {
 		List<Concerto> concerti = new ArrayList<>();
 
 		Concerto concertoProva = new Concerto();
-		concertoProva.setDataConcerto(null);
-		concertoProva.setLuogo(null);
-		concertoProva.setArtista(null);
+		LocalDate date = LocalDate.of(2022, 9, 26);
+		Teatro teatro = new Teatro();
+		teatro.setCitta("Roma");
+
+		concertoProva.setData(date);
+		concertoProva.setLuogo(teatro);
+		concertoProva.setArtista("Renato Zero");
 		concertoProva.setScaletta("La scala musicale è definibile come un sistema di organizzazione"
 				+ " dei suoni sviluppato nel contesto teorico e/o nella pratica"
 				+ " da ogni cultura musicale, passata e presente.");

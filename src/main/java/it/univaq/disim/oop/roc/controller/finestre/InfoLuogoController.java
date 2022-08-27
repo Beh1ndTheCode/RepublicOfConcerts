@@ -25,17 +25,17 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 	private TextField nomeTextField, cittaTextField, capienzaTextField;
 
 	@FXML
-	private Button modificaButton;
+	private Button modificaButton, eliminaButton;
 
 	private ViewDispatcher dispatcher;
 
-	private LuogoService luoghiService;
+	private LuogoService luogoService;
 
 	private Luogo luogo;
 
 	public InfoLuogoController() {
 		dispatcher = ViewDispatcher.getInstance();
-		luoghiService = new RAMLuogoServiceImpl();
+		luogoService = new RAMLuogoServiceImpl();
 	}
 
 	public void initialize() {
@@ -60,10 +60,10 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 		modificaButton.setDisable(isDisable);
 	}
 
-	public void updateDatiAction(ActionEvent event) {
+	public void updateLuogoAction(ActionEvent event) {
 		try {
 			capienzaErrorLabel.setText("");
-			luoghiService.updateLuogo(luogo, nomeTextField.getText(), cittaTextField.getText(),
+			luogoService.updateLuogo(luogo, nomeTextField.getText(), cittaTextField.getText(),
 					capienzaTextField.getText());
 			initializeData(luogo);
 			nomeTextField.setText("");
@@ -73,6 +73,15 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 			dispatcher.renderView("gestioneluoghi");
 		} catch (IntegerFormatException e) {
 			capienzaErrorLabel.setText("capienza non valida!");
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
+	}
+
+	public void deleteAction(ActionEvent event) {
+		try {
+			luogoService.deleteLuogo(luogo);
+			dispatcher.renderView("gestioneluoghi");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

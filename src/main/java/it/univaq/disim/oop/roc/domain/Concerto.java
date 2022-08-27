@@ -1,20 +1,20 @@
 package it.univaq.disim.oop.roc.domain;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Concerto {
 
 	private String scaletta;
 	private LocalDate data;
+	private String artista;
 
 	private Luogo luogo;
 	private MetodoDiPagamento metodo;
 	private Tour tour;
 
-	private Set<String> artisti = new HashSet<>();
-	private Set<Recensione> recensioni = new HashSet<>();
+	private List<Recensione> recensioni = new ArrayList<>();
 
 	public String getScaletta() {
 		return scaletta;
@@ -24,12 +24,12 @@ public class Concerto {
 		this.scaletta = scaletta;
 	}
 
-	public LocalDate getDataConcerto() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setDataConcerto(LocalDate dataConcerto) {
-		this.data = dataConcerto;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	public Luogo getLuogo() {
@@ -56,19 +56,19 @@ public class Concerto {
 		this.tour = tour;
 	}
 
-	public Set<String> getArtista() {
-		return artisti;
+	public String getArtista() {
+		return artista;
 	}
 
-	public void setArtista(Set<String> artista) {
-		this.artisti = artista;
+	public void setArtista(String artista) {
+		this.artista = artista;
 	}
 
-	public Set<Recensione> getRecensione() {
+	public List<Recensione> getRecensione() {
 		return recensioni;
 	}
 
-	public void setRecensione(Set<Recensione> recensione) {
+	public void setRecensione(List<Recensione> recensione) {
 		this.recensioni = recensione;
 	}
 
