@@ -10,7 +10,9 @@ public interface LuogoService {
 
 	void addLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException;
 
-	void updateDati(Luogo luogo, String nome, String citta, String capienza) throws BusinessException;
+	void updateLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException;
+
+	void deleteLuogo(Luogo luogo) throws BusinessException;
 
 	List<Luogo> findAllLuoghi() throws BusinessException;
 

@@ -56,7 +56,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	}
 
 	@Override
-	public void updateDati(Luogo luogo, String nome, String citta, String capienza) throws BusinessException {
+	public void updateLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException {
 		if (capienza.length() > 0) {
 			Integer capienzaInput;
 			try {
@@ -73,6 +73,13 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 			return;
 		}
+	}
+
+	@Override
+	public void deleteLuogo(Luogo luogo) throws BusinessException {
+		luoghiAggiunti.remove(luogo);
+
+		return;
 	}
 
 	@Override

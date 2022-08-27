@@ -12,18 +12,31 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMTourServiceImpl implements TourService {
 
-	private Set<Tour> tours = new HashSet<>();
+	private Set<Tour> tourAggiunti = new HashSet<>();
 
 	@Override
-	public void add(String artista, Set<Concerto> concerti) {
+	public void addTour(String artista, Set<Concerto> concerti) {
 		Tour tour = new Tour();
 		tour.setArtista(artista);
 		tour.setConcerti(concerti);
+		tourAggiunti.add(tour);
+
+		return;
 	}
 
 	@Override
 	public List<Tour> findAllTours() throws BusinessException {
-		return new ArrayList<>(tours);
+		List<Tour> tours = new ArrayList<>();
+
+		Tour tourProva = new Tour();
+		tourProva.setArtista(null);
+		tourProva.setConcerti(null);
+
+		for (Tour tour : tourAggiunti) {
+			tours.add(tour);
+		}
+
+		return tours;
 	}
 
 }

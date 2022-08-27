@@ -4,8 +4,34 @@ public class Recensione {
 
 	private String titolo;
 	private String descrizione;
+	private Integer valutazione;
+
 	private Spettatore spettatore;
 	private Concerto concerto;
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public Integer getValutazione() {
+		return valutazione;
+	}
+
+	public void setValutazione(Integer valutazione) {
+		this.valutazione = valutazione;
+	}
 
 	public Spettatore getSpettatore() {
 		return spettatore;
@@ -23,19 +49,4 @@ public class Recensione {
 		this.concerto = concerto;
 	}
 
-	public String getTitolo() {
-		return titolo;
-	}
-
-	public void setTitolo(String titolo) {
-		this.titolo = titolo;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
 }

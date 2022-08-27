@@ -63,7 +63,7 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 	public void updateDatiAction(ActionEvent event) {
 		try {
 			capienzaErrorLabel.setText("");
-			luoghiService.updateDati(luogo, nomeTextField.getText(), cittaTextField.getText(),
+			luoghiService.updateLuogo(luogo, nomeTextField.getText(), cittaTextField.getText(),
 					capienzaTextField.getText());
 			initializeData(luogo);
 			nomeTextField.setText("");
