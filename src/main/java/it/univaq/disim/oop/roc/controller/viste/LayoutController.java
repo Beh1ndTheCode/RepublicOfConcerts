@@ -54,7 +54,7 @@ public class LayoutController implements DataInitializable<Utente> {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {
 					dispatcher.renderView("gestione" + menu.getText());
-					titoloPagina.setText(menu.getText());
+					titoloPagina.setText(menu.getText().toUpperCase());
 				});
 			}
 			bottoneProfilo.setVisible(false);

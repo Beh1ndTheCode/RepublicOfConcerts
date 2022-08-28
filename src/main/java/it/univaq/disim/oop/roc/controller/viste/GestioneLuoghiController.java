@@ -29,7 +29,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 	private TableColumn<Luogo, String> tipoTableColumn, cittaTableColumn, nomeTableColumn;
 
 	@FXML
-	private TableColumn<Luogo, Button> azioniTableColumn;
+	private TableColumn<Luogo, Button> modificaTableColumn, settoriTableColumn;
 
 	private ViewDispatcher dispatcher;
 
@@ -50,8 +50,8 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 		nomeTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getNome());
 		});
-		azioniTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
-			final Button infoButton = new Button("info");
+		modificaTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
+			final Button infoButton = new Button("modifica");
 			infoButton.setOnAction(e -> {
 				try {
 					dispatcher.openNewWindow("infoluogo", param.getValue());
@@ -59,6 +59,11 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 					ex.printStackTrace();
 				}
 			});
+			return new SimpleObjectProperty<Button>(infoButton);
+		});
+		settoriTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
+			final Button infoButton = new Button("settori");
+			infoButton.setOnAction(e -> dispatcher.renderView("gestionesettori", param.getValue()));
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
 

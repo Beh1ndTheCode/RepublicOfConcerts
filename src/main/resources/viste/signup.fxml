@@ -125,7 +125,7 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="loginViewButton" alignment="CENTER" contentDisplay="CENTER" layoutX="287.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToLoginView" prefHeight="24.0" prefWidth="94.0" text="INDIETRO" textAlignment="CENTER">
+      <Button fx:id="loginViewButton" alignment="CENTER" contentDisplay="CENTER" layoutX="287.0" layoutY="422.0" mnemonicParsing="false" onAction="#goToLoginView" prefHeight="24.0" prefWidth="94.0" text="ACCEDI" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="11.0" />
          </font>

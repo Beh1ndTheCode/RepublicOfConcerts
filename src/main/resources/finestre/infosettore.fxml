@@ -9,19 +9,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.InfoLuogoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.InfoSettoreController">
    <children>
       <Text fx:id="nomeText" layoutX="14.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial Italic" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="cittaText" layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Città" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text fx:id="tariffaText" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tariffa" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial Italic" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="capienzaText" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capienza" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text fx:id="capienzaText" layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capienza" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial Italic" size="15.0" />
          </font>
@@ -37,33 +37,33 @@
          </image>
       </ImageView>
       <TextField fx:id="nomeTextField" layoutX="266.0" layoutY="81.0" onKeyReleased="#blockModificaButton" />
-      <TextField fx:id="cittaTextField" layoutX="266.0" layoutY="106.0" onKeyReleased="#blockModificaButton" />
-      <TextField fx:id="capienzaTextField" layoutX="266.0" layoutY="131.0" onKeyReleased="#blockModificaButton" />
+      <TextField fx:id="tariffaTextField" layoutX="266.0" layoutY="131.0" onKeyReleased="#blockModificaButton" />
+      <TextField fx:id="capienzaTextField" layoutX="266.0" layoutY="106.0" onKeyReleased="#blockModificaButton" />
       <Label fx:id="nomeLabel" layoutX="119.0" layoutY="82.0" prefHeight="17.0" prefWidth="133.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="cittaLabel" layoutX="119.0" layoutY="107.0" prefHeight="17.0" prefWidth="133.0">
+      <Label fx:id="tariffaLabel" layoutX="119.0" layoutY="132.0" prefHeight="17.0" prefWidth="133.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="capienzaLabel" layoutX="119.0" layoutY="132.0" prefHeight="17.0" prefWidth="133.0">
+      <Label fx:id="capienzaLabel" layoutX="119.0" layoutY="107.0" prefHeight="17.0" prefWidth="133.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="eliminaButton" layoutX="85.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteLuogoAction" prefHeight="39.0" prefWidth="101.0" text="Elimina">
+      <Button fx:id="eliminaButton" layoutX="85.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteSettoreAction" prefHeight="39.0" prefWidth="101.0" text="Elimina">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="modificaButton" layoutX="290.0" layoutY="180.0" mnemonicParsing="false" onAction="#updateLuogoAction" prefHeight="39.0" prefWidth="101.0" text="Modifica">
+      <Button fx:id="modificaButton" layoutX="290.0" layoutY="180.0" mnemonicParsing="false" onAction="#updateSettoreAction" prefHeight="39.0" prefWidth="101.0" text="Modifica">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="capienzaErrorLabel" layoutX="266.0" layoutY="160.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="errorLabel" layoutX="266.0" layoutY="160.0" prefHeight="17.0" prefWidth="149.0" />
    </children>
 </Pane>

@@ -9,12 +9,13 @@ import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 
 	private static List<Luogo> luoghiAggiunti = new ArrayList<>();
-	private static List<Settore> settoriAggiunti = new ArrayList<>();
+	private static List<Settore> SettoriAggiunti = new ArrayList<>();
 
 	private static int idCounterLuoghi = 1;
 
@@ -62,15 +63,14 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
-
-			luogo.setCapienza(capienzaInput);
-			if (!nome.isEmpty())
-				luogo.setNome(nome);
-			if (!citta.isEmpty())
-				luogo.setCitta(citta);
-
-			return;
+			luogo.setCapienza(capienzaInput);	
 		}
+		if (!nome.isEmpty())
+			luogo.setNome(nome);
+		if (!citta.isEmpty())
+			luogo.setCitta(citta);
+		
+		return;
 	}
 
 	@Override
@@ -100,20 +100,62 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	}
 
 	@Override
-	public void addSettore(String nome, Integer capienza, Luogo luogo) throws BusinessException {
-		Settore settore = new Settore();
-		settore.setNome(nome);
-		settore.setLuogo(luogo);
-		settore.setCapienza(capienza);
-		settoriAggiunti.add(settore);
-
-		return;
+	public void addSettore(Luogo luogo, String nome, String capienza, String tariffa) throws BusinessException {
+		if (capienza.length() >= 0) {
+			Integer capienzaInput;
+			try {
+				capienzaInput = Integer.parseInt(capienza);
+			} catch (NumberFormatException n) {
+				throw new IntegerFormatException();
+			}
+			if (tariffa.length() > 0) {
+				Float tariffaInput;
+				try {
+					tariffaInput = Float.parseFloat(tariffa);
+				} catch (NumberFormatException n) {
+					throw new FloatFormatException();
+				}
+				Settore settore = new Settore();
+				settore.setNome(nome);
+				settore.setLuogo(luogo);
+				settore.setCapienza(capienzaInput);
+				settore.setTariffa(tariffaInput);
+				SettoriAggiunti.add(settore);
+				
+				return;
+			}
+			throw new FloatFormatException();
+		}
+		throw new IntegerFormatException();
 	}
 
 	@Override
-	public void updateSettore(Settore settore, String nome, Integer capienza) {
+	public void updateSettore(Settore settore, String nome, String capienza, String tariffa) throws BusinessException{
+		if (capienza.length() >= 0 && !capienza.isEmpty()) {
+			Integer capienzaInput;
+			try {
+				capienzaInput = Integer.parseInt(capienza);
+			} catch (NumberFormatException n) {
+				throw new IntegerFormatException();
+			}
+			settore.setCapienza(capienzaInput);
+		}
+		if (tariffa.length() > 0) {
+			Float tariffaInput;
+			try {
+				tariffaInput = Float.parseFloat(tariffa);
+			} catch (NumberFormatException n) {
+				throw new FloatFormatException();
+			}
+			settore.setTariffa(tariffaInput);
+		}
 		settore.setNome(nome);
-		settore.setCapienza(capienza);
+		
+		return;
+	}
+	
+	public void deleteSettore(Settore settore) throws BusinessException {
+		SettoriAggiunti.remove(settore);
 
 		return;
 	}
@@ -125,10 +167,11 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		Settore settoreProva = new Settore();
 		settoreProva.setNome("Settore prova");
 		settoreProva.setCapienza(50);
+		settoreProva.setTariffa(20.99f);
 		settoreProva.setLuogo(luogo);
 		settori.add(settoreProva);
 
-		for (Settore sector : settoriAggiunti) {
+		for (Settore sector : SettoriAggiunti) {
 			if (sector.getLuogo().equals(luogo))
 				settori.add(sector);
 		}
