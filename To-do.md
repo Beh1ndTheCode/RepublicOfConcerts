@@ -11,7 +11,11 @@
 
 ## Luoghi
 	- Schermate per visualizzare/aggiungere settori
-	- Sistemare colonna Data in lista concerti
+	
+## Metodi di Pagamento
 	- Sistemare bottone eliminazione metodi di pagamento
-	- Aggiungere bottone e schermata per creare un concerto
-	- Implementare finestra infoConcerto
+	
+## Concerti
+	- Sistemare graficamente schermata per creare un concerto
+	- Verificare perché non vengono viusalizzati nella lista i concerti creati 
+	- Creare finestra infoConcerto
