@@ -25,6 +25,24 @@
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
+            <Text fx:id="oldPswText" layoutX="16.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vecchia password" wrappingWidth="139.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="oldPswField" layoutX="156.0" layoutY="62.0" onKeyReleased="#blockModificaDatiButton" />
+            <Text fx:id="newPswText" layoutX="19.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="newPswField" layoutX="156.0" layoutY="97.0" onKeyReleased="#blockModificaDatiButton" />
+            <Text fx:id="repeatPswText" layoutX="19.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ripeti password" wrappingWidth="133.43359375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="repeatPswField" layoutX="156.0" layoutY="119.0" />
             <Text fx:id="usernameText" layoutX="332.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="103.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
@@ -49,24 +67,6 @@
                </font>
             </Text>
             <TextField fx:id="ageField" layoutX="413.0" layoutY="133.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="oldPswText" layoutX="16.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vecchia password" wrappingWidth="139.43359375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <PasswordField fx:id="oldPswField" layoutX="156.0" layoutY="62.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="newPswText" layoutX="19.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <PasswordField fx:id="newPswField" layoutX="156.0" layoutY="97.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="repeatPswText" layoutX="19.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ripeti password" wrappingWidth="133.43359375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <PasswordField fx:id="repeatPswField" layoutX="156.0" layoutY="119.0" />
             <Label fx:id="oldPswErrorLabel" layoutX="21.0" layoutY="150.0" />
             <Label fx:id="repeatPswErrorLabel" layoutX="153.0" layoutY="149.0" />
             <Label fx:id="ageErrorLabel" layoutX="403.0" layoutY="167.0" />
@@ -87,7 +87,7 @@
                   <TableColumn fx:id="azioniTableColumn" prefWidth="122.0" text="Azioni" />
               </columns>
             </TableView>
-            <Text fill="#7c7c7c" layoutX="255.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="per modificare i dati bisogna inserire la vecchia password" wrappingWidth="153.13671875" />
+            <Text fill="#7c7c7c" layoutX="258.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="per modificare i dati inserire la vecchia password" wrappingWidth="147.13671875" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

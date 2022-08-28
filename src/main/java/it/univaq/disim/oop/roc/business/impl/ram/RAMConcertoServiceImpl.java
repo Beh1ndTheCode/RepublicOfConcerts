@@ -1,6 +1,7 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,12 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	private static int contNumBiglietti = 1;
 
 	@Override
-	public void addConcerto(Luogo luogo, LocalDate data) {
+	public void addConcerto(String artista, Luogo luogo, LocalDate data) {
 		Concerto concerto = new Concerto();
+		concerto.setArtista(artista);
 		concerto.setLuogo(luogo);
 		concerto.setData(data);
+		concertiAggiunti.add(concerto);
 
 		return;
 	}
@@ -41,11 +44,14 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		List<Concerto> concerti = new ArrayList<>();
 
 		Concerto concertoProva = new Concerto();
-		LocalDate date = LocalDate.of(2022, 9, 26);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		String date = "25/09/2022";
+		LocalDate localDate = LocalDate.parse(date, formatter);
+
 		Teatro teatro = new Teatro();
 		teatro.setCitta("Roma");
 
-		concertoProva.setData(date);
+		concertoProva.setData(localDate);
 		concertoProva.setLuogo(teatro);
 		concertoProva.setArtista("Renato Zero");
 		concertoProva.setScaletta("La scala musicale è definibile come un sistema di organizzazione"

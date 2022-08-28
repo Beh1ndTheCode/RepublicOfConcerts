@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="it.univaq.disim.oop.roc.controller.viste.GestioneLuoghiController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.GestioneLuoghiController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="585.0">
+    <AnchorPane>
          <children>
-            <Button fx:id="aggiungiMetodiButton" layoutX="429.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAggiungiLuogoWindow" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
+            <Button fx:id="aggiungiLuogoButton" layoutX="429.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAggiungiLuogoWindow" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>

@@ -50,11 +50,11 @@ public class GestioneConcertiController implements DataInitializable<Concerto> {
 		cittaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getLuogo().getCitta());
 		});
-		/*
-		 * dataTableColumn.setCellFactory((CellDataFeatures<Concerto, String> param) ->
-		 * { return new SimpleStringProperty((param.getValue().getData().toString()));
-		 * });
-		 */
+
+		dataTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
+			return new SimpleStringProperty(param.getValue().getData().toString());
+		});
+
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button infoButton = new Button("info");
 			infoButton.setOnAction(e -> {

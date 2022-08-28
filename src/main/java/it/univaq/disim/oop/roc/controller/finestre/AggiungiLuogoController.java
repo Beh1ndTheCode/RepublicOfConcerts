@@ -82,9 +82,7 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 			capienzaTextField.setText("");
 			blockAggiungiButton();
 			dispatcher.renderView("gestioneluoghi");
-		} catch (
-
-		IntegerFormatException e) {
+		} catch (IntegerFormatException e) {
 			capienzaErrorLabel.setText("capienza non valida");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
