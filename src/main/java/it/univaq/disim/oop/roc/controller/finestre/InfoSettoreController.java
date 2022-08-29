@@ -3,7 +3,6 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
-import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
@@ -16,16 +15,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class InfoSettoreController implements DataInitializable<Settore>{
+public class InfoSettoreController implements DataInitializable<Settore> {
 
 	@FXML
-	private Text nomeText, tariffaText, capienzaText;
+	private Text nomeText, capienzaText;
 
 	@FXML
-	private Label nomeLabel, tariffaLabel, capienzaLabel, errorLabel;
+	private Label nomeLabel, capienzaLabel, errorLabel;
 
 	@FXML
-	private TextField nomeTextField, tariffaTextField, capienzaTextField;
+	private TextField nomeTextField, capienzaTextField;
 
 	@FXML
 	private Button modificaButton, eliminaButton;
@@ -49,30 +48,26 @@ public class InfoSettoreController implements DataInitializable<Settore>{
 		this.settore = settore;
 		nomeLabel.setText(settore.getNome());
 		nomeTextField.setPromptText(settore.getNome());
-		tariffaLabel.setText(settore.getTariffa().toString());
-		tariffaTextField.setPromptText(settore.getTariffa().toString());
 		capienzaLabel.setText((Integer.toString(settore.getCapienza())));
 		capienzaTextField.setPromptText((Integer.toString(settore.getCapienza())));
 	}
 
 	public void blockModificaButton() {
 		String nome = nomeTextField.getText();
-		String citta = tariffaTextField.getText();
 		String capienza = capienzaTextField.getText();
-		boolean isDisable = nome.isEmpty() && citta.isEmpty() && capienza.isEmpty();
+		boolean isDisable = nome.isEmpty() && capienza.isEmpty();
 		modificaButton.setDisable(isDisable);
 	}
 
 	public void updateSettoreAction(ActionEvent event) {
 		try {
 			errorLabel.setText("");
-			luogoService.updateSettore(settore, nomeTextField.getText(), capienzaTextField.getText() , tariffaTextField.getText());
+			luogoService.updateSettore(settore, nomeTextField.getText(), capienzaTextField.getText());
 			initializeData(settore);
 			nomeTextField.setText("");
-			tariffaTextField.setText("");
 			capienzaTextField.setText("");
 			blockModificaButton();
-			dispatcher.renderView("gestionesettori",settore.getLuogo());
+			dispatcher.renderView("gestionesettori", settore.getLuogo());
 		} catch (FloatFormatException e) {
 			errorLabel.setText("tariffa non valida!");
 		} catch (IntegerFormatException e) {
@@ -85,7 +80,7 @@ public class InfoSettoreController implements DataInitializable<Settore>{
 	public void deleteSettoreAction(ActionEvent event) {
 		try {
 			luogoService.deleteSettore(settore);
-			dispatcher.renderView("gestionesettori",settore.getLuogo());
+			dispatcher.renderView("gestionesettori", settore.getLuogo());
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

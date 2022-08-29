@@ -6,14 +6,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.GestioneSettoriController">
    <children>
       <TableView fx:id="settoriTableView" layoutX="12.0" layoutY="58.0" prefHeight="272.0" prefWidth="568.0">
         <columns>
           <TableColumn fx:id="nomeTableColumn" prefWidth="249.0" text="Nome" />
           <TableColumn fx:id="capienzaTableColumn" prefWidth="120.0" text="Capienza" />
-            <TableColumn fx:id="tariffaTableColumn" prefWidth="114.0" text="Tariffa" />
             <TableColumn fx:id="modificaTableColumn" prefWidth="84.0" text="Modifica" />
         </columns>
       </TableView>

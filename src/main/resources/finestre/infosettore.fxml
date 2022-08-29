@@ -16,11 +16,6 @@
             <Font name="Arial Italic" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="tariffaText" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tariffa" textAlignment="RIGHT" wrappingWidth="88.43359375">
-         <font>
-            <Font name="Arial Italic" size="15.0" />
-         </font>
-      </Text>
       <Text fx:id="capienzaText" layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capienza" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial Italic" size="15.0" />
@@ -37,14 +32,8 @@
          </image>
       </ImageView>
       <TextField fx:id="nomeTextField" layoutX="266.0" layoutY="81.0" onKeyReleased="#blockModificaButton" />
-      <TextField fx:id="tariffaTextField" layoutX="266.0" layoutY="131.0" onKeyReleased="#blockModificaButton" />
       <TextField fx:id="capienzaTextField" layoutX="266.0" layoutY="106.0" onKeyReleased="#blockModificaButton" />
       <Label fx:id="nomeLabel" layoutX="119.0" layoutY="82.0" prefHeight="17.0" prefWidth="133.0">
-         <font>
-            <Font name="Arial Black" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="tariffaLabel" layoutX="119.0" layoutY="132.0" prefHeight="17.0" prefWidth="133.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>

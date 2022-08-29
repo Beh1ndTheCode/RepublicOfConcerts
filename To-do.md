@@ -4,18 +4,16 @@
 	
 # Eccezioni
 	- Differenziare eccezioni in AggiungiMetodo
-	- Eccezioni per i luoghi (es. capienza settori)
 	
 # JavaFX
-## Realizzare altre viste
+Sistemare graficamente lista settori in gestioneSettori
 
-## Luoghi
-	- Schermate per visualizzare/aggiungere settori
+### Realizzare altre viste
 	
-## Metodi di Pagamento
+### Metodi di Pagamento
 	- Sistemare bottone eliminazione metodi di pagamento
 	
-## Concerti
+### Concerti
 	- Sistemare graficamente schermata per creare un concerto
 	- Verificare perché non vengono viusalizzati nella lista i concerti creati 
 	- Creare finestra infoConcerto

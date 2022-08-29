@@ -21,31 +21,31 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 
-public class GestioneSettoriController implements DataInitializable<Luogo>{
-	
+public class GestioneSettoriController implements DataInitializable<Luogo> {
+
 	@FXML
-	private TableView <Settore> settoriTableView;
-	
+	private TableView<Settore> settoriTableView;
+
 	@FXML
-	private TableColumn <Settore, String>nomeTableColumn, capienzaTableColumn, tariffaTableColumn;
-	
+	private TableColumn<Settore, String> nomeTableColumn, capienzaTableColumn;
+
 	@FXML
 	private TableColumn<Settore, Button> modificaTableColumn;
-	
+
 	@FXML
 	private Button aggiungiButton;
-	
-	private Luogo luogo;
-	
+
 	private ViewDispatcher dispatcher;
-	
+
 	private LuogoService luoghiService;
-	
+
+	private Luogo luogo;
+
 	public GestioneSettoriController() {
 		dispatcher = ViewDispatcher.getInstance();
 		luoghiService = new RAMLuogoServiceImpl();
 	}
-	
+
 	public void initialize() {
 		nomeTableColumn.setCellValueFactory((CellDataFeatures<Settore, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getNome());
@@ -53,10 +53,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo>{
 		capienzaTableColumn.setCellValueFactory((CellDataFeatures<Settore, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getCapienza().toString());
 		});
-		tariffaTableColumn.setCellValueFactory((CellDataFeatures<Settore, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getTariffa().toString());
-		});
-		
+
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Settore, Button> param) -> {
 			final Button infoButton = new Button("modifica");
 			infoButton.setOnAction(e -> {
@@ -69,7 +66,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo>{
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
 	}
-	
+
 	public void initializeData(Luogo luogo) {
 		this.luogo = luogo;
 		try {
@@ -80,8 +77,8 @@ public class GestioneSettoriController implements DataInitializable<Luogo>{
 			dispatcher.renderError(e);
 		}
 	}
-	
+
 	public void openAggiungiSettoreWindow(ActionEvent event) throws Exception {
-		dispatcher.openNewWindow("aggiungisettore");
+		dispatcher.openNewWindow("aggiungisettore", luogo);
 	}
 }
