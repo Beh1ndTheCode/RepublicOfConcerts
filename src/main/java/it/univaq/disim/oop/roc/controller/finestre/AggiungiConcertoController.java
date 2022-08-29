@@ -2,6 +2,7 @@ package it.univaq.disim.oop.roc.controller.finestre;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
@@ -13,16 +14,11 @@ import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class AggiungiConcertoController implements DataInitializable<Concerto> {
@@ -31,13 +27,10 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	private TextField artistaTextField, dataTextField;
 
 	@FXML
-	private TableView<Luogo> luoghiTableView;
-
+	private ListView<String> luoghiListView;
+	
 	@FXML
-	private TableColumn<Luogo, String> nomeTableColumn, cittaTableColumn;
-
-	@FXML
-	private TableColumn<Luogo, Button> azioniTableColumn;
+	private Label luogoLabel;
 
 	@FXML
 	private Button aggiungiConcertoButton;
@@ -57,28 +50,20 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void initialize() {
-		aggiungiConcertoButton.setDisable(true);
-		cittaTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getCitta());
-		});
-		nomeTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getNome());
-		});
-		azioniTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
-			final Button selectButton = new Button("seleziona");
-			selectButton.setOnAction(e -> {
-				luogo = luoghiTableView.getSelectionModel().getSelectedItem();
-			});
-			return new SimpleObjectProperty<Button>(selectButton);
-		});
-
 		try {
-			List<Luogo> luoghi = luoghiService.findAllLuoghi();
-			ObservableList<Luogo> luoghiData = FXCollections.observableArrayList(luoghi);
-			luoghiTableView.setItems(luoghiData);
+			List<Luogo> listLuoghi = luoghiService.findAllLuoghi();
+			List<String> luoghi = new ArrayList<>();
+			for(Luogo luogo : listLuoghi) {
+				luoghi.add(luogo.getId()+", "+luogo.getNome()+", "+luogo.getCitta());
+			}
+			luoghiListView.getItems().addAll(luoghi);
 		} catch (BusinessException e) {
-			dispatcher.renderError(e);
+			e.printStackTrace();
 		}
+	}
+	
+	public void luogoSelezionato() {
+		luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem());
 	}
 
 	public void blockAggiungiButton() {
@@ -94,7 +79,7 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		String date = dataTextField.getText();
 		LocalDate localDate = LocalDate.parse(date, formatter);
 
-		concertoService.addConcerto(artistaTextField.getText(), luogo, localDate);
+		concertoService.addConcerto(artistaTextField.getText(), luogoLabel.getText(), localDate);
 
 		artistaTextField.setText("");
 		dataTextField.setText("");

@@ -26,7 +26,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 	private TableView<Luogo> luoghiTableView;
 
 	@FXML
-	private TableColumn<Luogo, String> tipoTableColumn, cittaTableColumn, nomeTableColumn;
+	private TableColumn<Luogo, String> tipoTableColumn, cittaTableColumn, nomeTableColumn,capienzaTableColumn;
 
 	@FXML
 	private TableColumn<Luogo, Button> modificaTableColumn, settoriTableColumn;
@@ -49,6 +49,9 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 		});
 		nomeTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getNome());
+		});
+		capienzaTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
+			return new SimpleStringProperty(param.getValue().getCapienza().toString());
 		});
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
 			final Button infoButton = new Button("modifica");

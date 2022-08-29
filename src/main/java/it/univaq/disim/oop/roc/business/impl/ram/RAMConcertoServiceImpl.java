@@ -22,10 +22,10 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	private static int contNumBiglietti = 1;
 
 	@Override
-	public void addConcerto(String artista, Luogo luogo, LocalDate data) {
+	public void addConcerto(String artista, String luogo, LocalDate data) {
 		Concerto concerto = new Concerto();
 		concerto.setArtista(artista);
-		concerto.setLuogo(luogo);
+		//concerto.setLuogo(luogo);
 		concerto.setData(data);
 		concertiAggiunti.add(concerto);
 

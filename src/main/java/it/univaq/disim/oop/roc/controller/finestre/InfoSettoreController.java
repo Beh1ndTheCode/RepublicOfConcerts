@@ -7,6 +7,7 @@ import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
+import it.univaq.disim.oop.roc.exceptions.NumberOutOfBounds;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,6 +69,8 @@ public class InfoSettoreController implements DataInitializable<Settore> {
 			capienzaTextField.setText("");
 			blockModificaButton();
 			dispatcher.renderView("gestionesettori", settore.getLuogo());
+		} catch (NumberOutOfBounds e) {
+			errorLabel.setText("ridurre la capienza");
 		} catch (FloatFormatException e) {
 			errorLabel.setText("tariffa non valida!");
 		} catch (IntegerFormatException e) {

@@ -84,14 +84,6 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	public List<Luogo> findAllLuoghi() throws BusinessException {
 		List<Luogo> luoghi = new ArrayList<>();
 
-		Teatro teatroProva = new Teatro();
-		teatroProva.setId(idCounterLuoghi++);
-		teatroProva.setTipo("Teatro");
-		teatroProva.setNome("Teatro prova");
-		teatroProva.setCitta("Pettino");
-		teatroProva.setCapienza(150);
-		luoghi.add(teatroProva);
-
 		for (Luogo place : luoghiAggiunti) {
 			luoghi.add(place);
 		}
@@ -107,6 +99,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			}
 		}
 		capienzaRimanente += capienzaSettore;
+		System.out.println(capienzaRimanente);
 		if (capienzaRimanente > luogo.getCapienza())
 			throw new NumberOutOfBounds();
 
@@ -124,7 +117,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		}
 
 		verificaCapienza(luogo, capienzaInput);
-
+		
 		if (luogo instanceof Teatro) {
 			Settore settore = new Settore();
 			settore.setNome(nome);
@@ -158,6 +151,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
+			verificaCapienza(settore.getLuogo(), capienzaInput);
 			settore.setCapienza(capienzaInput);
 		}
 		settore.setNome(nome);
@@ -174,13 +168,6 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	@Override
 	public List<Settore> findAllSettori(Luogo luogo) throws BusinessException {
 		List<Settore> settori = new ArrayList<>();
-
-		Settore settoreProva = new Settore();
-		settoreProva.setNome("Settore prova");
-		settoreProva.setCapienza(50);
-		settoreProva.setTariffa(20.99f);
-		settoreProva.setLuogo(luogo);
-		settori.add(settoreProva);
 
 		for (Settore sector : settoriAggiunti) {
 			if (sector.getLuogo().equals(luogo))

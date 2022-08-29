@@ -13,7 +13,7 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface ConcertoService {
 
-	void addConcerto(String artista, Luogo luogo, LocalDate dataConcerto);
+	void addConcerto(String artista, String luogo, LocalDate dataConcerto);
 
 	void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo);
 

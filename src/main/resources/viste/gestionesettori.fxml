@@ -8,14 +8,14 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.GestioneSettoriController">
    <children>
-      <TableView fx:id="settoriTableView" layoutX="12.0" layoutY="58.0" prefHeight="272.0" prefWidth="568.0">
+      <TableView fx:id="settoriTableView" layoutX="12.0" layoutY="58.0" prefHeight="272.0" prefWidth="574.0">
         <columns>
-          <TableColumn fx:id="nomeTableColumn" prefWidth="249.0" text="Nome" />
-          <TableColumn fx:id="capienzaTableColumn" prefWidth="120.0" text="Capienza" />
-            <TableColumn fx:id="modificaTableColumn" prefWidth="84.0" text="Modifica" />
+          <TableColumn fx:id="nomeTableColumn" prefWidth="321.0" text="Nome" />
+          <TableColumn fx:id="capienzaTableColumn" prefWidth="195.0" text="Capienza" />
+            <TableColumn fx:id="modificaTableColumn" minWidth="0.0" prefWidth="57.0" text="Modifica" />
         </columns>
       </TableView>
-      <Button fx:id="aggiungiButton" layoutX="468.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAggiungiSettoreWindow" prefHeight="36.0" prefWidth="112.0" text="AGGIUNGI">
+      <Button fx:id="aggiungiButton" layoutX="474.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAggiungiSettoreWindow" prefHeight="36.0" prefWidth="112.0" text="AGGIUNGI">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
