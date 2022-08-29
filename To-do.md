@@ -6,13 +6,8 @@
 	- Differenziare eccezioni in AggiungiMetodo
 	
 # JavaFX
-Sistemare graficamente lista settori in gestioneSettori
-
 ### Realizzare altre viste
-	
-### Metodi di Pagamento
-	- Sistemare bottone eliminazione metodi di pagamento
-	
+		
 ### Concerti
 	- Sistemare graficamente schermata per creare un concerto
 	- Verificare perché non vengono viusalizzati nella lista i concerti creati 
