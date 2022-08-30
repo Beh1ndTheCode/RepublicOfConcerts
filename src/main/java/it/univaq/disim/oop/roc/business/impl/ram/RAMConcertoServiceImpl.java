@@ -62,6 +62,13 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	}
 
 	@Override
+	public void deleteConcerto(Concerto concerto) {
+		concertiAggiunti.remove(concerto);
+
+		return;
+	}
+
+	@Override
 	public List<Concerto> findAllConcerti() throws BusinessException {
 		List<Concerto> concerti = new ArrayList<>();
 
@@ -83,6 +90,7 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 		for (Concerto concert : concertiAggiunti) {
 			concerti.add(concert);
+			System.out.println("CHECK");
 		}
 
 		return concerti;
