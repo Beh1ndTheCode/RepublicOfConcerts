@@ -83,6 +83,7 @@ public class InfoSettoreController implements DataInitializable<Settore> {
 	public void deleteSettoreAction(ActionEvent event) {
 		try {
 			luogoService.deleteSettore(settore);
+			dispatcher.closeWindowView();
 			dispatcher.renderView("gestionesettori", settore.getLuogo());
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);

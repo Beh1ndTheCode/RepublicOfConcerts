@@ -82,6 +82,7 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 	public void deleteLuogoAction(ActionEvent event) {
 		try {
 			luogoService.deleteLuogo(luogo);
+			dispatcher.closeWindowView();
 			dispatcher.renderView("gestioneluoghi");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);

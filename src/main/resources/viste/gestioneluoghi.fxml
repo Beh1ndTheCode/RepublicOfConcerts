@@ -21,8 +21,8 @@
                   <TableColumn fx:id="tipoTableColumn" prefWidth="81.0" text="Tipo" />
                   <TableColumn fx:id="cittaTableColumn" prefWidth="106.0" text="Città" />
                   <TableColumn fx:id="nomeTableColumn" prefWidth="172.0" text="Nome" />
-                  <TableColumn fx:id="capienzaTableColumn" prefWidth="77.0" text="Capienza" />
-                  <TableColumn fx:id="modificaTableColumn" prefWidth="61.0" text="Modifica" />
+                  <TableColumn fx:id="capienzaTableColumn" prefWidth="61.0" text="Capienza" />
+                  <TableColumn fx:id="modificaTableColumn" prefWidth="77.0" text="Modifica" />
                   <TableColumn fx:id="settoriTableColumn" prefWidth="62.0" text="Settori" />
                </columns>
             </TableView>

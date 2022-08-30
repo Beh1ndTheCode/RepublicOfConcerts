@@ -72,6 +72,7 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 		try {
 			metodiService.deleteMetodo(metodo);
 			dispatcher.closeWindowView();
+			dispatcher.renderView("profilo", metodo.getUtente());
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
