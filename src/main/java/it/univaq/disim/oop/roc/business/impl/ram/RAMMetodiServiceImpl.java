@@ -1,5 +1,7 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,38 +19,33 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	private static int idCounterMetodi = 1;
 
 	@Override
-	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,
-			String annoScadenza, String cvv) throws BusinessException {
-		if (cvv.length() == 3 && (meseScadenza.length() == 1 || meseScadenza.length() == 2)
-				&& (annoScadenza.length() == 1 || annoScadenza.length() == 2) && numero.length() == 16) {
-			Integer meseScadenzaInput, annoScadenzaInput, cvvInput;
+	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String scadenza,
+			String cvv) throws BusinessException {
+		if (cvv.length() == 3 && numero.length() == 16) {
+			Integer cvvInput;
 			Long numeroInput;
 
 			try {
 				numeroInput = Long.parseLong(numero);
-				meseScadenzaInput = Integer.parseInt(meseScadenza);
-				annoScadenzaInput = Integer.parseInt(annoScadenza);
 				cvvInput = Integer.parseInt(cvv);
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
+			Carta carta = new Carta();
+			carta.setId(idCounterMetodi++);
+			carta.setTipo("Carta");
+			carta.setNome(nomeCarta);
+			carta.setUtente(utente);
+			carta.setIntestatario(intestatario);
+			carta.setNumero(numeroInput);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
+			String date = ("01/" + scadenza);
+			LocalDate localDate = LocalDate.parse(date, formatter);
+			carta.setScadenza(localDate);
+			carta.setCvv(cvvInput);
+			metodiAggiunti.add(carta);
 
-			if ((meseScadenzaInput >= 1 && meseScadenzaInput <= 12)
-					&& (annoScadenzaInput >= 0 && annoScadenzaInput <= 99)) {
-				Carta carta = new Carta();
-				carta.setId(idCounterMetodi++);
-				carta.setTipo("Carta");
-				carta.setNome(nomeCarta);
-				carta.setUtente(utente);
-				carta.setIntestatario(intestatario);
-				carta.setNumero(numeroInput);
-				carta.setMeseScadenza(meseScadenzaInput);
-				carta.setAnnoScadenza(annoScadenzaInput);
-				carta.setCvv(cvvInput);
-				metodiAggiunti.add(carta);
-
-				return;
-			}
+			return;
 		}
 
 		throw new IntegerFormatException();
@@ -89,8 +86,10 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		cartaProva.setNome("Carta prova");
 		cartaProva.setIntestatario("Giovanni Storti");
 		cartaProva.setNumero(1234567890123456l);
-		cartaProva.setMeseScadenza(06);
-		cartaProva.setAnnoScadenza(23);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
+		String date = "01/09/22";
+		LocalDate localDate = LocalDate.parse(date, formatter);
+		cartaProva.setScadenza(localDate);
 		cartaProva.setCvv(578);
 		cartaProva.setUtente(utente);
 		metodiDiPagamento.add(cartaProva);

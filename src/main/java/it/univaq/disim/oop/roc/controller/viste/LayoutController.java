@@ -40,7 +40,7 @@ public class LayoutController implements DataInitializable<Utente> {
 
 	private static final MenuItem[] MENU_AMMINISTRATORE = { new MenuItem("concerti"), new MenuItem("tour"),
 			new MenuItem("luoghi"), new MenuItem("recensioni") };
-	private static final MenuItem[] MENU_SPETTATORE = { new MenuItem("concerti"), new MenuItem("tour")};
+	private static final MenuItem[] MENU_SPETTATORE = { new MenuItem("concerti"), new MenuItem("tour") };
 
 	public LayoutController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -77,6 +77,6 @@ public class LayoutController implements DataInitializable<Utente> {
 
 	public void goToProfiloView() throws Exception {
 		dispatcher.renderView("profilo", utente);
-		titoloPagina.setText("profilo");
+		titoloPagina.setText("profilo".toUpperCase());
 	}
 }

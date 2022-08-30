@@ -8,7 +8,6 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
@@ -22,11 +21,13 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	private static int contNumBiglietti = 1;
 
 	@Override
-	public void addConcerto(String artista, String luogo, LocalDate data) {
+	public void addConcerto(String artista, String luogo, String data) {
 		Concerto concerto = new Concerto();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate localDate = LocalDate.parse(data, formatter);
 		concerto.setArtista(artista);
-		//concerto.setLuogo(luogo);
-		concerto.setData(data);
+		// concerto.setLuogo(luogo);
+		concerto.setData(localDate);
 		concertiAggiunti.add(concerto);
 
 		return;

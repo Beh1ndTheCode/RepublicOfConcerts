@@ -16,8 +16,8 @@ import javafx.scene.control.TextField;
 public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	@FXML
-	private TextField nomeCartaField, intestatarioField, numeroField, scadenzaField, meseScadenzaField,
-			annoScadenzaField, cvvField, nomeContoField, ibanField, swiftField;
+	private TextField nomeCartaField, intestatarioField, numeroField, meseScadenzaField, annoScadenzaField, cvvField,
+			nomeContoField, ibanField, swiftField;
 
 	@FXML
 	private Label ibanErrorLabel, numCartaErrorLabel;
@@ -30,6 +30,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	private ViewDispatcher dispatcher;
 
 	private Utente utente;
+
 	public AggiungiMetodoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		metodiService = new RAMMetodiServiceImpl();
@@ -67,8 +68,9 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public void aggiungiCartaAction(ActionEvent event) {
 		try {
 			numCartaErrorLabel.setText("");
+			String scadenza = (meseScadenzaField.getText() + "/" + annoScadenzaField.getText());
 			metodiService.addCarta(utente, nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
-					meseScadenzaField.getText(), annoScadenzaField.getText(), cvvField.getText());
+					scadenza, cvvField.getText());
 
 			nomeCartaField.setText("");
 			intestatarioField.setText("");

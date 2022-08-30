@@ -18,7 +18,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 	private static final String METODI_FILE_NAME = REPOSITORY_BASE + File.separator + "metodi.txt";
 
 	@Override
-	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza, String annoScadenza,
+	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String scadenza,
 			String cvv) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
@@ -38,10 +38,6 @@ public class FileMetodiServiceImpl implements MetodiService {
 				row.append(Utility.SEPARATORE);
 				row.append(numero);
 				row.append(Utility.SEPARATORE);
-				row.append(meseScadenza);
-				row.append(Utility.SEPARATORE);
-				row.append(annoScadenza);
-				row.append(Utility.SEPARATORE);
 				row.append(cvv);
 				writer.println(row.toString());
 
@@ -53,7 +49,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 
 	}
 
-	public void addConto(Utente utente, String nomeConto, String iban,String swift) throws BusinessException {
+	public void addConto(Utente utente, String nomeConto, String iban, String swift) throws BusinessException {
 	}
 
 	@Override

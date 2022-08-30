@@ -1,7 +1,5 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +22,11 @@ import javafx.scene.control.TextField;
 public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	@FXML
-	private TextField artistaTextField, dataTextField;
+	private TextField artistaTextField, giornoTextField, meseTextField, annoTextField;
 
 	@FXML
 	private ListView<String> luoghiListView;
-	
+
 	@FXML
 	private Label luogoLabel;
 
@@ -41,8 +39,6 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	private LuogoService luoghiService;
 
-	private Luogo luogo;
-
 	public AggiungiConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertoService = new RAMConcertoServiceImpl();
@@ -53,36 +49,39 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		try {
 			List<Luogo> listLuoghi = luoghiService.findAllLuoghi();
 			List<String> luoghi = new ArrayList<>();
-			for(Luogo luogo : listLuoghi) {
-				luoghi.add(luogo.getId()+", "+luogo.getNome()+", "+luogo.getCitta());
+			for (Luogo luogo : listLuoghi) {
+				luoghi.add(luogo.getId() + ", " + luogo.getNome() + ", " + luogo.getCitta());
 			}
 			luoghiListView.getItems().addAll(luoghi);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void luogoSelezionato() {
 		luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem());
 	}
 
 	public void blockAggiungiButton() {
 		String artista = artistaTextField.getText();
-		String data = dataTextField.getText();
-		boolean isDisable = artista.isEmpty() || data.isEmpty();
+		String giorno = giornoTextField.getText();
+		String mese = meseTextField.getText();
+		String anno = annoTextField.getText();
+
+		boolean isDisable = artista.isEmpty() || giorno.isEmpty() || mese.isEmpty() || anno.isEmpty();
 		aggiungiConcertoButton.setDisable(isDisable);
 	}
 
 	public void addConcertoAction(ActionEvent event) {
 		// try {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-		String date = dataTextField.getText();
-		LocalDate localDate = LocalDate.parse(date, formatter);
+		String data = (giornoTextField.getText() + "/" + meseTextField.getText() + "/" + annoTextField.getText());
 
-		concertoService.addConcerto(artistaTextField.getText(), luogoLabel.getText(), localDate);
+		concertoService.addConcerto(artistaTextField.getText(), luogoLabel.getText(), data);
 
 		artistaTextField.setText("");
-		dataTextField.setText("");
+		giornoTextField.setText("");
+		meseTextField.setText("");
+		annoTextField.setText("");
 		blockAggiungiButton();
 		dispatcher.renderView("gestioneconcerti");
 		// } catch (BusinessException e) {

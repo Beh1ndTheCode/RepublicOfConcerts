@@ -10,7 +10,7 @@ import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
-import it.univaq.disim.oop.roc.exceptions.NumberOutOfBounds;
+import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 
@@ -101,7 +101,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		capienzaRimanente += capienzaSettore;
 		System.out.println(capienzaRimanente);
 		if (capienzaRimanente > luogo.getCapienza())
-			throw new NumberOutOfBounds();
+			throw new NumberOutOfBoundsException();
 
 		return;
 	}

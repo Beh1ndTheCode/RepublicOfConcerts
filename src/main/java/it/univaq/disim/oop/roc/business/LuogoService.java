@@ -5,7 +5,7 @@ import java.util.List;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.NumberOutOfBounds;
+import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 
 public interface LuogoService {
 
@@ -15,7 +15,7 @@ public interface LuogoService {
 
 	void deleteLuogo(Luogo luogo) throws BusinessException;
 
-	void verificaCapienza(Luogo luogo, Integer capienzaSettore) throws BusinessException, NumberOutOfBounds;
+	void verificaCapienza(Luogo luogo, Integer capienzaSettore) throws BusinessException, NumberOutOfBoundsException;
 
 	List<Luogo> findAllLuoghi() throws BusinessException;
 

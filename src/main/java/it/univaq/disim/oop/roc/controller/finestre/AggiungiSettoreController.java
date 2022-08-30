@@ -6,7 +6,7 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
-import it.univaq.disim.oop.roc.exceptions.NumberOutOfBounds;
+import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,7 +59,7 @@ public class AggiungiSettoreController implements DataInitializable<Luogo> {
 			capienzaTextField.setText("");
 			blockAggiungiButton();
 			dispatcher.renderView("gestionesettori", luogo);
-		} catch (NumberOutOfBounds e) {
+		} catch (NumberOutOfBoundsException e) {
 			capienzaErrorLabel.setText("ridurre la capienza");
 		} catch (IntegerFormatException e) {
 			capienzaErrorLabel.setText("capienza non valida");
