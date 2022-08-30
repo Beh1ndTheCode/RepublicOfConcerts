@@ -1,6 +1,5 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
@@ -11,7 +10,10 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,10 +27,10 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	private TextField artistaTextField, giornoTextField, meseTextField, annoTextField;
 
 	@FXML
-	private ListView<String> luoghiListView;
+	private ListView<Luogo> luoghiListView;
 
 	@FXML
-	private Label luogoLabel;
+	private Label luogoLabel, dataErrorLabel;
 
 	@FXML
 	private Button aggiungiConcertoButton;
@@ -46,20 +48,18 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void initialize() {
+		aggiungiConcertoButton.setDisable(true);
 		try {
-			List<Luogo> listLuoghi = luoghiService.findAllLuoghi();
-			List<String> luoghi = new ArrayList<>();
-			for (Luogo luogo : listLuoghi) {
-				luoghi.add(luogo.getId() + ", " + luogo.getNome() + ", " + luogo.getCitta());
-			}
-			luoghiListView.getItems().addAll(luoghi);
+			List<Luogo> luoghi = luoghiService.findAllLuoghi();
+			ObservableList<Luogo> luoghiData = FXCollections.observableArrayList(luoghi);
+			luoghiListView.setItems(luoghiData);
 		} catch (BusinessException e) {
-			e.printStackTrace();
+			dispatcher.renderError(e);
 		}
 	}
 
 	public void luogoSelezionato() {
-		luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem());
+		luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem().toString());
 	}
 
 	public void blockAggiungiButton() {
@@ -73,20 +73,23 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void addConcertoAction(ActionEvent event) {
-		// try {
-		String data = (giornoTextField.getText() + "/" + meseTextField.getText() + "/" + annoTextField.getText());
+		try {
+			concertoService.addConcerto(artistaTextField.getText(),
+					luoghiListView.getSelectionModel().getSelectedItem(), giornoTextField.getText(),
+					meseTextField.getText(), annoTextField.getText());
 
-		concertoService.addConcerto(artistaTextField.getText(), luogoLabel.getText(), data);
-
-		artistaTextField.setText("");
-		giornoTextField.setText("");
-		meseTextField.setText("");
-		annoTextField.setText("");
-		blockAggiungiButton();
-		dispatcher.renderView("gestioneconcerti");
-		// } catch (BusinessException e) {
-		// dispatcher.renderError(e);
-		// }
+			luogoLabel.setText("");
+			artistaTextField.setText("");
+			giornoTextField.setText("");
+			meseTextField.setText("");
+			annoTextField.setText("");
+			blockAggiungiButton();
+			dispatcher.renderView("gestioneconcerti");
+		} catch (InvalidDateException e) {
+			dataErrorLabel.setText("Inserisci una data valida");
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
 	}
 
 	public void closeWindow() {

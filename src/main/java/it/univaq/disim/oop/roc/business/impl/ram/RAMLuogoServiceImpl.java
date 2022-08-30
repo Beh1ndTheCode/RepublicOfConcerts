@@ -99,7 +99,6 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			}
 		}
 		capienzaRimanente += capienzaSettore;
-		System.out.println(capienzaRimanente);
 		if (capienzaRimanente > luogo.getCapienza())
 			throw new NumberOutOfBoundsException();
 
@@ -117,7 +116,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		}
 
 		verificaCapienza(luogo, capienzaInput);
-		
+
 		if (luogo instanceof Teatro) {
 			Settore settore = new Settore();
 			settore.setNome(nome);

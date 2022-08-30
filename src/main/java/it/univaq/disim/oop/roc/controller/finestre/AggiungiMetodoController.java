@@ -6,6 +6,7 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
+import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,11 +17,11 @@ import javafx.scene.control.TextField;
 public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	@FXML
-	private TextField nomeCartaField, intestatarioField, numeroField, meseScadenzaField, annoScadenzaField, cvvField,
-			nomeContoField, ibanField, swiftField;
+	private TextField nomeCartaField, intestatarioField, numeroField1, numeroField2, numeroField3, numeroField4,
+			meseScadenzaField, annoScadenzaField, cvvField, nomeContoField, ibanField, swiftField;
 
 	@FXML
-	private Label ibanErrorLabel, numCartaErrorLabel;
+	private Label ibanErrorLabel, numCartaErrorLabel, dataErrorLabel;
 
 	@FXML
 	private Button aggiungiCartaButton, aggiungiContoButton;
@@ -48,7 +49,8 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public void blockAggiungiCartaButton() {
 		String nomeCarta = nomeCartaField.getText();
 		String intestatario = intestatarioField.getText();
-		String numero = numeroField.getText();
+		String numero = numeroField1.getText() + numeroField2.getText() + numeroField3.getText()
+				+ numeroField4.getText();
 		String meseScadenza = meseScadenzaField.getText();
 		String annoScadenza = annoScadenzaField.getText();
 		String cvv = cvvField.getText();
@@ -68,20 +70,33 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public void aggiungiCartaAction(ActionEvent event) {
 		try {
 			numCartaErrorLabel.setText("");
-			String scadenza = (meseScadenzaField.getText() + "/" + annoScadenzaField.getText());
-			metodiService.addCarta(utente, nomeCartaField.getText(), intestatarioField.getText(), numeroField.getText(),
-					scadenza, cvvField.getText());
+			dataErrorLabel.setText("");
+			if (numeroField1.getText().length() == 4 && numeroField2.getText().length() == 4
+					&& numeroField3.getText().length() == 4 && numeroField4.getText().length() == 4) {
 
-			nomeCartaField.setText("");
-			intestatarioField.setText("");
-			numeroField.setText("");
-			meseScadenzaField.setText("");
-			annoScadenzaField.setText("");
-			cvvField.setText("");
-			blockAggiungiCartaButton();
-			dispatcher.renderView("profilo", utente);
+				String numero = numeroField1.getText() + numeroField2.getText() + numeroField3.getText()
+						+ numeroField4.getText();
+				metodiService.addCarta(utente, nomeCartaField.getText(), intestatarioField.getText(), numero,
+						meseScadenzaField.getText(), annoScadenzaField.getText(), cvvField.getText());
+
+				nomeCartaField.setText("");
+				intestatarioField.setText("");
+				numeroField1.setText("");
+				numeroField2.setText("");
+				numeroField3.setText("");
+				numeroField4.setText("");
+				meseScadenzaField.setText("");
+				annoScadenzaField.setText("");
+				cvvField.setText("");
+				blockAggiungiCartaButton();
+				dispatcher.renderView("profilo", utente);
+			}
+
+			throw new IntegerFormatException();
 		} catch (IntegerFormatException e) {
 			numCartaErrorLabel.setText("Inserisci un numero valido");
+		} catch (InvalidDateException e) {
+			dataErrorLabel.setText("Inserisci una scadenza valida");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

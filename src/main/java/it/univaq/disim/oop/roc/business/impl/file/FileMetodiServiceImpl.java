@@ -18,8 +18,8 @@ public class FileMetodiServiceImpl implements MetodiService {
 	private static final String METODI_FILE_NAME = REPOSITORY_BASE + File.separator + "metodi.txt";
 
 	@Override
-	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String scadenza,
-			String cvv) throws BusinessException {
+	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,
+			String annoScadenza, String cvv) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
 			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {

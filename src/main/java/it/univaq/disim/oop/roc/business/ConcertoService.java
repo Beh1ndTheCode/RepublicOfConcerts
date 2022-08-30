@@ -4,14 +4,17 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 
 public interface ConcertoService {
 
-	void addConcerto(String artista, String luogo, String data);
+	void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
+			throws BusinessException, InvalidDateException;
 
 	void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo);
 

@@ -8,11 +8,14 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
+import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 
 public class RAMConcertoServiceImpl implements ConcertoService {
 
@@ -21,14 +24,32 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	private static int contNumBiglietti = 1;
 
 	@Override
-	public void addConcerto(String artista, String luogo, String data) {
+	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
+			throws BusinessException {
+		if (giorno.length() == 2 && mese.length() == 2 && anno.length() == 2) {
+
+		}
+		Integer giornoInput, meseInput, annoInput;
+
+		try {
+			giornoInput = Integer.parseInt(giorno);
+			meseInput = Integer.parseInt(mese);
+			annoInput = Integer.parseInt(anno);
+		} catch (NumberFormatException n) {
+			throw new IntegerFormatException();
+		}
+
+		if (!(giornoInput <= 31 && meseInput <= 12))
+			throw new InvalidDateException();
 		Concerto concerto = new Concerto();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String data = giornoInput + "/" + meseInput + "/" + annoInput;
 		LocalDate localDate = LocalDate.parse(data, formatter);
 		concerto.setArtista(artista);
-		// concerto.setLuogo(luogo);
+		concerto.setLuogo(luogo);
 		concerto.setData(localDate);
 		concertiAggiunti.add(concerto);
+		System.out.println(concerto.getLuogo().getNome());
 
 		return;
 	}

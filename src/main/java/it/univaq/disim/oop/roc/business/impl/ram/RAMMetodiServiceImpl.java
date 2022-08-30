@@ -12,6 +12,7 @@ import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
+import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 
 public class RAMMetodiServiceImpl implements MetodiService {
 
@@ -19,18 +20,23 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	private static int idCounterMetodi = 1;
 
 	@Override
-	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String scadenza,
-			String cvv) throws BusinessException {
-		if (cvv.length() == 3 && numero.length() == 16) {
-			Integer cvvInput;
+	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,
+			String annoScadenza, String cvv) throws BusinessException {
+		if (cvv.length() == 3 && numero.length() == 16 && meseScadenza.length() == 2 && annoScadenza.length() == 2) {
+			Integer cvvInput, meseInput, annoInput;
 			Long numeroInput;
 
 			try {
 				numeroInput = Long.parseLong(numero);
 				cvvInput = Integer.parseInt(cvv);
+				meseInput = Integer.parseInt(meseScadenza);
+				annoInput = Integer.parseInt(annoScadenza);
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
+
+			if (!(meseInput <= 12))
+				throw new InvalidDateException();
 			Carta carta = new Carta();
 			carta.setId(idCounterMetodi++);
 			carta.setTipo("Carta");
@@ -39,7 +45,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 			carta.setIntestatario(intestatario);
 			carta.setNumero(numeroInput);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
-			String date = ("01/" + scadenza);
+			String date = ("01/" + meseInput + "/" + annoInput);
 			LocalDate localDate = LocalDate.parse(date, formatter);
 			carta.setScadenza(localDate);
 			carta.setCvv(cvvInput);

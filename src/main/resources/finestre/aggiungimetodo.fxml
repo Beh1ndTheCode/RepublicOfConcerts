@@ -37,7 +37,22 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="numeroField" layoutX="106.0" layoutY="65.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="134.0">
+      <TextField fx:id="numeroField1" layoutX="106.0" layoutY="65.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="43.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="numeroField2" layoutX="155.0" layoutY="65.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="43.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="numeroField3" layoutX="204.0" layoutY="65.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="43.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="numeroField4" layoutX="253.0" layoutY="65.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="43.0">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
@@ -47,7 +62,7 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="meseScadenzaField" layoutX="106.0" layoutY="90.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="30.0">
+      <TextField fx:id="meseScadenzaField" layoutX="106.0" layoutY="90.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="35.0" promptText="mm">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
@@ -57,7 +72,7 @@
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="annoScadenzaField" layoutX="166.0" layoutY="90.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="30.0">
+      <TextField fx:id="annoScadenzaField" layoutX="166.0" layoutY="90.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="35.0" promptText="yy">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
@@ -73,6 +88,11 @@
          </font>
       </TextField>
       <Label fx:id="numCartaErrorLabel" layoutX="203.0" layoutY="103.0" prefHeight="39.0" prefWidth="95.0" textAlignment="RIGHT" textFill="RED" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="dataErrorLabel" layoutX="206.0" layoutY="81.0" prefHeight="39.0" prefWidth="95.0" textAlignment="RIGHT" textFill="RED" wrapText="true">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
