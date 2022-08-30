@@ -1,52 +1,35 @@
 package it.univaq.disim.oop.roc.domain;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Concerto {
 
-	private Integer prezzo;
 	private String scaletta;
+	private LocalDate data;
+	private String artista;
 
+	private Luogo luogo;
 	private MetodoDiPagamento metodo;
 	private Tour tour;
-	private Luogo luogo;
-	private LocalDate dataConcerto;
 
-	private Set<Recensione> recensione = new HashSet<>();
-	private Set<Artista> artista = new HashSet<>();
+	private List<Recensione> recensioni = new ArrayList<>();
 
-	public Set<Artista> getArtista() {
-		return artista;
+	public String getScaletta() {
+		return scaletta;
 	}
 
-	public void setArtista(Set<Artista> artista) {
-		this.artista = artista;
+	public void setScaletta(String scaletta) {
+		this.scaletta = scaletta;
 	}
 
-	public Set<Recensione> getRecensione() {
-		return recensione;
+	public LocalDate getData() {
+		return data;
 	}
 
-	public void setRecensione(Set<Recensione> recensione) {
-		this.recensione = recensione;
-	}
-
-	public MetodoDiPagamento getMetodo() {
-		return metodo;
-	}
-
-	public LocalDate getDataConcerto() {
-		return dataConcerto;
-	}
-
-	public Tour getTour() {
-		return tour;
-	}
-
-	public void setTour(Tour tour) {
-		this.tour = tour;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	public Luogo getLuogo() {
@@ -57,27 +40,36 @@ public class Concerto {
 		this.luogo = luogo;
 	}
 
-	public void setDataConcerto(LocalDate dataConcerto) {
-		this.dataConcerto = dataConcerto;
+	public MetodoDiPagamento getMetodo() {
+		return metodo;
 	}
 
 	public void setMetodo(MetodoDiPagamento metodo) {
 		this.metodo = metodo;
 	}
 
-	public Integer getPrezzo() {
-		return prezzo;
+	public Tour getTour() {
+		return tour;
 	}
 
-	public void setPrezzo(Integer prezzo) {
-		this.prezzo = prezzo;
+	public void setTour(Tour tour) {
+		this.tour = tour;
 	}
 
-	public String getScaletta() {
-		return scaletta;
+	public String getArtista() {
+		return artista;
 	}
 
-	public void setScaletta(String scaletta) {
-		this.scaletta = scaletta;
+	public void setArtista(String artista) {
+		this.artista = artista;
 	}
+
+	public List<Recensione> getRecensione() {
+		return recensioni;
+	}
+
+	public void setRecensione(List<Recensione> recensione) {
+		this.recensioni = recensione;
+	}
+
 }

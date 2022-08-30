@@ -2,8 +2,26 @@ package it.univaq.disim.oop.roc.domain;
 
 public abstract class MetodoDiPagamento {
 
+	private Integer id;
+	private String tipo;
 	private String nome;
-	private String nomeTitolare;
+	private Utente utente;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
 	public String getNome() {
 		return nome;
@@ -13,12 +31,12 @@ public abstract class MetodoDiPagamento {
 		this.nome = nome;
 	}
 
-	public String getNomeTitolare() {
-		return nomeTitolare;
+	public Utente getUtente() {
+		return utente;
 	}
 
-	public void setNomeTitolare(String nomeTitolare) {
-		this.nomeTitolare = nomeTitolare;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 }

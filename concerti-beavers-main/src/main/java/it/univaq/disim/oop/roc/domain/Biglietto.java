@@ -3,19 +3,10 @@ package it.univaq.disim.oop.roc.domain;
 public class Biglietto {
 
 	private Integer numeroBiglietto;
+	private Settore settore;
 	private Integer posto;
-	private String settore;
-
 	private Concerto concerto;
 	private Spettatore spettatore;
-
-	public Integer getPosto() {
-		return posto;
-	}
-
-	public void setPosto(Integer posto) {
-		this.posto = posto;
-	}
 
 	public Integer getNumeroBiglietto() {
 		return numeroBiglietto;
@@ -41,11 +32,20 @@ public class Biglietto {
 		this.spettatore = spettatore;
 	}
 
-	public String getSettore() {
+	public Settore getSettore() {
 		return settore;
 	}
 
-	public void setSettore(String settore) {
+	public void setSettore(Settore settore) {
 		this.settore = settore;
 	}
+	
+	public Integer getPosto() {
+		return posto;
+	}
+
+	public void setPosto(Integer posto) {
+		this.posto = posto;
+	}
+
 }

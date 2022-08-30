@@ -2,11 +2,12 @@ package it.univaq.disim.oop.roc.domain;
 
 public abstract class Utente {
 
+	private Integer id;
 	private String nome;
 	private String cognome;
-	private Integer ID;
 	private String username;
 	private String password;
+	private Integer eta;
 
 	public String getNome() {
 		return nome;
@@ -24,12 +25,20 @@ public abstract class Utente {
 		this.cognome = cognome;
 	}
 
-	public Integer getID() {
-		return ID;
+	public Integer getEta() {
+		return eta;
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public void setEta(Integer eta) {
+		this.eta = eta;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
