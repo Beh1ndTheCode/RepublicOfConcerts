@@ -6,7 +6,7 @@ public class Carta extends MetodoDiPagamento {
 
 	private Long numero;
 	private String intestatario;
-	private LocalDate scadenza;
+	private int meseScadenza, annoScadenza;
 	private Integer cvv;
 
 	public Long getNumero() {
@@ -28,13 +28,21 @@ public class Carta extends MetodoDiPagamento {
 	public void setIntestatario(String intestatario) {
 		this.intestatario = intestatario;
 	}
-
-	public LocalDate getScadenza() {
-		return scadenza;
+	
+	public int getmeseScadenza() {
+		return meseScadenza;
 	}
 
-	public void setScadenza(LocalDate scadenza) {
-		this.scadenza = scadenza;
+	public void setmeseScadenza(int mesescadenza) {
+		this.meseScadenza = mesescadenza;
+	}
+
+	public int getannoScadenza() {
+		return annoScadenza;
+	}
+
+	public void setannoScadenza(int annoscadenza) {
+		this.annoScadenza = annoscadenza;
 	}
 
 	public Integer getCvv() {

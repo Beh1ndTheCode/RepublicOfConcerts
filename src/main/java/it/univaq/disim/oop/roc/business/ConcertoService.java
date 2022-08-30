@@ -18,8 +18,6 @@ public interface ConcertoService {
 
 	void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo);
 
-	void deleteConcerto(Concerto concerto);
-
 	List<Concerto> findAllConcerti() throws BusinessException;
 
 	public Biglietto bookBiglietto(Concerto concerto, Settore settore, Spettatore spettatore);

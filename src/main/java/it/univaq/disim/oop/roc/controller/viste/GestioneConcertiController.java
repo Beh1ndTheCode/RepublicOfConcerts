@@ -20,7 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 
-public class GestioneConcertiController implements DataInitializable<Concerto> {
+public class GestioneConcertiController implements DataInitializable<Object> {
 
 	@FXML
 	private TableView<Concerto> concertiTableView;

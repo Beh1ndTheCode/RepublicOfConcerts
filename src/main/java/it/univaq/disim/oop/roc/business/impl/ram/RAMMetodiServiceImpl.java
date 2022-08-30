@@ -44,10 +44,8 @@ public class RAMMetodiServiceImpl implements MetodiService {
 			carta.setUtente(utente);
 			carta.setIntestatario(intestatario);
 			carta.setNumero(numeroInput);
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
-			String date = ("01/" + meseInput + "/" + annoInput);
-			LocalDate localDate = LocalDate.parse(date, formatter);
-			carta.setScadenza(localDate);
+			carta.setmeseScadenza(meseInput);
+			carta.setannoScadenza(annoInput);
 			carta.setCvv(cvvInput);
 			metodiAggiunti.add(carta);
 
@@ -92,10 +90,8 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		cartaProva.setNome("Carta prova");
 		cartaProva.setIntestatario("Giovanni Storti");
 		cartaProva.setNumero(1234567890123456l);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
-		String date = "01/09/22";
-		LocalDate localDate = LocalDate.parse(date, formatter);
-		cartaProva.setScadenza(localDate);
+		cartaProva.setannoScadenza(23);
+		cartaProva.setmeseScadenza(9);
 		cartaProva.setCvv(578);
 		cartaProva.setUtente(utente);
 		metodiDiPagamento.add(cartaProva);

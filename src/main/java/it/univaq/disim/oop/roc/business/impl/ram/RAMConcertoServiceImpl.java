@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
+import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
@@ -19,51 +20,30 @@ import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 
 public class RAMConcertoServiceImpl implements ConcertoService {
 
-	private List<Concerto> concertiAggiunti = new ArrayList<>();
+	private static List<Concerto> concertiAggiunti = new ArrayList<>();
 
 	private static int contNumBiglietti = 1;
 
 	@Override
-	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
-			throws BusinessException {
-		if (giorno.length() == 2 && mese.length() == 2 && anno.length() == 2) {
-
-		}
-		Integer giornoInput, meseInput, annoInput;
-
+	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno) throws  BusinessException, InvalidDateException {
 		try {
-			giornoInput = Integer.parseInt(giorno);
-			meseInput = Integer.parseInt(mese);
-			annoInput = Integer.parseInt(anno);
-		} catch (NumberFormatException n) {
+			LocalDate data = Utility.VerificaData(giorno, mese, anno);
+			Concerto concerto = new Concerto();
+			concerto.setArtista(artista);
+			concerto.setLuogo(luogo);
+			concerto.setData(data);
+			System.out.println(concerto.getLuogo().getNome());
+		} catch (IntegerFormatException e) {
 			throw new IntegerFormatException();
-		}
-
-		if (!(giornoInput <= 31 && meseInput <= 12))
+		} catch (InvalidDateException e) {
 			throw new InvalidDateException();
-		Concerto concerto = new Concerto();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String data = giornoInput + "/" + meseInput + "/" + annoInput;
-		LocalDate localDate = LocalDate.parse(data, formatter);
-		concerto.setArtista(artista);
-		concerto.setLuogo(luogo);
-		concerto.setData(localDate);
-		concertiAggiunti.add(concerto);
-		System.out.println(concerto.getLuogo().getNome());
-
+		}
 		return;
 	}
 
 	public void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo) {
 		concerto.setScaletta(scaletta);
 		concerto.setMetodo(metodo);
-
-		return;
-	}
-
-	@Override
-	public void deleteConcerto(Concerto concerto) {
-		concertiAggiunti.remove(concerto);
 
 		return;
 	}
@@ -90,7 +70,6 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 		for (Concerto concert : concertiAggiunti) {
 			concerti.add(concert);
-			System.out.println("CHECK");
 		}
 
 		return concerti;

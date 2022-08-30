@@ -10,8 +10,8 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
-import it.univaq.disim.oop.roc.exceptions.SelectionException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +31,7 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	private ListView<Luogo> luoghiListView;
 
 	@FXML
-	private Label luogoLabel, dataErrorLabel, luogoErrorLabel;
+	private Label luogoLabel, dataErrorLabel;
 
 	@FXML
 	private Button aggiungiConcertoButton;
@@ -59,14 +59,8 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		}
 	}
 
-	public void luogoSelezionato() throws SelectionException {
-		try {
-			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
-				throw new SelectionException();
-			luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem().toString());
-		} catch (SelectionException e) {
-			luogoErrorLabel.setText("Inserisci un luogo");
-		}
+	public void luogoSelezionato() {
+		luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem().toString());
 	}
 
 	public void blockAggiungiButton() {
@@ -92,8 +86,8 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 			annoTextField.setText("");
 			blockAggiungiButton();
 			dispatcher.renderView("gestioneconcerti");
-		} catch (SelectionException e) {
-			luogoErrorLabel.setText("Inserire un luogo");
+		} catch (IntegerFormatException e) {
+			dataErrorLabel.setText("Inserisci una data valida");
 		} catch (InvalidDateException e) {
 			dataErrorLabel.setText("Inserisci una data valida");
 		} catch (BusinessException e) {

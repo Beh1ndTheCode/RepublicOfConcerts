@@ -54,7 +54,7 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 			numeroCartaLabel.setText(Long.toString(carta.getNumero()));
 			intestatarioLabel.setText(carta.getIntestatario());
 			nomeCartaLabel.setText(carta.getNome());
-			scadenzaLabel.setText(carta.getScadenza().toString());
+			scadenzaLabel.setText(carta.getmeseScadenza() + " / " + carta.getannoScadenza());
 		}
 
 		if (metodo instanceof Conto) {
