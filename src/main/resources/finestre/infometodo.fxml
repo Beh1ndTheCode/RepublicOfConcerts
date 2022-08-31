@@ -90,6 +90,9 @@
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="eliminaButton" layoutX="199.0" layoutY="202.0" mnemonicParsing="false" onAction="#deleteAction" text="Elimina" />
+      <Button fx:id="eliminaButton" layoutX="175.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: ed5e68;" text="Elimina" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font></Button>
    </children>
 </Pane>
