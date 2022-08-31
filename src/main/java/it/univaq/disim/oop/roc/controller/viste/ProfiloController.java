@@ -7,6 +7,7 @@ import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
+import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -74,16 +75,19 @@ public class ProfiloController implements DataInitializable<Utente> {
 	public void initialize() {
 		modificaDatiButton.setDisable(true);
 		tipoTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getTipo().toString());
+			if (param.getValue() instanceof Carta)
+				return new SimpleStringProperty("Carta");
+			else
+				return new SimpleStringProperty("Conto");
 		});
 		nomeTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getNome());
 		});
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, Button> param) -> {
 			final Button infoButton = new Button("info");
-			infoButton.setOnAction(e-> {
+			infoButton.setOnAction(e -> {
 				try {
-					dispatcher.openNewWindow("infometodo",param.getValue());
+					dispatcher.openNewWindow("infometodo", param.getValue());
 				} catch (ViewException ex) {
 					ex.printStackTrace();
 				}
@@ -109,13 +113,13 @@ public class ProfiloController implements DataInitializable<Utente> {
 	}
 
 	public void blockModificaDatiButton() {
-		String oldpassword = oldPswField.getText();
-		String newpassword = newPswField.getText();
+		String oldPassword = oldPswField.getText();
+		String newPassword = newPswField.getText();
 		String name = nameField.getText();
 		String surname = surnameField.getText();
 		String username = usernameField.getText();
 		String età = ageField.getText();
-		boolean isDisable = oldpassword.isEmpty() || (newpassword.isEmpty() && name.isEmpty() && surname.isEmpty()
+		boolean isDisable = oldPassword.isEmpty() || (newPassword.isEmpty() && name.isEmpty() && surname.isEmpty()
 				&& username.isEmpty() && età.isEmpty());
 		modificaDatiButton.setDisable(isDisable);
 	}
@@ -157,7 +161,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 	}
 
 	public void openAggiungiMetodoWindow(ActionEvent event) throws Exception {
-		dispatcher.openNewWindow("aggiungimetodo",utente);
+		dispatcher.openNewWindow("aggiungimetodo", utente);
 	}
 
 }

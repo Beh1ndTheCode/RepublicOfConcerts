@@ -6,6 +6,7 @@ import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
+import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import it.univaq.disim.oop.roc.viste.ViewException;
@@ -26,7 +27,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 	private TableView<Luogo> luoghiTableView;
 
 	@FXML
-	private TableColumn<Luogo, String> tipoTableColumn, cittaTableColumn, nomeTableColumn,capienzaTableColumn;
+	private TableColumn<Luogo, String> tipoTableColumn, cittaTableColumn, nomeTableColumn, capienzaTableColumn;
 
 	@FXML
 	private TableColumn<Luogo, Button> modificaTableColumn, settoriTableColumn;
@@ -42,7 +43,10 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 
 	public void initialize() {
 		tipoTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getTipo());
+			if (param.getValue() instanceof Teatro)
+				return new SimpleStringProperty("Teatro");
+			else
+				return new SimpleStringProperty("Stadio");
 		});
 		cittaTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getCitta());

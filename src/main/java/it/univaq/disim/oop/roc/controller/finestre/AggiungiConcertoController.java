@@ -12,6 +12,7 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
+import it.univaq.disim.oop.roc.exceptions.SelectionException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +32,7 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	private ListView<Luogo> luoghiListView;
 
 	@FXML
-	private Label luogoLabel, dataErrorLabel;
+	private Label luogoLabel, dataErrorLabel, luogoErrorLabel;
 
 	@FXML
 	private Button aggiungiConcertoButton;
@@ -60,8 +61,15 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void luogoSelezionato() {
-		if(luoghiListView.getSelectionModel().getSelectedItem() != null)
+		try {
+			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
+				throw new SelectionException();
+			luogoErrorLabel.setText(null);
 			luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem().toString());
+		} catch (SelectionException e) {
+			luogoErrorLabel.setText("Seleziona un luogo");
+		}
+
 	}
 
 	public void blockAggiungiButton() {
@@ -76,17 +84,24 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	public void addConcertoAction(ActionEvent event) {
 		try {
+			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
+				throw new SelectionException();
 			concertoService.addConcerto(artistaTextField.getText(),
 					luoghiListView.getSelectionModel().getSelectedItem(), giornoTextField.getText(),
 					meseTextField.getText(), annoTextField.getText());
 
+			luoghiListView.getSelectionModel().clearSelection();
 			luogoLabel.setText("");
+			dataErrorLabel.setText("");
+			luogoErrorLabel.setText("");
 			artistaTextField.setText("");
 			giornoTextField.setText("");
 			meseTextField.setText("");
 			annoTextField.setText("");
 			blockAggiungiButton();
 			dispatcher.renderView("gestioneconcerti");
+		} catch (SelectionException e) {
+			luogoErrorLabel.setText("Inserisci un luogo");
 		} catch (IntegerFormatException e) {
 			dataErrorLabel.setText("Inserisci una data valida");
 		} catch (InvalidDateException e) {

@@ -49,7 +49,7 @@ public class LayoutController implements DataInitializable<Utente> {
 	public void initializeData(Utente utente) {
 		this.utente = utente;
 		if (utente instanceof Amministratore) {
-			bottoneMenu.setText("gestione");
+			bottoneMenu.setText("gestisci");
 			for (MenuItem menu : MENU_AMMINISTRATORE) {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {

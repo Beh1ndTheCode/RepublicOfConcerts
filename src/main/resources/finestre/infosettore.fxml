@@ -21,12 +21,12 @@
             <Font name="Arial Italic" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="340.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esci" wrappingWidth="51.13671875">
+      <Text layoutX="333.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esci" wrappingWidth="51.13671875">
          <font>
             <Font name="Arial Black" size="19.0" />
          </font>
       </Text>
-      <ImageView fx:id="esciButton" fitHeight="39.0" fitWidth="43.0" layoutX="396.0" layoutY="14.0" onMousePressed="#closeWindow" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="esciButton" fitHeight="39.0" fitWidth="43.0" layoutX="389.0" layoutY="11.0" onMousePressed="#closeWindow" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/exit%20icon.png" />
          </image>

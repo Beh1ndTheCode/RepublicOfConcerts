@@ -6,7 +6,6 @@ import java.util.Set;
 public abstract class Luogo {
 
 	private Integer id;
-	private String tipo;
 	private String nome;
 	private String citta;
 	private Integer capienza;
@@ -27,14 +26,6 @@ public abstract class Luogo {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getCitta() {
@@ -71,7 +62,7 @@ public abstract class Luogo {
 
 	@Override
 	public String toString() {
-		return id + ", " + tipo + ", " + nome + ", " + citta;
+		return nome + ", " + citta;
 	}
 
 }

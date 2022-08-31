@@ -1,5 +1,6 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
@@ -8,7 +9,6 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
-import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -52,7 +52,8 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 		});
 
 		dataTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getData().toString());
+			String data = param.getValue().getData().format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+			return new SimpleStringProperty(data);
 		});
 
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {

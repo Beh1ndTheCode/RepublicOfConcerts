@@ -90,9 +90,9 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 				cvvField.setText("");
 				blockAggiungiCartaButton();
 				dispatcher.renderView("profilo", utente);
-			}
+			} else
+				throw new IntegerFormatException();
 
-			throw new IntegerFormatException();
 		} catch (IntegerFormatException e) {
 			numCartaErrorLabel.setText("Inserisci un numero valido");
 		} catch (InvalidDateException e) {

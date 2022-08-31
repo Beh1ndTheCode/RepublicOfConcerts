@@ -1,7 +1,5 @@
 package it.univaq.disim.oop.roc.domain;
 
-import java.time.LocalDate;
-
 public class Carta extends MetodoDiPagamento {
 
 	private Long numero;
@@ -28,7 +26,7 @@ public class Carta extends MetodoDiPagamento {
 	public void setIntestatario(String intestatario) {
 		this.intestatario = intestatario;
 	}
-	
+
 	public int getmeseScadenza() {
 		return meseScadenza;
 	}

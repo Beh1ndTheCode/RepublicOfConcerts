@@ -32,7 +32,6 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 			if (luogo instanceof Teatro) {
 				luogo.setId(idCounterLuoghi++);
-				luogo.setTipo("Teatro");
 				luogo.setNome(nome);
 				luogo.setCitta(citta);
 				luogo.setCapienza(capienzaInput);
@@ -41,7 +40,6 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 			if (luogo instanceof Stadio) {
 				luogo.setId(idCounterLuoghi++);
-				luogo.setTipo("Stadio");
 				luogo.setNome(nome);
 				luogo.setCitta(citta);
 				luogo.setCapienza(capienzaInput);

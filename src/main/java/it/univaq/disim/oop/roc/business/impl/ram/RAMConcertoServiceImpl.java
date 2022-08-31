@@ -25,14 +25,14 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	private static int contNumBiglietti = 1;
 
 	@Override
-	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno) throws  BusinessException, InvalidDateException {
+	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
+			throws BusinessException, InvalidDateException {
 		try {
 			LocalDate data = Utility.VerificaData(giorno, mese, anno);
 			Concerto concerto = new Concerto();
 			concerto.setArtista(artista);
 			concerto.setLuogo(luogo);
 			concerto.setData(data);
-			System.out.println(concerto.getLuogo().getNome());
 		} catch (IntegerFormatException e) {
 			throw new IntegerFormatException();
 		} catch (InvalidDateException e) {
@@ -41,9 +41,17 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		return;
 	}
 
-	public void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo) {
+	@Override
+	public void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo) throws BusinessException {
 		concerto.setScaletta(scaletta);
 		concerto.setMetodo(metodo);
+
+		return;
+	}
+
+	@Override
+	public void deleteConcerto(Concerto concerto) throws BusinessException {
+		concertiAggiunti.remove(concerto);
 
 		return;
 	}

@@ -1,11 +1,8 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.univaq.disim.oop.roc.Tipe.TipoDiMetodoDiPagamento;
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Conto;
@@ -40,7 +37,6 @@ public class RAMMetodiServiceImpl implements MetodiService {
 				throw new InvalidDateException();
 			Carta carta = new Carta();
 			carta.setId(idCounterMetodi++);
-			carta.setTipo(TipoDiMetodoDiPagamento.Carta);
 			carta.setNome(nomeCarta);
 			carta.setUtente(utente);
 			carta.setIntestatario(intestatario);
@@ -61,7 +57,6 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		if (iban.length() == 27) {
 			Conto conto = new Conto();
 			conto.setId(idCounterMetodi++);
-			conto.setTipo(TipoDiMetodoDiPagamento.Conto);
 			conto.setNome(nomeConto);
 			conto.setIban(iban);
 			conto.setSwift(swift);
@@ -87,7 +82,6 @@ public class RAMMetodiServiceImpl implements MetodiService {
 
 		Carta cartaProva = new Carta();
 		cartaProva.setId(idCounterMetodi++);
-		cartaProva.setTipo(TipoDiMetodoDiPagamento.Carta);
 		cartaProva.setNome("Carta prova");
 		cartaProva.setIntestatario("Giovanni Storti");
 		cartaProva.setNumero(1234567890123456l);
@@ -99,7 +93,6 @@ public class RAMMetodiServiceImpl implements MetodiService {
 
 		Conto contoProva = new Conto();
 		contoProva.setId(idCounterMetodi++);
-		contoProva.setTipo(TipoDiMetodoDiPagamento.Conto);
 		contoProva.setNome("Conto prova");
 		contoProva.setIban("IT85I8284863987145289597634");
 		contoProva.setUtente(utente);

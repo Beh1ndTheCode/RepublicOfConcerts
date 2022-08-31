@@ -16,7 +16,9 @@ public interface ConcertoService {
 	void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
 			throws BusinessException, InvalidDateException;
 
-	void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo);
+	void updateConcerto(Concerto concerto, String scaletta, MetodoDiPagamento metodo) throws BusinessException;
+
+	void deleteConcerto(Concerto concerto) throws BusinessException;
 
 	List<Concerto> findAllConcerti() throws BusinessException;
 
