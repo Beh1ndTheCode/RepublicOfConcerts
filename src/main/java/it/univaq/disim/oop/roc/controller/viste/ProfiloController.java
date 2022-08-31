@@ -74,7 +74,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 	public void initialize() {
 		modificaDatiButton.setDisable(true);
 		tipoTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getTipo());
+			return new SimpleStringProperty(param.getValue().getTipo().toString());
 		});
 		nomeTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getNome());

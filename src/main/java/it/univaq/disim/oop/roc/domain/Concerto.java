@@ -8,7 +8,7 @@ public class Concerto {
 
 	private String scaletta;
 	private LocalDate data;
-	private String artista;
+	private String artista;//possono essere anche più di uno, è una stringa descrittiva
 
 	private Luogo luogo;
 	private MetodoDiPagamento metodo;

@@ -71,7 +71,7 @@ public abstract class Luogo {
 
 	@Override
 	public String toString() {
-		return id + ", " + nome + ", " + citta;
+		return id + ", " + tipo + ", " + nome + ", " + citta;
 	}
 
 }

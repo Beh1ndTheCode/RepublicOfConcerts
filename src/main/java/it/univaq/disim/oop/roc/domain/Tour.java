@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class Tour {
 
+	private String nome;
 	private String artista;
 	private Set<Concerto> concerti = new HashSet<>();
 
@@ -22,6 +23,10 @@ public class Tour {
 
 	public void setArtista(String artista) {
 		this.artista = artista;
+	}
+	
+	public String toString() {
+		return nome + ", " + artista;
 	}
 
 }
