@@ -60,7 +60,8 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void luogoSelezionato() {
-		luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem().toString());
+		if(luoghiListView.getSelectionModel().getSelectedItem() != null)
+			luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem().toString());
 	}
 
 	public void blockAggiungiButton() {

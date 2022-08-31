@@ -58,11 +58,7 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button infoButton = new Button("info");
 			infoButton.setOnAction(e -> {
-				try {
-					dispatcher.openNewWindow("infoConcerto", param.getValue());
-				} catch (ViewException ex) {
-					ex.printStackTrace();
-				}
+				dispatcher.renderView("modificaconcerto", param.getValue());
 			});
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
