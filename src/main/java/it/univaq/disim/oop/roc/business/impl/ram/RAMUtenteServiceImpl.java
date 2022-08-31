@@ -15,7 +15,7 @@ import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 public class RAMUtenteServiceImpl implements UtenteService {
 
 	private static List<Utente> utentiAggiunti = new ArrayList<>();
-	private static int idCounterUtenti = 1;
+	private static int idCounterUtenti = 0;
 
 	@Override
 	public Utente authenticate(String username, String password) throws BusinessException {

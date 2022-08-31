@@ -59,10 +59,4 @@ public abstract class Luogo {
 	public void setSettori(Set<Settore> settori) {
 		this.settori = settori;
 	}
-
-	@Override
-	public String toString() {
-		return nome + ", " + citta;
-	}
-
 }

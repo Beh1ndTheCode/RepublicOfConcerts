@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -34,6 +35,9 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 
 	@FXML
 	private Button aggiungiButton;
+	
+	@FXML
+	private Label capienzaRimanenteLabel;
 
 	private ViewDispatcher dispatcher;
 
@@ -69,6 +73,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 
 	public void initializeData(Luogo luogo) {
 		this.luogo = luogo;
+		capienzaRimanenteLabel.setText(luoghiService.getCapienzaRimanente(luogo).toString());
 		try {
 			List<Settore> settori = luoghiService.findAllSettori(luogo);
 			ObservableList<Settore> settoriData = FXCollections.observableArrayList(settori);

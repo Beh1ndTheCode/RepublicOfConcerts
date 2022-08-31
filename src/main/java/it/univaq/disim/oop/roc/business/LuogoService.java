@@ -26,4 +26,6 @@ public interface LuogoService {
 	List<Settore> findAllSettori(Luogo luogo) throws BusinessException;
 
 	void deleteSettore(Settore settore) throws BusinessException;
+
+	Integer getCapienzaRimanente(Luogo luogo);
 }

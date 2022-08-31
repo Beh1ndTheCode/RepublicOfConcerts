@@ -7,6 +7,7 @@ public class Tour {
 
 	private String nome;
 	private String artista;
+	private String id;
 	private Set<Concerto> concerti = new HashSet<>();
 
 	public Set<Concerto> getConcerti() {

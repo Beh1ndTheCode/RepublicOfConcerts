@@ -10,7 +10,10 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
+import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 import it.univaq.disim.oop.roc.exceptions.SelectionException;
+import it.univaq.disim.oop.roc.tipi.TipoDiMetodoDiPagamento;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,41 +26,44 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class ModificaConcertoController implements DataInitializable<Object> {
+public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	@FXML
 	private TextArea artistiTextArea, scalettaTextArea;
-
+	
 	@FXML
-	private TextField giornoTextField, meseTextField, annoTextField, tourTextField;
-
+	private TextField giornoTextField, meseTextField, annoTextField;
+ 	
 	@FXML
 	private RadioButton cartaRadioButton, contoRadioButton;
-
+	
 	@FXML
-	private Label luogoLabel, luogoErrorLabel;
-
+	private Label luogoLabel, dataErrorLabel, luogoErrorLabel, tourLabel;
+	
 	@FXML
 	private ListView<Luogo> luoghiListView;
-
+	
 	@FXML
 	private Button modificaButton, eliminaButton;
-
+	
 	private ViewDispatcher dispatcher;
 
 	private ConcertoService concertoService;
 
 	private LuogoService luoghiService;
-
+	
 	private Concerto concerto;
-
+	
+	private TipoDiMetodoDiPagamento metodo;
+	
 	public ModificaConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertoService = new RAMConcertoServiceImpl();
 		luoghiService = new RAMLuogoServiceImpl();
 	}
-
+	
 	public void initialize() {
+		this.metodo = TipoDiMetodoDiPagamento.Carta;
 		try {
 			List<Luogo> luoghi = luoghiService.findAllLuoghi();
 			ObservableList<Luogo> luoghiData = FXCollections.observableArrayList(luoghi);
@@ -66,24 +72,25 @@ public class ModificaConcertoController implements DataInitializable<Object> {
 			dispatcher.renderError(e);
 		}
 	}
-
+	
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
-
-		if (!(concerto.getArtista() == null))
-			artistiTextArea.setPromptText(concerto.getArtista());
+			
 		if (!(concerto.getScaletta() == null))
-			artistiTextArea.setPromptText(concerto.getScaletta());
-		if (!(concerto.getData() == null)) {
-			giornoTextField.setPromptText(((Integer) concerto.getData().getDayOfMonth()).toString());
-			meseTextField.setPromptText(((Integer) concerto.getData().getMonthValue()).toString());
-			annoTextField.setPromptText(((Integer) concerto.getData().getYear()).toString());
-		}
-		if (!(concerto.getScaletta() == null))
-			tourTextField.setPromptText(concerto.getTour().toString());
-
+			scalettaTextArea.setPromptText(concerto.getScaletta());
+		if (!(concerto.getTour() == null))
+			tourLabel.setText(concerto.getTour().toString());
+		else
+			tourLabel.setText("nessuno");
+		
+		artistiTextArea.setPromptText(concerto.getArtista());
+		giornoTextField.setPromptText(((Integer)concerto.getData().getDayOfMonth()).toString());
+		meseTextField.setPromptText(((Integer)concerto.getData().getMonthValue()).toString());
+		annoTextField.setPromptText(((Integer)concerto.getData().getYear()).toString());
+		luogoLabel.setText(concerto.getLuogo().toString());
+			
 	}
-
+	
 	public void luogoSelezionato() {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
@@ -94,25 +101,37 @@ public class ModificaConcertoController implements DataInitializable<Object> {
 			luogoErrorLabel.setText("Seleziona un luogo");
 		}
 	}
-
-	public void updateConcertoAction(ActionEvent event) {
-
+	
+	public void setContoAction(ActionEvent event) {
+		this.metodo = TipoDiMetodoDiPagamento.Conto;
+	}
+	
+	public void setCartaAction(ActionEvent event) {
+		this.metodo = TipoDiMetodoDiPagamento.Carta;
+	}
+	
+	public void updateConcertoAction(ActionEvent event) throws BusinessException {
+		try {
+			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
+				throw new SelectionException();
+			concertoService.updateConcerto(concerto, scalettaTextArea.getText(), artistiTextArea.getText(), metodo, giornoTextField.getText(), 
+					meseTextField.getText(), annoTextField.getText(), luoghiListView.getSelectionModel().getSelectedItem());
+			dispatcher.renderView("gestioneconcerti");
+		} catch (IntegerFormatException e) {
+			dataErrorLabel.setText("data non valida");
+		} catch (InvalidDateException e) {
+			dataErrorLabel.setText("data non valida");
+		} catch (SelectionException e) {
+			luogoErrorLabel.setText("Seleziona un luogo");
+		}
 	}
 
-	public void deleteConcertoAction(ActionEvent event) {
+	public void deleteConcertoAction() {
 		try {
 			concertoService.deleteConcerto(concerto);
 			dispatcher.renderView("gestioneconcerti");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
-	}
-
-	public void setCartaAction(ActionEvent event) {
-
-	}
-
-	public void setContoAction(ActionEvent event) {
-
 	}
 }

@@ -48,13 +48,12 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="TourTextField" layoutX="325.0" layoutY="61.0" prefHeight="25.0" prefWidth="165.0" promptText="nessuno" />
       <Text layoutX="250.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento" textAlignment="RIGHT" wrappingWidth="100.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <RadioButton fx:id="cartaRadioButton" layoutX="383.0" layoutY="91.0" mnemonicParsing="false" onAction="#setCartaAction" text="Carta" textAlignment="RIGHT">
+      <RadioButton fx:id="cartaRadioButton" layoutX="383.0" layoutY="91.0" mnemonicParsing="false" onAction="#setCartaAction" selected="true" text="Carta" textAlignment="RIGHT">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -91,6 +90,13 @@
       <Label fx:id="luogoLabel1" layoutX="441.0" layoutY="148.0" opacity="0.7" prefHeight="30.0" prefWidth="150.0">
          <font>
             <Font name="Arial Black" size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="dataErrorLabel" layoutX="325.0" layoutY="17.0" prefHeight="17.0" prefWidth="165.0" />
+      <Label fx:id="luogoErrorLabel" layoutX="243.0" layoutY="140.0" prefHeight="17.0" prefWidth="165.0" />
+      <Label fx:id="tourLabel" layoutX="326.0" layoutY="62.0" prefHeight="17.0" prefWidth="165.0">
+         <font>
+            <Font name="Arial Black" size="15.0" />
          </font>
       </Label>
    </children>

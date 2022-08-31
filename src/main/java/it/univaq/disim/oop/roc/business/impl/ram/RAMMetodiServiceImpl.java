@@ -15,7 +15,7 @@ import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 public class RAMMetodiServiceImpl implements MetodiService {
 
 	private static List<MetodoDiPagamento> metodiAggiunti = new ArrayList<>();
-	private static int idCounterMetodi = 1;
+	private static int idCounterMetodi = 0;
 
 	@Override
 	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,

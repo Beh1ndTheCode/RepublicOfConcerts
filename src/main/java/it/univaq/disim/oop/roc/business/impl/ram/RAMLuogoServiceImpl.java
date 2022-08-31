@@ -17,7 +17,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	private static List<Luogo> luoghiAggiunti = new ArrayList<>();
 	private static List<Settore> settoriAggiunti = new ArrayList<>();
 
-	private static int idCounterLuoghi = 1;
+	private static int idCounterLuoghi = 0;
 
 	@Override
 	public void addLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException {
@@ -35,7 +35,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 				luogo.setNome(nome);
 				luogo.setCitta(citta);
 				luogo.setCapienza(capienzaInput);
-				luoghiAggiunti.add(luogo);
+				getLuoghiAggiunti().add(luogo);
 			}
 
 			if (luogo instanceof Stadio) {
@@ -43,7 +43,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 				luogo.setNome(nome);
 				luogo.setCitta(citta);
 				luogo.setCapienza(capienzaInput);
-				luoghiAggiunti.add(luogo);
+				getLuoghiAggiunti().add(luogo);
 			}
 
 			return;
@@ -73,7 +73,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 	@Override
 	public void deleteLuogo(Luogo luogo) throws BusinessException {
-		luoghiAggiunti.remove(luogo);
+		getLuoghiAggiunti().remove(luogo);
 
 		return;
 	}
@@ -82,24 +82,39 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	public List<Luogo> findAllLuoghi() throws BusinessException {
 		List<Luogo> luoghi = new ArrayList<>();
 
-		for (Luogo place : luoghiAggiunti) {
+		for (Luogo place : getLuoghiAggiunti()) {
 			luoghi.add(place);
 		}
 
 		return luoghi;
 	}
-
-	public void verificaCapienza(Luogo luogo, Integer capienzaSettore) throws BusinessException {
-		Integer capienzaRimanente = 0;
-		for (Settore sector : settoriAggiunti) {
-			if (sector.getLuogo().equals(luogo)) {
-				capienzaRimanente += sector.getCapienza();
+	
+	public Integer getCapienzaRimanente(Luogo luogo) {
+		Integer capienzaRimanente = luogo.getCapienza();
+		if(luogo instanceof Stadio) {
+			for (Settore sector : settoriAggiunti) {
+				if (sector.getLuogo().equals(luogo)) {
+					capienzaRimanente -= sector.getCapienza();
+				}
 			}
 		}
-		capienzaRimanente += capienzaSettore;
-		if (capienzaRimanente > luogo.getCapienza())
-			throw new NumberOutOfBoundsException();
+		if(luogo instanceof Teatro) {
+			for (Settore sector : settoriAggiunti) {
+				if (sector.getLuogo().equals(luogo)) {
+					capienzaRimanente -= ((sector.getCapienza() * 10) / 7);
+				}
+			}
+		}
+		
+		return capienzaRimanente;
+	}
 
+	public void verificaCapienza(Luogo luogo, Integer capienzaSettore) throws BusinessException {
+		Integer capienzaRimanente = getCapienzaRimanente(luogo);
+		capienzaRimanente -= capienzaSettore;
+		if (capienzaRimanente < 0)
+			throw new NumberOutOfBoundsException();
+		
 		return;
 	}
 
@@ -118,7 +133,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		if (luogo instanceof Teatro) {
 			Settore settore = new Settore();
 			settore.setNome(nome);
-			capienzaInput -= ((capienzaInput * 30) / 100);
+			capienzaInput -= ((capienzaInput * 3) / 10);
 			settore.setCapienza(capienzaInput);
 			settore.setLuogo(luogo);
 			settoriAggiunti.add(settore);
@@ -174,4 +189,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		return settori;
 	}
 
+	public static List<Luogo> getLuoghiAggiunti() {
+		return luoghiAggiunti;
+	}
 }

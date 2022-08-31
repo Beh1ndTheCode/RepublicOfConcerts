@@ -1,7 +1,7 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +12,9 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMTourServiceImpl implements TourService {
 
-	private Set<Tour> tourAggiunti = new HashSet<>();
+	private static List<Tour> tourAggiunti = new ArrayList<>();
+	
+	private static int idCounterTour = 0;
 
 	@Override
 	public void addTour(String artista, Set<Concerto> concerti) {
@@ -37,6 +39,10 @@ public class RAMTourServiceImpl implements TourService {
 		}
 
 		return tours;
+	}
+
+	public static List<Tour> getTourAggiunti() {
+		return tourAggiunti;
 	}
 
 }

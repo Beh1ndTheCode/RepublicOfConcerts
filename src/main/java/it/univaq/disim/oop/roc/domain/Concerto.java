@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.univaq.disim.oop.roc.business.Utility;
+import it.univaq.disim.oop.roc.tipi.TipoDiMetodoDiPagamento;
+
 public class Concerto {
 
 	private String scaletta;
@@ -11,7 +14,7 @@ public class Concerto {
 	private String artista;//possono essere anche più di uno, è una stringa descrittiva
 
 	private Luogo luogo;
-	private MetodoDiPagamento metodo;
+	private TipoDiMetodoDiPagamento metodo;
 	private Tour tour;
 
 	private List<Recensione> recensioni = new ArrayList<>();
@@ -40,11 +43,11 @@ public class Concerto {
 		this.luogo = luogo;
 	}
 
-	public MetodoDiPagamento getMetodo() {
+	public TipoDiMetodoDiPagamento getMetodo() {
 		return metodo;
 	}
 
-	public void setMetodo(MetodoDiPagamento metodo) {
+	public void setMetodo(TipoDiMetodoDiPagamento metodo) {
 		this.metodo = metodo;
 	}
 
