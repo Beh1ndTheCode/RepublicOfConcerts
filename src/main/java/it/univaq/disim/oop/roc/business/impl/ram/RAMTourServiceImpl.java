@@ -11,7 +11,6 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 public class RAMTourServiceImpl implements TourService {
 
 	private static List<Tour> tourAggiunti = new ArrayList<>();
-	private static List<Concerto> concertiAggiunti = new ArrayList<>();
 
 	private static int idCounterTour = 0;
 
@@ -66,12 +65,18 @@ public class RAMTourServiceImpl implements TourService {
 	}
 
 	@Override
-	public void addConcerto(Tour tour, List<Concerto> concerti) throws BusinessException {
-		for (Concerto concert : concerti) {
-			concertiAggiunti.add(concert);
-		}
+	public void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
+		for (Concerto concert : concerti)
+			tour.getConcerti().add(concert);
 
 		return;
 	}
 
+	@Override
+	public void deleteConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
+		for (Concerto concert : concerti)
+			tour.getConcerti().remove(concert);
+
+		return;
+	}
 }

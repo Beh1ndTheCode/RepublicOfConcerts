@@ -14,7 +14,9 @@ public interface TourService {
 
 	void deleteTour(Tour tour) throws BusinessException;
 
-	void addConcerto(Tour tour, List<Concerto> concerti) throws BusinessException;
+	void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException;
+
+	void deleteConcerti(Tour tour, List<Concerto> concerti) throws BusinessException;
 
 	List<Tour> getTourAggiunti() throws BusinessException;
 

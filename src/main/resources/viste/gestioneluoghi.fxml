@@ -16,7 +16,7 @@
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Button>
-            <TableView fx:id="luoghiTableView" layoutX="11.0" layoutY="57.0" prefHeight="539.0" prefWidth="560.0">
+            <TableView fx:id="luoghiTableView" layoutX="11.0" layoutY="57.0" prefHeight="540.0" prefWidth="560.0">
                <columns>
                   <TableColumn fx:id="tipoTableColumn" prefWidth="81.0" text="Tipo" />
                   <TableColumn fx:id="cittaTableColumn" prefWidth="106.0" text="Città" />

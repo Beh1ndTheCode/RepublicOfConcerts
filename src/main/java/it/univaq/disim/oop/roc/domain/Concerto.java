@@ -1,6 +1,7 @@
 package it.univaq.disim.oop.roc.domain;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,8 @@ public class Concerto {
 	}
 
 	public String toString() {
-		return luogo.getNome() + ", " + luogo.getCitta() + ", " + data;
+		String date = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		return luogo.getNome() + ", " + luogo.getCitta() + ", " + date;
 	}
 
 }

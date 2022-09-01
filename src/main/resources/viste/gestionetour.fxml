@@ -11,12 +11,7 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="585.0" prefWidth="585.0">
          <children>
-            <Button fx:id="aggiungiButton" layoutX="474.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAggiungiTourWindow" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Button>
-            <TableView fx:id="tourTableView" layoutX="13.0" layoutY="56.0" prefHeight="518.0" prefWidth="560.0">
+            <TableView fx:id="tourTableView" layoutX="13.0" layoutY="57.0" prefHeight="540.0" prefWidth="560.0">
                <columns>
                   <TableColumn fx:id="artistaTableColumn" prefWidth="186.0" text="Artista" />
                   <TableColumn fx:id="nomeTableColumn" prefWidth="208.0" text="Nome" />
@@ -24,6 +19,11 @@
                   <TableColumn fx:id="concertiTableColumn" prefWidth="81.0" text="Concerti" />
                </columns>
             </TableView>
+            <Button fx:id="aggiungiButton" layoutX="453.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAggiungiTourWindow" prefHeight="37.0" prefWidth="118.0" text="AGGIUNGI">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
   </content>
 </ScrollPane>

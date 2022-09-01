@@ -25,7 +25,7 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 	private ListView<Concerto> allConcertiArtistaListView, tourConcertiListView;
 
 	@FXML
-	private Button aggiungiButton;
+	private Button aggiungiButton, eliminaConcertiButton;
 
 	private ViewDispatcher dispatcher;
 
@@ -43,6 +43,7 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 
 	public void initialize() {
 		aggiungiButton.setDisable(true);
+		eliminaConcertiButton.setDisable(true);
 		allConcertiArtistaListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tourConcertiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		try {
@@ -68,13 +69,28 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 			aggiungiButton.setDisable(false);
 	}
 
+	public void blockEliminaConcertiAction() {
+		if (!(tourConcertiListView.getSelectionModel().getSelectedItems() == null))
+			eliminaConcertiButton.setDisable(false);
+	}
+
 	public void addConcertiAction(ActionEvent event) {
 		try {
-			tourService.addConcerto(tour, allConcertiArtistaListView.getSelectionModel().getSelectedItems());
-			// tour.setConcerti(allConcertiArtistaListView.getSelectionModel().getSelectedItems());
+			tourService.addConcerti(tour, allConcertiArtistaListView.getSelectionModel().getSelectedItems());
 			allConcertiArtistaListView.getSelectionModel().clearSelection();
 			initializeData(tour);
 			aggiungiButton.setDisable(true);
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
+	}
+
+	public void deleteConcertiAction(ActionEvent event) {
+		try {
+			tourService.deleteConcerti(tour, tourConcertiListView.getSelectionModel().getSelectedItems());
+			tourConcertiListView.getSelectionModel().clearSelection();
+			initializeData(tour);
+			eliminaConcertiButton.setDisable(true);
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
