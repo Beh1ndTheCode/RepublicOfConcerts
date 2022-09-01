@@ -4,6 +4,7 @@ import it.univaq.disim.oop.roc.business.TourService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Tour;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,18 +58,26 @@ public class InfoTourController implements DataInitializable<Tour> {
 	}
 
 	public void updateTourAction(ActionEvent event) {
-		tourService.updateTour(tour, artistaTextField.getText(), nomeTextField.getText());
-		initializeData(tour);
-		nomeTextField.setText("");
-		artistaTextField.setText("");
-		blockModificaButton();
-		dispatcher.renderView("gestionetour");
+		try {
+			tourService.updateTour(tour, artistaTextField.getText(), nomeTextField.getText());
+			initializeData(tour);
+			nomeTextField.setText("");
+			artistaTextField.setText("");
+			blockModificaButton();
+			dispatcher.renderView("gestionetour");
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
 	}
 
 	public void deleteTourAction(ActionEvent event) {
-		tourService.deleteTour(tour);
-		closeWindow();
-		dispatcher.renderView("gestionetour");
+		try {
+			tourService.deleteTour(tour);
+			closeWindow();
+			dispatcher.renderView("gestionetour");
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
 	}
 
 	public void closeWindow() {

@@ -19,36 +19,36 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
-public class TourGestioneConcertiController implements DataInitializable<Tour>{
-	
+public class TourGestioneConcertiController implements DataInitializable<Tour> {
+
 	@FXML
-	private ListView<Concerto> allConcertiListView, tourConcertiListView;
-	
+	private ListView<Concerto> allConcertiArtistaListView, tourConcertiListView;
+
 	@FXML
 	private Button aggiungiButton;
-	
+
 	private ViewDispatcher dispatcher;
 
 	private TourService tourService;
-	
+
 	private ConcertoService concertoService;
 
 	private Tour tour;
-	
+
 	public TourGestioneConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		tourService = new RAMTourServiceImpl();
 		concertoService = new RAMConcertoServiceImpl();
 	}
-	
+
 	public void initialize() {
 		aggiungiButton.setDisable(true);
-		allConcertiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		allConcertiArtistaListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tourConcertiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		try {
 			List<Concerto> concerti = concertoService.findAllConcerti();
 			ObservableList<Concerto> concertiData = FXCollections.observableArrayList(concerti);
-			allConcertiListView.setItems(concertiData);
+			allConcertiArtistaListView.setItems(concertiData);
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
@@ -57,21 +57,27 @@ public class TourGestioneConcertiController implements DataInitializable<Tour>{
 	public void initializeData(Tour tour) {
 		this.tour = tour;
 		List<Concerto> concerti = tour.getConcerti();
-		if(!(concerti == null)) {
+		if (!(concerti == null)) {
 			ObservableList<Concerto> concertiData = FXCollections.observableArrayList(concerti);
 			tourConcertiListView.setItems(concertiData);
 		}
 	}
-	
+
 	public void blockAggiungiButton() {
-		if(!(allConcertiListView.getSelectionModel().getSelectedItems() == null))
+		if (!(allConcertiArtistaListView.getSelectionModel().getSelectedItems() == null))
 			aggiungiButton.setDisable(false);
 	}
-	
+
 	public void addConcertiAction(ActionEvent event) {
-		//tourService.addConcerto(tour, allConcertiListView.getSelectionModel().getSelectedItems());
-		tour.setConcerti(allConcertiListView.getSelectionModel().getSelectedItems());
-		initializeData(tour);
-		aggiungiButton.setDisable(true);
+		try {
+			tourService.addConcerto(tour, allConcertiArtistaListView.getSelectionModel().getSelectedItems());
+			// tour.setConcerti(allConcertiArtistaListView.getSelectionModel().getSelectedItems());
+			allConcertiArtistaListView.getSelectionModel().clearSelection();
+			initializeData(tour);
+			aggiungiButton.setDisable(true);
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
 	}
+
 }
