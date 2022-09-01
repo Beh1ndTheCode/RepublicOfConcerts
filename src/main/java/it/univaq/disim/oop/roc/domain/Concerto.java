@@ -74,5 +74,9 @@ public class Concerto {
 	public void setRecensione(List<Recensione> recensione) {
 		this.recensioni = recensione;
 	}
+	
+	public String toString() {
+		return luogo.getNome() + ", " + luogo.getCitta() + ", " + data;
+	}
 
 }

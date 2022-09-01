@@ -69,23 +69,6 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	@Override
 	public List<Concerto> findAllConcerti() throws BusinessException {
 		List<Concerto> concerti = new ArrayList<>();
-
-		Concerto concertoProva = new Concerto();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-		String date = "25/09/2022";
-		LocalDate localDate = LocalDate.parse(date, formatter);
-
-		Teatro teatro = new Teatro();
-		teatro.setCitta("Roma");
-
-		concertoProva.setData(localDate);
-		concertoProva.setLuogo(teatro);
-		concertoProva.setArtista("Renato Zero");
-		concertoProva.setScaletta("La scala musicale è definibile come un sistema di organizzazione"
-				+ " dei suoni sviluppato nel contesto teorico e/o nella pratica"
-				+ " da ogni cultura musicale, passata e presente.");
-		concerti.add(concertoProva);
-
 		for (Concerto concert : concertiAggiunti) {
 			concerti.add(concert);
 		}

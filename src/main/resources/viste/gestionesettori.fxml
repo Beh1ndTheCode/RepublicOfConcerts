@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.GestioneSettoriController">
    <children>
@@ -22,15 +21,20 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="capienzaRimanenteLabel" layoutX="308.0" layoutY="21.0" prefHeight="17.0" prefWidth="153.0">
+      <Label fx:id="capienzaRimanenteLabel" layoutX="298.0" layoutY="33.0" prefHeight="23.0" prefWidth="172.0" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Label>
-      <Text layoutX="121.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capienza Rimanente:" textAlignment="RIGHT" wrappingWidth="178.13671875">
+      <Label fx:id="luogoLabel" layoutX="7.0" layoutY="21.0" prefHeight="23.0" prefWidth="285.0">
          <font>
-            <Font size="15.0" />
+            <Font name="Arial Black" size="15.0" />
          </font>
-      </Text>
+      </Label>
+      <Label layoutX="300.0" layoutY="10.0" prefHeight="23.0" prefWidth="172.0" text="Capienza rimanente:" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

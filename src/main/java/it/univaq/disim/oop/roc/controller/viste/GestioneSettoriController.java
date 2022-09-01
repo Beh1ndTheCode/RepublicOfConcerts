@@ -37,7 +37,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 	private Button aggiungiButton;
 	
 	@FXML
-	private Label capienzaRimanenteLabel;
+	private Label capienzaRimanenteLabel, luogoLabel;
 
 	private ViewDispatcher dispatcher;
 
@@ -74,6 +74,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 	public void initializeData(Luogo luogo) {
 		this.luogo = luogo;
 		capienzaRimanenteLabel.setText(luoghiService.getCapienzaRimanente(luogo).toString());
+		luogoLabel.setText(luogo.toString());
 		try {
 			List<Settore> settori = luoghiService.findAllSettori(luogo);
 			ObservableList<Settore> settoriData = FXCollections.observableArrayList(settori);
