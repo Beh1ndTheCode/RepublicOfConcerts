@@ -42,9 +42,11 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 	public void updateConcerto(Concerto concerto, String scaletta, String artista, TipoMetodoDiPagamento metodo,
 			String giorno, String mese, String anno, Luogo luogo) throws BusinessException {
-		if (!(giorno.isEmpty() || mese.isEmpty() || anno.isEmpty())) {
-			if (!(giorno.isEmpty() && mese.isEmpty() && anno.isEmpty()))
+		if(giorno.isEmpty() || mese.isEmpty() || anno.isEmpty()) {
+			if(!(giorno.isEmpty() && mese.isEmpty() && anno.isEmpty()))
 				throw new InvalidDateException();
+		}
+		else {
 			try {
 				LocalDate data = Utility.VerificaData(giorno, mese, anno);
 				concerto.setData(data);

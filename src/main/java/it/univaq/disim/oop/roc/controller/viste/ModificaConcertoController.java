@@ -120,19 +120,19 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void updateConcertoAction(ActionEvent event) throws BusinessException {
+		Luogo luogo;
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
-				throw new SelectionException();
-			concertoService.updateConcerto(concerto, scalettaTextArea.getText(), artistiTextArea.getText(), tipoMetodo,
-					giornoTextField.getText(), meseTextField.getText(), annoTextField.getText(),
-					luoghiListView.getSelectionModel().getSelectedItem());
+				luogo = concerto.getLuogo();
+			else
+				luogo = luoghiListView.getSelectionModel().getSelectedItem();
+			concertoService.updateConcerto(concerto, scalettaTextArea.getText(), artistiTextArea.getText(), tipoMetodo, giornoTextField.getText(), 
+					meseTextField.getText(), annoTextField.getText(), luogo);
 			dispatcher.renderView("gestioneconcerti");
 		} catch (IntegerFormatException e) {
 			dataErrorLabel.setText("data non valida");
 		} catch (InvalidDateException e) {
 			dataErrorLabel.setText("data non valida");
-		} catch (SelectionException e) {
-			luogoErrorLabel.setText("Seleziona un luogo");
 		}
 	}
 
