@@ -3,7 +3,6 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import it.univaq.disim.oop.roc.business.TourService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
-import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

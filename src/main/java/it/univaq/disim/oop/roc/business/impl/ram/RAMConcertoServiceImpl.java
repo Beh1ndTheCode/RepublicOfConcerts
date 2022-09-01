@@ -1,7 +1,6 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +11,10 @@ import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
-import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
-import it.univaq.disim.oop.roc.tipi.TipoDiMetodoDiPagamento;
+import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 
 public class RAMConcertoServiceImpl implements ConcertoService {
 
@@ -25,7 +23,8 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 	private static int contNumBiglietti = 0;
 
 	@Override
-	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno) throws  BusinessException {
+	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
+			throws BusinessException {
 		try {
 			LocalDate data = Utility.VerificaData(giorno, mese, anno);
 			Concerto concerto = new Concerto();
@@ -41,10 +40,10 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		return;
 	}
 
-	public void updateConcerto(Concerto concerto, String scaletta, String artista, TipoDiMetodoDiPagamento metodo,
-			 String giorno, String mese, String anno, Luogo luogo) throws BusinessException {
-		if(!(giorno.isEmpty() || mese.isEmpty() || anno.isEmpty())) {
-			if(!(giorno.isEmpty() && mese.isEmpty() && anno.isEmpty()))
+	public void updateConcerto(Concerto concerto, String scaletta, String artista, TipoMetodoDiPagamento metodo,
+			String giorno, String mese, String anno, Luogo luogo) throws BusinessException {
+		if (!(giorno.isEmpty() || mese.isEmpty() || anno.isEmpty())) {
+			if (!(giorno.isEmpty() && mese.isEmpty() && anno.isEmpty()))
 				throw new InvalidDateException();
 			try {
 				LocalDate data = Utility.VerificaData(giorno, mese, anno);
@@ -55,10 +54,10 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 				throw new InvalidDateException();
 			}
 		}
-		
-		if(!scaletta.isEmpty())
+
+		if (!scaletta.isEmpty())
 			concerto.setScaletta(scaletta);
-		if(!artista.isEmpty())
+		if (!artista.isEmpty())
 			concerto.setArtista(artista);
 		concerto.setLuogo(luogo);
 		concerto.setMetodo(metodo);

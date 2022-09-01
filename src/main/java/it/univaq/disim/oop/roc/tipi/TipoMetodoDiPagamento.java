@@ -1,5 +1,5 @@
 package it.univaq.disim.oop.roc.tipi;
 
-public enum TipoDiMetodoDiPagamento {
+public enum TipoMetodoDiPagamento {
 	Carta,Conto;
 }

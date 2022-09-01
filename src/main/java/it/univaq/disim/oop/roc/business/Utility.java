@@ -3,26 +3,20 @@ package it.univaq.disim.oop.roc.business;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
-import it.univaq.disim.oop.roc.domain.Luogo;
-import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 
 public class Utility {
-	
-	
 
-	public static LocalDate VerificaData(String giorno, String mese, String anno) throws BusinessException, InvalidDateException {
+	public static LocalDate VerificaData(String giorno, String mese, String anno)
+			throws BusinessException, InvalidDateException {
 		boolean errore = false;
 		if (!(giorno.length() == 2 && mese.length() == 2 && anno.length() == 4)) {
 			errore = true;
-		}
-		else {
+		} else {
 			Integer giornoInput, meseInput, annoInput;
-			
+
 			try {
 				giornoInput = Integer.parseInt(giorno);
 				meseInput = Integer.parseInt(mese);
@@ -30,8 +24,8 @@ public class Utility {
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
-			
-			if(giornoInput <= 0 || meseInput <= 0 || annoInput <= 0)
+
+			if (giornoInput <= 0 || meseInput <= 0 || annoInput <= 0)
 				errore = true;
 			else {
 				switch (meseInput) {
@@ -53,26 +47,26 @@ public class Utility {
 						errore = true;
 					break;
 				case 2:
-					if (annoInput%4 == 0) {
+					if (annoInput % 4 == 0) {
 						if (giornoInput > 29)
 							errore = true;
-					}
-					else {
+					} else {
 						if (giornoInput > 28)
-							errore = true;	
+							errore = true;
 					}
-					break;	
-				default: throw new InvalidDateException();
+					break;
+				default:
+					throw new InvalidDateException();
 				}
 			}
 		}
-		if(errore) {
+		if (errore) {
 			throw new InvalidDateException();
 		}
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String data = giorno + "/" + mese + "/" + anno;
 		LocalDate localDate = LocalDate.parse(data, formatter);
-		return localDate;	
+		return localDate;
 	}
-	
+
 }

@@ -3,10 +3,7 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import it.univaq.disim.oop.roc.business.TourService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
-import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Tour;
-import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class InfoTourController implements DataInitializable<Tour> {
-	
+
 	@FXML
 	private Text nomeText, artistaText;
 

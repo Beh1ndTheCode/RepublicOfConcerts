@@ -53,7 +53,7 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <RadioButton fx:id="cartaRadioButton" layoutX="383.0" layoutY="91.0" mnemonicParsing="false" onAction="#setCartaAction" selected="true" text="Carta" textAlignment="RIGHT">
+      <RadioButton fx:id="cartaRadioButton" layoutX="383.0" layoutY="91.0" mnemonicParsing="false" onAction="#setCartaAction" text="Carta" textAlignment="RIGHT">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>

@@ -5,7 +5,6 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.TourService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
-import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
@@ -33,14 +32,14 @@ public class GestioneTourController implements DataInitializable<Object> {
 	private TableColumn<Tour, Button> modificaTableColumn, concertiTableColumn;
 
 	private ViewDispatcher dispatcher;
-	
+
 	private TourService tourService;
-	
+
 	public GestioneTourController() {
 		dispatcher = ViewDispatcher.getInstance();
 		tourService = new RAMTourServiceImpl();
 	}
-	
+
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Tour, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());
@@ -73,9 +72,9 @@ public class GestioneTourController implements DataInitializable<Object> {
 			dispatcher.renderError(e);
 		}
 	}
-	
+
 	public void openAggiungiTourWindow(ActionEvent event) throws Exception {
 		dispatcher.openNewWindow("aggiungitour");
 	}
-	
+
 }
