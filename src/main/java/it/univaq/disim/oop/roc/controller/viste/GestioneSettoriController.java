@@ -31,7 +31,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 	private TableColumn<Settore, String> nomeTableColumn, capienzaTableColumn;
 
 	@FXML
-	private TableColumn<Settore, Button> infoTableColumn;
+	private TableColumn<Settore, Button> modificaTableColumn;
 
 	@FXML
 	private Button aggiungiButton;
@@ -58,7 +58,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 			return new SimpleStringProperty(param.getValue().getCapienza().toString());
 		});
 
-		infoTableColumn.setCellValueFactory((CellDataFeatures<Settore, Button> param) -> {
+		modificaTableColumn.setCellValueFactory((CellDataFeatures<Settore, Button> param) -> {
 			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {
 				try {

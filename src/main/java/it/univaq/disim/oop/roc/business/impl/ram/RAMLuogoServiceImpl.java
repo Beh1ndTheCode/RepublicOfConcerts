@@ -117,6 +117,16 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		
 		return;
 	}
+	
+	public void verificaCapienza(Luogo luogo, Settore settore, Integer capienzaSettore) throws BusinessException {
+		Integer capienzaRimanente = getCapienzaRimanente(luogo);
+		capienzaRimanente += settore.getCapienza();
+		capienzaRimanente -= capienzaSettore;
+		if (capienzaRimanente < 0)
+			throw new NumberOutOfBoundsException();
+		
+		return;
+	}
 
 	@Override
 	public void addSettore(Luogo luogo, String nome, String capienza) throws BusinessException {
@@ -135,6 +145,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			settore.setNome(nome);
 			capienzaInput -= ((capienzaInput * 3) / 10);
 			settore.setCapienza(capienzaInput);
+			settore.setTariffa(0f);
 			settore.setLuogo(luogo);
 			settoriAggiunti.add(settore);
 
@@ -145,6 +156,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			Settore settore = new Settore();
 			settore.setNome(nome);
 			settore.setCapienza(capienzaInput);
+			settore.setTariffa(0f);
 			settore.setLuogo(luogo);
 			settoriAggiunti.add(settore);
 
@@ -163,10 +175,11 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
-			verificaCapienza(settore.getLuogo(), capienzaInput);
+			verificaCapienza(settore.getLuogo(), settore, capienzaInput);
 			settore.setCapienza(capienzaInput);
 		}
-		settore.setNome(nome);
+		if(!nome.isEmpty())
+			settore.setNome(nome);
 
 		return;
 	}

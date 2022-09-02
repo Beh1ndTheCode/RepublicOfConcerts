@@ -67,7 +67,7 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 		tariffeTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button tariffeButton = new Button("Tariffe");
 			tariffeButton.setOnAction(e -> {
-				dispatcher.renderView("aggiungitariffe", param.getValue());
+				dispatcher.renderView("gestionetariffe", param.getValue());
 			});
 			return new SimpleObjectProperty<Button>(tariffeButton);
 		});

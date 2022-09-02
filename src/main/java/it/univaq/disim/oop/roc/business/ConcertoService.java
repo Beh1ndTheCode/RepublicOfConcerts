@@ -8,6 +8,8 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
+import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 
@@ -22,6 +24,8 @@ public interface ConcertoService {
 	void deleteConcerto(Concerto concerto) throws BusinessException;
 
 	List<Concerto> findAllConcerti() throws BusinessException;
+	
+	void setTariffa(Settore settore, String tariffa) throws FloatFormatException;
 
 	public Biglietto bookBiglietto(Concerto concerto, Settore settore, Spettatore spettatore);
 

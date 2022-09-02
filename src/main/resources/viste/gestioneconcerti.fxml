@@ -13,11 +13,11 @@
          <children>
             <TableView fx:id="concertiTableView" layoutX="11.0" layoutY="57.0" prefHeight="540.0" prefWidth="560.0">
                <columns>
-                  <TableColumn fx:id="artistaTableColumn" prefWidth="150.0" text="Artista" />
-                  <TableColumn fx:id="luogoTableColumn" prefWidth="150.0" text="Luogo" />
-                  <TableColumn fx:id="dataTableColumn" prefWidth="96.0" text="Data" />
-                  <TableColumn fx:id="infoTableColumn" prefWidth="82.0" text="Info" />
-                  <TableColumn fx:id="tariffeTableColumn" prefWidth="82.0" text="Tariffe" />
+                  <TableColumn fx:id="artistaTableColumn" prefWidth="134.0" text="Artista" />
+                  <TableColumn fx:id="luogoTableColumn" prefWidth="188.0" text="Luogo" />
+                  <TableColumn fx:id="dataTableColumn" prefWidth="120.0" text="Data" />
+                  <TableColumn fx:id="infoTableColumn" prefWidth="47.0" text="Info" />
+                  <TableColumn fx:id="tariffeTableColumn" prefWidth="71.0" text="Tariffe" />
                </columns>
             </TableView>
             <Button fx:id="aggiungiConcertoButton" layoutX="453.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAggiungiConcertoWindow" prefHeight="37.0" prefWidth="118.0" text="AGGIUNGI">

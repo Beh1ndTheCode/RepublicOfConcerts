@@ -38,5 +38,8 @@ public class Settore {
 	public void setLuogo(Luogo luogo) {
 		this.luogo = luogo;
 	}
-
+	
+	public String toString() {
+		return luogo.getNome() + "," + nome + "," + capienza;
+	}
 }

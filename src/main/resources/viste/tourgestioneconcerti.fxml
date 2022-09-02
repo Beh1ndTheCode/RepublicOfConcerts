@@ -9,7 +9,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.TourGestioneConcertiController">
    <children>
       <ListView fx:id="allConcertiArtistaListView" layoutX="14.0" layoutY="59.0" onMouseReleased="#blockAggiungiButton" prefHeight="268.0" prefWidth="273.0" />
-      <ListView fx:id="tourConcertiListView" layoutX="313.0" layoutY="59.0" prefHeight="268.0" prefWidth="273.0" />
+      <ListView fx:id="tourConcertiListView" layoutX="313.0" layoutY="59.0" onMouseReleased="#blockEliminaConcertiAction" prefHeight="268.0" prefWidth="273.0" />
       <Label layoutX="14.0" layoutY="28.0" prefHeight="31.0" prefWidth="208.0" text="Tutti i concerti">
          <font>
             <Font name="Arial Black" size="17.0" />
