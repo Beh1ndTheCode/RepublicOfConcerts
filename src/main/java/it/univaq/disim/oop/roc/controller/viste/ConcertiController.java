@@ -58,7 +58,7 @@ public class ConcertiController implements DataInitializable<Object> {
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {
-				dispatcher.renderView("infoconcerto", param.getValue());
+				dispatcher.renderView("infoconcertospettatore", param.getValue());
 			});
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
