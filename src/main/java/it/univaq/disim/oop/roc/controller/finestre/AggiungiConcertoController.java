@@ -4,8 +4,10 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
+import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
+import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
@@ -41,12 +43,17 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	private ConcertoService concertoService;
 
+	private TariffeService tariffeService;
+
 	private LuogoService luoghiService;
+
+	private Concerto concerto;
 
 	public AggiungiConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertoService = new RAMConcertoServiceImpl();
 		luoghiService = new RAMLuogoServiceImpl();
+		tariffeService = new RAMTariffeServiceImpl();
 	}
 
 	public void initialize() {

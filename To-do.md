@@ -6,7 +6,4 @@
 ### Realizzare altre viste
 			
 ### Concerti	
-	- Aggiungere funzione per aggiungere/modificare tariffe
-	
-### Tour
-	- Collegare Bottone Elimina in TourGestioneConcertiController con il metodo per abilitarlo
+	- Correggere funzione per aggiungere/modificare tariffe

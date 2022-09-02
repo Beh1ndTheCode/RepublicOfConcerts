@@ -1,11 +1,15 @@
 package it.univaq.disim.oop.roc.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Settore {
 
 	private String nome;
 	private Integer capienza;
-	private Float tariffa;
 	private Luogo luogo;
+
+	private Set<Tariffa> tariffe = new HashSet<>();
 
 	public String getNome() {
 		return nome;
@@ -23,14 +27,6 @@ public class Settore {
 		this.capienza = capienza;
 	}
 
-	public Float getTariffa() {
-		return tariffa;
-	}
-
-	public void setTariffa(Float tariffa) {
-		this.tariffa = tariffa;
-	}
-
 	public Luogo getLuogo() {
 		return luogo;
 	}
@@ -38,7 +34,15 @@ public class Settore {
 	public void setLuogo(Luogo luogo) {
 		this.luogo = luogo;
 	}
-	
+
+	public Set<Tariffa> getTariffe() {
+		return tariffe;
+	}
+
+	public void setTariffe(Set<Tariffa> tariffe) {
+		this.tariffe = tariffe;
+	}
+
 	public String toString() {
 		return luogo.getNome() + "," + nome + "," + capienza;
 	}
