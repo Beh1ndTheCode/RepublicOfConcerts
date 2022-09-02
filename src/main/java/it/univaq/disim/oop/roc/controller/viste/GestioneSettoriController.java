@@ -31,11 +31,11 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 	private TableColumn<Settore, String> nomeTableColumn, capienzaTableColumn;
 
 	@FXML
-	private TableColumn<Settore, Button> modificaTableColumn;
+	private TableColumn<Settore, Button> infoTableColumn;
 
 	@FXML
 	private Button aggiungiButton;
-	
+
 	@FXML
 	private Label capienzaRimanenteLabel, luogoLabel;
 
@@ -58,8 +58,8 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 			return new SimpleStringProperty(param.getValue().getCapienza().toString());
 		});
 
-		modificaTableColumn.setCellValueFactory((CellDataFeatures<Settore, Button> param) -> {
-			final Button infoButton = new Button("modifica");
+		infoTableColumn.setCellValueFactory((CellDataFeatures<Settore, Button> param) -> {
+			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {
 				try {
 					dispatcher.openNewWindow("infosettore", param.getValue());
@@ -85,6 +85,6 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 	}
 
 	public void openAggiungiSettoreWindow(ActionEvent event) throws Exception {
-		dispatcher.openNewWindow("aggiungisettore", luogo);
+		dispatcher.openNewWindow("aggiungisettori", luogo);
 	}
 }

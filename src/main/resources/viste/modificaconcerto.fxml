@@ -25,30 +25,30 @@
          </font>
       </Text>
       <TextArea fx:id="scalettaTextArea" layoutX="14.0" layoutY="197.0" prefHeight="129.0" prefWidth="200.0" promptText="inserisci scaletta" />
-      <Text layoutX="218.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" textAlignment="RIGHT" wrappingWidth="100.0">
+      <Text layoutX="243.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" textAlignment="RIGHT" wrappingWidth="66.9931640625">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="giornoTextField" layoutX="325.0" layoutY="36.0" prefHeight="25.0" prefWidth="39.0" promptText="DD" />
+      <TextField fx:id="giornoTextField" layoutX="325.0" layoutY="36.0" prefHeight="25.0" prefWidth="39.0" />
       <Text fx:id="luogoText" layoutX="364.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="RIGHT" wrappingWidth="11.43359375">
          <font>
             <Font name="Arial Black" size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="meseTextField" layoutX="382.0" layoutY="36.0" prefHeight="25.0" prefWidth="39.0" promptText="MM" />
+      <TextField fx:id="meseTextField" layoutX="382.0" layoutY="36.0" prefHeight="25.0" prefWidth="39.0" />
       <Text fx:id="luogoText2" layoutX="421.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="RIGHT" wrappingWidth="11.43359375">
          <font>
             <Font name="Arial Black" size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="annoTextField" layoutX="439.0" layoutY="36.0" prefHeight="25.0" prefWidth="51.0" promptText="AAAA" />
-      <Text layoutX="218.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour" textAlignment="RIGHT" wrappingWidth="100.0">
+      <TextField fx:id="annoTextField" layoutX="439.0" layoutY="36.0" prefHeight="25.0" prefWidth="51.0" />
+      <Text layoutX="243.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour" textAlignment="RIGHT" wrappingWidth="66.9931640625">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="250.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento" textAlignment="RIGHT" wrappingWidth="100.0">
+      <Text layoutX="263.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento" textAlignment="RIGHT" wrappingWidth="94.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
@@ -73,7 +73,7 @@
       </Text>
       <Label fx:id="luogoLabel" layoutX="296.0" layoutY="156.0" opacity="0.7" prefHeight="17.0" prefWidth="150.0">
          <font>
-            <Font name="Arial Black" size="11.0" />
+            <Font name="Arial Black" size="12.0" />
          </font>
       </Label>
       <ListView fx:id="luoghiListView" layoutX="243.0" layoutY="175.0" onMouseReleased="#luogoSelezionato" prefHeight="151.0" prefWidth="165.0" />
@@ -94,9 +94,9 @@
       </Label>
       <Label fx:id="dataErrorLabel" layoutX="325.0" layoutY="17.0" prefHeight="17.0" prefWidth="165.0" />
       <Label fx:id="luogoErrorLabel" layoutX="243.0" layoutY="140.0" prefHeight="17.0" prefWidth="165.0" />
-      <Label fx:id="tourLabel" layoutX="326.0" layoutY="62.0" prefHeight="17.0" prefWidth="165.0">
+      <Label fx:id="tourLabel" layoutX="326.0" layoutY="65.0" opacity="0.7" prefHeight="17.0" prefWidth="165.0">
          <font>
-            <Font name="Arial Black" size="15.0" />
+            <Font name="Arial Black" size="12.0" />
          </font>
       </Label>
    </children>

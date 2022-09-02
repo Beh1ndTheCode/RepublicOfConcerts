@@ -66,8 +66,10 @@ public class RAMTourServiceImpl implements TourService {
 
 	@Override
 	public void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
-		for (Concerto concert : concerti)
-			tour.getConcerti().add(concert);
+		for (Concerto concert : concerti) {
+			if (!tour.getConcerti().contains(concert))
+				tour.getConcerti().add(concert);
+		}
 
 		return;
 	}

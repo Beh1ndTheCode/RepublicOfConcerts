@@ -49,7 +49,7 @@ public class LayoutController implements DataInitializable<Utente> {
 	public void initializeData(Utente utente) {
 		this.utente = utente;
 		if (utente instanceof Amministratore) {
-			bottoneMenu.setText("gestisci");
+			bottoneMenu.setText("Gestisci");
 			for (MenuItem menu : MENU_AMMINISTRATORE) {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {
@@ -60,7 +60,7 @@ public class LayoutController implements DataInitializable<Utente> {
 			bottoneProfilo.setVisible(false);
 		}
 		if (utente instanceof Spettatore) {
-			bottoneMenu.setText("menù");
+			bottoneMenu.setText("Menù");
 			for (MenuItem menu : MENU_SPETTATORE) {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {

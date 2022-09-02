@@ -58,7 +58,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 			return new SimpleStringProperty(param.getValue().getCapienza().toString());
 		});
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
-			final Button infoButton = new Button("modifica");
+			final Button infoButton = new Button("Modifica");
 			infoButton.setOnAction(e -> {
 				try {
 					dispatcher.openNewWindow("infoluogo", param.getValue());
@@ -69,7 +69,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
 		settoriTableColumn.setCellValueFactory((CellDataFeatures<Luogo, Button> param) -> {
-			final Button infoButton = new Button("settori");
+			final Button infoButton = new Button("Settori");
 			infoButton.setOnAction(e -> dispatcher.renderView("gestionesettori", param.getValue()));
 			return new SimpleObjectProperty<Button>(infoButton);
 		});

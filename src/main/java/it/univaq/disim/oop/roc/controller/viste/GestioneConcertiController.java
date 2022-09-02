@@ -26,13 +26,13 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 	private TableView<Concerto> concertiTableView;
 
 	@FXML
-	private TableColumn<Concerto, String> artistaTableColumn, cittaTableColumn;
+	private TableColumn<Concerto, String> artistaTableColumn, luogoTableColumn;
 
 	@FXML
 	private TableColumn<Concerto, String> dataTableColumn;
 
 	@FXML
-	private TableColumn<Concerto, Button> azioniTableColumn;
+	private TableColumn<Concerto, Button> infoTableColumn, tariffeTableColumn;
 
 	private ViewDispatcher dispatcher;
 
@@ -47,8 +47,8 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());
 		});
-		cittaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getLuogo().getCitta());
+		luogoTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
+			return new SimpleStringProperty(param.getValue().getLuogo().toString());
 		});
 
 		dataTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
@@ -56,12 +56,20 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 			return new SimpleStringProperty(data);
 		});
 
-		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
-			final Button infoButton = new Button("info");
+		infoTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
+			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {
 				dispatcher.renderView("modificaconcerto", param.getValue());
 			});
 			return new SimpleObjectProperty<Button>(infoButton);
+		});
+
+		tariffeTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
+			final Button tariffeButton = new Button("Tariffe");
+			tariffeButton.setOnAction(e -> {
+				dispatcher.renderView("aggiungitariffe", param.getValue());
+			});
+			return new SimpleObjectProperty<Button>(tariffeButton);
 		});
 
 		try {
