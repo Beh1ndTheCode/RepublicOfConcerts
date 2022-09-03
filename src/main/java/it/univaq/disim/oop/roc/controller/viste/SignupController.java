@@ -45,7 +45,7 @@ public class SignupController implements DataInitializable<Utente> {
 	public SignupController() {
 		dispatcher = ViewDispatcher.getInstance();
 		utenteService = new RAMUtenteServiceImpl();
-		//utenteService = new FileUtenteServiceImpl();
+		// utenteService = new FileUtenteServiceImpl();
 	}
 
 	public void initialize() {
@@ -65,15 +65,11 @@ public class SignupController implements DataInitializable<Utente> {
 
 	@FXML
 	public void signupAction(ActionEvent event) {
+		passwordErrorLabel.setText("");
+		etaErrorLabel.setText("");
+		Integer ageInput;
 		try {
-			passwordErrorLabel.setText("");
-			etaErrorLabel.setText("");
-			Integer ageInput;
-			try {
-				ageInput = Integer.parseInt(ageField.getText());
-			} catch (NumberFormatException n) {
-				throw new IntegerFormatException();
-			}
+			ageInput = Integer.parseInt(ageField.getText());
 			if (ageInput > 0 && ageInput < 100) {
 				if (passwordField.getText().equals(ripetiPasswordField.getText())) {
 					Spettatore spettatore = new Spettatore();
@@ -86,7 +82,6 @@ public class SignupController implements DataInitializable<Utente> {
 					dispatcher.signedUp(utente);
 				}
 				throw new InvalidPasswordException();
-
 			}
 			throw new IntegerFormatException();
 
@@ -97,6 +92,7 @@ public class SignupController implements DataInitializable<Utente> {
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
+
 	}
 
 	public void goToLoginView(ActionEvent event) throws Exception {

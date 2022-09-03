@@ -72,6 +72,8 @@ public class FileUtenteServiceImpl implements UtenteService {
 				row.append(Utility.SEPARATORE);
 				row.append(spettatore.getPassword());
 				row.append(Utility.SEPARATORE);
+				row.append("spettatore");
+				row.append(Utility.SEPARATORE);
 				row.append(spettatore.getNome());
 				row.append(Utility.SEPARATORE);
 				row.append(spettatore.getCognome());

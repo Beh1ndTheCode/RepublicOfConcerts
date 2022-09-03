@@ -10,14 +10,13 @@ import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
-import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 
 public class RAMMetodiServiceImpl implements MetodiService {
 
 	private static List<MetodoDiPagamento> metodiAggiunti = new ArrayList<>();
 	private static int idCounterMetodi = 0;
 
-	@Override
+	/*@Override
 	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,
 			String annoScadenza, String cvv) throws BusinessException {
 		if (cvv.length() == 3 && numero.length() == 16 && meseScadenza.length() == 2 && annoScadenza.length() == 2) {
@@ -50,6 +49,12 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		}
 
 		throw new IntegerFormatException();
+	}*/
+	
+	@Override
+	public void addCarta(Carta carta) throws BusinessException {
+		carta.setId(idCounterMetodi++);
+		metodiAggiunti.add(carta);
 	}
 
 	@Override
