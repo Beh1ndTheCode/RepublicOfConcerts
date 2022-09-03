@@ -4,8 +4,10 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
+import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
+import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
@@ -41,12 +43,19 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	private ConcertoService concertoService;
 
+	private TariffeService tariffeService;
+
 	private LuogoService luoghiService;
+
+	private Concerto concerto;
+	
+	private Luogo luogo;
 
 	public AggiungiConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertoService = new RAMConcertoServiceImpl();
 		luoghiService = new RAMLuogoServiceImpl();
+		tariffeService = new RAMTariffeServiceImpl();
 	}
 
 	public void initialize() {
@@ -86,10 +95,12 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
 				throw new SelectionException();
-			concertoService.addConcerto(artistaTextField.getText(),
+			this.concerto = concertoService.addConcerto(artistaTextField.getText(),
 					luoghiListView.getSelectionModel().getSelectedItem(), giornoTextField.getText(),
 					meseTextField.getText(), annoTextField.getText());
-
+			this.luogo = luoghiListView.getSelectionModel().getSelectedItem();
+			tariffeService.addTariffe(concerto, luogo);
+			
 			luoghiListView.getSelectionModel().clearSelection();
 			luogoLabel.setText("");
 			dataErrorLabel.setText("");

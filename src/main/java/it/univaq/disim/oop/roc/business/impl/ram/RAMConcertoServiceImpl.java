@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
+import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
@@ -12,7 +13,6 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
@@ -23,8 +23,9 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 	private static int contNumBiglietti = 0;
 
+
 	@Override
-	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
+	public Concerto addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
 			throws BusinessException {
 		try {
 			LocalDate data = Utility.VerificaData(giorno, mese, anno);
@@ -33,22 +34,24 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 			concerto.setLuogo(luogo);
 			concerto.setData(data);
 			concertiAggiunti.add(concerto);
+
+			return concerto;
+
 		} catch (IntegerFormatException e) {
 			throw new IntegerFormatException();
 		} catch (InvalidDateException e) {
 			throw new InvalidDateException();
 		}
-		return;
+
 	}
-	
+
 	@Override
 	public void updateConcerto(Concerto concerto, String scaletta, String artista, TipoMetodoDiPagamento metodo,
 			String giorno, String mese, String anno, Luogo luogo) throws BusinessException {
-		if(giorno.isEmpty() || mese.isEmpty() || anno.isEmpty()) {
-			if(!(giorno.isEmpty() && mese.isEmpty() && anno.isEmpty()))
+		if (giorno.isEmpty() || mese.isEmpty() || anno.isEmpty()) {
+			if (!(giorno.isEmpty() && mese.isEmpty() && anno.isEmpty()))
 				throw new InvalidDateException();
-		}
-		else {
+		} else {
 			try {
 				LocalDate data = Utility.VerificaData(giorno, mese, anno);
 				concerto.setData(data);
@@ -78,7 +81,7 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 		return concerti;
 	}
-	
+
 	@Override
 	public void deleteConcerto(Concerto concerto) throws BusinessException {
 		concertiAggiunti.remove(concerto);
@@ -93,19 +96,5 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 		return biglietto;
 	}
-	
-	@Override
-	public void setTariffa(Settore settore, String tariffa) throws FloatFormatException {
-		Float inputTariffa;
-		try {
-			inputTariffa = Float.parseFloat(tariffa);
-		} catch (NumberFormatException n) {
-			throw new FloatFormatException();
-		}
-		if(inputTariffa < 0) 
-			throw new FloatFormatException();
-		settore.setTariffa(inputTariffa);
-		
-		return;
-	}
+
 }

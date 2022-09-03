@@ -3,7 +3,9 @@ package it.univaq.disim.oop.roc.domain;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 
@@ -17,6 +19,7 @@ public class Concerto {
 	private TipoMetodoDiPagamento metodo;
 	private Tour tour;
 
+	private Set<Tariffa> tariffe = new HashSet<>();
 	private List<Recensione> recensioni = new ArrayList<>();
 
 	public String getScaletta() {
@@ -65,6 +68,14 @@ public class Concerto {
 
 	public void setArtista(String artista) {
 		this.artista = artista;
+	}
+
+	public Set<Tariffa> getTariffe() {
+		return tariffe;
+	}
+
+	public void setTariffe(Set<Tariffa> tariffe) {
+		this.tariffe = tariffe;
 	}
 
 	public List<Recensione> getRecensione() {
