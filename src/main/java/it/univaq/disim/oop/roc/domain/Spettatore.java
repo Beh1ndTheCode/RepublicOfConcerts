@@ -7,7 +7,9 @@ import java.util.Set;
 
 public class Spettatore extends Utente {
 
-	private List<MetodoDiPagamento> metodo = new ArrayList<>();
+	private MetodoDiPagamento metodoPreferito;
+
+	private List<MetodoDiPagamento> metodiAggiunti = new ArrayList<>();
 	private Set<Recensione> recensioniLasciate = new HashSet<>();
 	private Set<Biglietto> bigliettiPrenotati = new HashSet<>();
 
@@ -27,12 +29,20 @@ public class Spettatore extends Utente {
 		this.recensioniLasciate = recensioniLasciate;
 	}
 
-	public List<MetodoDiPagamento> getMetodo() {
-		return metodo;
+	public List<MetodoDiPagamento> getMetodiAggiunti() {
+		return metodiAggiunti;
 	}
 
-	public void setMetodo(List<MetodoDiPagamento> metodo) {
-		this.metodo = metodo;
+	public void setMetodiAggiunti(List<MetodoDiPagamento> metodo) {
+		this.metodiAggiunti = metodo;
+	}
+
+	public MetodoDiPagamento getMetodoPreferito() {
+		return metodoPreferito;
+	}
+
+	public void setMetodoPreferito(MetodoDiPagamento metodoPreferito) {
+		this.metodoPreferito = metodoPreferito;
 	}
 
 }

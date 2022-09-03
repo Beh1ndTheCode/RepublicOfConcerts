@@ -1,8 +1,10 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
 import it.univaq.disim.oop.roc.business.UtenteService;
+import it.univaq.disim.oop.roc.business.impl.file.FileUtenteServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
+import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
@@ -43,6 +45,7 @@ public class SignupController implements DataInitializable<Utente> {
 	public SignupController() {
 		dispatcher = ViewDispatcher.getInstance();
 		utenteService = new RAMUtenteServiceImpl();
+		//utenteService = new FileUtenteServiceImpl();
 	}
 
 	public void initialize() {
@@ -60,6 +63,7 @@ public class SignupController implements DataInitializable<Utente> {
 		signupButton.setDisable(isDisable);
 	}
 
+	@FXML
 	public void signupAction(ActionEvent event) {
 		try {
 			passwordErrorLabel.setText("");
@@ -70,9 +74,21 @@ public class SignupController implements DataInitializable<Utente> {
 			} catch (NumberFormatException n) {
 				throw new IntegerFormatException();
 			}
-			utente = utenteService.registration(usernameField.getText(), passwordField.getText(),
-					ripetiPasswordField.getText(), nameField.getText(), surnameField.getText(), ageInput);
-			dispatcher.signedUp(utente);
+			if (ageInput > 0 && ageInput < 100) {
+				if (passwordField.getText().equals(ripetiPasswordField.getText())) {
+					Spettatore spettatore = new Spettatore();
+					spettatore.setUsername(usernameField.getText());
+					spettatore.setPassword(passwordField.getText());
+					spettatore.setNome(nameField.getText());
+					spettatore.setCognome(surnameField.getText());
+					spettatore.setEta(ageInput);
+					utente = utenteService.registration(spettatore);
+					dispatcher.signedUp(utente);
+				}
+				throw new InvalidPasswordException();
+
+			}
+			throw new IntegerFormatException();
 
 		} catch (InvalidPasswordException e) {
 			passwordErrorLabel.setText("Le password non coincidono!");

@@ -35,6 +35,7 @@ public class FileUtenteServiceImpl implements UtenteService {
 						break;
 					}
 					if (utente != null) {
+						utente.setId(Integer.parseInt(colonne[0]));
 						utente.setUsername(username);
 						utente.setPassword(password);
 						utente.setNome(colonne[4]);
@@ -55,14 +56,9 @@ public class FileUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	// TROVARE IL MODO PER COSTRUIRE L'OGGETTO SPETTATORE E RESTITUIRLO
-	public Utente registration(String username, String password, String confermaPassword, String nome, String cognome,
-			Integer eta) throws BusinessException {
+	public Utente registration(Spettatore spettatore) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
-
-			Spettatore spettatore = new Spettatore();
-
 			try (PrintWriter writer = new PrintWriter(new File(UTENTI_FILE_NAME))) {
 				Long contatore = fileData.getContatore();
 				writer.println(contatore + 1);
@@ -72,15 +68,15 @@ public class FileUtenteServiceImpl implements UtenteService {
 				StringBuilder row = new StringBuilder();
 				row.append(contatore);
 				row.append(Utility.SEPARATORE);
-				row.append(username);
+				row.append(spettatore.getUsername());
 				row.append(Utility.SEPARATORE);
-				row.append(password);
+				row.append(spettatore.getPassword());
 				row.append(Utility.SEPARATORE);
-				row.append(nome);
+				row.append(spettatore.getNome());
 				row.append(Utility.SEPARATORE);
-				row.append(cognome);
+				row.append(spettatore.getCognome());
 				row.append(Utility.SEPARATORE);
-				row.append(eta);
+				row.append(spettatore.getEta());
 				writer.println(row.toString());
 				return spettatore;
 			}
@@ -91,8 +87,36 @@ public class FileUtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public void updateDati(Utente utente, String name, String surname, String username, Integer age, String oldPassword,
-			String newPassword, String repeatPassword) throws BusinessException {
+	public void updateDati(Spettatore spettatore) throws BusinessException {
+		try {
+			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
+			try (PrintWriter writer = new PrintWriter(new File(UTENTI_FILE_NAME))) {
+				writer.println(fileData.getContatore());
+				for (String[] righe : fileData.getRighe()) {
+					if (Long.parseLong(righe[0]) == spettatore.getId()) {
+						StringBuilder row = new StringBuilder();
+						row.append(spettatore.getId());
+						row.append(Utility.SEPARATORE);
+						row.append(spettatore.getUsername());
+						row.append(Utility.SEPARATORE);
+						row.append(spettatore.getPassword());
+						row.append(Utility.SEPARATORE);
+						row.append(spettatore.getNome());
+						row.append(Utility.SEPARATORE);
+						row.append(spettatore.getCognome());
+						row.append(Utility.SEPARATORE);
+						row.append(spettatore.getEta());
+						writer.println(row.toString());
+					} else {
+						writer.println(String.join(Utility.SEPARATORE, righe));
+					}
+				}
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
 
 	}
 

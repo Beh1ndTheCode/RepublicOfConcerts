@@ -1,0 +1,4 @@
+4
+1,amministratore,amministratore,amministratore,Mario,Rossi
+2,studente,studente,studente,Luigi,31
+3,marco_ciucci,marco,Marco,Ciucci,20

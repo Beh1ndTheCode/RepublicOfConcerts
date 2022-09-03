@@ -4,11 +4,13 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.UtenteService;
+import it.univaq.disim.oop.roc.business.impl.file.FileUtenteServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
+import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
@@ -56,19 +58,20 @@ public class ProfiloController implements DataInitializable<Utente> {
 	private TableColumn<MetodoDiPagamento, String> tipoTableColumn, nomeTableColumn;
 
 	@FXML
-	private TableColumn<MetodoDiPagamento, Button> azioniTableColumn;
+	private TableColumn<MetodoDiPagamento, Button> azioniTableColumn, preferitoTableColumn;
 
 	private ViewDispatcher dispatcher;
 
 	private MetodiService metodiService;
 
-	private Utente utente;
+	private Spettatore spettatore;
 
 	private UtenteService utenteService;
 
 	public ProfiloController() {
 		dispatcher = ViewDispatcher.getInstance();
 		utenteService = new RAMUtenteServiceImpl();
+		//utenteService = new FileUtenteServiceImpl();
 		metodiService = new RAMMetodiServiceImpl();
 	}
 
@@ -84,7 +87,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 			return new SimpleStringProperty(param.getValue().getNome());
 		});
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, Button> param) -> {
-			final Button infoButton = new Button("info");
+			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {
 				try {
 					dispatcher.openNewWindow("infometodo", param.getValue());
@@ -94,11 +97,23 @@ public class ProfiloController implements DataInitializable<Utente> {
 			});
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
+		preferitoTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, Button> param) -> {
+			final Button preferitoButton = new Button("Seleziona");
+			if (!param.getValue().equals(spettatore.getMetodoPreferito())) {
+				preferitoButton.setOnAction(e -> {
+					spettatore.setMetodoPreferito(param.getValue());
+					dispatcher.renderView("profilo", spettatore);
+				});
+			} else
+				preferitoButton.setDisable(true);
+
+			return new SimpleObjectProperty<Button>(preferitoButton);
+		});
 	}
 
 	@Override
 	public void initializeData(Utente utente) {
-		this.utente = utente;
+		this.spettatore = (Spettatore) utente;
 		usernameField.setPromptText(utente.getUsername());
 		nameField.setPromptText(utente.getNome());
 		surnameField.setPromptText(utente.getCognome());
@@ -129,26 +144,36 @@ public class ProfiloController implements DataInitializable<Utente> {
 			ageErrorLabel.setText("");
 			oldPswErrorLabel.setText("");
 			repeatPswErrorLabel.setText("");
-			Integer ageInput;
-			if (!ageField.getText().equals("")) {
-				try {
-					ageInput = Integer.parseInt(ageField.getText());
-				} catch (NumberFormatException n) {
-					throw new IntegerFormatException();
+
+			if (spettatore.getPassword().equals(oldPswField.getText())) {
+				if (newPswField.getText().equals(repeatPswField.getText())) {
+
+					if (!ageField.getText().equals("")) {
+						Integer ageInput;
+						try {
+							ageInput = Integer.parseInt(ageField.getText());
+							if (ageInput > 0 && ageInput < 100)
+								spettatore.setEta(ageInput);
+						} catch (NumberFormatException n) {
+							throw new IntegerFormatException();
+						}
+					}
+
+					if (!usernameField.getText().isEmpty())
+						spettatore.setUsername(usernameField.getText());
+					if (!nameField.getText().isEmpty())
+						spettatore.setNome(nameField.getText());
+					if (!surnameField.getText().isEmpty())
+						spettatore.setCognome(surnameField.getText());
+					if (!newPswField.getText().isEmpty())
+						spettatore.setPassword(newPswField.getText());
+					utenteService.updateDati(spettatore);
+
+					dispatcher.renderView("profilo", spettatore);
 				}
-			} else
-				ageInput = utente.getEta();
-			utenteService.updateDati(utente, nameField.getText(), surnameField.getText(), usernameField.getText(),
-					ageInput, oldPswField.getText(), newPswField.getText(), repeatPswField.getText());
-			initializeData(utente);
-			// azzero tutti i campi così da mostrare i dati modificati nel promptText
-			nameField.setText("");
-			surnameField.setText("");
-			usernameField.setText("");
-			ageField.setText("");
-			oldPswField.setText("");
-			newPswField.setText("");
-			repeatPswField.setText("");
+				throw new InvalidPasswordException();
+			}
+			throw new UtenteNotFoundException();
 		} catch (IntegerFormatException e) {
 			ageErrorLabel.setText("Età non valida!");
 		} catch (UtenteNotFoundException e) {
@@ -161,7 +186,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 	}
 
 	public void openAggiungiMetodoWindow(ActionEvent event) throws Exception {
-		dispatcher.openNewWindow("aggiungimetodo", utente);
+		dispatcher.openNewWindow("aggiungimetodo", spettatore);
 	}
 
 }
