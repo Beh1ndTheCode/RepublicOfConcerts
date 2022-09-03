@@ -13,7 +13,7 @@ import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 
 public interface ConcertoService {
 
-	void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
+	Concerto addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
 			throws BusinessException, InvalidDateException;
 
 	void updateConcerto(Concerto concerto, String scaletta, String artista, TipoMetodoDiPagamento metodo, String giorno,

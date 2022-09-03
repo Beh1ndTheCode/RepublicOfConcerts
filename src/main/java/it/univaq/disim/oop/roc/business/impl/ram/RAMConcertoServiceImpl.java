@@ -23,10 +23,9 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 	private static int contNumBiglietti = 0;
 
-	private TariffeService tariffeService = new RAMTariffeServiceImpl();
 
 	@Override
-	public void addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
+	public Concerto addConcerto(String artista, Luogo luogo, String giorno, String mese, String anno)
 			throws BusinessException {
 		try {
 			LocalDate data = Utility.VerificaData(giorno, mese, anno);
@@ -34,9 +33,9 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 			concerto.setArtista(artista);
 			concerto.setLuogo(luogo);
 			concerto.setData(data);
-			tariffeService.addTariffe(concerto);
-
 			concertiAggiunti.add(concerto);
+
+			return concerto;
 
 		} catch (IntegerFormatException e) {
 			throw new IntegerFormatException();
@@ -44,7 +43,6 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 			throw new InvalidDateException();
 		}
 
-		return;
 	}
 
 	@Override

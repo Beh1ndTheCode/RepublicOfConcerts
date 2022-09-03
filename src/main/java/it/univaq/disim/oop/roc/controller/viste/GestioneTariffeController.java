@@ -2,16 +2,14 @@ package it.univaq.disim.oop.roc.controller.viste;
 
 import java.util.List;
 
-import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.TariffeService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
+import it.univaq.disim.oop.roc.exceptions.SelectionException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -51,35 +49,32 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 
 	private ViewDispatcher dispatcher;
 
-	private ConcertoService concertoService;
-
 	private TariffeService tariffeService;
 
 	private Concerto concerto;
-
-	private Settore settore;
 
 	private Tariffa tariffa;
 
 	public GestioneTariffeController() {
 		dispatcher = ViewDispatcher.getInstance();
-		concertoService = new RAMConcertoServiceImpl();
 		tariffeService = new RAMTariffeServiceImpl();
 	}
 
 	public void initialize() {
 		settoreTableColumn.setCellValueFactory((CellDataFeatures<Tariffa, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getSettore().toString());
+			return new SimpleStringProperty(param.getValue().getSettore().getNome());
 		});
 
 		tariffaTableColumn.setCellValueFactory((CellDataFeatures<Tariffa, String> param) -> {
+			if (param.getValue().getPrezzo() == null)
+				return new SimpleStringProperty("");
 			return new SimpleStringProperty(param.getValue().getPrezzo().toString());
 		});
 
 		selezionaTableColumn.setCellValueFactory((CellDataFeatures<Tariffa, Button> param) -> {
 			final Button selezionaButton = new Button("Seleziona");
 			selezionaButton.setOnAction(e -> {
-				settoreLabel.setText(param.getValue().toString());
+				settoreLabel.setText(param.getValue().getSettore().getNome());
 				this.tariffa = param.getValue();
 			});
 			return new SimpleObjectProperty<Button>(selezionaButton);
@@ -105,19 +100,27 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 		modificaButton.setDisable(isDisable);
 	}
 
-	public void setTariffaAction(ActionEvent event) {
-		if (settore == null)
-			errorLabel.setText("nessun settore selezionato");
-		else {
-			try {
-				tariffeService.setTariffa(concerto, settore, tariffa, prezzoTextField.getText());
-			} catch (FloatFormatException e) {
-				errorLabel.setText("tariffa non valida");
-				return;
-			} catch (BusinessException e) {
-				dispatcher.renderError(e);
-			}
-			dispatcher.renderView("gestionetariffe", concerto);
+	public void tariffaSelezionata() {
+		try {
+			if (settoriTableView.getSelectionModel().getSelectedItem() == null)
+				throw new SelectionException();
+			errorLabel.setText(null);
+			settoreLabel.setText(settoriTableView.getSelectionModel().getSelectedItem().getSettore().getNome());
+		} catch (SelectionException e) {
+			errorLabel.setText("Nessun settore selezionato");
 		}
 	}
+
+	public void setTariffaAction(ActionEvent event) {
+		try {
+			tariffeService.setTariffa(tariffa, prezzoTextField.getText());
+		} catch (FloatFormatException e) {
+			errorLabel.setText("tariffa non valida");
+			return;
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
+		dispatcher.renderView("gestionetariffe", concerto);
+	}
+
 }

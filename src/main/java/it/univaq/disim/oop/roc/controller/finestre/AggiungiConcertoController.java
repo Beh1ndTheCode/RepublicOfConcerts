@@ -48,6 +48,8 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 	private LuogoService luoghiService;
 
 	private Concerto concerto;
+	
+	private Luogo luogo;
 
 	public AggiungiConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -93,10 +95,12 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
 				throw new SelectionException();
-			concertoService.addConcerto(artistaTextField.getText(),
+			this.concerto = concertoService.addConcerto(artistaTextField.getText(),
 					luoghiListView.getSelectionModel().getSelectedItem(), giornoTextField.getText(),
 					meseTextField.getText(), annoTextField.getText());
-
+			this.luogo = luoghiListView.getSelectionModel().getSelectedItem();
+			tariffeService.addTariffe(concerto, luogo);
+			
 			luoghiListView.getSelectionModel().clearSelection();
 			luogoLabel.setText("");
 			dataErrorLabel.setText("");

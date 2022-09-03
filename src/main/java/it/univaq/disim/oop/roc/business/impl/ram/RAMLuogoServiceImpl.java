@@ -88,24 +88,24 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 		return luoghi;
 	}
-	
+
 	public Integer getCapienzaRimanente(Luogo luogo) {
 		Integer capienzaRimanente = luogo.getCapienza();
-		if(luogo instanceof Stadio) {
+		if (luogo instanceof Stadio) {
 			for (Settore sector : settoriAggiunti) {
 				if (sector.getLuogo().equals(luogo)) {
 					capienzaRimanente -= sector.getCapienza();
 				}
 			}
 		}
-		if(luogo instanceof Teatro) {
+		if (luogo instanceof Teatro) {
 			for (Settore sector : settoriAggiunti) {
 				if (sector.getLuogo().equals(luogo)) {
 					capienzaRimanente -= ((sector.getCapienza() * 10) / 7);
 				}
 			}
 		}
-		
+
 		return capienzaRimanente;
 	}
 
@@ -114,17 +114,17 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		capienzaRimanente -= capienzaSettore;
 		if (capienzaRimanente < 0)
 			throw new NumberOutOfBoundsException();
-		
+
 		return;
 	}
-	
+
 	public void verificaCapienza(Luogo luogo, Settore settore, Integer capienzaSettore) throws BusinessException {
 		Integer capienzaRimanente = getCapienzaRimanente(luogo);
 		capienzaRimanente += settore.getCapienza();
 		capienzaRimanente -= capienzaSettore;
 		if (capienzaRimanente < 0)
 			throw new NumberOutOfBoundsException();
-		
+
 		return;
 	}
 
@@ -145,8 +145,8 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			settore.setNome(nome);
 			capienzaInput -= ((capienzaInput * 3) / 10);
 			settore.setCapienza(capienzaInput);
-			settore.setTariffa(0f);
 			settore.setLuogo(luogo);
+			luogo.getSettori().add(settore);
 			settoriAggiunti.add(settore);
 
 			return;
@@ -156,8 +156,8 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			Settore settore = new Settore();
 			settore.setNome(nome);
 			settore.setCapienza(capienzaInput);
-			settore.setTariffa(0f);
 			settore.setLuogo(luogo);
+			luogo.getSettori().add(settore);
 			settoriAggiunti.add(settore);
 
 			return;
@@ -178,7 +178,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 			verificaCapienza(settore.getLuogo(), settore, capienzaInput);
 			settore.setCapienza(capienzaInput);
 		}
-		if(!nome.isEmpty())
+		if (!nome.isEmpty())
 			settore.setNome(nome);
 
 		return;
