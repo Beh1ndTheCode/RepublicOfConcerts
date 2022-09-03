@@ -38,13 +38,7 @@ public class RAMTourServiceImpl implements TourService {
 	@Override
 	public List<Tour> findAllTours() throws BusinessException {
 		List<Tour> tours = new ArrayList<>();
-
-		Tour tourProva = new Tour();
-		tourProva.setArtista("Gemitaiz e Medman");
-		tourProva.setNome("Scatola nera");
-		tourProva.setConcerti(null);
-		tours.add(tourProva);
-
+		
 		for (Tour tour : tourAggiunti) {
 			tours.add(tour);
 		}
@@ -66,9 +60,13 @@ public class RAMTourServiceImpl implements TourService {
 
 	@Override
 	public void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
+		if (tour.getConcerti() == null)
+			tour.setConcerti(concerti);
 		for (Concerto concert : concerti) {
-			if (!tour.getConcerti().contains(concert))
-				tour.getConcerti().add(concert);
+			concert.setArtista(tour.getArtista());
+			concert.setTour(tour);
+				if(!tour.getConcerti().contains(concert))
+				tour.getConcerti().add(concert);	
 		}
 
 		return;

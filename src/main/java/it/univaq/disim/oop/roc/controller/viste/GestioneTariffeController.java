@@ -66,10 +66,10 @@ public class GestioneTariffeController implements DataInitializable<Concerto>{
 			return new SimpleStringProperty(param.getValue().toString());
 		});
 		tariffaTableColumn.setCellValueFactory((CellDataFeatures<Settore, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getTariffa().toString());
+			return new SimpleStringProperty(param.getValue().getTariffa().toString() + "€");
 		});
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Settore, Button> param) -> {
-			final Button infoButton = new Button("Modifica");
+			final Button infoButton = new Button("Seleziona");
 			infoButton.setOnAction(e -> {
 				settoreLabel.setText(param.getValue().toString());
 				this.settore = param.getValue();
@@ -105,6 +105,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto>{
 				concertoService.setTariffa(settore,tariffaTextField.getText());
 			} catch (FloatFormatException e) {
 				errorLabel.setText("tariffa non valida");
+				return;
 			}
 			dispatcher.renderView("gestionetariffe",concerto);
 		}

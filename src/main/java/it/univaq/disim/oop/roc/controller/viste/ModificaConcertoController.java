@@ -88,7 +88,6 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 		if (!(concerto.getTour() == null))
 			tourLabel.setText(concerto.getTour().toString());
-
 		else
 			tourLabel.setText("nessuno");
 

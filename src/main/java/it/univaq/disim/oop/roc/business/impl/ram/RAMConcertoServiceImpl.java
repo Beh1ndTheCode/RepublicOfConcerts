@@ -61,7 +61,7 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 		if (!scaletta.isEmpty())
 			concerto.setScaletta(scaletta);
-		if (!artista.isEmpty())
+		if (!artista.isEmpty() && concerto.getTour() == null)
 			concerto.setArtista(artista);
 		concerto.setLuogo(luogo);
 		concerto.setMetodo(metodo);
