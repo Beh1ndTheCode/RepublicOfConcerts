@@ -6,14 +6,13 @@ import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
 
 public interface TariffeService {
 
 	void addTariffe(Concerto concerto, Luogo luogo) throws BusinessException;
 
-	void setTariffa(Tariffa tariffa, String prezzo) throws BusinessException, FloatFormatException;
+	void setTariffa(Tariffa tariffa) throws BusinessException;
 
-	List<Tariffa> findTariffeByConcerto(Concerto concerto) throws BusinessException;
+	List<Tariffa> findAllTariffe(Concerto concerto) throws BusinessException;
 
 }

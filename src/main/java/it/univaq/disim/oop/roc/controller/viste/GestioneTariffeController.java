@@ -8,7 +8,6 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
 import it.univaq.disim.oop.roc.exceptions.SelectionException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.beans.property.SimpleObjectProperty;
@@ -30,10 +29,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 	private TableView<Tariffa> settoriTableView;
 
 	@FXML
-	private TableColumn<Tariffa, String> settoreTableColumn;
-
-	@FXML
-	private TableColumn<Tariffa, String> tariffaTableColumn;
+	private TableColumn<Tariffa, String> settoreTableColumn, tariffaTableColumn;
 
 	@FXML
 	private TableColumn<Tariffa, Button> selezionaTableColumn;
@@ -45,7 +41,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 	private Label settoreLabel, errorLabel, concertoLabel;
 
 	@FXML
-	private TextField tariffaTextField;
+	private TextField prezzoTextField;
 
 	private ViewDispatcher dispatcher;
 
@@ -58,6 +54,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 	public GestioneTariffeController() {
 		dispatcher = ViewDispatcher.getInstance();
 		tariffeService = new RAMTariffeServiceImpl();
+		// tariffeService = new FileTariffeServiceImpl();
 	}
 
 	public void initialize() {
@@ -86,7 +83,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 		this.concerto = concerto;
 		concertoLabel.setText(concerto.toString());
 		try {
-			List<Tariffa> tariffe = tariffeService.findTariffeByConcerto(concerto);
+			List<Tariffa> tariffe = tariffeService.findAllTariffe(concerto);
 			ObservableList<Tariffa> tariffeData = FXCollections.observableArrayList(tariffe);
 			settoriTableView.setItems(tariffeData);
 		} catch (BusinessException e) {
@@ -95,7 +92,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 	}
 
 	public void BlockModificaButton() {
-		String tariffa = tariffaTextField.getText();
+		String tariffa = prezzoTextField.getText();
 		boolean isDisable = tariffa.isEmpty();
 		modificaButton.setDisable(isDisable);
 	}
@@ -113,10 +110,22 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 
 	public void setTariffaAction(ActionEvent event) {
 		try {
-			tariffeService.setTariffa(tariffa, tariffaTextField.getText());
+			if (tariffa == null)
+				throw new SelectionException();
+			Float inputPrezzo;
+			try {
+				inputPrezzo = Float.parseFloat(prezzoTextField.getText());
+				if (inputPrezzo < 0)
+					throw new NumberFormatException();
+				tariffa.setPrezzo(inputPrezzo);
+			} catch (NumberFormatException n) {
+				errorLabel.setText("tariffa non valida");
+			}
+			tariffa.getConcerto().getTariffe().add(tariffa);
+			tariffa.getSettore().getTariffe().add(tariffa);
+			tariffeService.setTariffa(tariffa);
+
 			dispatcher.renderView("gestionetariffe", concerto);
-		} catch (FloatFormatException e) {
-			errorLabel.setText("tariffa non valida");
 		} catch (SelectionException e) {
 			errorLabel.setText("settore non selezionato");
 		} catch (BusinessException e) {

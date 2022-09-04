@@ -11,6 +11,7 @@ import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 
 public class Concerto {
 
+	private String id;
 	private String scaletta;
 	private LocalDate data;
 	private String artista;// possono essere anche più di uno, è una stringa descrittiva
@@ -21,6 +22,22 @@ public class Concerto {
 
 	private Set<Tariffa> tariffe = new HashSet<>();
 	private List<Recensione> recensioni = new ArrayList<>();
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
 
 	public String getScaletta() {
 		return scaletta;

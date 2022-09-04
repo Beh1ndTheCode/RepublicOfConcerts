@@ -10,5 +10,3 @@
 		
 # JavaFX
 ### Realizzare tutte le viste per lo spettatore, per poi aggiungere la vista gestione recensioni per l'amministratore
-
-	- Sistemare graficamente labels di errore in Aggiungi Metodo

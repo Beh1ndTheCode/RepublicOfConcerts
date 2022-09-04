@@ -9,16 +9,17 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
-import it.univaq.disim.oop.roc.exceptions.SelectionException;
 
 public class RAMTariffeServiceImpl implements TariffeService {
 
 	private static List<Tariffa> tariffeAggiunte = new ArrayList<>();
 
+	private static int idCounterTariffe = 0;
+
 	public void addTariffe(Concerto concerto, Luogo luogo) throws BusinessException {
 		for (Settore settore : luogo.getSettori()) {
 			Tariffa tariffa = new Tariffa();
+			tariffa.setId(idCounterTariffe++);
 			tariffa.setConcerto(concerto);
 			tariffa.setSettore(settore);
 			settore.getTariffe().add(tariffa);
@@ -28,26 +29,16 @@ public class RAMTariffeServiceImpl implements TariffeService {
 	}
 
 	@Override
-	public void setTariffa(Tariffa tariffa, String prezzo) throws BusinessException {
-		if(tariffa == null)
-			throw new SelectionException();
-		Float inputPrezzo;
-		try {
-			inputPrezzo = Float.parseFloat(prezzo);
-		} catch (NumberFormatException n) {
-			throw new FloatFormatException();
+	public void setTariffa(Tariffa tariffa) throws BusinessException {
+		for (Tariffa fee : tariffeAggiunte) {
+			if (tariffa.getId() == fee.getId()) {
+				fee.setPrezzo(tariffa.getPrezzo());
+			}
 		}
-		if (inputPrezzo < 0)
-			throw new FloatFormatException();
-		tariffa.setPrezzo(inputPrezzo);
-		tariffa.getConcerto().getTariffe().add(tariffa);
-		tariffa.getSettore().getTariffe().add(tariffa);
-
-		return;
 	}
 
 	@Override
-	public List<Tariffa> findTariffeByConcerto(Concerto concerto) throws BusinessException {
+	public List<Tariffa> findAllTariffe(Concerto concerto) throws BusinessException {
 		List<Tariffa> tariffe = new ArrayList<>();
 
 		for (Tariffa fee : tariffeAggiunte) {

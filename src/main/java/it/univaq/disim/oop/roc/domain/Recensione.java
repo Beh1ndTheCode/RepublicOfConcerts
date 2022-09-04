@@ -2,12 +2,21 @@ package it.univaq.disim.oop.roc.domain;
 
 public class Recensione {
 
+	private Integer id;
 	private String titolo;
 	private String descrizione;
 	private Integer valutazione;
 
 	private Spettatore spettatore;
 	private Concerto concerto;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getTitolo() {
 		return titolo;
