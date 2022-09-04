@@ -3,6 +3,7 @@ package it.univaq.disim.oop.roc.viste;
 import java.io.IOException;
 
 import it.univaq.disim.oop.roc.controller.DataInitializable;
+import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Utente;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,7 +45,7 @@ public class ViewDispatcher {
 			DataInitializable<Utente> layoutController = layoutView.getController();
 			layoutController.initializeData(utente);
 			layout = (BorderPane) layoutView.getView();
-			renderHome(false,utente);
+			renderView("home",false,utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
 		} catch (ViewException e) {
@@ -67,6 +68,19 @@ public class ViewDispatcher {
 			View<T> view = loadView(viewName);
 			DataInitializable<T> controller = view.getController();
 			controller.initializeData(data);
+			layout.setCenter(view.getView());
+		} catch (ViewException e) {
+			renderError(e);
+		}
+	}
+	
+	public <T> void renderView(String viewName, T data, Utente utente) {
+		try {
+			View<T> view = loadView(viewName);
+			DataInitializable<T> controllerData = view.getController();
+			controllerData.initializeData(data);
+			UtenteInitializable<Utente> controllerUtente = (UtenteInitializable<Utente>) view.getController();
+			controllerUtente.initializeUtente(utente);
 			layout.setCenter(view.getView());
 		} catch (ViewException e) {
 			renderError(e);
@@ -114,21 +128,9 @@ public class ViewDispatcher {
 			DataInitializable<Utente> layoutController = layoutView.getController();
 			layoutController.initializeData(utente);
 			layout = (BorderPane) layoutView.getView();
-			renderHome(true,utente);
+			renderView("home",true,utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
-		} catch (ViewException e) {
-			renderError(e);
-		}
-	}
-	
-	public <T> void renderHome(boolean registrazione, T data) {
-		try {
-			View<T> view = loadView("home");
-			DataInitializable<T> controller = view.getController();
-			controller.initializeData(data);
-			controller.initializeBool(registrazione);
-			layout.setCenter(view.getView());
 		} catch (ViewException e) {
 			renderError(e);
 		}
@@ -139,6 +141,19 @@ public class ViewDispatcher {
 		View<T> windowController = loadWindow(windowName);
 		DataInitializable<T> controller = windowController.getController();
 		controller.initializeData(data);
+		Parent windowView = windowController.getView();
+		Scene scene = new Scene(windowView);
+		window.setScene(scene);
+		window.show();
+	}
+	
+	public <T> void openNewWindow(String windowName, T data, Utente utente) throws ViewException {
+		window = new Stage();
+		View<T> windowController = loadWindow(windowName);
+		DataInitializable<T> controllerData = windowController.getController();
+		controllerData.initializeData(data);
+		UtenteInitializable<Utente> controllerUtente = (UtenteInitializable<Utente>) windowController.getController();
+		controllerUtente.initializeUtente(utente);
 		Parent windowView = windowController.getView();
 		Scene scene = new Scene(windowView);
 		window.setScene(scene);

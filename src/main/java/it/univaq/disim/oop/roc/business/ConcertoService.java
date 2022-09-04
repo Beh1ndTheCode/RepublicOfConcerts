@@ -7,6 +7,7 @@ import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
+import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
@@ -23,6 +24,6 @@ public interface ConcertoService {
 
 	List<Concerto> findAllConcerti() throws BusinessException;
 
-	public Biglietto bookBiglietto(Concerto concerto, Settore settore, Spettatore spettatore) throws BusinessException;
+	public Biglietto bookBiglietto(Concerto concerto, Tariffa tariffa, Spettatore spettatore) throws BusinessException;
 
 }

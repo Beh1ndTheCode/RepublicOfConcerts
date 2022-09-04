@@ -8,8 +8,12 @@ public class Tariffa {
 	private Concerto concerto;
 	private Settore settore;
 
-	public Float getPrezzo() {
+	public Float getPrezzoIntero() {
 		return prezzo;
+	}
+	
+	public Float getPrezzoRidotto() {
+		return (prezzo * 9) / 10;
 	}
 
 	public void setPrezzo(Float prezzo) {
@@ -38,6 +42,10 @@ public class Tariffa {
 
 	public void setSettore(Settore settore) {
 		this.settore = settore;
+	}
+	
+	public String toString() {
+		return settore.getNome() + ", " + prezzo + "€";
 	}
 
 }

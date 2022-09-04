@@ -7,6 +7,7 @@ import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.beans.property.SimpleObjectProperty;
@@ -19,7 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 
-public class ConcertiController implements DataInitializable<Object> {
+public class ConcertiController implements DataInitializable<Utente> {
 
 	@FXML
 	private TableView<Concerto> concertiTableView;
@@ -36,12 +37,14 @@ public class ConcertiController implements DataInitializable<Object> {
 	private ViewDispatcher dispatcher;
 
 	private ConcertoService concertiService;
+	
+	private Utente utente;
 
 	public ConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertiService = new RAMConcertoServiceImpl();
 	}
-
+	
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());
@@ -54,11 +57,15 @@ public class ConcertiController implements DataInitializable<Object> {
 			String data = param.getValue().getData().format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
 			return new SimpleStringProperty(data);
 		});
+	}
 
+	public void initializeData(Utente utente) {
+		this.utente = utente;
+		
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {
-				dispatcher.renderView("infoconcertospettatore", param.getValue());
+				dispatcher.renderView("infoconcertospettatore", param.getValue(), utente);
 			});
 			return new SimpleObjectProperty<Button>(infoButton);
 		});

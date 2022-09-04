@@ -7,14 +7,17 @@ import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
+import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class InfoConcertoSpettatoreController implements DataInitializable<Concerto> {
+public class InfoConcertoSpettatoreController implements DataInitializable<Concerto>, UtenteInitializable<Utente> {
 
 	@FXML
 	private Label artistiLabel, scalettaLabel, luogoLabel, tourLabel, metodoLabel, dataLabel;
@@ -31,6 +34,8 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 	private Concerto concerto;
 
 	private TipoMetodoDiPagamento tipoMetodo;
+	
+	private Utente utente;
 
 	public InfoConcertoSpettatoreController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -67,9 +72,14 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 		luogoLabel.setText(concerto.getLuogo().toString());
 
 	}
-
-	public void prenotaBigliettoAction() {
-
+	
+	public void InitializeUtente(Utente utente) {
+		this.utente = utente;
+		System.out.println(utente.getUsername());
 	}
 
+	public void prenotaBigliettoAction() throws ViewException {
+		dispatcher.openNewWindow("prenotabiglietto", concerto, utente);
+	}
+	
 }

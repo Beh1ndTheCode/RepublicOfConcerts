@@ -63,9 +63,9 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 		});
 
 		tariffaTableColumn.setCellValueFactory((CellDataFeatures<Tariffa, String> param) -> {
-			if (param.getValue().getPrezzo() == null)
+			if (param.getValue().getPrezzoIntero() == null)
 				return new SimpleStringProperty("");
-			return new SimpleStringProperty(param.getValue().getPrezzo().toString() + "€");
+			return new SimpleStringProperty(param.getValue().getPrezzoIntero().toString() + "€");
 		});
 
 		selezionaTableColumn.setCellValueFactory((CellDataFeatures<Tariffa, Button> param) -> {

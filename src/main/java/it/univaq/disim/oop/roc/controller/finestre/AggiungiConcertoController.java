@@ -78,7 +78,6 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		} catch (SelectionException e) {
 			luogoErrorLabel.setText("Seleziona un luogo");
 		}
-
 	}
 
 	public void blockAggiungiButton() {

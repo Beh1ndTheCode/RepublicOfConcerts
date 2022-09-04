@@ -13,5 +13,9 @@ public interface MetodiService {
 	void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException;
 
 	List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException;
+	
+	List<MetodoDiPagamento> findAllCarte(Utente utente) throws BusinessException;
+	
+	List<MetodoDiPagamento> findAllConti(Utente utente) throws BusinessException;
 
 }

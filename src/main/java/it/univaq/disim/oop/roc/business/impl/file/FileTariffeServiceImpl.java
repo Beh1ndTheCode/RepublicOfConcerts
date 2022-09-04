@@ -63,7 +63,7 @@ public class FileTariffeServiceImpl implements TariffeService {
 						row.append(Utility.SEPARATORE);
 						row.append(tariffa.getSettore().getId());
 						row.append(Utility.SEPARATORE);
-						row.append(tariffa.getPrezzo());
+						row.append(tariffa.getPrezzoIntero());
 						writer.println(row.toString());
 					} else {
 						writer.println(String.join(Utility.SEPARATORE, righe));

@@ -11,6 +11,7 @@ import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
+import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
@@ -86,10 +87,11 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		concertiAggiunti.remove(concerto);
 		return;
 	}
-
-	public Biglietto bookBiglietto(Concerto concerto, Settore settore, Spettatore spettatore) {
+	
+	@Override
+	public Biglietto bookBiglietto(Concerto concerto, Tariffa tariffa, Spettatore spettatore)  throws BusinessException{
 		Biglietto biglietto = new Biglietto();
-		biglietto.setSettore(settore);
+		biglietto.setTariffa(tariffa);
 		biglietto.setNumeroBiglietto(contNumBiglietti++);
 		biglietto.setSpettatore(spettatore);
 

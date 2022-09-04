@@ -6,8 +6,7 @@ public interface DataInitializable<T> {
 
 	}
 	
-	default void initializeBool(boolean t) {
+	default void initializeBool(Boolean b) {
 
 	}
-	
 }

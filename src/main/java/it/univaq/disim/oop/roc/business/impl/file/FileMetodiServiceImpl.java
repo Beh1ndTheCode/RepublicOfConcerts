@@ -136,4 +136,60 @@ public class FileMetodiServiceImpl implements MetodiService {
 
 		return result;
 	}
+
+	@Override
+	public List<MetodoDiPagamento> findAllCarte(Utente utente) throws BusinessException {
+		List<MetodoDiPagamento> result = new ArrayList<>();
+		try {
+			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
+			for (String[] colonne : fileData.getRighe()) {
+				if (colonne[1].equals(utente.getId().toString())) {
+					if (colonne[2].equals("Carta")) {
+						Carta carta = new Carta();
+						carta.setId(Integer.parseInt(colonne[0]));
+						carta.setUtente(utente);
+						carta.setNome(colonne[3]);
+						carta.setNumero(Long.parseLong(colonne[4]));
+						carta.setIntestatario(colonne[5]);
+						carta.setScadenza(LocalDate.parse(colonne[6]));
+						carta.setCvv(Integer.parseInt(colonne[7]));
+						result.add(carta);
+					}
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
+
+		return result;
+	}
+
+	@Override
+	public List<MetodoDiPagamento> findAllConti(Utente utente) throws BusinessException {
+		List<MetodoDiPagamento> result = new ArrayList<>();
+		try {
+			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
+			for (String[] colonne : fileData.getRighe()) {
+				if (colonne[1].equals(utente.getId().toString())) {
+					if (colonne[2].equals("Conto")) {
+						Conto conto = new Conto();
+						conto.setId(Integer.parseInt(colonne[0]));
+						conto.setUtente(utente);
+						conto.setNome(colonne[3]);
+						conto.setIban(colonne[4]);
+						conto.setSwift(colonne[5]);
+						result.add(conto);
+					}
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
+
+		return result;
+	}
 }

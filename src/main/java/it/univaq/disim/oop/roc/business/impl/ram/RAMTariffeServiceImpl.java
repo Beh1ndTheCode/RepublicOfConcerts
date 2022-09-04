@@ -32,7 +32,7 @@ public class RAMTariffeServiceImpl implements TariffeService {
 	public void setTariffa(Tariffa tariffa) throws BusinessException {
 		for (Tariffa fee : tariffeAggiunte) {
 			if (tariffa.getId() == fee.getId()) {
-				fee.setPrezzo(tariffa.getPrezzo());
+				fee.setPrezzo(tariffa.getPrezzoIntero());
 			}
 		}
 	}
