@@ -1,10 +1,12 @@
 package it.univaq.disim.oop.roc.domain;
 
+import java.time.LocalDate;
+
 public class Carta extends MetodoDiPagamento {
 
 	private Long numero;
 	private String intestatario;
-	private int meseScadenza, annoScadenza;
+	private LocalDate scadenza;
 	private Integer cvv;
 
 	public Long getNumero() {
@@ -27,20 +29,12 @@ public class Carta extends MetodoDiPagamento {
 		this.intestatario = intestatario;
 	}
 
-	public int getmeseScadenza() {
-		return meseScadenza;
+	public LocalDate getScadenza() {
+		return scadenza;
 	}
 
-	public void setmeseScadenza(int mesescadenza) {
-		this.meseScadenza = mesescadenza;
-	}
-
-	public int getannoScadenza() {
-		return annoScadenza;
-	}
-
-	public void setannoScadenza(int annoscadenza) {
-		this.annoScadenza = annoscadenza;
+	public void setScadenza(LocalDate scadenza) {
+		this.scadenza = scadenza;
 	}
 
 	public Integer getCvv() {
@@ -50,5 +44,5 @@ public class Carta extends MetodoDiPagamento {
 	public void setCvv(Integer cvv) {
 		this.cvv = cvv;
 	}
-	
+
 }

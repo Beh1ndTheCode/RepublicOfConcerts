@@ -1,6 +1,12 @@
 # Logica di Business
-	- Sistemare errore in Profilo Controller con implementazione su file quando si modificano dei dati (l'id è nullo)
+### Implementazione su file
+	- Sistemare errore in Profilo Controller quando si modificano dei dati (l'id è nullo)
+	- Sistemare tasto preferito
+	- Controllare se funzionano eccezioni in aggiungi metodo e tasto elimina metodo
+	
 # Eccezioni
 		
 # JavaFX
 ### Realizzare tutte le viste per lo spettatore, per poi aggiungere la vista gestione recensioni per l'amministratore
+
+	- Sistemare graficamente labels di errore in Aggiungi Metodo

@@ -1,5 +1,7 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,76 +11,28 @@ import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 
 public class RAMMetodiServiceImpl implements MetodiService {
 
 	private static List<MetodoDiPagamento> metodiAggiunti = new ArrayList<>();
 	private static int idCounterMetodi = 0;
 
-	/*@Override
-	public void addCarta(Utente utente, String nomeCarta, String intestatario, String numero, String meseScadenza,
-			String annoScadenza, String cvv) throws BusinessException {
-		if (cvv.length() == 3 && numero.length() == 16 && meseScadenza.length() == 2 && annoScadenza.length() == 2) {
-			Integer cvvInput, meseInput, annoInput;
-			Long numeroInput;
-
-			try {
-				numeroInput = Long.parseLong(numero);
-				cvvInput = Integer.parseInt(cvv);
-				meseInput = Integer.parseInt(meseScadenza);
-				annoInput = Integer.parseInt(annoScadenza);
-			} catch (NumberFormatException n) {
-				throw new IntegerFormatException();
-			}
-
-			if (!(meseInput <= 12))
-				throw new InvalidDateException();
-			Carta carta = new Carta();
-			carta.setId(idCounterMetodi++);
-			carta.setNome(nomeCarta);
-			carta.setUtente(utente);
-			carta.setIntestatario(intestatario);
-			carta.setNumero(numeroInput);
-			carta.setmeseScadenza(meseInput);
-			carta.setannoScadenza(annoInput);
-			carta.setCvv(cvvInput);
-			metodiAggiunti.add(carta);
-
-			return;
-		}
-
-		throw new IntegerFormatException();
-	}*/
-	
 	@Override
-	public void addCarta(Carta carta) throws BusinessException {
-		carta.setId(idCounterMetodi++);
-		metodiAggiunti.add(carta);
-	}
-
-	@Override
-	public void addConto(Utente utente, String nomeConto, String iban, String swift) throws BusinessException {
-		if (iban.length() == 27) {
-			Conto conto = new Conto();
-			conto.setId(idCounterMetodi++);
-			conto.setNome(nomeConto);
-			conto.setIban(iban);
-			conto.setSwift(swift);
-			conto.setUtente(utente);
-			metodiAggiunti.add(conto);
-
-			return;
-		}
-
-		throw new IntegerFormatException();
+	public void addMetodo(MetodoDiPagamento metodo) throws BusinessException {
+		metodo.setId(idCounterMetodi++);
+		metodiAggiunti.add(metodo);
 	}
 
 	@Override
 	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
-		metodiAggiunti.remove(metodo);
+		for (MetodoDiPagamento method : metodiAggiunti) {
+			if (metodo.getId() == method.getId()) {
+				metodiAggiunti.remove(method);
+				return;
+			}
+		}
+		throw new BusinessException();
 
-		return;
 	}
 
 	@Override
@@ -90,8 +44,10 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		cartaProva.setNome("Carta prova");
 		cartaProva.setIntestatario("Giovanni Storti");
 		cartaProva.setNumero(1234567890123456l);
-		cartaProva.setannoScadenza(23);
-		cartaProva.setmeseScadenza(9);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String data = "22/09/2022";
+		LocalDate localDate = LocalDate.parse(data, formatter);
+		cartaProva.setScadenza(localDate);
 		cartaProva.setCvv(578);
 		cartaProva.setUtente(utente);
 		metodiDiPagamento.add(cartaProva);

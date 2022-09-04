@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.UtenteService;
+import it.univaq.disim.oop.roc.business.impl.file.FileMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.file.FileUtenteServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
@@ -71,8 +72,9 @@ public class ProfiloController implements DataInitializable<Utente> {
 	public ProfiloController() {
 		dispatcher = ViewDispatcher.getInstance();
 		utenteService = new RAMUtenteServiceImpl();
-		//utenteService = new FileUtenteServiceImpl();
 		metodiService = new RAMMetodiServiceImpl();
+		// utenteService = new FileUtenteServiceImpl();
+		// metodiService = new FileMetodiServiceImpl();
 	}
 
 	public void initialize() {

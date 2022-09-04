@@ -1,6 +1,9 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
+import java.time.format.DateTimeFormatter;
+
 import it.univaq.disim.oop.roc.business.MetodiService;
+import it.univaq.disim.oop.roc.business.impl.file.FileMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
@@ -38,6 +41,7 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 	public InfoMetodoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		metodiService = new RAMMetodiServiceImpl();
+		// metodiService = new FileMetodiServiceImpl();
 	}
 
 	public void initialize() {
@@ -54,7 +58,7 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 			numeroCartaLabel.setText(Long.toString(carta.getNumero()));
 			intestatarioLabel.setText(carta.getIntestatario());
 			nomeCartaLabel.setText(carta.getNome());
-			scadenzaLabel.setText(carta.getmeseScadenza() + " / " + carta.getannoScadenza());
+			scadenzaLabel.setText(carta.getScadenza().format(DateTimeFormatter.ofPattern("MM/yy")));
 		}
 
 		if (metodo instanceof Conto) {

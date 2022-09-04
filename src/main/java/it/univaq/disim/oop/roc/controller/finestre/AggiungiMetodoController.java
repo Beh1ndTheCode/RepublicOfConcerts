@@ -1,9 +1,13 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
+import java.time.LocalDate;
+
 import it.univaq.disim.oop.roc.business.MetodiService;
+import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
+import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
@@ -22,7 +26,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 			meseScadenzaField, annoScadenzaField, cvvField, nomeContoField, ibanField, swiftField;
 
 	@FXML
-	private Label ibanErrorLabel, numCartaErrorLabel, dataErrorLabel;
+	private Label ibanErrorLabel, numErrorLabel, dataErrorLabel;
 
 	@FXML
 	private Button aggiungiCartaButton, aggiungiContoButton;
@@ -36,6 +40,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public AggiungiMetodoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		metodiService = new RAMMetodiServiceImpl();
+		// metodiService = new FileMetodiServiceImpl();
 	}
 
 	public void initialize() {
@@ -69,36 +74,33 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	}
 
 	public void aggiungiCartaAction(ActionEvent event) {
-		numCartaErrorLabel.setText("");
+		numErrorLabel.setText("");
 		dataErrorLabel.setText("");
 
 		try {
 			if (numeroField1.getText().length() == 4 && numeroField2.getText().length() == 4
 					&& numeroField3.getText().length() == 4 && numeroField4.getText().length() == 4) {
+
 				String numero = numeroField1.getText() + numeroField2.getText() + numeroField3.getText()
 						+ numeroField4.getText();
+				Long numeroInput;
+				numeroInput = Long.parseLong(numero);
 
-				if (cvvField.getText().length() == 3 && meseScadenzaField.getText().length() == 2
-						&& annoScadenzaField.getText().length() == 2) {
-					Integer cvvInput, meseInput, annoInput;
-					Long numeroInput;
-
-					numeroInput = Long.parseLong(numero);
+				if (cvvField.getText().length() == 3) {
+					Integer cvvInput;
 					cvvInput = Integer.parseInt(cvvField.getText());
-					meseInput = Integer.parseInt(meseScadenzaField.getText());
-					annoInput = Integer.parseInt(annoScadenzaField.getText());
 
-					if (!(meseInput <= 12))
-						throw new InvalidDateException();
+					LocalDate data = Utility.VerificaData("01", meseScadenzaField.getText(),
+							annoScadenzaField.getText());
+
 					Carta carta = new Carta();
 					carta.setNome(nomeCartaField.getText());
 					carta.setUtente(utente);
 					carta.setIntestatario(intestatarioField.getText());
 					carta.setNumero(numeroInput);
-					carta.setmeseScadenza(meseInput);
-					carta.setannoScadenza(annoInput);
+					carta.setScadenza(data);
 					carta.setCvv(cvvInput);
-					metodiService.addCarta(carta);
+					metodiService.addMetodo(carta);
 
 					dispatcher.renderView("profilo", utente);
 					nomeCartaField.setText("");
@@ -114,11 +116,14 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 					return;
 				}
+				throw new IntegerFormatException();
 			}
-			throw new IntegerFormatException();
+			throw new NumberFormatException();
 
+		} catch (NumberFormatException e) {
+			numErrorLabel.setText("Inserisci un numero carta valido");
 		} catch (IntegerFormatException e) {
-			numCartaErrorLabel.setText("Inserisci un numero valido");
+			numErrorLabel.setText("Inserisci un CVV valido");
 		} catch (InvalidDateException e) {
 			dataErrorLabel.setText("Inserisci una scadenza valida");
 		} catch (BusinessException e) {
@@ -127,15 +132,27 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	}
 
 	public void aggiungiContoAction(ActionEvent event) {
-		try {
-			ibanErrorLabel.setText("");
-			metodiService.addConto(utente, nomeContoField.getText(), ibanField.getText(), swiftField.getText());
+		ibanErrorLabel.setText("");
 
-			nomeContoField.setText("");
-			ibanField.setText("");
-			swiftField.setText("");
-			blockAggiungiContoButton();
-			dispatcher.renderView("profilo", utente);
+		try {
+			if (ibanField.getText().length() == 27) {
+				Conto conto = new Conto();
+				conto.setNome(nomeContoField.getText());
+				conto.setIban(ibanField.getText());
+				conto.setSwift(swiftField.getText());
+				conto.setUtente(utente);
+				metodiService.addMetodo(conto);
+
+				dispatcher.renderView("profilo", utente);
+				nomeContoField.setText("");
+				ibanField.setText("");
+				swiftField.setText("");
+				blockAggiungiContoButton();
+
+				return;
+			}
+			throw new IntegerFormatException();
+
 		} catch (IntegerFormatException e) {
 			ibanErrorLabel.setText("Iban non valido");
 		} catch (BusinessException e) {
