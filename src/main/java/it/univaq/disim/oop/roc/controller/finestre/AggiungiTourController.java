@@ -3,6 +3,8 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import it.univaq.disim.oop.roc.business.TourService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
+import it.univaq.disim.oop.roc.domain.Tour;
+import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ public class AggiungiTourController implements DataInitializable<Object> {
 	public AggiungiTourController() {
 		dispatcher = ViewDispatcher.getInstance();
 		tourService = new RAMTourServiceImpl();
+		// tourService = new FileTourServiceImpl();
 	}
 
 	public void initialize() {
@@ -38,11 +41,19 @@ public class AggiungiTourController implements DataInitializable<Object> {
 	}
 
 	public void addTourAction(ActionEvent event) {
-		tourService.addTour(artistaTextField.getText(), nomeTextField.getText());
-		nomeTextField.setText("");
-		artistaTextField.setText("");
-		blockAggiungiButton();
-		dispatcher.renderView("gestionetour");
+		try {
+			Tour tour = new Tour();
+			tour.setArtista(artistaTextField.getText());
+			tour.setNome(nomeTextField.getText());
+			tourService.addTour(tour);
+
+			nomeTextField.setText("");
+			artistaTextField.setText("");
+			blockAggiungiButton();
+			dispatcher.renderView("gestionetour");
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
 	}
 
 	public void closeWindow() {

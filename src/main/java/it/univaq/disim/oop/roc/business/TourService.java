@@ -8,17 +8,15 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface TourService {
 
-	void addTour(String artista, String nome);
+	void addTour(Tour tour) throws BusinessException;
 
-	void updateTour(Tour tour, String artista, String nome) throws BusinessException;
+	void updateTour(Tour tour) throws BusinessException;
 
 	void deleteTour(Tour tour) throws BusinessException;
 
 	void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException;
 
 	void deleteConcerti(Tour tour, List<Concerto> concerti) throws BusinessException;
-
-	List<Tour> getTourAggiunti() throws BusinessException;
 
 	List<Tour> findAllTours() throws BusinessException;
 }

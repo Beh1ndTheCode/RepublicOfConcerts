@@ -36,6 +36,7 @@ public class InfoTourController implements DataInitializable<Tour> {
 	public InfoTourController() {
 		dispatcher = ViewDispatcher.getInstance();
 		tourService = new RAMTourServiceImpl();
+		// tourService = new FileTourServiceImpl();
 	}
 
 	public void initialize() {
@@ -59,7 +60,12 @@ public class InfoTourController implements DataInitializable<Tour> {
 
 	public void updateTourAction(ActionEvent event) {
 		try {
-			tourService.updateTour(tour, artistaTextField.getText(), nomeTextField.getText());
+			if (!artistaTextField.getText().isEmpty())
+				tour.setArtista(artistaTextField.getText());
+			if (!nomeTextField.getText().isEmpty())
+				tour.setNome(nomeTextField.getText());
+			tourService.updateTour(tour);
+
 			initializeData(tour);
 			nomeTextField.setText("");
 			artistaTextField.setText("");

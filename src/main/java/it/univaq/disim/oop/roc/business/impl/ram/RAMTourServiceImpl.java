@@ -15,29 +15,25 @@ public class RAMTourServiceImpl implements TourService {
 	private static int idCounterTour = 0;
 
 	@Override
-	public void addTour(String artista, String nome) {
-		Tour tour = new Tour();
+	public void addTour(Tour tour) {
 		tour.setId(idCounterTour++);
-		tour.setArtista(artista);
-		tour.setNome(nome);
 		tourAggiunti.add(tour);
-
-		return;
 	}
 
 	@Override
-	public void updateTour(Tour tour, String artista, String nome) throws BusinessException {
-		if (!artista.isEmpty())
-			tour.setArtista(artista);
-		if (!nome.isEmpty())
-			tour.setNome(nome);
-
-		return;
+	public void updateTour(Tour tour) throws BusinessException {
+		for (Tour t : tourAggiunti) {
+			if (tour.getId() == t.getId()) {
+				t.setArtista(tour.getArtista());
+				t.setNome(tour.getNome());
+			}
+		}
 	}
 
 	@Override
 	public List<Tour> findAllTours() throws BusinessException {
 		List<Tour> tours = new ArrayList<>();
+		
 		for (Tour tour : tourAggiunti) {
 			tours.add(tour);
 		}
@@ -47,35 +43,23 @@ public class RAMTourServiceImpl implements TourService {
 
 	@Override
 	public void deleteTour(Tour tour) throws BusinessException {
-		getTourAggiunti().remove(tour);
-
-		return;
-	}
-
-	@Override
-	public List<Tour> getTourAggiunti() throws BusinessException {
-		return tourAggiunti;
+		tourAggiunti.remove(tour);
 	}
 
 	@Override
 	public void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
-		if (tour.getConcerti() == null)
-			tour.setConcerti(concerti);
 		for (Concerto concert : concerti) {
 			concert.setTour(tour);
 			concert.setArtista(tour.getArtista());
 			if (!tour.getConcerti().contains(concert))
 				tour.getConcerti().add(concert);
 		}
-
-		return;
 	}
 
 	@Override
 	public void deleteConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
 		for (Concerto concert : concerti)
 			tour.getConcerti().remove(concert);
-
-		return;
 	}
+	
 }
