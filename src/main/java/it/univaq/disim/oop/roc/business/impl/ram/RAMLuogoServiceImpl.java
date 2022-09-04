@@ -9,7 +9,6 @@ import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
@@ -18,77 +17,42 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	private static List<Settore> settoriAggiunti = new ArrayList<>();
 
 	private static int idCounterLuoghi = 0;
+	private static int idCounterSettori = 0;
 
 	@Override
-	public void addLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException {
-		Integer capienzaInput;
-		try {
-			capienzaInput = Integer.parseInt(capienza);
-		} catch (NumberFormatException n) {
-			throw new IntegerFormatException();
-		}
-
-		if (capienzaInput >= 1) {
-
-			if (luogo instanceof Teatro) {
-				luogo.setId(idCounterLuoghi++);
-				luogo.setNome(nome);
-				luogo.setCitta(citta);
-				luogo.setCapienza(capienzaInput);
-				getLuoghiAggiunti().add(luogo);
-			}
-
-			if (luogo instanceof Stadio) {
-				luogo.setId(idCounterLuoghi++);
-				luogo.setNome(nome);
-				luogo.setCitta(citta);
-				luogo.setCapienza(capienzaInput);
-				getLuoghiAggiunti().add(luogo);
-			}
-
-			return;
-		}
-
-		throw new IntegerFormatException();
+	public void addLuogo(Luogo luogo) throws BusinessException {
+		luogo.setId(idCounterLuoghi++);
+		luoghiAggiunti.add(luogo);
 	}
 
 	@Override
-	public void updateLuogo(Luogo luogo, String nome, String citta, String capienza) throws BusinessException {
-		if (capienza.length() > 0) {
-			Integer capienzaInput;
-			try {
-				capienzaInput = Integer.parseInt(capienza);
-			} catch (NumberFormatException n) {
-				throw new IntegerFormatException();
+	public void updateLuogo(Luogo luogo) throws BusinessException {
+		for (Luogo place : luoghiAggiunti) {
+			if (luogo.getId() == place.getId()) {
+				place.setNome(luogo.getNome());
+				place.setCitta(luogo.getCitta());
+				place.setCapienza(luogo.getCapienza());
 			}
-			luogo.setCapienza(capienzaInput);
 		}
-		if (!nome.isEmpty())
-			luogo.setNome(nome);
-		if (!citta.isEmpty())
-			luogo.setCitta(citta);
-
-		return;
 	}
 
 	@Override
 	public void deleteLuogo(Luogo luogo) throws BusinessException {
-		getLuoghiAggiunti().remove(luogo);
-
-		return;
+		luoghiAggiunti.remove(luogo);
 	}
 
 	@Override
 	public List<Luogo> findAllLuoghi() throws BusinessException {
 		List<Luogo> luoghi = new ArrayList<>();
 
-		for (Luogo place : getLuoghiAggiunti()) {
+		for (Luogo place : luoghiAggiunti) {
 			luoghi.add(place);
 		}
 
 		return luoghi;
 	}
 
+	@Override
 	public Integer getCapienzaRimanente(Luogo luogo) {
 		Integer capienzaRimanente = luogo.getCapienza();
 		if (luogo instanceof Stadio) {
@@ -109,6 +73,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		return capienzaRimanente;
 	}
 
+	@Override
 	public void verificaCapienza(Luogo luogo, Integer capienzaSettore) throws BusinessException {
 		Integer capienzaRimanente = getCapienzaRimanente(luogo);
 		capienzaRimanente -= capienzaSettore;
@@ -118,6 +83,7 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		return;
 	}
 
+	@Override
 	public void verificaCapienza(Luogo luogo, Settore settore, Integer capienzaSettore) throws BusinessException {
 		Integer capienzaRimanente = getCapienzaRimanente(luogo);
 		capienzaRimanente += settore.getCapienza();
@@ -129,65 +95,23 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	}
 
 	@Override
-	public void addSettore(Luogo luogo, String nome, String capienza) throws BusinessException {
-		Integer capienzaInput;
-
-		try {
-			capienzaInput = Integer.parseInt(capienza);
-		} catch (NumberFormatException n) {
-			throw new IntegerFormatException();
-		}
-
-		verificaCapienza(luogo, capienzaInput);
-
-		if (luogo instanceof Teatro) {
-			Settore settore = new Settore();
-			settore.setNome(nome);
-			capienzaInput -= ((capienzaInput * 3) / 10);
-			settore.setCapienza(capienzaInput);
-			settore.setLuogo(luogo);
-			luogo.getSettori().add(settore);
-			settoriAggiunti.add(settore);
-
-			return;
-		}
-
-		if (luogo instanceof Stadio) {
-			Settore settore = new Settore();
-			settore.setNome(nome);
-			settore.setCapienza(capienzaInput);
-			settore.setLuogo(luogo);
-			luogo.getSettori().add(settore);
-			settoriAggiunti.add(settore);
-
-			return;
-		}
-
-		throw new BusinessException();
+	public void addSettore(Settore settore) throws BusinessException {
+		settore.setId(idCounterSettori++);
+		settoriAggiunti.add(settore);
 	}
 
 	@Override
-	public void updateSettore(Settore settore, String nome, String capienza) throws BusinessException {
-		if (capienza.length() >= 0 && !capienza.isEmpty()) {
-			Integer capienzaInput;
-			try {
-				capienzaInput = Integer.parseInt(capienza);
-			} catch (NumberFormatException n) {
-				throw new IntegerFormatException();
+	public void updateSettore(Settore settore) throws BusinessException {
+		for (Settore sector : settoriAggiunti) {
+			if (settore.getId() == sector.getId()) {
+				sector.setNome(settore.getNome());
+				sector.setCapienza(settore.getCapienza());
 			}
-			verificaCapienza(settore.getLuogo(), settore, capienzaInput);
-			settore.setCapienza(capienzaInput);
 		}
-		if (!nome.isEmpty())
-			settore.setNome(nome);
-
-		return;
 	}
 
 	public void deleteSettore(Settore settore) throws BusinessException {
 		settoriAggiunti.remove(settore);
-
-		return;
 	}
 
 	@Override
@@ -202,7 +126,4 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		return settori;
 	}
 
-	public static List<Luogo> getLuoghiAggiunti() {
-		return luoghiAggiunti;
-	}
 }

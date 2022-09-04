@@ -50,7 +50,6 @@ public class FileMetodiServiceImpl implements MetodiService {
 					row.append(Utility.SEPARATORE);
 					row.append(carta.getCvv());
 					writer.println(row.toString());
-					return;
 				}
 
 				if (metodo instanceof Conto) {
@@ -66,9 +65,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 					row.append(conto.getIban());
 					row.append(Utility.SEPARATORE);
 					row.append(conto.getSwift());
-					row.append(Utility.SEPARATORE);
 					writer.println(row.toString());
-					return;
 				}
 			}
 		} catch (IOException e) {

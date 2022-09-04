@@ -39,6 +39,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 	public GestioneLuoghiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		luoghiService = new RAMLuogoServiceImpl();
+		// luoghiService = new FileLuogoServiceImpl();
 	}
 
 	public void initialize() {

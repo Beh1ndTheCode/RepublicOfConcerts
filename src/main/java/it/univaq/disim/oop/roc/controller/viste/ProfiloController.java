@@ -4,8 +4,6 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.UtenteService;
-import it.univaq.disim.oop.roc.business.impl.file.FileMetodiServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.file.FileUtenteServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
@@ -14,7 +12,6 @@ import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidPasswordException;
 import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
@@ -142,11 +139,10 @@ public class ProfiloController implements DataInitializable<Utente> {
 	}
 
 	public void updateDatiAction(ActionEvent event) {
+		ageErrorLabel.setText("");
+		oldPswErrorLabel.setText("");
+		repeatPswErrorLabel.setText("");
 		try {
-			ageErrorLabel.setText("");
-			oldPswErrorLabel.setText("");
-			repeatPswErrorLabel.setText("");
-
 			if (spettatore.getPassword().equals(oldPswField.getText())) {
 				if (newPswField.getText().equals(repeatPswField.getText())) {
 
@@ -157,7 +153,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 							if (ageInput > 0 && ageInput < 100)
 								spettatore.setEta(ageInput);
 						} catch (NumberFormatException n) {
-							throw new IntegerFormatException();
+							ageErrorLabel.setText("Età non valida!");
 						}
 					}
 
@@ -176,8 +172,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 				throw new InvalidPasswordException();
 			}
 			throw new UtenteNotFoundException();
-		} catch (IntegerFormatException e) {
-			ageErrorLabel.setText("Età non valida!");
+
 		} catch (UtenteNotFoundException e) {
 			oldPswErrorLabel.setText("Password errata!");
 		} catch (InvalidPasswordException e) {

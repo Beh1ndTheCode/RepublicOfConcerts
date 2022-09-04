@@ -4,8 +4,10 @@ import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
+import it.univaq.disim.oop.roc.domain.Settore;
+import it.univaq.disim.oop.roc.domain.Stadio;
+import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
@@ -34,6 +36,7 @@ public class AggiungiSettoreController implements DataInitializable<Luogo> {
 	public AggiungiSettoreController() {
 		dispatcher = ViewDispatcher.getInstance();
 		luoghiService = new RAMLuogoServiceImpl();
+		// luoghiService = new FileLuogoServiceImpl();
 	}
 
 	public void initialize() {
@@ -52,16 +55,40 @@ public class AggiungiSettoreController implements DataInitializable<Luogo> {
 	}
 
 	public void addSettoreAction(ActionEvent event) {
+		capienzaErrorLabel.setText("");
 		try {
-			capienzaErrorLabel.setText("");
-			luoghiService.addSettore(luogo, nomeTextField.getText(), capienzaTextField.getText());
+			Integer capienzaInput;
+			try {
+				capienzaInput = Integer.parseInt(capienzaTextField.getText());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException();
+			}
+			luoghiService.verificaCapienza(luogo, capienzaInput);
+
+			Settore settore = new Settore();
+			if (luogo instanceof Teatro) {
+				settore.setNome(nomeTextField.getText());
+				capienzaInput -= ((capienzaInput * 3) / 10);
+				settore.setCapienza(capienzaInput);
+				settore.setLuogo(luogo);
+				luogo.getSettori().add(settore);
+			}
+
+			if (luogo instanceof Stadio) {
+				settore.setNome(nomeTextField.getText());
+				settore.setCapienza(capienzaInput);
+				settore.setLuogo(luogo);
+				luogo.getSettori().add(settore);
+			}
+			luoghiService.addSettore(settore);
+
 			nomeTextField.setText("");
 			capienzaTextField.setText("");
 			blockAggiungiButton();
 			dispatcher.renderView("gestionesettori", luogo);
 		} catch (NumberOutOfBoundsException e) {
 			capienzaErrorLabel.setText("ridurre la capienza");
-		} catch (IntegerFormatException e) {
+		} catch (NumberFormatException e) {
 			capienzaErrorLabel.setText("capienza non valida");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);

@@ -5,8 +5,6 @@ import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.FloatFormatException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
@@ -39,6 +37,7 @@ public class InfoSettoreController implements DataInitializable<Settore> {
 	public InfoSettoreController() {
 		dispatcher = ViewDispatcher.getInstance();
 		luogoService = new RAMLuogoServiceImpl();
+		// luogoService = new FileLuogoServiceImpl();
 	}
 
 	public void initialize() {
@@ -61,20 +60,31 @@ public class InfoSettoreController implements DataInitializable<Settore> {
 	}
 
 	public void updateSettoreAction(ActionEvent event) {
+		errorLabel.setText("");
 		try {
-			errorLabel.setText("");
-			luogoService.updateSettore(settore, nomeTextField.getText(), capienzaTextField.getText());
+			Integer capienzaInput;
+			if (capienzaTextField.getText().length() >= 0 && !capienzaTextField.getText().isEmpty()) {
+				try {
+					capienzaInput = Integer.parseInt(capienzaTextField.getText());
+					luogoService.verificaCapienza(settore.getLuogo(), settore, capienzaInput);
+					settore.setCapienza(capienzaInput);
+				} catch (NumberFormatException e) {
+					errorLabel.setText("capienza non valida!");
+				} catch (NumberOutOfBoundsException e) {
+					errorLabel.setText("ridurre la capienza");
+				}
+			}
+
+			if (!nomeTextField.getText().isEmpty())
+				settore.setNome(nomeTextField.getText());
+			luogoService.updateSettore(settore);
+
 			initializeData(settore);
 			nomeTextField.setText("");
 			capienzaTextField.setText("");
 			blockModificaButton();
 			dispatcher.renderView("gestionesettori", settore.getLuogo());
-		} catch (NumberOutOfBoundsException e) {
-			errorLabel.setText("ridurre la capienza");
-		} catch (FloatFormatException e) {
-			errorLabel.setText("tariffa non valida!");
-		} catch (IntegerFormatException e) {
-			errorLabel.setText("capienza non valida!");
+
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

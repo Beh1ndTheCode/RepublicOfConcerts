@@ -5,7 +5,6 @@ import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class InfoLuogoController implements DataInitializable<Luogo> {
-	
+
 	@FXML
 	private Text nomeText, cittaText, capienzaText;
 
@@ -37,6 +36,7 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 	public InfoLuogoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		luogoService = new RAMLuogoServiceImpl();
+		// luogoService = new FileLuogoServiceImpl();
 	}
 
 	public void initialize() {
@@ -62,18 +62,30 @@ public class InfoLuogoController implements DataInitializable<Luogo> {
 	}
 
 	public void updateLuogoAction(ActionEvent event) {
+		capienzaErrorLabel.setText("");
 		try {
-			capienzaErrorLabel.setText("");
-			luogoService.updateLuogo(luogo, nomeTextField.getText(), cittaTextField.getText(),
-					capienzaTextField.getText());
+			if (capienzaTextField.getText().length() > 0) {
+				Integer capienzaInput;
+				try {
+					capienzaInput = Integer.parseInt(capienzaTextField.getText());
+					luogo.setCapienza(capienzaInput);
+				} catch (NumberFormatException n) {
+					capienzaErrorLabel.setText("capienza non valida!");
+				}
+			}
+
+			if (!nomeTextField.getText().isEmpty())
+				luogo.setNome(nomeTextField.getText());
+			if (!cittaTextField.getText().isEmpty())
+				luogo.setCitta(cittaTextField.getText());
+			luogoService.updateLuogo(luogo);
+
 			initializeData(luogo);
 			nomeTextField.setText("");
 			cittaTextField.setText("");
 			capienzaTextField.setText("");
 			blockModificaButton();
 			dispatcher.renderView("gestioneluoghi");
-		} catch (IntegerFormatException e) {
-			capienzaErrorLabel.setText("capienza non valida!");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

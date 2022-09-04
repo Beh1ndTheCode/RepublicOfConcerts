@@ -7,7 +7,6 @@ import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Stadio;
 import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +32,7 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 	public AggiungiLuogoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		luoghiService = new RAMLuogoServiceImpl();
+		// luoghiService = new FileLuogoServiceImpl();
 	}
 
 	public void initialize() {
@@ -50,20 +50,29 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 	}
 
 	public void addTeatroAction(ActionEvent event) {
+		capienzaErrorLabel.setText("");
+		Integer capienzaInput;
 		try {
-			Luogo teatro = new Teatro();
-			capienzaErrorLabel.setText("");
-			luoghiService.addLuogo(teatro, nomeTextField.getText(), cittaTextField.getText(),
-					capienzaTextField.getText());
+			capienzaInput = Integer.parseInt(capienzaTextField.getText());
 
-			nomeTextField.setText("");
-			cittaTextField.setText("");
-			capienzaTextField.setText("");
-			blockAggiungiButton();
-			dispatcher.renderView("gestioneluoghi");
-		} catch (
+			if (capienzaInput >= 1) {
+				Teatro teatro = new Teatro();
+				teatro.setNome(nomeTextField.getText());
+				teatro.setCitta(cittaTextField.getText());
+				teatro.setCapienza(capienzaInput);
+				luoghiService.addLuogo(teatro);
 
-		IntegerFormatException e) {
+				nomeTextField.setText("");
+				cittaTextField.setText("");
+				capienzaTextField.setText("");
+				blockAggiungiButton();
+				dispatcher.renderView("gestioneluoghi");
+
+				return;
+			}
+			throw new NumberFormatException();
+
+		} catch (NumberFormatException e) {
 			capienzaErrorLabel.setText("capienza non valida");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
@@ -71,18 +80,28 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 	}
 
 	public void addStadioAction(ActionEvent event) {
+		capienzaErrorLabel.setText("");
+		Integer capienzaInput;
 		try {
-			Luogo stadio = new Stadio();
-			capienzaErrorLabel.setText("");
-			luoghiService.addLuogo(stadio, nomeTextField.getText(), cittaTextField.getText(),
-					capienzaTextField.getText());
+			capienzaInput = Integer.parseInt(capienzaTextField.getText());
+			if (capienzaInput >= 1) {
+				Stadio stadio = new Stadio();
+				stadio.setNome(nomeTextField.getText());
+				stadio.setCitta(cittaTextField.getText());
+				stadio.setCapienza(capienzaInput);
+				luoghiService.addLuogo(stadio);
 
-			nomeTextField.setText("");
-			cittaTextField.setText("");
-			capienzaTextField.setText("");
-			blockAggiungiButton();
-			dispatcher.renderView("gestioneluoghi");
-		} catch (IntegerFormatException e) {
+				nomeTextField.setText("");
+				cittaTextField.setText("");
+				capienzaTextField.setText("");
+				blockAggiungiButton();
+				dispatcher.renderView("gestioneluoghi");
+
+				return;
+			}
+			throw new NumberFormatException();
+
+		} catch (NumberFormatException e) {
 			capienzaErrorLabel.setText("capienza non valida");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);

@@ -5,11 +5,20 @@ import java.util.Set;
 
 public class Settore {
 
+	private Integer id;
 	private String nome;
 	private Integer capienza;
 	private Luogo luogo;
 
 	private Set<Tariffa> tariffe = new HashSet<>();
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;

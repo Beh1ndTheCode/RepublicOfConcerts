@@ -25,14 +25,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 
 	@Override
 	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
-		for (MetodoDiPagamento method : metodiAggiunti) {
-			if (metodo.getId() == method.getId()) {
-				metodiAggiunti.remove(method);
-				return;
-			}
-		}
-		throw new BusinessException();
-
+		metodiAggiunti.remove(metodo);
 	}
 
 	@Override
