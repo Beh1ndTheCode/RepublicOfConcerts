@@ -2,10 +2,6 @@ package it.univaq.disim.oop.roc.controller.viste;
 
 import java.time.format.DateTimeFormatter;
 
-import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.business.LuogoService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
@@ -27,20 +23,14 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 
 	private ViewDispatcher dispatcher;
 
-	private ConcertoService concertoService;
-
-	private LuogoService luoghiService;
-
 	private Concerto concerto;
 
 	private TipoMetodoDiPagamento tipoMetodo;
-	
+
 	private Utente utente;
 
 	public InfoConcertoSpettatoreController() {
 		dispatcher = ViewDispatcher.getInstance();
-		concertoService = new RAMConcertoServiceImpl();
-		luoghiService = new RAMLuogoServiceImpl();
 	}
 
 	public void initialize() {
@@ -50,7 +40,7 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 
-		tipoMetodo = concerto.getMetodo();
+		tipoMetodo = concerto.getTipoMetodo();
 		if (tipoMetodo == TipoMetodoDiPagamento.Carta)
 			metodoLabel.setText("Carta");
 
@@ -72,7 +62,7 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 		luogoLabel.setText(concerto.getLuogo().toString());
 
 	}
-	
+
 	public void InitializeUtente(Utente utente) {
 		this.utente = utente;
 		System.out.println(utente.getUsername());
@@ -81,5 +71,5 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 	public void prenotaBigliettoAction() throws ViewException {
 		dispatcher.openNewWindow("prenotabiglietto", concerto, utente);
 	}
-	
+
 }

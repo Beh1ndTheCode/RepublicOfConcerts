@@ -37,14 +37,12 @@ public class ConcertiController implements DataInitializable<Utente> {
 	private ViewDispatcher dispatcher;
 
 	private ConcertoService concertiService;
-	
-	private Utente utente;
 
 	public ConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertiService = new RAMConcertoServiceImpl();
 	}
-	
+
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());
@@ -60,8 +58,6 @@ public class ConcertiController implements DataInitializable<Utente> {
 	}
 
 	public void initializeData(Utente utente) {
-		this.utente = utente;
-		
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {

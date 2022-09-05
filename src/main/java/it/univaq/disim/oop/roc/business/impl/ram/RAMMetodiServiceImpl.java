@@ -23,7 +23,12 @@ public class RAMMetodiServiceImpl implements MetodiService {
 
 	@Override
 	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
-		metodiAggiunti.remove(metodo);
+		for (MetodoDiPagamento method : metodiAggiunti) {
+			if (metodo.getId() == method.getId()) {
+				metodiAggiunti.remove(metodo);
+				return;
+			}
+		}
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		}
 		return metodiDiPagamento;
 	}
-	
+
 	public List<MetodoDiPagamento> findAllCarte(Utente utente) throws BusinessException {
 		List<MetodoDiPagamento> carte = new ArrayList<>();
 		for (MetodoDiPagamento method : metodiAggiunti) {
@@ -44,7 +49,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 		}
 		return carte;
 	}
-	
+
 	public List<MetodoDiPagamento> findAllConti(Utente utente) throws BusinessException {
 		List<MetodoDiPagamento> conti = new ArrayList<>();
 		for (MetodoDiPagamento method : metodiAggiunti) {

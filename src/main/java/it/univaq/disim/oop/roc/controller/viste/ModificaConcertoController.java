@@ -1,9 +1,11 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
+import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
@@ -54,12 +56,16 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	private Concerto concerto;
 
+	private Luogo luogo;
+
 	private TipoMetodoDiPagamento tipoMetodo;
 
 	public ModificaConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertoService = new RAMConcertoServiceImpl();
 		luoghiService = new RAMLuogoServiceImpl();
+		// concertoService = new FileConcertoServiceImpl();
+		// luoghiService = new FileLuogoServiceImpl();
 	}
 
 	public void initialize() {
@@ -76,7 +82,7 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 
-		tipoMetodo = concerto.getMetodo();
+		tipoMetodo = concerto.getTipoMetodo();
 		if (tipoMetodo == TipoMetodoDiPagamento.Carta)
 			cartaRadioButton.setSelected(true);
 
@@ -119,14 +125,37 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void updateConcertoAction(ActionEvent event) throws BusinessException {
-		Luogo luogo;
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
 				luogo = concerto.getLuogo();
 			else
 				luogo = luoghiListView.getSelectionModel().getSelectedItem();
-			concertoService.updateConcerto(concerto, scalettaTextArea.getText(), artistiTextArea.getText(), tipoMetodo, giornoTextField.getText(), 
-					meseTextField.getText(), annoTextField.getText(), luogo);
+
+			if (giornoTextField.getText().isEmpty() || meseTextField.getText().isEmpty()
+					|| annoTextField.getText().isEmpty()) {
+				if (!(giornoTextField.getText().isEmpty() && meseTextField.getText().isEmpty()
+						&& annoTextField.getText().isEmpty()))
+					throw new InvalidDateException();
+			} else {
+				try {
+					LocalDate data = Utility.VerificaData(giornoTextField.getText(), meseTextField.getText(),
+							annoTextField.getText());
+					concerto.setData(data);
+				} catch (IntegerFormatException e) {
+					throw new IntegerFormatException();
+				} catch (InvalidDateException e) {
+					throw new InvalidDateException();
+				}
+			}
+
+			if (!scalettaTextArea.getText().isEmpty())
+				concerto.setScaletta(scalettaTextArea.getText());
+			if (!artistiTextArea.getText().isEmpty())
+				concerto.setArtista(artistiTextArea.getText());
+			concerto.setLuogo(luogo);
+			concerto.setTipoMetodo(tipoMetodo);
+			concertoService.updateConcerto(concerto);
+
 			dispatcher.renderView("gestioneconcerti");
 		} catch (IntegerFormatException e) {
 			dataErrorLabel.setText("data non valida");

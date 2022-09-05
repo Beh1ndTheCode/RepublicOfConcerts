@@ -38,7 +38,12 @@ public class RAMLuogoServiceImpl implements LuogoService {
 
 	@Override
 	public void deleteLuogo(Luogo luogo) throws BusinessException {
-		luoghiAggiunti.remove(luogo);
+		for (Luogo place : luoghiAggiunti) {
+			if (luogo.getId() == place.getId()) {
+				luoghiAggiunti.remove(luogo);
+				return;
+			}
+		}
 	}
 
 	@Override
@@ -111,7 +116,12 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	}
 
 	public void deleteSettore(Settore settore) throws BusinessException {
-		settoriAggiunti.remove(settore);
+		for (Settore sector : settoriAggiunti) {
+			if (settore.getId() == sector.getId()) {
+				settoriAggiunti.remove(settore);
+				return;
+			}
+		}
 	}
 
 	@Override

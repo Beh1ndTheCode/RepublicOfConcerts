@@ -1,10 +1,12 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.TariffeService;
+import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
@@ -47,8 +49,6 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	private LuogoService luoghiService;
 
-	private Concerto concerto;
-	
 	private Luogo luogo;
 
 	public AggiungiConcertoController() {
@@ -56,6 +56,9 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		concertoService = new RAMConcertoServiceImpl();
 		luoghiService = new RAMLuogoServiceImpl();
 		tariffeService = new RAMTariffeServiceImpl();
+		// concertoService = new FileConcertoServiceImpl();
+		// luoghiService = new FileLuogoServiceImpl();
+		// tariffeService = new FileTariffeServiceImpl();
 	}
 
 	public void initialize() {
@@ -94,12 +97,17 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
 				throw new SelectionException();
-			this.concerto = concertoService.addConcerto(artistaTextField.getText(),
-					luoghiListView.getSelectionModel().getSelectedItem(), giornoTextField.getText(),
-					meseTextField.getText(), annoTextField.getText());
-			this.luogo = luoghiListView.getSelectionModel().getSelectedItem();
+
+			Concerto concerto = new Concerto();
+			LocalDate data = Utility.VerificaData(giornoTextField.getText(), meseTextField.getText(),
+					annoTextField.getText());
+			concerto.setArtista(artistaTextField.getText());
+			concerto.setLuogo(luoghiListView.getSelectionModel().getSelectedItem());
+			concerto.setData(data);
+			concerto = concertoService.addConcerto(concerto);
+			luogo = luoghiListView.getSelectionModel().getSelectedItem();
 			tariffeService.addTariffe(concerto, luogo);
-			
+
 			luoghiListView.getSelectionModel().clearSelection();
 			luogoLabel.setText("");
 			dataErrorLabel.setText("");

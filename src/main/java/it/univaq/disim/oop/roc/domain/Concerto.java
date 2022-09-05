@@ -11,23 +11,23 @@ import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 
 public class Concerto {
 
-	private String id;
+	private Integer id;
 	private String scaletta;
 	private LocalDate data;
 	private String artista;// possono essere anche più di uno, è una stringa descrittiva
 
 	private Luogo luogo;
-	private TipoMetodoDiPagamento metodo;
+	private TipoMetodoDiPagamento tipoMetodo;
 	private Tour tour;
 
 	private Set<Tariffa> tariffe = new HashSet<>();
 	private List<Recensione> recensioni = new ArrayList<>();
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,12 +63,12 @@ public class Concerto {
 		this.luogo = luogo;
 	}
 
-	public TipoMetodoDiPagamento getMetodo() {
-		return metodo;
+	public TipoMetodoDiPagamento getTipoMetodo() {
+		return tipoMetodo;
 	}
 
-	public void setMetodo(TipoMetodoDiPagamento metodo) {
-		this.metodo = metodo;
+	public void setTipoMetodo(TipoMetodoDiPagamento tipoMetodo) {
+		this.tipoMetodo = tipoMetodo;
 	}
 
 	public Tour getTour() {
