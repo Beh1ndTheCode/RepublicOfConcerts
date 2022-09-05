@@ -6,8 +6,9 @@ public class Recensione {
 	private String titolo;
 	private String descrizione;
 	private Integer valutazione;
+	private Boolean approvato;
 
-	private Spettatore spettatore;
+	private Utente utente;
 	private Concerto concerto;
 
 	public Integer getId() {
@@ -42,12 +43,12 @@ public class Recensione {
 		this.valutazione = valutazione;
 	}
 
-	public Spettatore getSpettatore() {
-		return spettatore;
+	public Utente getUtente() {
+		return utente;
 	}
 
-	public void setSpettatore(Spettatore spettatore) {
-		this.spettatore = spettatore;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	public Concerto getConcerto() {
@@ -56,6 +57,14 @@ public class Recensione {
 
 	public void setConcerto(Concerto concerto) {
 		this.concerto = concerto;
+	}
+
+	public Boolean getApprovato() {
+		return approvato;
+	}
+
+	public void setApprovato(Boolean approvato) {
+		this.approvato = approvato;
 	}
 
 }

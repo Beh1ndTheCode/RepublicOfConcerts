@@ -2,15 +2,12 @@ package it.univaq.disim.oop.roc.controller.finestre;
 
 import java.util.List;
 
-import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.TariffeService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
-import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Tariffa;
@@ -46,17 +43,11 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 	@FXML
 	private Button compraButton;
 
-	private ConcertoService concertoService;
-
 	private TariffeService tariffeService;
 
 	private MetodiService metodiService;
 
 	private ViewDispatcher dispatcher;
-
-	private Concerto concerto;
-
-	private Utente utente;
 
 	private TipoMetodoDiPagamento tipoMetodo;
 
@@ -73,7 +64,6 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 	}
 
 	public void initializeData(Concerto concerto) {
-		this.concerto = concerto;
 		this.tipoMetodo = concerto.getTipoMetodo();
 		if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
 			metodoText.setText("Le tue carte");
@@ -92,7 +82,6 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 	}
 
 	public void initializeUtente(Utente utente) {
-		this.utente = utente;
 		List<MetodoDiPagamento> metodi;
 		try {
 			if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
@@ -150,8 +139,9 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
 		try {
-			dispatcher.openNewWindow("checkout", settoriListView.getSelectionModel().getSelectedItem(), metodiListView.getSelectionModel().getSelectedItem());
 			dispatcher.closeWindowView();
+			dispatcher.openNewWindow("checkout", settoriListView.getSelectionModel().getSelectedItem(),
+					metodiListView.getSelectionModel().getSelectedItem());
 		} catch (ViewException e) {
 			dispatcher.renderError(e);
 		}

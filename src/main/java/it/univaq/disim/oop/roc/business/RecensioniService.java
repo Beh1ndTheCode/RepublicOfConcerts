@@ -4,26 +4,22 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Recensione;
-import it.univaq.disim.oop.roc.domain.Spettatore;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface RecensioniService {
 
-	void addRecensione(Spettatore spettatore, Concerto concerto, String titolo, String descrizione, Integer valutazione)
-			throws BusinessException;
+	void addRecensione(Recensione recensione) throws BusinessException;
 
-	void updateRecensione(Recensione recensione, String titolo, String descrizione, Integer valutazione)
-			throws BusinessException;
+	// Utilizzato sia per aggiornare che per approvare una recensione
+	void updateRecensione(Recensione recensione) throws BusinessException;
 
+	// Utilizzato sia per eliminare che per rifiutare una recensione
 	void deleteRecensione(Recensione recensione) throws BusinessException;
 
-	void acceptRecensione(Recensione recensione) throws BusinessException;
+	List<Recensione> findRecensioniByConcerto(Concerto concerto) throws BusinessException;
 
-	void rejectRecensione(Recensione recensione) throws BusinessException;
-
-	List<Recensione> findRecensioniByConcert(Concerto concerto) throws BusinessException;
-
-	List<Recensione> findRecensioniByUser(Spettatore spettatore) throws BusinessException;
+	List<Recensione> findRecensioniByUtente(Utente utente) throws BusinessException;
 
 	List<Recensione> findRecensioniInAttesa() throws BusinessException;
 

@@ -6,10 +6,7 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
-import it.univaq.disim.oop.roc.domain.Stadio;
-import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 
 public class RAMLuogoServiceImpl implements LuogoService {
 
@@ -58,16 +55,21 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	}
 
 	@Override
+	public Luogo findLuogoById(int id) throws BusinessException {
+		return luoghiAggiunti.get(id);
+	}
+
+	@Override
 	public Integer getCapienzaRimanente(Luogo luogo) {
 		Integer capienzaRimanente = luogo.getCapienza();
-		if (luogo instanceof Stadio) {
+		if (luogo.getTipologiaLuogo().toString().equals("Stadio")) {
 			for (Settore sector : settoriAggiunti) {
 				if (sector.getLuogo().equals(luogo)) {
 					capienzaRimanente -= sector.getCapienza();
 				}
 			}
 		}
-		if (luogo instanceof Teatro) {
+		if (luogo.getTipologiaLuogo().toString().equals("Teatro")) {
 			for (Settore sector : settoriAggiunti) {
 				if (sector.getLuogo().equals(luogo)) {
 					capienzaRimanente -= ((sector.getCapienza() * 10) / 7);
@@ -76,27 +78,6 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		}
 
 		return capienzaRimanente;
-	}
-
-	@Override
-	public void verificaCapienza(Luogo luogo, Integer capienzaSettore) throws BusinessException {
-		Integer capienzaRimanente = getCapienzaRimanente(luogo);
-		capienzaRimanente -= capienzaSettore;
-		if (capienzaRimanente < 0)
-			throw new NumberOutOfBoundsException();
-
-		return;
-	}
-
-	@Override
-	public void verificaCapienza(Luogo luogo, Settore settore, Integer capienzaSettore) throws BusinessException {
-		Integer capienzaRimanente = getCapienzaRimanente(luogo);
-		capienzaRimanente += settore.getCapienza();
-		capienzaRimanente -= capienzaSettore;
-		if (capienzaRimanente < 0)
-			throw new NumberOutOfBoundsException();
-
-		return;
 	}
 
 	@Override
@@ -134,6 +115,11 @@ public class RAMLuogoServiceImpl implements LuogoService {
 		}
 
 		return settori;
+	}
+
+	@Override
+	public Settore findSettoreById(int id) throws BusinessException {
+		return settoriAggiunti.get(id);
 	}
 
 }

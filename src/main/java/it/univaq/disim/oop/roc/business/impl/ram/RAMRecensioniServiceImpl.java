@@ -6,108 +6,79 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.RecensioniService;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Recensione;
-import it.univaq.disim.oop.roc.domain.Spettatore;
+import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class RAMRecensioniServiceImpl implements RecensioniService {
 
-	private static List<Recensione> recensioniInAttesa = new ArrayList<>();
-	private static List<Recensione> recensioniConfermate = new ArrayList<>();
+	private static List<Recensione> recensioniAggiunte = new ArrayList<>();
+
+	private static int idCounterRecensioni = 0;
 
 	@Override
-	public void addRecensione(Spettatore spettatore, Concerto concerto, String titolo, String descrizione,
-			Integer valutazione) throws BusinessException {
-		Recensione recensione = new Recensione();
-
-		recensione.setTitolo(titolo);
-		recensione.setDescrizione(descrizione);
-		recensione.setValutazione(valutazione);
-		recensione.setSpettatore(spettatore);
-		recensione.setConcerto(concerto);
-
-		recensioniInAttesa.add(recensione);
-		return;
+	public void addRecensione(Recensione recensione) throws BusinessException {
+		recensione.setId(idCounterRecensioni++);
+		recensioniAggiunte.add(recensione);
 	}
 
 	@Override
-	public void updateRecensione(Recensione recensione, String titolo, String descrizione, Integer valutazione)
-			throws BusinessException {
-		recensione.setValutazione(valutazione);
-		if (!titolo.equals(null))
-			recensione.setTitolo(titolo);
-		if (!descrizione.equals(null))
-			recensione.setDescrizione(descrizione);
-
-		return;
+	public void updateRecensione(Recensione recensione) throws BusinessException {
+		for (Recensione review : recensioniAggiunte) {
+			if (recensione.getId() == review.getId()) {
+				review.setTitolo(recensione.getTitolo());
+				review.setDescrizione(recensione.getDescrizione());
+				review.setValutazione(recensione.getValutazione());
+				review.setApprovato(recensione.getApprovato());
+				return;
+			}
+		}
 	}
 
 	@Override
 	public void deleteRecensione(Recensione recensione) throws BusinessException {
-		recensioniConfermate.remove(recensione);
-
-		return;
+		for (Recensione review : recensioniAggiunte) {
+			if (recensione.getId() == review.getId()) {
+				recensioniAggiunte.remove(recensione);
+				return;
+			}
+		}
 	}
 
 	@Override
-	public void acceptRecensione(Recensione recensione) throws BusinessException {
-		recensioniConfermate.add(recensione);
-		recensioniInAttesa.add(recensione);
+	public List<Recensione> findRecensioniByConcerto(Concerto concerto) throws BusinessException {
+		List<Recensione> recensioniConcerto = new ArrayList<>();
 
-		return;
-	}
-
-	@Override
-	public void rejectRecensione(Recensione recensione) throws BusinessException {
-		recensioniInAttesa.remove(recensione);
-
-		return;
-	}
-
-	@Override
-	public List<Recensione> findRecensioniByConcert(Concerto concerto) throws BusinessException {
-		List<Recensione> recensioni = new ArrayList<>();
-
-		Recensione recensioneProva = new Recensione();
-		recensioneProva.setTitolo("Bellissima esperienza");
-		recensioneProva.setDescrizione("Teatro prova");
-		recensioneProva.setValutazione(4);
-		recensioni.add(recensioneProva);
-
-		for (Recensione review : recensioniConfermate) {
+		for (Recensione review : recensioniAggiunte) {
 			if (review.getConcerto().equals(concerto))
-				recensioni.add(review);
+				recensioniConcerto.add(review);
 		}
 
-		return recensioni;
+		return recensioniConcerto;
 	}
 
 	@Override
-	public List<Recensione> findRecensioniByUser(Spettatore spettatore) throws BusinessException {
-		List<Recensione> recensioni = new ArrayList<>();
+	public List<Recensione> findRecensioniByUtente(Utente utente) throws BusinessException {
+		List<Recensione> recensioniUtente = new ArrayList<>();
 
-		Recensione recensioneProva = new Recensione();
-		recensioneProva.setTitolo("Bellissima esperienza");
-		recensioneProva.setDescrizione("Teatro prova");
-		recensioneProva.setValutazione(5);
-		recensioni.add(recensioneProva);
-
-		for (Recensione review : recensioniConfermate) {
-			if (review.getSpettatore().equals(spettatore))
-				recensioni.add(review);
+		for (Recensione review : recensioniAggiunte) {
+			if (review.getUtente().equals(utente))
+				recensioniUtente.add(review);
 		}
 
-		return recensioni;
+		return recensioniUtente;
 	}
 
 	@Override
 	public List<Recensione> findRecensioniInAttesa() throws BusinessException {
-		List<Recensione> recensioni = new ArrayList<>();
+		List<Recensione> recensioniInAttesa = new ArrayList<>();
 
-		for (Recensione review : recensioniInAttesa) {
-			recensioni.add(review);
+		for (Recensione review : recensioniAggiunte) {
+			if (!review.getApprovato()) {
+				recensioniInAttesa.add(review);
+			}
 		}
 
-		return recensioni;
+		return recensioniInAttesa;
 	}
 
 }

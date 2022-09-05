@@ -9,10 +9,8 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
-import it.univaq.disim.oop.roc.domain.Stadio;
-import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
+import it.univaq.disim.oop.roc.tipi.TipologiaLuogo;
 
 public class FileLuogoServiceImpl implements LuogoService {
 
@@ -32,32 +30,16 @@ public class FileLuogoServiceImpl implements LuogoService {
 					writer.println(String.join(Utility.SEPARATORE, righe));
 				}
 				StringBuilder row = new StringBuilder();
-
-				if (luogo instanceof Teatro) {
-					row.append(contatore);
-					row.append(Utility.SEPARATORE);
-					row.append("Teatro");
-					row.append(Utility.SEPARATORE);
-					row.append(luogo.getNome());
-					row.append(Utility.SEPARATORE);
-					row.append(luogo.getCitta());
-					row.append(Utility.SEPARATORE);
-					row.append(luogo.getCapienza());
-					writer.println(row.toString());
-				}
-
-				if (luogo instanceof Stadio) {
-					row.append(contatore);
-					row.append(Utility.SEPARATORE);
-					row.append("Conto");
-					row.append(Utility.SEPARATORE);
-					row.append(luogo.getNome());
-					row.append(Utility.SEPARATORE);
-					row.append(luogo.getCitta());
-					row.append(Utility.SEPARATORE);
-					row.append(luogo.getCapienza());
-					writer.println(row.toString());
-				}
+				row.append(contatore);
+				row.append(Utility.SEPARATORE);
+				row.append(luogo.getTipologiaLuogo().toString());
+				row.append(Utility.SEPARATORE);
+				row.append(luogo.getNome());
+				row.append(Utility.SEPARATORE);
+				row.append(luogo.getCitta());
+				row.append(Utility.SEPARATORE);
+				row.append(luogo.getCapienza());
+				writer.println(row.toString());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -73,31 +55,16 @@ public class FileLuogoServiceImpl implements LuogoService {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == luogo.getId()) {
-						if (luogo instanceof Teatro) {
-							StringBuilder row = new StringBuilder();
-							row.append(luogo.getId());
-							row.append(Utility.SEPARATORE);
-							row.append("Teatro");
-							row.append(luogo.getNome());
-							row.append(Utility.SEPARATORE);
-							row.append(luogo.getCitta());
-							row.append(Utility.SEPARATORE);
-							row.append(luogo.getCapienza());
-							writer.println(row.toString());
-						}
-						if (luogo instanceof Stadio) {
-							StringBuilder row = new StringBuilder();
-							row.append(luogo.getId());
-							row.append(Utility.SEPARATORE);
-							row.append("Stadio");
-							row.append(Utility.SEPARATORE);
-							row.append(luogo.getNome());
-							row.append(Utility.SEPARATORE);
-							row.append(luogo.getCitta());
-							row.append(Utility.SEPARATORE);
-							row.append(luogo.getCapienza());
-							writer.println(row.toString());
-						}
+						StringBuilder row = new StringBuilder();
+						row.append(luogo.getId());
+						row.append(Utility.SEPARATORE);
+						row.append(luogo.getTipologiaLuogo().toString());
+						row.append(luogo.getNome());
+						row.append(Utility.SEPARATORE);
+						row.append(luogo.getCitta());
+						row.append(Utility.SEPARATORE);
+						row.append(luogo.getCapienza());
+						writer.println(row.toString());
 					} else {
 						writer.println(String.join(Utility.SEPARATORE, righe));
 					}
@@ -135,50 +102,46 @@ public class FileLuogoServiceImpl implements LuogoService {
 	}
 
 	@Override
-	public void verificaCapienza(Luogo luogo, Integer capienzaSettore)
-			throws BusinessException, NumberOutOfBoundsException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void verificaCapienza(Luogo luogo, Settore settore, Integer capienzaSettore)
-			throws BusinessException, NumberOutOfBoundsException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public List<Luogo> findAllLuoghi() throws BusinessException {
 		List<Luogo> result = new ArrayList<>();
 		try {
 			FileData fileData = Utility.readAllRows(LUOGHI_FILE_NAME);
 			for (String[] colonne : fileData.getRighe()) {
-
-				if (colonne[1].equals("Teatro")) {
-					Teatro teatro = new Teatro();
-					teatro.setId(Integer.parseInt(colonne[0]));
-					teatro.setNome(colonne[2]);
-					teatro.setCitta(colonne[3]);
-					teatro.setCapienza(Integer.parseInt(colonne[4]));
-					result.add(teatro);
-				}
-
-				if (colonne[1].equals("Stadio")) {
-					Stadio stadio = new Stadio();
-					stadio.setId(Integer.parseInt(colonne[0]));
-					stadio.setNome(colonne[2]);
-					stadio.setCitta(colonne[3]);
-					stadio.setCapienza(Integer.parseInt(colonne[4]));
-					result.add(stadio);
-				}
+				Luogo luogo = new Luogo();
+				luogo.setId(Integer.parseInt(colonne[0]));
+				luogo.setTipologiaLuogo(TipologiaLuogo.valueOf(colonne[1]));
+				luogo.setNome(colonne[2]);
+				luogo.setCitta(colonne[3]);
+				luogo.setCapienza(Integer.parseInt(colonne[4]));
+				result.add(luogo);
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
 
+		return result;
+	}
+
+	@Override
+	public Luogo findLuogoById(int id) throws BusinessException {
+		Luogo result = new Luogo();
+		try {
+			FileData fileData = Utility.readAllRows(LUOGHI_FILE_NAME);
+			for (String[] colonne : fileData.getRighe()) {
+				if (Integer.parseInt(colonne[0]) == id) {
+					result.setId(id);
+					result.setTipologiaLuogo(TipologiaLuogo.valueOf(colonne[1]));
+					result.setNome(colonne[2]);
+					result.setCitta(colonne[3]);
+					result.setCapienza(Integer.parseInt(colonne[4]));
+					return result;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
 		return result;
 	}
 
@@ -261,6 +224,30 @@ public class FileLuogoServiceImpl implements LuogoService {
 			throw new BusinessException(e);
 		}
 
+		return result;
+	}
+
+	@Override
+	public Settore findSettoreById(int id) throws BusinessException {
+		Settore result = new Settore();
+		try {
+			FileData fileData = Utility.readAllRows(SETTORI_FILE_NAME);
+			for (String[] colonne : fileData.getRighe()) {
+				if (Integer.parseInt(colonne[0]) == id) {
+					result.setId(Integer.parseInt(colonne[0]));
+					result.setNome(colonne[2]);
+					result.setCapienza(Integer.parseInt(colonne[3]));
+
+					Luogo luogo = findLuogoById(Integer.parseInt(colonne[2]));
+					result.setLuogo(luogo);
+
+					return result;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
 		return result;
 	}
 

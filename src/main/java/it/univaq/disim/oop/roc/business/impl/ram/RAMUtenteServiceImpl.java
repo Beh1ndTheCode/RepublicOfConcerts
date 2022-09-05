@@ -73,4 +73,9 @@ public class RAMUtenteServiceImpl implements UtenteService {
 		}
 	}
 
+	@Override
+	public Utente findUtenteById(int id) throws BusinessException {
+		return utentiAggiunti.get(id);
+	}
+
 }

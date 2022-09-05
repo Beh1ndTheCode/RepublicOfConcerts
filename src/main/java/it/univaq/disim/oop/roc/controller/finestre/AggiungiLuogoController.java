@@ -4,9 +4,8 @@ import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
-import it.univaq.disim.oop.roc.domain.Stadio;
-import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.tipi.TipologiaLuogo;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,11 +55,12 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 			capienzaInput = Integer.parseInt(capienzaTextField.getText());
 
 			if (capienzaInput >= 1) {
-				Teatro teatro = new Teatro();
-				teatro.setNome(nomeTextField.getText());
-				teatro.setCitta(cittaTextField.getText());
-				teatro.setCapienza(capienzaInput);
-				luoghiService.addLuogo(teatro);
+				Luogo luogo = new Luogo();
+				luogo.setNome(nomeTextField.getText());
+				luogo.setTipologiaLuogo(TipologiaLuogo.Teatro);
+				luogo.setCitta(cittaTextField.getText());
+				luogo.setCapienza(capienzaInput);
+				luoghiService.addLuogo(luogo);
 
 				nomeTextField.setText("");
 				cittaTextField.setText("");
@@ -85,11 +85,12 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 		try {
 			capienzaInput = Integer.parseInt(capienzaTextField.getText());
 			if (capienzaInput >= 1) {
-				Stadio stadio = new Stadio();
-				stadio.setNome(nomeTextField.getText());
-				stadio.setCitta(cittaTextField.getText());
-				stadio.setCapienza(capienzaInput);
-				luoghiService.addLuogo(stadio);
+				Luogo luogo = new Luogo();
+				luogo.setNome(nomeTextField.getText());
+				luogo.setTipologiaLuogo(TipologiaLuogo.Stadio);
+				luogo.setCitta(cittaTextField.getText());
+				luogo.setCapienza(capienzaInput);
+				luoghiService.addLuogo(luogo);
 
 				nomeTextField.setText("");
 				cittaTextField.setText("");

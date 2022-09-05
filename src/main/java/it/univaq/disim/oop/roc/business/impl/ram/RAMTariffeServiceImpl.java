@@ -50,4 +50,9 @@ public class RAMTariffeServiceImpl implements TariffeService {
 		return tariffe;
 	}
 
+	@Override
+	public Tariffa findTariffaById(int id) throws BusinessException {
+		return tariffeAggiunte.get(id);
+	}
+
 }

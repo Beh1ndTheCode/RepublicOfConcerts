@@ -3,12 +3,15 @@ package it.univaq.disim.oop.roc.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Luogo {
+import it.univaq.disim.oop.roc.tipi.TipologiaLuogo;
+
+public class Luogo {
 
 	private Integer id;
 	private String nome;
 	private String citta;
 	private Integer capienza;
+	private TipologiaLuogo tipologiaLuogo;
 
 	private List<Concerto> concerti = new ArrayList<>();
 	private List<Settore> settori = new ArrayList<>();
@@ -60,4 +63,17 @@ public abstract class Luogo {
 	public void setSettori(List<Settore> settori) {
 		this.settori = settori;
 	}
+
+	public TipologiaLuogo getTipologiaLuogo() {
+		return tipologiaLuogo;
+	}
+
+	public void setTipologiaLuogo(TipologiaLuogo tipologiaLuogo) {
+		this.tipologiaLuogo = tipologiaLuogo;
+	}
+
+	public String toString() {
+		return getTipologiaLuogo().toString() + ", " + getNome() + ", " + getCitta();
+	}
+
 }

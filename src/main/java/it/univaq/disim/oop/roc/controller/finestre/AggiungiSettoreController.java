@@ -5,8 +5,6 @@ import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
-import it.univaq.disim.oop.roc.domain.Stadio;
-import it.univaq.disim.oop.roc.domain.Teatro;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
@@ -63,10 +61,13 @@ public class AggiungiSettoreController implements DataInitializable<Luogo> {
 			} catch (NumberFormatException e) {
 				throw new NumberFormatException();
 			}
-			luoghiService.verificaCapienza(luogo, capienzaInput);
+			Integer capienzaRimanente = luoghiService.getCapienzaRimanente(luogo);
+			capienzaRimanente -= capienzaInput;
+			if (capienzaRimanente < 0)
+				throw new NumberOutOfBoundsException();
 
 			Settore settore = new Settore();
-			if (luogo instanceof Teatro) {
+			if (luogo.getTipologiaLuogo().toString().equals("Teatro")) {
 				settore.setNome(nomeTextField.getText());
 				capienzaInput -= ((capienzaInput * 3) / 10);
 				settore.setCapienza(capienzaInput);
@@ -74,7 +75,7 @@ public class AggiungiSettoreController implements DataInitializable<Luogo> {
 				luogo.getSettori().add(settore);
 			}
 
-			if (luogo instanceof Stadio) {
+			if (luogo.getTipologiaLuogo().toString().equals("Stadio")) {
 				settore.setNome(nomeTextField.getText());
 				settore.setCapienza(capienzaInput);
 				settore.setLuogo(luogo);

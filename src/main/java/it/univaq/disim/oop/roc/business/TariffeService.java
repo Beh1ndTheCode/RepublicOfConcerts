@@ -15,4 +15,5 @@ public interface TariffeService {
 
 	List<Tariffa> findAllTariffe(Concerto concerto) throws BusinessException;
 
+	Tariffa findTariffaById(int id) throws BusinessException;
 }

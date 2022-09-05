@@ -33,7 +33,7 @@ public class RAMTourServiceImpl implements TourService {
 	@Override
 	public List<Tour> findAllTours() throws BusinessException {
 		List<Tour> tours = new ArrayList<>();
-		
+
 		for (Tour tour : tourAggiunti) {
 			tours.add(tour);
 		}
@@ -43,23 +43,27 @@ public class RAMTourServiceImpl implements TourService {
 
 	@Override
 	public void deleteTour(Tour tour) throws BusinessException {
-		tourAggiunti.remove(tour);
+		for (Tour t : tourAggiunti) {
+			if (t.getId() == tour.getId()) {
+				tourAggiunti.remove(tour);
+				return;
+			}
+		}
 	}
 
 	@Override
 	public void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
 		for (Concerto concert : concerti) {
-			concert.setTour(tour);
-			concert.setArtista(tour.getArtista());
-			if (!tour.getConcerti().contains(concert))
-				tour.getConcerti().add(concert);
+			if (concert.getTour() == null || !(concert.getTour().getId() == tour.getId())) {
+				concert.setTour(tour);
+			}
 		}
 	}
 
 	@Override
 	public void deleteConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
 		for (Concerto concert : concerti)
-			tour.getConcerti().remove(concert);
+			concert.setTour(null);
 	}
-	
+
 }

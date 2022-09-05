@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.univaq.disim.oop.roc.business.ConcertoService;
+import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
@@ -99,6 +101,35 @@ public class FileTariffeServiceImpl implements TariffeService {
 			throw new BusinessException(e);
 		}
 
+		return result;
+	}
+
+	@Override
+	public Tariffa findTariffaById(int id) throws BusinessException {
+		Tariffa result = new Tariffa();
+		try {
+			FileData fileData = Utility.readAllRows(TARIFFE_FILE_NAME);
+			for (String[] colonne : fileData.getRighe()) {
+				if (Integer.parseInt(colonne[0]) == id) {
+					result.setId(Integer.parseInt(colonne[0]));
+					result.setSettore(null);
+					result.setPrezzo(Float.parseFloat(colonne[3]));
+
+					ConcertoService concertoService = new FileConcertoServiceImpl();
+					Concerto concerto = concertoService.findConcertoById(Integer.parseInt(colonne[1]));
+					result.setConcerto(concerto);
+
+					LuogoService luogoService = new FileLuogoServiceImpl();
+					Settore settore = luogoService.findSettoreById(Integer.parseInt(colonne[2]));
+					result.setSettore(settore);
+
+					return result;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
 		return result;
 	}
 

@@ -120,7 +120,29 @@ public class FileUtenteServiceImpl implements UtenteService {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
+	}
 
+	@Override
+	public Utente findUtenteById(int id) throws BusinessException {
+		Spettatore result = new Spettatore();
+		try {
+			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
+			for (String[] colonne : fileData.getRighe()) {
+				if (Integer.parseInt(colonne[0]) == id) {
+					result.setId(Integer.parseInt(colonne[0]));
+					result.setUsername(colonne[1]);
+					result.setPassword(colonne[2]);
+					result.setNome(colonne[3]);
+					result.setCognome(colonne[4]);
+					result.setEta(Integer.parseInt(colonne[5]));
+					return result;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
+		return result;
 	}
 
 }

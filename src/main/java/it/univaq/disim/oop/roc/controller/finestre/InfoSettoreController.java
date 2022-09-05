@@ -66,7 +66,11 @@ public class InfoSettoreController implements DataInitializable<Settore> {
 			if (capienzaTextField.getText().length() >= 0 && !capienzaTextField.getText().isEmpty()) {
 				try {
 					capienzaInput = Integer.parseInt(capienzaTextField.getText());
-					luogoService.verificaCapienza(settore.getLuogo(), settore, capienzaInput);
+					Integer capienzaRimanente = luogoService.getCapienzaRimanente(settore.getLuogo());
+					capienzaRimanente += settore.getCapienza();
+					capienzaRimanente -= capienzaInput;
+					if (capienzaRimanente < 0)
+						throw new NumberOutOfBoundsException();
 					settore.setCapienza(capienzaInput);
 				} catch (NumberFormatException e) {
 					errorLabel.setText("capienza non valida!");

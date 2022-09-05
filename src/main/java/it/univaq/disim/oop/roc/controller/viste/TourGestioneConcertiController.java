@@ -46,21 +46,22 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 		eliminaConcertiButton.setDisable(true);
 		allConcertiArtistaListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tourConcertiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		try {
-			List<Concerto> concerti = concertoService.findAllConcerti();
-			ObservableList<Concerto> concertiData = FXCollections.observableArrayList(concerti);
-			allConcertiArtistaListView.setItems(concertiData);
-		} catch (BusinessException e) {
-			dispatcher.renderError(e);
-		}
 	}
 
 	public void initializeData(Tour tour) {
 		this.tour = tour;
-		List<Concerto> concerti = tour.getConcerti();
-		if (!(concerti == null)) {
-			ObservableList<Concerto> concertiData = FXCollections.observableArrayList(concerti);
-			tourConcertiListView.setItems(concertiData);
+		try {
+			List<Concerto> concertiArtista = concertoService.findConcertiByArtista(tour.getArtista());
+			ObservableList<Concerto> concertiArtistaData = FXCollections.observableArrayList(concertiArtista);
+			allConcertiArtistaListView.setItems(concertiArtistaData);
+
+			List<Concerto> concertiTour = concertoService.findConcertiByTour(tour);
+			if (!(concertiTour == null)) {
+				ObservableList<Concerto> concertiTourData = FXCollections.observableArrayList(concertiTour);
+				tourConcertiListView.setItems(concertiTourData);
+			}
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
 		}
 	}
 
