@@ -13,7 +13,6 @@ import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
-import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -56,9 +55,9 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 
 	private Concerto concerto;
 
-	private TipoMetodoDiPagamento metodo;
+	private Utente utente;
 
-	private Spettatore spettatore;
+	private TipoMetodoDiPagamento tipoMetodo;
 
 	public PrenotaBigliettoController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -72,19 +71,18 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 
 	public void initialize() {
 		compraButton.setDisable(true);
-
 	}
 
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
-		this.metodo = concerto.getTipoMetodo();
-		if (metodo == TipoMetodoDiPagamento.Carta) {
+		this.tipoMetodo = concerto.getTipoMetodo();
+		if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
 			metodoText.setText("Le tue carte");
-			if (metodo == TipoMetodoDiPagamento.Conto)
-				metodoText.setText("I tuoi conti");
-		} else
+		} else if (tipoMetodo == TipoMetodoDiPagamento.Conto) {
+			metodoText.setText("I tuoi conti");
+		} else {
 			metodoText.setText("I tuoi metodi di pagamento");
-
+		}
 		try {
 			List<Tariffa> tariffe = tariffeService.findAllTariffe(concerto);
 			ObservableList<Tariffa> tariffeData = FXCollections.observableArrayList(tariffe);
@@ -95,13 +93,13 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 	}
 
 	public void initializeUtente(Utente utente) {
-		this.spettatore = (Spettatore) utente;
+		this.utente = utente;
 		List<MetodoDiPagamento> metodi;
 		try {
-			if (metodo == TipoMetodoDiPagamento.Carta) {
+			if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
 				metodi = metodiService.findAllCarte(utente);
-				if (metodo == TipoMetodoDiPagamento.Conto)
-					metodi = metodiService.findAllConti(utente);
+			} else if (tipoMetodo == TipoMetodoDiPagamento.Conto) {
+				metodi = metodiService.findAllConti(utente);
 			} else {
 				metodi = metodiService.findAllMetodi(utente);
 			}
@@ -136,9 +134,9 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 			metodoLabel.setText(metodiListView.getSelectionModel().getSelectedItem().toString());
 			BlockCompraButton();
 		} catch (SelectionException e) {
-			if (metodo == TipoMetodoDiPagamento.Carta) {
+			if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
 				metodoErrorLabel.setText("Seleziona una carta");
-				if (metodo == TipoMetodoDiPagamento.Conto)
+				if (tipoMetodo == TipoMetodoDiPagamento.Conto)
 					metodoErrorLabel.setText("Seleziona un conto");
 			} else
 				metodoErrorLabel.setText("Seleziona un metodo di pagamento");
@@ -155,7 +153,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		try {
 			Biglietto biglietto = new Biglietto();
 			biglietto.setConcerto(concerto);
-			biglietto.setSpettatore(spettatore);
+			biglietto.setUtente(utente);
 			biglietto.setTariffa(settoriListView.getSelectionModel().getSelectedItem());
 			concertoService.prenotaBiglietto(biglietto);
 		} catch (BusinessException e) {

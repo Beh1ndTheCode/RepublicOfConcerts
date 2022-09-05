@@ -6,7 +6,7 @@ public class Biglietto {
 	private Tariffa tariffa;
 	private Integer posto;
 	private Concerto concerto;
-	private Spettatore spettatore;
+	private Utente utente;
 
 	public Integer getNumeroBiglietto() {
 		return numeroBiglietto;
@@ -24,12 +24,12 @@ public class Biglietto {
 		this.concerto = concerto;
 	}
 
-	public Spettatore getSpettatore() {
-		return spettatore;
+	public Utente getUtente() {
+		return utente;
 	}
 
-	public void setSpettatore(Spettatore spettatore) {
-		this.spettatore = spettatore;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	public Tariffa getTariffa() {
@@ -39,7 +39,7 @@ public class Biglietto {
 	public void setTariffa(Tariffa tariffa) {
 		this.tariffa = tariffa;
 	}
-	
+
 	public Integer getPosto() {
 		return posto;
 	}

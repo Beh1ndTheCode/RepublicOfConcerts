@@ -40,6 +40,7 @@ public class FileUtenteServiceImpl implements UtenteService {
 						utente.setPassword(password);
 						utente.setNome(colonne[4]);
 						utente.setCognome(colonne[5]);
+						utente.setEta(Integer.parseInt(colonne[6]));
 					} else {
 						throw new BusinessException("errore nella lettura del file");
 					}

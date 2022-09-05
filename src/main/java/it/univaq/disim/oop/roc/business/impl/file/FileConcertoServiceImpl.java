@@ -141,7 +141,7 @@ public class FileConcertoServiceImpl implements ConcertoService {
 				row.append(Utility.SEPARATORE);
 				row.append(biglietto.getConcerto().getId());
 				row.append(Utility.SEPARATORE);
-				row.append(biglietto.getSpettatore().getId());
+				row.append(biglietto.getUtente().getId());
 				row.append(Utility.SEPARATORE);
 				row.append(biglietto.getTariffa().getId());
 				writer.println(row.toString());
