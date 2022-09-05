@@ -44,5 +44,8 @@ public class Carta extends MetodoDiPagamento {
 	public void setCvv(Integer cvv) {
 		this.cvv = cvv;
 	}
-
+	
+	public String toString() {
+		return "carta" + ", " + getNome() + ", " + scadenza;
+	}
 }

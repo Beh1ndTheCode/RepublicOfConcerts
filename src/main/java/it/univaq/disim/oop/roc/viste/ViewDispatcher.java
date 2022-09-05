@@ -74,12 +74,12 @@ public class ViewDispatcher {
 		}
 	}
 	
-	public <T> void renderView(String viewName, T data, Utente utente) {
+	public <T> void renderView(String viewName, T data, T utente) {
 		try {
 			View<T> view = loadView(viewName);
 			DataInitializable<T> controllerData = view.getController();
 			controllerData.initializeData(data);
-			UtenteInitializable<Utente> controllerUtente = (UtenteInitializable<Utente>) view.getController();
+			UtenteInitializable<T> controllerUtente = (UtenteInitializable<T>) view.getController();
 			controllerUtente.initializeUtente(utente);
 			layout.setCenter(view.getView());
 		} catch (ViewException e) {
@@ -147,12 +147,12 @@ public class ViewDispatcher {
 		window.show();
 	}
 	
-	public <T> void openNewWindow(String windowName, T data, Utente utente) throws ViewException {
+	public <T> void openNewWindow(String windowName, T data, T utente) throws ViewException {
 		window = new Stage();
 		View<T> windowController = loadWindow(windowName);
 		DataInitializable<T> controllerData = windowController.getController();
 		controllerData.initializeData(data);
-		UtenteInitializable<Utente> controllerUtente = (UtenteInitializable<Utente>) windowController.getController();
+		UtenteInitializable<T> controllerUtente = (UtenteInitializable<T>) windowController.getController();
 		controllerUtente.initializeUtente(utente);
 		Parent windowView = windowController.getView();
 		Scene scene = new Scene(windowView);

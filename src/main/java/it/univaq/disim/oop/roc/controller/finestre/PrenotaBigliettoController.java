@@ -19,6 +19,7 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.SelectionException;
 import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
+import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,10 +64,8 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		dispatcher = ViewDispatcher.getInstance();
 		metodiService = new RAMMetodiServiceImpl();
 		tariffeService = new RAMTariffeServiceImpl();
-		concertoService = new RAMConcertoServiceImpl();
 		// metodiService = new FileMetodiServiceImpl();
 		// tariffeService = new FileTariffeServiceImpl();
-		// concertoService = new FileConcertoServiceImpl();
 	}
 
 	public void initialize() {
@@ -144,19 +143,16 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 	}
 
 	public void BlockCompraButton() {
-		if (metodoLabel != null && metodoLabel != null) {
+		if ((settoreLabel.getText() != "") && (metodoLabel.getText() != "")) {
 			compraButton.setDisable(false);
 		}
 	}
 
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
 		try {
-			Biglietto biglietto = new Biglietto();
-			biglietto.setConcerto(concerto);
-			biglietto.setUtente(utente);
-			biglietto.setTariffa(settoriListView.getSelectionModel().getSelectedItem());
-			concertoService.prenotaBiglietto(biglietto);
-		} catch (BusinessException e) {
+			dispatcher.openNewWindow("checkout", settoriListView.getSelectionModel().getSelectedItem(), metodiListView.getSelectionModel().getSelectedItem());
+			dispatcher.closeWindowView();
+		} catch (ViewException e) {
 			dispatcher.renderError(e);
 		}
 	}

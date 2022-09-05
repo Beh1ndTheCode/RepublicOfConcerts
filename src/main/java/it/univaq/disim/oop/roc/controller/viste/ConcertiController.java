@@ -37,6 +37,8 @@ public class ConcertiController implements DataInitializable<Utente> {
 	private ViewDispatcher dispatcher;
 
 	private ConcertoService concertiService;
+	
+	private Utente utente;
 
 	public ConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -58,10 +60,11 @@ public class ConcertiController implements DataInitializable<Utente> {
 	}
 
 	public void initializeData(Utente utente) {
+		this.utente = utente;
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {
-				dispatcher.renderView("infoconcertospettatore", param.getValue(), utente);
+				dispatcher.renderView("infoconcertospettatore", param.getValue(), this.utente);
 			});
 			return new SimpleObjectProperty<Button>(infoButton);
 		});

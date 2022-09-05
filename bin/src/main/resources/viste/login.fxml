@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.LoginController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="480.0" fitWidth="640.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/concerti-torino-2019-633x385.jpg" />
+         </image>
+         <effect>
+            <BoxBlur iterations="2">
+               <input>
+                  <ColorAdjust brightness="0.02" contrast="-0.26" hue="0.21" saturation="-0.19" />
+               </input></BoxBlur>
+         </effect>
+      </ImageView>
+      <ImageView fx:id="logo" fitHeight="202.0" fitWidth="251.0" layoutX="220.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Rock-music-elements-on-transparent-background-PNG.png" />
+         </image>
+         <effect>
+            <InnerShadow choke="1.0" height="0.0" radius="4.5" width="20.0" />
+         </effect>
+      </ImageView>
+      <Text fx:id="usernameText" fill="WHITE" layoutX="143.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font name="Arial Black" size="17.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <TextField fx:id="usernameField" alignment="CENTER" layoutX="247.0" layoutY="266.0" onKeyReleased="#blockLoginButton" style="-fx-background-color: FFFFFF;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <Text fx:id="passwordText" fill="WHITE" layoutX="143.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+         <font>
+            <Font name="Arial Black" size="17.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="247.0" layoutY="318.0" onKeyReleased="#blockLoginButton" style="-fx-background-color: FFFFFF;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </PasswordField>
+      <Label fx:id="loginErrorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="343.0" prefHeight="47.0" prefWidth="337.0" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="383.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="32.0" prefWidth="135.0" text="ACCEDI" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="signupViewButton" alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="428.0" mnemonicParsing="false" onAction="#goToSignupView" prefHeight="24.0" prefWidth="94.0" text="REGISTRATI" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="11.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

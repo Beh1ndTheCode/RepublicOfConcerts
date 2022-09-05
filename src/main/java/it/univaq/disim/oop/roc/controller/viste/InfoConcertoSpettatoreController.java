@@ -63,9 +63,8 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 
 	}
 
-	public void InitializeUtente(Utente utente) {
+	public void initializeUtente(Utente utente) {
 		this.utente = utente;
-		System.out.println(utente.getUsername());
 	}
 
 	public void prenotaBigliettoAction() throws ViewException {

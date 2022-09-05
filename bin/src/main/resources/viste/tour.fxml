@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.TourController">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="585.0" prefWidth="585.0">
+         <children>
+            <TableView fx:id="tourTableView" layoutX="13.0" layoutY="14.0" prefHeight="540.0" prefWidth="560.0">
+               <columns>
+                  <TableColumn fx:id="artistaTableColumn" prefWidth="238.5" text="Artista" />
+                  <TableColumn fx:id="nomeTableColumn" prefWidth="238.5" text="Nome" />
+                  <TableColumn fx:id="modificaTableColumn" prefWidth="82.0" text="Azioni" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

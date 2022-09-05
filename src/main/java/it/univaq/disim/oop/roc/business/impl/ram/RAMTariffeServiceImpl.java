@@ -22,6 +22,7 @@ public class RAMTariffeServiceImpl implements TariffeService {
 			tariffa.setId(idCounterTariffe++);
 			tariffa.setConcerto(concerto);
 			tariffa.setSettore(settore);
+			tariffa.setPrezzo(0f);
 			settore.getTariffe().add(tariffa);
 			concerto.getTariffe().add(tariffa);
 			tariffeAggiunte.add(tariffa);
