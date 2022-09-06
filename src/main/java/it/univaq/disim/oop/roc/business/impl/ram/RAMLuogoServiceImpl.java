@@ -60,18 +60,14 @@ public class RAMLuogoServiceImpl implements LuogoService {
 	}
 
 	@Override
-	public Integer getCapienzaRimanente(Luogo luogo) {
+	public Integer getCapienzaRimanente(Luogo luogo) throws BusinessException {
 		Integer capienzaRimanente = luogo.getCapienza();
-		if (luogo.getTipologiaLuogo().toString().equals("Stadio")) {
-			for (Settore sector : settoriAggiunti) {
-				if (sector.getLuogo().equals(luogo)) {
+		for (Settore sector : settoriAggiunti) {
+			if (sector.getLuogo().getId() == luogo.getId()) {
+				if (luogo.getTipologiaLuogo().toString().equals("Stadio")) {
 					capienzaRimanente -= sector.getCapienza();
 				}
-			}
-		}
-		if (luogo.getTipologiaLuogo().toString().equals("Teatro")) {
-			for (Settore sector : settoriAggiunti) {
-				if (sector.getLuogo().equals(luogo)) {
+				if (luogo.getTipologiaLuogo().toString().equals("Teatro")) {
 					capienzaRimanente -= ((sector.getCapienza() * 10) / 7);
 				}
 			}

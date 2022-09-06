@@ -28,5 +28,5 @@ public interface LuogoService {
 
 	void deleteSettore(Settore settore) throws BusinessException;
 
-	Integer getCapienzaRimanente(Luogo luogo);
+	Integer getCapienzaRimanente(Luogo luogo) throws BusinessException;
 }

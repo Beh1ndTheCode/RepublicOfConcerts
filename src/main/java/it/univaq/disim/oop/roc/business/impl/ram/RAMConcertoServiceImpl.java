@@ -30,7 +30,13 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 				concert.setLuogo(concerto.getLuogo());
 				concert.setData(concerto.getData());
 				concert.setScaletta(concerto.getScaletta());
-				concert.setTipoMetodo(concerto.getTipoMetodo());
+
+				concert.setTipoMetodo(null);
+				if (!(concerto.getTipoMetodo() == null))
+					concert.setTipoMetodo(concerto.getTipoMetodo());
+
+				if (concert.getTour() == null || (!(concert.getTour().getId() == concerto.getTour().getId())))
+					concert.setTour(concerto.getTour());
 			}
 		}
 	}
@@ -51,9 +57,8 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		List<Concerto> concertiArtista = new ArrayList<>();
 
 		for (Concerto concert : concertiAggiunti) {
-			if (concert.getArtista().toLowerCase().equals(artista.toLowerCase())) {
+			if (concert.getArtista().toLowerCase().equals(artista.toLowerCase()))
 				concertiArtista.add(concert);
-			}
 		}
 		return concertiArtista;
 	}
@@ -64,9 +69,8 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 		for (Concerto concert : concertiAggiunti) {
 			if (!(concert.getTour() == null)) {
-				if (concert.getTour().getId() == tour.getId()) {
+				if (concert.getTour().getId() == tour.getId())
 					concertiTour.add(concert);
-				}
 			}
 		}
 		return concertiTour;

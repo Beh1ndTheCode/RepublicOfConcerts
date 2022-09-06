@@ -71,11 +71,13 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 		});
 	}
 
+	@Override
 	public void initializeData(Luogo luogo) {
-		this.luogo = luogo;
-		capienzaRimanenteLabel.setText(luoghiService.getCapienzaRimanente(luogo).toString());
-		luogoLabel.setText(luogo.toString());
 		try {
+			this.luogo = luogo;
+			capienzaRimanenteLabel.setText(luoghiService.getCapienzaRimanente(luogo).toString());
+			luogoLabel.setText(luogo.toString());
+
 			List<Settore> settori = luoghiService.findAllSettori(luogo);
 			ObservableList<Settore> settoriData = FXCollections.observableArrayList(settori);
 			settoriTableView.setItems(settoriData);
@@ -84,6 +86,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 		}
 	}
 
+	@FXML
 	public void openAggiungiSettoreWindow(ActionEvent event) throws Exception {
 		dispatcher.openNewWindow("aggiungisettori", luogo);
 	}

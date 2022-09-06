@@ -2,9 +2,7 @@ package it.univaq.disim.oop.roc.domain;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
@@ -12,16 +10,15 @@ import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 public class Concerto {
 
 	private Integer id;
-	private String scaletta;
-	private LocalDate data;
 	private String artista;// possono essere anche più di uno, è una stringa descrittiva
-
 	private Luogo luogo;
+	private LocalDate data;
+	private String scaletta;
 	private TipoMetodoDiPagamento tipoMetodo;
 	private Tour tour;
 
 	private Set<Tariffa> tariffe = new HashSet<>();
-	private List<Recensione> recensioni = new ArrayList<>();
+	private Set<Recensione> recensioni = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -31,11 +28,11 @@ public class Concerto {
 		this.id = id;
 	}
 
-	public List<Recensione> getRecensioni() {
+	public Set<Recensione> getRecensioni() {
 		return recensioni;
 	}
 
-	public void setRecensioni(List<Recensione> recensioni) {
+	public void setRecensioni(Set<Recensione> recensioni) {
 		this.recensioni = recensioni;
 	}
 
@@ -93,14 +90,6 @@ public class Concerto {
 
 	public void setTariffe(Set<Tariffa> tariffe) {
 		this.tariffe = tariffe;
-	}
-
-	public List<Recensione> getRecensione() {
-		return recensioni;
-	}
-
-	public void setRecensione(List<Recensione> recensione) {
-		this.recensioni = recensione;
 	}
 
 	public String toString() {

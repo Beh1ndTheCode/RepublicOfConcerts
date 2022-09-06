@@ -146,6 +146,28 @@ public class FileLuogoServiceImpl implements LuogoService {
 	}
 
 	@Override
+	public Integer getCapienzaRimanente(Luogo luogo) throws BusinessException {
+		Integer capienzaRimanente = luogo.getCapienza();
+		try {
+			FileData fileData = Utility.readAllRows(SETTORI_FILE_NAME);
+			for (String[] colonne : fileData.getRighe()) {
+				if (Integer.parseInt(colonne[1]) == luogo.getId()) {
+					if (luogo.getTipologiaLuogo().toString().equals("Stadio")) {
+						capienzaRimanente -= Integer.parseInt(colonne[3]);
+					}
+					if (luogo.getTipologiaLuogo().toString().equals("Teatro")) {
+						capienzaRimanente -= (Integer.parseInt(colonne[3]) * 10) / 7;
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
+		return capienzaRimanente;
+	}
+
+	@Override
 	public void addSettore(Settore settore) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(SETTORI_FILE_NAME);
@@ -272,12 +294,6 @@ public class FileLuogoServiceImpl implements LuogoService {
 			throw new BusinessException(e);
 		}
 
-	}
-
-	@Override
-	public Integer getCapienzaRimanente(Luogo luogo) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

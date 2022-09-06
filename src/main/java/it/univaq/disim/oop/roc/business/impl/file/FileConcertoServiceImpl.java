@@ -39,6 +39,12 @@ public class FileConcertoServiceImpl implements ConcertoService {
 				row.append(concerto.getLuogo().getId());
 				row.append(Utility.SEPARATORE);
 				row.append(concerto.getData());
+				row.append(Utility.SEPARATORE);
+				row.append("Inserisci una scaletta");
+				row.append(Utility.SEPARATORE);
+				row.append("null");
+				row.append(Utility.SEPARATORE);
+				row.append("null");
 				writer.println(row.toString());
 				return concerto;
 			}
@@ -68,7 +74,19 @@ public class FileConcertoServiceImpl implements ConcertoService {
 						row.append(Utility.SEPARATORE);
 						row.append(concerto.getScaletta());
 						row.append(Utility.SEPARATORE);
-						row.append(concerto.getTipoMetodo().toString());
+
+						if (!(concerto.getTipoMetodo().toString().equals("null")))
+							row.append(concerto.getTipoMetodo().toString());
+						else
+							row.append("null");
+						row.append(Utility.SEPARATORE);
+
+						if (concerto.getTour().toString().equals("null")
+						/* || !(Integer.parseInt(colonne[6]) == concerto.getTour().getId()) */)
+							row.append(concerto.getTour().getId());
+						else
+							row.append("null");
+
 						writer.println(row.toString());
 					} else {
 						writer.println(String.join(Utility.SEPARATORE, righe));

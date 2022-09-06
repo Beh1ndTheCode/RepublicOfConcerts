@@ -3,9 +3,7 @@ package it.univaq.disim.oop.roc.controller.viste;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.business.TourService;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tour;
@@ -29,16 +27,14 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 
 	private ViewDispatcher dispatcher;
 
-	private TourService tourService;
-
 	private ConcertoService concertoService;
 
 	private Tour tour;
 
 	public TourGestioneConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
-		tourService = new RAMTourServiceImpl();
 		concertoService = new RAMConcertoServiceImpl();
+		// concertoService = new FileConcertoServiceImpl();
 	}
 
 	public void initialize() {
@@ -48,6 +44,7 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 		tourConcertiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 
+	@Override
 	public void initializeData(Tour tour) {
 		this.tour = tour;
 		try {
@@ -75,9 +72,13 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 			eliminaConcertiButton.setDisable(false);
 	}
 
+	@FXML
 	public void addConcertiAction(ActionEvent event) {
 		try {
-			tourService.addConcerti(tour, allConcertiArtistaListView.getSelectionModel().getSelectedItems());
+			for (Concerto concert : allConcertiArtistaListView.getSelectionModel().getSelectedItems()) {
+				concert.setTour(tour);
+				concertoService.updateConcerto(concert);
+			}
 			allConcertiArtistaListView.getSelectionModel().clearSelection();
 			initializeData(tour);
 			aggiungiButton.setDisable(true);
@@ -86,9 +87,13 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 		}
 	}
 
+	@FXML
 	public void deleteConcertiAction(ActionEvent event) {
 		try {
-			tourService.deleteConcerti(tour, tourConcertiListView.getSelectionModel().getSelectedItems());
+			for (Concerto concert : tourConcertiListView.getSelectionModel().getSelectedItems()) {
+				concert.setTour(null);
+				concertoService.updateConcerto(concert);
+			}
 			tourConcertiListView.getSelectionModel().clearSelection();
 			initializeData(tour);
 			eliminaConcertiButton.setDisable(true);

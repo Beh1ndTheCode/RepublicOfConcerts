@@ -2,7 +2,6 @@ package it.univaq.disim.oop.roc.business;
 
 import java.util.List;
 
-import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -14,9 +13,6 @@ public interface TourService {
 
 	void deleteTour(Tour tour) throws BusinessException;
 
-	void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException;
-
-	void deleteConcerti(Tour tour, List<Concerto> concerti) throws BusinessException;
-
 	List<Tour> findAllTours() throws BusinessException;
+
 }

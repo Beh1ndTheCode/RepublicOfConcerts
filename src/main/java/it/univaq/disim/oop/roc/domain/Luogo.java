@@ -1,7 +1,7 @@
 package it.univaq.disim.oop.roc.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.univaq.disim.oop.roc.tipi.TipologiaLuogo;
 
@@ -13,8 +13,8 @@ public class Luogo {
 	private Integer capienza;
 	private TipologiaLuogo tipologiaLuogo;
 
-	private List<Concerto> concerti = new ArrayList<>();
-	private List<Settore> settori = new ArrayList<>();
+	private Set<Concerto> concerti = new HashSet<>();
+	private Set<Settore> settori = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -48,19 +48,19 @@ public class Luogo {
 		this.capienza = capienza;
 	}
 
-	public List<Concerto> getConcerti() {
+	public Set<Concerto> getConcerti() {
 		return concerti;
 	}
 
-	public void setConcerti(List<Concerto> concerti) {
+	public void setConcerti(Set<Concerto> concerti) {
 		this.concerti = concerti;
 	}
 
-	public List<Settore> getSettori() {
+	public Set<Settore> getSettori() {
 		return settori;
 	}
 
-	public void setSettori(List<Settore> settori) {
+	public void setSettori(Set<Settore> settori) {
 		this.settori = settori;
 	}
 

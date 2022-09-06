@@ -1,29 +1,22 @@
 package it.univaq.disim.oop.roc.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Tour {
 
+	private Integer id;
 	private String nome;
 	private String artista;
-	private Integer id;
-	private List<Concerto> concerti = new ArrayList<>();
 
-	public List<Concerto> getConcerti() {
-		return concerti;
+	private Set<Concerto> concerti = new HashSet<>();
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setConcerti(List<Concerto> concerti) {
-		this.concerti = concerti;
-	}
-
-	public String getArtista() {
-		return artista;
-	}
-
-	public void setArtista(String artista) {
-		this.artista = artista;
+	public Integer getId() {
+		return id;
 	}
 
 	public String getNome() {
@@ -34,16 +27,24 @@ public class Tour {
 		this.nome = nome;
 	}
 
+	public String getArtista() {
+		return artista;
+	}
+
+	public void setArtista(String artista) {
+		this.artista = artista;
+	}
+
 	public String toString() {
 		return nome + ", " + artista;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public Set<Concerto> getConcerti() {
+		return concerti;
 	}
 
-	public Integer getId() {
-		return id;
+	public void setConcerti(Set<Concerto> concerti) {
+		this.concerti = concerti;
 	}
 
 }

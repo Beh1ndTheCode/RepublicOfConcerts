@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.TourService;
-import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -91,18 +90,6 @@ public class FileTourServiceImpl implements TourService {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
-
-	}
-
-	@Override
-	public void addConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteConcerti(Tour tour, List<Concerto> concerti) throws BusinessException {
-		// TODO Auto-generated method stub
 
 	}
 
