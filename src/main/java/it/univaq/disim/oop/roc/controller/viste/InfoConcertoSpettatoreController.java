@@ -12,11 +12,15 @@ import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 public class InfoConcertoSpettatoreController implements DataInitializable<Concerto>, UtenteInitializable<Utente> {
 
 	@FXML
 	private Label artistiLabel, scalettaLabel, luogoLabel, tourLabel, metodoLabel, dataLabel;
+
+	@FXML
+	private Text metodoText;
 
 	@FXML
 	private Button prenotaButton;
@@ -25,8 +29,6 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 
 	private Concerto concerto;
 
-	private TipoMetodoDiPagamento tipoMetodo;
-
 	private Utente utente;
 
 	public InfoConcertoSpettatoreController() {
@@ -34,18 +36,24 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 	}
 
 	public void initialize() {
-		this.tipoMetodo = TipoMetodoDiPagamento.Carta;
+
 	}
 
+	@Override
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 
-		tipoMetodo = concerto.getTipoMetodo();
-		if (tipoMetodo == TipoMetodoDiPagamento.Carta)
+		if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta) {
+			metodoText.setText("Metodo di pagamento");
 			metodoLabel.setText("Carta");
 
-		if (tipoMetodo == TipoMetodoDiPagamento.Conto)
-			metodoLabel.setText("Conto");
+		} else if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto) {
+			metodoText.setText("Metodo di pagamento");
+			metodoLabel.setText("Bonifico");
+		} else {
+			metodoText.setText("Metodi di pagamento");
+			metodoLabel.setText("Carta, Bonifico");
+		}
 
 		if (!(concerto.getScaletta() == null))
 			scalettaLabel.setText(concerto.getScaletta());
@@ -63,10 +71,12 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 
 	}
 
+	@Override
 	public void initializeUtente(Utente utente) {
 		this.utente = utente;
 	}
 
+	@FXML
 	public void prenotaBigliettoAction() throws ViewException {
 		dispatcher.openNewWindow("prenotabiglietto", concerto, utente);
 	}

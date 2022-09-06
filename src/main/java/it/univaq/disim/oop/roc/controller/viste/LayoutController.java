@@ -65,7 +65,7 @@ public class LayoutController implements DataInitializable<Utente> {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {
 					dispatcher.renderView(menu.getText(), utente);
-					titoloPagina.setText(menu.getText());
+					titoloPagina.setText(menu.getText().toUpperCase());
 				});
 			}
 		}

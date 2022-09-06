@@ -27,7 +27,7 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="intestatarioField" layoutX="98.0" layoutY="36.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="190.0" promptText="Nome e Cognome">
+      <TextField fx:id="intestatarioCartaField" layoutX="98.0" layoutY="36.0" onKeyReleased="#blockAggiungiCartaButton" prefHeight="25.0" prefWidth="190.0" promptText="Nome e Cognome">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
@@ -103,37 +103,37 @@
          </font>
       </Button>
       <Line endX="210.0" endY="18.5" layoutX="240.0" layoutY="144.0" startX="-240.00001525878906" startY="18.5" stroke="#00000088" />
-      <Text layoutX="11.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome conto" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome conto" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="nomeContoField" layoutX="111.0" layoutY="169.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="26.0" prefWidth="204.0" promptText="Es. ContoIntesa">
+      <TextField fx:id="nomeContoField" layoutX="98.0" layoutY="169.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="26.0" prefWidth="190.0" promptText="Es. ContoIntesa">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </TextField>
-      <Text layoutX="11.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iban" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intestatario" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="ibanField" layoutX="111.0" layoutY="194.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="26.0" prefWidth="235.0">
+      <TextField fx:id="intestatarioContoField" layoutX="98.0" layoutY="194.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="25.0" prefWidth="190.0" promptText="Nome e Cognome">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </TextField>
-      <Text layoutX="14.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Swift" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iban" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="swiftField" layoutX="111.0" layoutY="219.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="25.0" prefWidth="120.0">
+      <TextField fx:id="ibanField" layoutX="98.0" layoutY="218.0" onKeyReleased="#blockAggiungiContoButton" prefHeight="26.0" prefWidth="235.0">
          <font>
-            <Font name="Arial" size="12.0" />
+            <Font name="Arial" size="14.0" />
          </font>
       </TextField>
-      <Label fx:id="ibanErrorLabel" layoutX="248.0" layoutY="223.0" prefHeight="17.0" prefWidth="190.0" textAlignment="RIGHT" textFill="RED">
+      <Label fx:id="ibanErrorLabel" layoutX="293.0" layoutY="198.0" prefHeight="17.0" prefWidth="149.0" textAlignment="RIGHT" textFill="RED">
          <font>
             <Font name="Arial" size="12.0" />
          </font>

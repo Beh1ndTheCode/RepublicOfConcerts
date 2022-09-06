@@ -13,18 +13,17 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.ModificaConcertoController">
    <children>
-      <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artisti" wrappingWidth="100.0">
+      <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artisti" wrappingWidth="100.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <TextArea fx:id="artistiTextArea" layoutX="14.0" layoutY="35.0" prefHeight="129.0" prefWidth="200.0" promptText="inserisci artisti" />
-      <Text layoutX="14.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scaletta" wrappingWidth="100.0">
+      <Text layoutX="14.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scaletta" wrappingWidth="100.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <TextArea fx:id="scalettaTextArea" layoutX="14.0" layoutY="197.0" prefHeight="129.0" prefWidth="200.0" promptText="inserisci scaletta" />
+      <TextArea fx:id="scalettaTextArea" layoutX="14.0" layoutY="127.0" prefHeight="199.0" prefWidth="200.0" promptText="inserisci scaletta" />
       <Text layoutX="243.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" textAlignment="RIGHT" wrappingWidth="66.9931640625">
          <font>
             <Font name="Arial Black" size="15.0" />
@@ -48,7 +47,7 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="263.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento" textAlignment="RIGHT" wrappingWidth="94.0">
+      <Text layoutX="263.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento" textAlignment="RIGHT" wrappingWidth="94.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
@@ -99,5 +98,6 @@
             <Font name="Arial Black" size="12.0" />
          </font>
       </Label>
+      <TextField fx:id="artistiTextField" layoutX="14.0" layoutY="61.0" prefHeight="25.0" prefWidth="200.0" />
    </children>
 </Pane>

@@ -49,7 +49,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 
 	private ViewDispatcher dispatcher;
 
-	private TipoMetodoDiPagamento tipoMetodo;
+	private Concerto concerto;
 
 	public PrenotaBigliettoController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -63,17 +63,22 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		compraButton.setDisable(true);
 	}
 
+	@Override
 	public void initializeData(Concerto concerto) {
-		this.tipoMetodo = concerto.getTipoMetodo();
-		if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
+		this.concerto = concerto;
+		if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta) {
 			metodoText.setText("Le tue carte");
-		} else if (tipoMetodo == TipoMetodoDiPagamento.Conto) {
+		} else if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto) {
 			metodoText.setText("I tuoi conti");
 		} else {
 			metodoText.setText("I tuoi metodi di pagamento");
 		}
 		try {
 			List<Tariffa> tariffe = tariffeService.findAllTariffe(concerto);
+			for (Tariffa fee : tariffe) {
+				if (fee.getPrezzoIntero() == null)
+					tariffe.remove(fee);
+			}
 			ObservableList<Tariffa> tariffeData = FXCollections.observableArrayList(tariffe);
 			settoriListView.setItems(tariffeData);
 		} catch (BusinessException e) {
@@ -81,12 +86,14 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
+	@Override
 	public void initializeUtente(Utente utente) {
 		List<MetodoDiPagamento> metodi;
 		try {
-			if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
+			if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta) {
+				System.out.println("CHECK 1");
 				metodi = metodiService.findAllCarte(utente);
-			} else if (tipoMetodo == TipoMetodoDiPagamento.Conto) {
+			} else if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto) {
 				metodi = metodiService.findAllConti(utente);
 			} else {
 				metodi = metodiService.findAllMetodi(utente);
@@ -98,6 +105,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
+	@FXML
 	public void settoreSelezionato() {
 		try {
 			if (settoriListView.getSelectionModel().getSelectedItem() == null)
@@ -114,6 +122,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
+	@FXML
 	public void metodoSelezionato() {
 		try {
 			if (metodiListView.getSelectionModel().getSelectedItem() == null)
@@ -122,12 +131,13 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 			metodoLabel.setText(metodiListView.getSelectionModel().getSelectedItem().toString());
 			BlockCompraButton();
 		} catch (SelectionException e) {
-			if (tipoMetodo == TipoMetodoDiPagamento.Carta) {
+			if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta) {
 				metodoErrorLabel.setText("Seleziona una carta");
-				if (tipoMetodo == TipoMetodoDiPagamento.Conto)
-					metodoErrorLabel.setText("Seleziona un conto");
-			} else
+			} else if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto) {
+				metodoErrorLabel.setText("Seleziona un conto");
+			} else {
 				metodoErrorLabel.setText("Seleziona un metodo di pagamento");
+			}
 		}
 	}
 
@@ -137,6 +147,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
+	@FXML
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
 		try {
 			dispatcher.closeWindowView();
@@ -147,6 +158,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
+	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

@@ -5,6 +5,7 @@ public abstract class MetodoDiPagamento {
 	private Integer id;
 	private String nome;
 	private Utente utente;
+	private String intestatario;
 
 	public Integer getId() {
 		return id;
@@ -28,6 +29,14 @@ public abstract class MetodoDiPagamento {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	public String getIntestatario() {
+		return intestatario;
+	}
+
+	public void setIntestatario(String intestatario) {
+		this.intestatario = intestatario;
 	}
 
 }

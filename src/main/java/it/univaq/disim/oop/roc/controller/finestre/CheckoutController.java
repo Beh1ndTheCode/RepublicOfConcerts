@@ -36,7 +36,7 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 
 	private Integer numBigliettiRidotti, numBigliettiInteri;
 
-	private Float prezzo;
+	private String prezzo;
 
 	public CheckoutController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -48,37 +48,43 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 		compraButton.setDisable(true);
 		numBigliettiRidotti = 0;
 		numBigliettiInteri = 0;
-		prezzo = 0f;
+		prezzo = "0.0€";
 		ridottoTextField.setText(numBigliettiRidotti.toString());
 		interoTextField.setText(numBigliettiInteri.toString());
 		prezzoLabel.setText(prezzo.toString());
 	}
 
+	@Override
 	public void initializeData(Tariffa tariffa) {
 		this.tariffa = tariffa;
 	}
 
+	@Override
 	public void initializeUtente(MetodoDiPagamento metodo) {
 		this.metodo = metodo;
 		metodoLabel.setText(metodo.toString());
 	}
 
+	@FXML
 	public void piuRidottoAction(ActionEvent event) {
 		numBigliettiRidotti++;
 		ridottoTextField.setText(numBigliettiRidotti.toString());
 	}
 
+	@FXML
 	public void menoRidottoAction(ActionEvent event) {
 		if (numBigliettiRidotti > 0)
 			numBigliettiRidotti--;
 		ridottoTextField.setText(numBigliettiRidotti.toString());
 	}
 
+	@FXML
 	public void piuInteroAction(ActionEvent event) {
 		numBigliettiInteri++;
 		interoTextField.setText(numBigliettiInteri.toString());
 	}
 
+	@FXML
 	public void menoInteroAction(ActionEvent event) {
 		if (numBigliettiInteri > 0)
 			numBigliettiInteri--;
@@ -87,12 +93,14 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 
 	// viene usato anche per aggiornare il prezzo totale
 	public void blockCompraButton() {
-		prezzo = (tariffa.getPrezzoIntero() * numBigliettiInteri) + (tariffa.getPrezzoRidotto() * numBigliettiRidotti);
+		prezzo = (tariffa.getPrezzoIntero() * numBigliettiInteri) + (tariffa.getPrezzoRidotto() * numBigliettiRidotti)
+				+ "€";
 		prezzoLabel.setText(prezzo.toString());
 		if (numBigliettiRidotti > 0 || numBigliettiInteri > 0)
 			compraButton.setDisable(false);
 	}
 
+	@FXML
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
 		try {
 			Biglietto biglietto = new Biglietto();
@@ -100,11 +108,13 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 			biglietto.setUtente(metodo.getUtente());
 			biglietto.setTariffa(tariffa);
 			bigliettoService.prenotaBiglietto(biglietto);
+			dispatcher.closeWindowView();
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
 	}
 
+	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

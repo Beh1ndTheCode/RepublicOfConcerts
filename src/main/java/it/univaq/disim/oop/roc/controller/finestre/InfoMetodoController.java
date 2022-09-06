@@ -3,7 +3,6 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import java.time.format.DateTimeFormatter;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
-import it.univaq.disim.oop.roc.business.impl.file.FileMetodiServiceImpl;
 import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
@@ -20,11 +19,11 @@ import javafx.scene.text.Text;
 public class InfoMetodoController implements DataInitializable<MetodoDiPagamento> {
 
 	@FXML
-	private Text numeroCartaText, intestatarioText, nomeCartaText, scadenzaText, nomeContoText, ibanText, swiftText;
+	private Text numeroText, intestatarioText, nomeText, scadenzaText;
 
 	@FXML
-	private Label numeroCartaLabel, intestatarioLabel, nomeCartaLabel, scadenzaLabel, nomeContoLabel, ibanLabel,
-			swiftLabel;
+	private Label numeroLabel, intestatarioLabel, nomeLabel, scadenzaLabel;
+
 	@FXML
 	private Button eliminaButton;
 
@@ -44,34 +43,35 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 		// metodiService = new FileMetodiServiceImpl();
 	}
 
-	public void initialize() {
-	}
-
+	@Override
 	public void initializeData(MetodoDiPagamento metodo) {
 		this.metodo = metodo;
 		if (metodo instanceof Carta) {
 			carta = (Carta) metodo;
-			nomeCartaText.setVisible(true);
-			numeroCartaText.setVisible(true);
+			nomeText.setVisible(true);
+			numeroText.setText("Numero");
+			numeroText.setVisible(true);
 			intestatarioText.setVisible(true);
 			scadenzaText.setVisible(true);
-			numeroCartaLabel.setText(Long.toString(carta.getNumero()));
+			numeroLabel.setText(Long.toString(carta.getNumero()));
 			intestatarioLabel.setText(carta.getIntestatario());
-			nomeCartaLabel.setText(carta.getNome());
+			nomeLabel.setText(carta.getNome());
 			scadenzaLabel.setText(carta.getScadenza().format(DateTimeFormatter.ofPattern("MM/yy")));
 		}
 
 		if (metodo instanceof Conto) {
 			conto = (Conto) metodo;
-			nomeContoText.setVisible(true);
-			ibanText.setVisible(true);
-			swiftText.setVisible(true);
-			nomeContoLabel.setText(conto.getNome());
-			ibanLabel.setText(conto.getIban());
-			swiftLabel.setText(conto.getSwift());
+			nomeText.setVisible(true);
+			numeroText.setText("Iban");
+			numeroText.setVisible(true);
+			intestatarioText.setVisible(true);
+			nomeLabel.setText(conto.getNome());
+			numeroLabel.setText(conto.getIban());
+			intestatarioLabel.setText(conto.getIntestatario());
 		}
 	}
 
+	@FXML
 	public void deleteAction(ActionEvent event) {
 		try {
 			metodiService.deleteMetodo(metodo);
@@ -83,6 +83,7 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 
 	}
 
+	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

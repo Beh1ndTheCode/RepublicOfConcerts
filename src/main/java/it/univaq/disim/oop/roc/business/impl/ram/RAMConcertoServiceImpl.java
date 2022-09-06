@@ -31,10 +31,9 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 				concert.setData(concerto.getData());
 				concert.setScaletta(concerto.getScaletta());
 
-				concert.setTipoMetodo(null);
 				if (!(concerto.getTipoMetodo() == null))
 					concert.setTipoMetodo(concerto.getTipoMetodo());
-
+				
 				if (concert.getTour() == null || (!(concert.getTour().getId() == concerto.getTour().getId())))
 					concert.setTour(concerto.getTour());
 			}

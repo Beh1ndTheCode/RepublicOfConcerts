@@ -31,10 +31,10 @@ import javafx.scene.control.TextField;
 public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	@FXML
-	private TextArea artistiTextArea, scalettaTextArea;
+	private TextArea scalettaTextArea;
 
 	@FXML
-	private TextField giornoTextField, meseTextField, annoTextField;
+	private TextField giornoTextField, meseTextField, annoTextField, artistiTextField;
 
 	@FXML
 	private RadioButton cartaRadioButton, contoRadioButton;
@@ -58,8 +58,6 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	private Luogo luogo;
 
-	private TipoMetodoDiPagamento tipoMetodo;
-
 	public ModificaConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		concertoService = new RAMConcertoServiceImpl();
@@ -69,7 +67,6 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	}
 
 	public void initialize() {
-		this.tipoMetodo = TipoMetodoDiPagamento.Carta;
 		try {
 			List<Luogo> luoghi = luoghiService.findAllLuoghi();
 			ObservableList<Luogo> luoghiData = FXCollections.observableArrayList(luoghi);
@@ -79,14 +76,14 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		}
 	}
 
+	@Override
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 
-		tipoMetodo = concerto.getTipoMetodo();
-		if (tipoMetodo == TipoMetodoDiPagamento.Carta)
+		if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta)
 			cartaRadioButton.setSelected(true);
 
-		if (tipoMetodo == TipoMetodoDiPagamento.Conto)
+		if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto)
 			contoRadioButton.setSelected(true);
 
 		if (!(concerto.getScaletta() == null))
@@ -97,7 +94,7 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		else
 			tourLabel.setText("nessuno");
 
-		artistiTextArea.setPromptText(concerto.getArtista());
+		artistiTextField.setPromptText(concerto.getArtista());
 		giornoTextField.setPromptText(((Integer) concerto.getData().getDayOfMonth()).toString());
 		meseTextField.setPromptText(((Integer) concerto.getData().getMonthValue()).toString());
 		annoTextField.setPromptText(((Integer) concerto.getData().getYear()).toString());
@@ -105,6 +102,7 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	}
 
+	@FXML
 	public void luogoSelezionato() {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
@@ -116,14 +114,17 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		}
 	}
 
+	@FXML
 	public void setContoAction(ActionEvent event) {
-		tipoMetodo = TipoMetodoDiPagamento.Conto;
+		concerto.setTipoMetodo(TipoMetodoDiPagamento.Conto);
 	}
 
+	@FXML
 	public void setCartaAction(ActionEvent event) {
-		tipoMetodo = TipoMetodoDiPagamento.Carta;
+		concerto.setTipoMetodo(TipoMetodoDiPagamento.Carta);
 	}
 
+	@FXML
 	public void updateConcertoAction(ActionEvent event) throws BusinessException {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
@@ -150,10 +151,9 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 			if (!scalettaTextArea.getText().isEmpty())
 				concerto.setScaletta(scalettaTextArea.getText());
-			if (!artistiTextArea.getText().isEmpty())
-				concerto.setArtista(artistiTextArea.getText());
+			if (!artistiTextField.getText().isEmpty())
+				concerto.setArtista(artistiTextField.getText());
 			concerto.setLuogo(luogo);
-			concerto.setTipoMetodo(tipoMetodo);
 			concertoService.updateConcerto(concerto);
 
 			dispatcher.renderView("gestioneconcerti");
@@ -164,7 +164,8 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		}
 	}
 
-	public void deleteConcertoAction() {
+	@FXML
+	public void deleteConcertoAction(ActionEvent event) {
 		try {
 			concertoService.deleteConcerto(concerto);
 			dispatcher.renderView("gestioneconcerti");

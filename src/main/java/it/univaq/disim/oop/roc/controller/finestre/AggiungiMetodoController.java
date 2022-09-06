@@ -22,8 +22,8 @@ import javafx.scene.control.TextField;
 public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	@FXML
-	private TextField nomeCartaField, intestatarioField, numeroField1, numeroField2, numeroField3, numeroField4,
-			meseScadenzaField, annoScadenzaField, cvvField, nomeContoField, ibanField, swiftField;
+	private TextField nomeCartaField, intestatarioCartaField, numeroField1, numeroField2, numeroField3, numeroField4,
+			meseScadenzaField, annoScadenzaField, cvvField, nomeContoField, ibanField, intestatarioContoField;
 
 	@FXML
 	private Label ibanErrorLabel, numErrorLabel, dataErrorLabel;
@@ -48,31 +48,34 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		aggiungiContoButton.setDisable(true);
 	}
 
+	@Override
 	public void initializeData(Utente utente) {
 		this.utente = utente;
 	}
 
 	public void blockAggiungiCartaButton() {
 		String nomeCarta = nomeCartaField.getText();
-		String intestatario = intestatarioField.getText();
+		String intestatarioCarta = intestatarioCartaField.getText();
 		String numero = numeroField1.getText() + numeroField2.getText() + numeroField3.getText()
 				+ numeroField4.getText();
 		String meseScadenza = meseScadenzaField.getText();
 		String annoScadenza = annoScadenzaField.getText();
 		String cvv = cvvField.getText();
 
-		boolean isDisable = nomeCarta.isEmpty() || intestatario.isEmpty() || numero.isEmpty() || meseScadenza.isEmpty()
-				|| annoScadenza.isEmpty() || cvv.isEmpty();
+		boolean isDisable = nomeCarta.isEmpty() || intestatarioCarta.isEmpty() || numero.isEmpty()
+				|| meseScadenza.isEmpty() || annoScadenza.isEmpty() || cvv.isEmpty();
 		aggiungiCartaButton.setDisable(isDisable);
 	}
 
 	public void blockAggiungiContoButton() {
 		String nomeConto = nomeContoField.getText();
+		String intestatarioConto = intestatarioContoField.getText();
 		String iban = ibanField.getText();
-		boolean isDisable = nomeConto.isEmpty() || iban.isEmpty();
+		boolean isDisable = nomeConto.isEmpty() || intestatarioConto.isEmpty() || iban.isEmpty();
 		aggiungiContoButton.setDisable(isDisable);
 	}
 
+	@FXML
 	public void aggiungiCartaAction(ActionEvent event) {
 		numErrorLabel.setText("");
 		dataErrorLabel.setText("");
@@ -96,7 +99,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 					Carta carta = new Carta();
 					carta.setNome(nomeCartaField.getText());
 					carta.setUtente(utente);
-					carta.setIntestatario(intestatarioField.getText());
+					carta.setIntestatario(intestatarioCartaField.getText());
 					carta.setNumero(numeroInput);
 					carta.setScadenza(data);
 					carta.setCvv(cvvInput);
@@ -104,7 +107,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 					dispatcher.renderView("profilo", utente);
 					nomeCartaField.setText("");
-					intestatarioField.setText("");
+					intestatarioCartaField.setText("");
 					numeroField1.setText("");
 					numeroField2.setText("");
 					numeroField3.setText("");
@@ -131,6 +134,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		}
 	}
 
+	@FXML
 	public void aggiungiContoAction(ActionEvent event) {
 		ibanErrorLabel.setText("");
 
@@ -139,14 +143,14 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 				Conto conto = new Conto();
 				conto.setNome(nomeContoField.getText());
 				conto.setIban(ibanField.getText());
-				conto.setSwift(swiftField.getText());
+				conto.setIntestatario(intestatarioContoField.getText());
 				conto.setUtente(utente);
 				metodiService.addMetodo(conto);
 
 				dispatcher.renderView("profilo", utente);
 				nomeContoField.setText("");
 				ibanField.setText("");
-				swiftField.setText("");
+				intestatarioContoField.setText("");
 				blockAggiungiContoButton();
 
 				return;
@@ -160,6 +164,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		}
 	}
 
+	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

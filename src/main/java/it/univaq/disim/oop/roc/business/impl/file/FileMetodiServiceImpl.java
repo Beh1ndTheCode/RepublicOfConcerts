@@ -64,7 +64,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 					row.append(Utility.SEPARATORE);
 					row.append(conto.getIban());
 					row.append(Utility.SEPARATORE);
-					row.append(conto.getSwift());
+					row.append(conto.getIntestatario());
 					writer.println(row.toString());
 				}
 			}
@@ -123,7 +123,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 						conto.setUtente(utente);
 						conto.setNome(colonne[3]);
 						conto.setIban(colonne[4]);
-						conto.setSwift(colonne[5]);
+						conto.setIntestatario(colonne[5]);
 						result.add(conto);
 					}
 				}
@@ -179,7 +179,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 						conto.setUtente(utente);
 						conto.setNome(colonne[3]);
 						conto.setIban(colonne[4]);
-						conto.setSwift(colonne[5]);
+						conto.setIntestatario(colonne[5]);
 						result.add(conto);
 					}
 				}

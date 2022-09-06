@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class Carta extends MetodoDiPagamento {
 
 	private Long numero;
-	private String intestatario;
 	private LocalDate scadenza;
 	private Integer cvv;
 
@@ -19,14 +18,6 @@ public class Carta extends MetodoDiPagamento {
 
 	public void setNumero(long numero) {
 		this.numero = numero;
-	}
-
-	public String getIntestatario() {
-		return intestatario;
-	}
-
-	public void setIntestatario(String intestatario) {
-		this.intestatario = intestatario;
 	}
 
 	public LocalDate getScadenza() {
@@ -44,8 +35,9 @@ public class Carta extends MetodoDiPagamento {
 	public void setCvv(Integer cvv) {
 		this.cvv = cvv;
 	}
-	
+
 	public String toString() {
-		return "carta" + ", " + getNome() + ", " + scadenza;
+		return getNome() + ", " + getIntestatario();
 	}
+
 }
