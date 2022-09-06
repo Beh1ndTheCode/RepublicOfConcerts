@@ -1,7 +1,7 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
 import it.univaq.disim.oop.roc.business.LuogoService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -30,8 +30,8 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 
 	public AggiungiLuogoController() {
 		dispatcher = ViewDispatcher.getInstance();
-		luoghiService = new RAMLuogoServiceImpl();
-		// luoghiService = new FileLuogoServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		luoghiService = factory.getLuogoService();
 	}
 
 	public void initialize() {

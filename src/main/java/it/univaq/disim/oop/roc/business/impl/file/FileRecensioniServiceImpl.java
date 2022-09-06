@@ -16,15 +16,22 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class FileRecensioniServiceImpl implements RecensioniService {
 
-	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
-			+ File.separator + "dati";
-	private static final String RECENSIONI_FILE_NAME = REPOSITORY_BASE + File.separator + "recensioni.txt";
+	private String recensioniFilename;
+	private UtenteService utenteService;
+	private ConcertoService concertoService;
+
+	public FileRecensioniServiceImpl(String recensioniFilename, UtenteService utenteService,
+			ConcertoService concertoService) {
+		this.recensioniFilename = recensioniFilename;
+		this.utenteService = utenteService;
+		this.concertoService = concertoService;
+	}
 
 	@Override
 	public void addRecensione(Recensione recensione) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(RECENSIONI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(RECENSIONI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(recensioniFilename);
+			try (PrintWriter writer = new PrintWriter(new File(recensioniFilename))) {
 				Long contatore = fileData.getContatore();
 				writer.println(contatore + 1);
 				for (String[] righe : fileData.getRighe()) {
@@ -55,8 +62,8 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 	@Override
 	public void updateRecensione(Recensione recensione) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(RECENSIONI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(RECENSIONI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(recensioniFilename);
+			try (PrintWriter writer = new PrintWriter(new File(recensioniFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == recensione.getId()) {
@@ -90,8 +97,8 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 	@Override
 	public void deleteRecensione(Recensione recensione) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(RECENSIONI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(RECENSIONI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(recensioniFilename);
+			try (PrintWriter writer = new PrintWriter(new File(recensioniFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == recensione.getId()) {
@@ -114,7 +121,7 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 	public List<Recensione> findRecensioniByConcerto(Concerto concerto) throws BusinessException {
 		List<Recensione> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(RECENSIONI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(recensioniFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[2].equals(concerto.getId().toString())) {
 					Recensione review = new Recensione();
@@ -125,7 +132,6 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 					review.setValutazione(Integer.parseInt(colonne[5]));
 					review.setApprovato(Boolean.parseBoolean(colonne[6]));
 
-					UtenteService utenteService = new FileUtenteServiceImpl();
 					Utente utente = utenteService.findUtenteById(Integer.parseInt(colonne[1]));
 					review.setUtente(utente);
 
@@ -145,7 +151,7 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 	public List<Recensione> findRecensioniByUtente(Utente utente) throws BusinessException {
 		List<Recensione> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(RECENSIONI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(recensioniFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].equals(utente.getId().toString())) {
 					Recensione review = new Recensione();
@@ -156,7 +162,6 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 					review.setValutazione(Integer.parseInt(colonne[5]));
 					review.setApprovato(Boolean.parseBoolean(colonne[6]));
 
-					ConcertoService concertoService = new FileConcertoServiceImpl();
 					Concerto concerto = concertoService.findConcertoById(Integer.parseInt(colonne[2]));
 					review.setConcerto(concerto);
 
@@ -176,7 +181,7 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 	public List<Recensione> findRecensioniInAttesa() throws BusinessException {
 		List<Recensione> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(RECENSIONI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(recensioniFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[6].equals("false")) {
 					Recensione review = new Recensione();
@@ -186,11 +191,9 @@ public class FileRecensioniServiceImpl implements RecensioniService {
 					review.setValutazione(Integer.parseInt(colonne[5]));
 					review.setApprovato(Boolean.parseBoolean(colonne[6]));
 
-					UtenteService utenteService = new FileUtenteServiceImpl();
 					Utente utente = utenteService.findUtenteById(Integer.parseInt(colonne[1]));
 					review.setUtente(utente);
 
-					ConcertoService concertoService = new FileConcertoServiceImpl();
 					Concerto concerto = concertoService.findConcertoById(Integer.parseInt(colonne[2]));
 					review.setConcerto(concerto);
 

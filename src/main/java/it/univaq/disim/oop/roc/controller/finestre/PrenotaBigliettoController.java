@@ -3,9 +3,8 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.TariffeService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
@@ -53,10 +52,9 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 
 	public PrenotaBigliettoController() {
 		dispatcher = ViewDispatcher.getInstance();
-		metodiService = new RAMMetodiServiceImpl();
-		tariffeService = new RAMTariffeServiceImpl();
-		// metodiService = new FileMetodiServiceImpl();
-		// tariffeService = new FileTariffeServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		metodiService = factory.getMetodiService();
+		tariffeService = factory.getTariffeService();
 	}
 
 	public void initialize() {
@@ -91,7 +89,6 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		List<MetodoDiPagamento> metodi;
 		try {
 			if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta) {
-				System.out.println("CHECK 1");
 				metodi = metodiService.findAllCarte(utente);
 			} else if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto) {
 				metodi = metodiService.findAllConti(utente);

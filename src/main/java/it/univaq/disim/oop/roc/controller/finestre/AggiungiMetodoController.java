@@ -3,8 +3,8 @@ package it.univaq.disim.oop.roc.controller.finestre;
 import java.time.LocalDate;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.Utility;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Conto;
@@ -39,8 +39,8 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	public AggiungiMetodoController() {
 		dispatcher = ViewDispatcher.getInstance();
-		metodiService = new RAMMetodiServiceImpl();
-		// metodiService = new FileMetodiServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		metodiService = factory.getMetodiService();
 	}
 
 	public void initialize() {

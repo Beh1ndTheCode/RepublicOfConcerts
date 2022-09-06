@@ -3,7 +3,7 @@ package it.univaq.disim.oop.roc.controller.viste;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.LuogoService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
@@ -47,7 +47,8 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 
 	public GestioneSettoriController() {
 		dispatcher = ViewDispatcher.getInstance();
-		luoghiService = new RAMLuogoServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		luoghiService = factory.getLuogoService();
 	}
 
 	public void initialize() {

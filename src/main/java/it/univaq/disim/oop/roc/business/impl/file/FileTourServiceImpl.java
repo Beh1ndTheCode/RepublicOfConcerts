@@ -12,15 +12,17 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class FileTourServiceImpl implements TourService {
 
-	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
-			+ File.separator + "dati";
-	private static final String TOUR_FILE_NAME = REPOSITORY_BASE + File.separator + "tour.txt";
+	private String tourFilename;
+
+	public FileTourServiceImpl(String tourFilename) {
+		this.tourFilename = tourFilename;
+	}
 
 	@Override
 	public void addTour(Tour tour) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(TOUR_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(TOUR_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(tourFilename);
+			try (PrintWriter writer = new PrintWriter(new File(tourFilename))) {
 				Long contatore = fileData.getContatore();
 				writer.println(contatore + 1);
 				for (String[] righe : fileData.getRighe()) {
@@ -45,8 +47,8 @@ public class FileTourServiceImpl implements TourService {
 	@Override
 	public void updateTour(Tour tour) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(TOUR_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(TOUR_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(tourFilename);
+			try (PrintWriter writer = new PrintWriter(new File(tourFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == tour.getId()) {
@@ -73,8 +75,8 @@ public class FileTourServiceImpl implements TourService {
 	@Override
 	public void deleteTour(Tour tour) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(TOUR_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(TOUR_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(tourFilename);
+			try (PrintWriter writer = new PrintWriter(new File(tourFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == tour.getId()) {
@@ -97,7 +99,7 @@ public class FileTourServiceImpl implements TourService {
 	public List<Tour> findAllTours() throws BusinessException {
 		List<Tour> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(TOUR_FILE_NAME);
+			FileData fileData = Utility.readAllRows(tourFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				Tour tour = new Tour();
 				tour.setId(Integer.parseInt(colonne[0]));

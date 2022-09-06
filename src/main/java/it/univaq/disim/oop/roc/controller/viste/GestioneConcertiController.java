@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -40,7 +40,8 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 
 	public GestioneConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
-		concertiService = new RAMConcertoServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		concertiService = factory.getConcertoService();
 	}
 
 	public void initialize() {

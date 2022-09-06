@@ -16,15 +16,17 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class FileMetodiServiceImpl implements MetodiService {
 
-	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
-			+ File.separator + "dati";
-	private static final String METODI_FILE_NAME = REPOSITORY_BASE + File.separator + "metodi.txt";
+	private String metodiFilename;
+
+	public FileMetodiServiceImpl(String metodiFilename) {
+		this.metodiFilename = metodiFilename;
+	}
 
 	@Override
 	public void addMetodo(MetodoDiPagamento metodo) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(metodiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(metodiFilename))) {
 				Long contatore = fileData.getContatore();
 				writer.println(contatore + 1);
 				for (String[] righe : fileData.getRighe()) {
@@ -77,8 +79,8 @@ public class FileMetodiServiceImpl implements MetodiService {
 	@Override
 	public void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(METODI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(metodiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(metodiFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == metodo.getId()) {
@@ -101,7 +103,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 	public List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException {
 		List<MetodoDiPagamento> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(metodiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].equals(utente.getId().toString())) {
 
@@ -141,7 +143,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 	public List<MetodoDiPagamento> findAllCarte(Utente utente) throws BusinessException {
 		List<MetodoDiPagamento> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(metodiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].equals(utente.getId().toString())) {
 					if (colonne[2].equals("Carta")) {
@@ -170,7 +172,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 	public List<MetodoDiPagamento> findAllConti(Utente utente) throws BusinessException {
 		List<MetodoDiPagamento> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(METODI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(metodiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].equals(utente.getId().toString())) {
 					if (colonne[2].equals("Conto")) {

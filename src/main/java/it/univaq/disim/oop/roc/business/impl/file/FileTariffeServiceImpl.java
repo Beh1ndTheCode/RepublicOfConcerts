@@ -17,16 +17,22 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class FileTariffeServiceImpl implements TariffeService {
 
-	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
-			+ File.separator + "dati";
-	private static final String TARIFFE_FILE_NAME = REPOSITORY_BASE + File.separator + "tariffe.txt";
+	private String tariffeFilename;
+	private ConcertoService concertoService;
+	private LuogoService luogoService;
+
+	public FileTariffeServiceImpl(String tariffeFilename, ConcertoService concertoService, LuogoService luogoService) {
+		this.tariffeFilename = tariffeFilename;
+		this.concertoService = concertoService;
+		this.luogoService = luogoService;
+	}
 
 	@Override
 	public void addTariffe(Concerto concerto, Luogo luogo) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(TARIFFE_FILE_NAME);
+			FileData fileData = Utility.readAllRows(tariffeFilename);
 			for (Settore settore : luogo.getSettori()) {
-				try (PrintWriter writer = new PrintWriter(new File(TARIFFE_FILE_NAME))) {
+				try (PrintWriter writer = new PrintWriter(new File(tariffeFilename))) {
 					Long contatore = fileData.getContatore();
 					writer.println(contatore + 1);
 					for (String[] righe : fileData.getRighe()) {
@@ -53,8 +59,8 @@ public class FileTariffeServiceImpl implements TariffeService {
 	@Override
 	public void setTariffa(Tariffa tariffa) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(TARIFFE_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(TARIFFE_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(tariffeFilename);
+			try (PrintWriter writer = new PrintWriter(new File(tariffeFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == tariffa.getId()) {
@@ -84,7 +90,7 @@ public class FileTariffeServiceImpl implements TariffeService {
 	public List<Tariffa> findAllTariffe(Concerto concerto) throws BusinessException {
 		List<Tariffa> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(TARIFFE_FILE_NAME);
+			FileData fileData = Utility.readAllRows(tariffeFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].equals(concerto.getId().toString())) {
 					Tariffa tariffa = new Tariffa();
@@ -108,18 +114,16 @@ public class FileTariffeServiceImpl implements TariffeService {
 	public Tariffa findTariffaById(int id) throws BusinessException {
 		Tariffa result = new Tariffa();
 		try {
-			FileData fileData = Utility.readAllRows(TARIFFE_FILE_NAME);
+			FileData fileData = Utility.readAllRows(tariffeFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (Integer.parseInt(colonne[0]) == id) {
 					result.setId(Integer.parseInt(colonne[0]));
 					result.setSettore(null);
 					result.setPrezzo(Float.parseFloat(colonne[3]));
 
-					ConcertoService concertoService = new FileConcertoServiceImpl();
 					Concerto concerto = concertoService.findConcertoById(Integer.parseInt(colonne[1]));
 					result.setConcerto(concerto);
 
-					LuogoService luogoService = new FileLuogoServiceImpl();
 					Settore settore = luogoService.findSettoreById(Integer.parseInt(colonne[2]));
 					result.setSettore(settore);
 

@@ -17,15 +17,22 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public class FileBigliettoServiceImpl implements BigliettoService {
 
-	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
-			+ File.separator + "dati";
-	private static final String BIGLIETTI_FILE_NAME = REPOSITORY_BASE + File.separator + "biglietti.txt";
+	private String bigliettiFilename;
+	private ConcertoService concertoService;
+	private TariffeService tariffeService;
+
+	public FileBigliettoServiceImpl(String bigliettiFilename, ConcertoService concertoService,
+			TariffeService tariffeService) {
+		this.bigliettiFilename = bigliettiFilename;
+		this.concertoService = concertoService;
+		this.tariffeService = tariffeService;
+	}
 
 	@Override
 	public void prenotaBiglietto(Biglietto biglietto) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(BIGLIETTI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(BIGLIETTI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(bigliettiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(bigliettiFilename))) {
 				Long contatore = fileData.getContatore();
 				writer.println(contatore + 1);
 				for (String[] righe : fileData.getRighe()) {
@@ -51,18 +58,16 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 	public List<Biglietto> findAllBiglietti(Utente utente) throws BusinessException {
 		List<Biglietto> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(BIGLIETTI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(bigliettiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[2].equals(utente.getId().toString())) {
 					Biglietto biglietto = new Biglietto();
 					biglietto.setNumeroBiglietto(Integer.parseInt(colonne[0]));
 					biglietto.setUtente(utente);
 
-					ConcertoService concertoService = new FileConcertoServiceImpl();
 					Concerto concerto = concertoService.findConcertoById(Integer.parseInt(colonne[2]));
 					biglietto.setConcerto(concerto);
 
-					TariffeService tariffeService = new FileTariffeServiceImpl();
 					Tariffa tariffa = tariffeService.findTariffaById(Integer.parseInt(colonne[2]));
 					biglietto.setTariffa(tariffa);
 

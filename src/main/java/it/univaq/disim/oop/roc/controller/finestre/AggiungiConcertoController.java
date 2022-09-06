@@ -5,11 +5,9 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.business.Utility;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMLuogoServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
@@ -53,12 +51,10 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	public AggiungiConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
-		concertoService = new RAMConcertoServiceImpl();
-		luoghiService = new RAMLuogoServiceImpl();
-		tariffeService = new RAMTariffeServiceImpl();
-		// concertoService = new FileConcertoServiceImpl();
-		// luoghiService = new FileLuogoServiceImpl();
-		// tariffeService = new FileTariffeServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		concertoService = factory.getConcertoService();
+		luoghiService = factory.getLuogoService();
+		tariffeService = factory.getTariffeService();
 	}
 
 	public void initialize() {

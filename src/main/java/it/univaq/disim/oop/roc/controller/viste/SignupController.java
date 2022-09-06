@@ -1,7 +1,7 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.UtenteService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
@@ -42,8 +42,8 @@ public class SignupController implements DataInitializable<Utente> {
 
 	public SignupController() {
 		dispatcher = ViewDispatcher.getInstance();
-		utenteService = new RAMUtenteServiceImpl();
-		// utenteService = new FileUtenteServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		utenteService = factory.getUtenteService();
 	}
 
 	public void initialize() {

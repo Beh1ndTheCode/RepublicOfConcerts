@@ -1,7 +1,7 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
 import it.univaq.disim.oop.roc.business.BigliettoService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMBigliettoServiceImpl;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Biglietto;
@@ -40,8 +40,8 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 
 	public CheckoutController() {
 		dispatcher = ViewDispatcher.getInstance();
-		bigliettoService = new RAMBigliettoServiceImpl();
-		// bigliettoService = new FileBigliettoServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		bigliettoService = factory.getBigliettoService();
 	}
 
 	public void initialize() {

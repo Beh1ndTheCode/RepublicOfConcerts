@@ -3,7 +3,7 @@ package it.univaq.disim.oop.roc.controller.viste;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMConcertoServiceImpl;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tour;
@@ -33,8 +33,8 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 
 	public TourGestioneConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
-		concertoService = new RAMConcertoServiceImpl();
-		// concertoService = new FileConcertoServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		concertoService = factory.getConcertoService();
 	}
 
 	public void initialize() {

@@ -1,7 +1,7 @@
 package it.univaq.disim.oop.roc.controller.finestre;
 
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.TourService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMTourServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -35,8 +35,8 @@ public class InfoTourController implements DataInitializable<Tour> {
 
 	public InfoTourController() {
 		dispatcher = ViewDispatcher.getInstance();
-		tourService = new RAMTourServiceImpl();
-		// tourService = new FileTourServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		tourService = factory.getTourService();
 	}
 
 	public void initialize() {

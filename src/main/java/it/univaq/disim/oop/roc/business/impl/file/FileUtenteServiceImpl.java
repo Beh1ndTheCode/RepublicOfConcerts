@@ -13,14 +13,16 @@ import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 
 public class FileUtenteServiceImpl implements UtenteService {
 
-	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
-			+ File.separator + "dati";
-	private static final String UTENTI_FILE_NAME = REPOSITORY_BASE + File.separator + "utenti.txt";
+	private String utentiFilename;
+
+	public FileUtenteServiceImpl(String utentiFilename) {
+		this.utentiFilename = utentiFilename;
+	}
 
 	@Override
 	public Utente authenticate(String username, String password) throws UtenteNotFoundException, BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(utentiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].equals(username) && colonne[2].equals(password)) {
 					Utente utente = null;
@@ -59,8 +61,8 @@ public class FileUtenteServiceImpl implements UtenteService {
 	@Override
 	public Utente registration(Spettatore spettatore) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(UTENTI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(utentiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(utentiFilename))) {
 				Long contatore = fileData.getContatore();
 				writer.println(contatore + 1);
 				for (String[] righe : fileData.getRighe()) {
@@ -92,8 +94,8 @@ public class FileUtenteServiceImpl implements UtenteService {
 	@Override
 	public void updateDati(Spettatore spettatore) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(UTENTI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(utentiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(utentiFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == spettatore.getId()) {
@@ -126,7 +128,7 @@ public class FileUtenteServiceImpl implements UtenteService {
 	public Utente findUtenteById(int id) throws BusinessException {
 		Spettatore result = new Spettatore();
 		try {
-			FileData fileData = Utility.readAllRows(UTENTI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(utentiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (Integer.parseInt(colonne[0]) == id) {
 					result.setId(Integer.parseInt(colonne[0]));

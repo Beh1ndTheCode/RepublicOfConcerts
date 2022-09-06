@@ -3,9 +3,8 @@ package it.univaq.disim.oop.roc.controller.viste;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.MetodiService;
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.UtenteService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMMetodiServiceImpl;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMUtenteServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
@@ -68,10 +67,9 @@ public class ProfiloController implements DataInitializable<Utente> {
 
 	public ProfiloController() {
 		dispatcher = ViewDispatcher.getInstance();
-		utenteService = new RAMUtenteServiceImpl();
-		metodiService = new RAMMetodiServiceImpl();
-		// utenteService = new FileUtenteServiceImpl();
-		// metodiService = new FileMetodiServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		utenteService = factory.getUtenteService();
+		metodiService = factory.getMetodiService();
 	}
 
 	public void initialize() {

@@ -17,15 +17,19 @@ import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 
 public class FileConcertoServiceImpl implements ConcertoService {
 
-	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
-			+ File.separator + "dati";
-	private static final String CONCERTI_FILE_NAME = REPOSITORY_BASE + File.separator + "concerti.txt";
+	private String concertiFilename;
+	private LuogoService luogoService;
+
+	public FileConcertoServiceImpl(String concertiFilename, LuogoService luogoService) {
+		this.concertiFilename = concertiFilename;
+		this.luogoService = luogoService;
+	}
 
 	@Override
 	public Concerto addConcerto(Concerto concerto) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(CONCERTI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(CONCERTI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(concertiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(concertiFilename))) {
 				Long contatore = fileData.getContatore();
 				writer.println(contatore + 1);
 				for (String[] righe : fileData.getRighe()) {
@@ -58,8 +62,8 @@ public class FileConcertoServiceImpl implements ConcertoService {
 	@Override
 	public void updateConcerto(Concerto concerto) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(CONCERTI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(CONCERTI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(concertiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(concertiFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == concerto.getId()) {
@@ -75,10 +79,8 @@ public class FileConcertoServiceImpl implements ConcertoService {
 						row.append(concerto.getScaletta());
 						row.append(Utility.SEPARATORE);
 
-						if (!(concerto.getTipoMetodo().toString().equals("null")))
+						if (concerto.getTipoMetodo().toString().equals("null"))
 							row.append(concerto.getTipoMetodo().toString());
-						else
-							row.append("null");
 						row.append(Utility.SEPARATORE);
 
 						if (concerto.getTour().toString().equals("null")
@@ -103,8 +105,8 @@ public class FileConcertoServiceImpl implements ConcertoService {
 	@Override
 	public void deleteConcerto(Concerto concerto) throws BusinessException {
 		try {
-			FileData fileData = Utility.readAllRows(CONCERTI_FILE_NAME);
-			try (PrintWriter writer = new PrintWriter(new File(CONCERTI_FILE_NAME))) {
+			FileData fileData = Utility.readAllRows(concertiFilename);
+			try (PrintWriter writer = new PrintWriter(new File(concertiFilename))) {
 				writer.println(fileData.getContatore());
 				for (String[] righe : fileData.getRighe()) {
 					if (Long.parseLong(righe[0]) == concerto.getId()) {
@@ -126,16 +128,18 @@ public class FileConcertoServiceImpl implements ConcertoService {
 	public List<Concerto> findAllConcerti() throws BusinessException {
 		List<Concerto> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(CONCERTI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(concertiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				Concerto concerto = new Concerto();
 				concerto.setId(Integer.parseInt(colonne[0]));
 				concerto.setArtista(colonne[1]);
 				concerto.setData(LocalDate.parse(colonne[3]));
 				concerto.setScaletta(colonne[4]);
-				concerto.setTipoMetodo(TipoMetodoDiPagamento.valueOf(colonne[5]));
+				if (colonne[5].equals("null"))
+					concerto.setTipoMetodo(null);
+				else
+					concerto.setTipoMetodo(TipoMetodoDiPagamento.valueOf(colonne[5]));
 
-				LuogoService luogoService = new FileLuogoServiceImpl();
 				Luogo luogo = luogoService.findLuogoById(Integer.parseInt(colonne[2]));
 				concerto.setLuogo(luogo);
 				result.add(concerto);
@@ -153,7 +157,7 @@ public class FileConcertoServiceImpl implements ConcertoService {
 	public List<Concerto> findConcertiByArtista(String artista) throws BusinessException {
 		List<Concerto> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(CONCERTI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(concertiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].toLowerCase().equals(artista.toLowerCase())) {
 					Concerto concerto = new Concerto();
@@ -163,7 +167,6 @@ public class FileConcertoServiceImpl implements ConcertoService {
 					concerto.setScaletta(colonne[4]);
 					concerto.setTipoMetodo(TipoMetodoDiPagamento.valueOf(colonne[5]));
 
-					LuogoService luogoService = new FileLuogoServiceImpl();
 					Luogo luogo = luogoService.findLuogoById(Integer.parseInt(colonne[2]));
 					concerto.setLuogo(luogo);
 					result.add(concerto);
@@ -181,7 +184,7 @@ public class FileConcertoServiceImpl implements ConcertoService {
 	public List<Concerto> findConcertiByTour(Tour tour) throws BusinessException {
 		List<Concerto> result = new ArrayList<>();
 		try {
-			FileData fileData = Utility.readAllRows(CONCERTI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(concertiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (Integer.parseInt(colonne[6]) == tour.getId()) {
 					Concerto concerto = new Concerto();
@@ -192,7 +195,6 @@ public class FileConcertoServiceImpl implements ConcertoService {
 					concerto.setTipoMetodo(TipoMetodoDiPagamento.valueOf(colonne[5]));
 					concerto.setTour(tour);
 
-					LuogoService luogoService = new FileLuogoServiceImpl();
 					Luogo luogo = luogoService.findLuogoById(Integer.parseInt(colonne[2]));
 					concerto.setLuogo(luogo);
 					result.add(concerto);
@@ -210,7 +212,7 @@ public class FileConcertoServiceImpl implements ConcertoService {
 	public Concerto findConcertoById(int id) throws BusinessException {
 		Concerto result = new Concerto();
 		try {
-			FileData fileData = Utility.readAllRows(CONCERTI_FILE_NAME);
+			FileData fileData = Utility.readAllRows(concertiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (Integer.parseInt(colonne[0]) == id) {
 					result.setId(Integer.parseInt(colonne[0]));
@@ -219,7 +221,6 @@ public class FileConcertoServiceImpl implements ConcertoService {
 					result.setScaletta(colonne[4]);
 					result.setTipoMetodo(TipoMetodoDiPagamento.valueOf(colonne[5]));
 
-					LuogoService luogoService = new FileLuogoServiceImpl();
 					Luogo luogo = luogoService.findLuogoById(Integer.parseInt(colonne[2]));
 					result.setLuogo(luogo);
 					return result;

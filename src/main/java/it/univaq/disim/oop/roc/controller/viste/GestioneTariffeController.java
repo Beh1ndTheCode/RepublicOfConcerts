@@ -2,8 +2,8 @@ package it.univaq.disim.oop.roc.controller.viste;
 
 import java.util.List;
 
+import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.TariffeService;
-import it.univaq.disim.oop.roc.business.impl.ram.RAMTariffeServiceImpl;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tariffa;
@@ -53,8 +53,8 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 
 	public GestioneTariffeController() {
 		dispatcher = ViewDispatcher.getInstance();
-		tariffeService = new RAMTariffeServiceImpl();
-		// tariffeService = new FileTariffeServiceImpl();
+		RocBusinessFactory factory = RocBusinessFactory.getInstance();
+		tariffeService = factory.getTariffeService();
 	}
 
 	public void initialize() {

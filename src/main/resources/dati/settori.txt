@@ -1,0 +1,8 @@
+9
+1,1,Curva Nord,15000
+2,1,Curva Sud,15000
+3,1,VIP,1000
+4,1,Ospiti,10000
+6,1,Altro,19000
+7,2,Standard,525
+8,2,Spalti,175

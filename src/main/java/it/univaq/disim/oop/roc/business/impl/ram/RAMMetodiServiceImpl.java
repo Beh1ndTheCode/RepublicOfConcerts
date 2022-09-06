@@ -45,10 +45,8 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	public List<MetodoDiPagamento> findAllCarte(Utente utente) throws BusinessException {
 		List<MetodoDiPagamento> carte = new ArrayList<>();
 		for (MetodoDiPagamento method : metodiAggiunti) {
-			if (method.getUtente().equals(utente)) {
-				if (method instanceof Carta)
-					carte.add(method);
-			}
+			if (method.getUtente().equals(utente) && method instanceof Carta)
+				carte.add(method);
 		}
 		return carte;
 	}
