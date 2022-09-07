@@ -24,7 +24,7 @@ public class RAMRocBusinessFactoryImpl extends RocBusinessFactory {
 	public RAMRocBusinessFactoryImpl() {
 		utenteService = new RAMUtenteServiceImpl();
 		luogoService = new RAMLuogoServiceImpl();
-		concertoService = new RAMConcertoServiceImpl(tariffeService);
+		concertoService = new RAMConcertoServiceImpl();
 		metodiService = new RAMMetodiServiceImpl();
 		bigliettoService = new RAMBigliettoServiceImpl();
 		recensioniService = new RAMRecensioniServiceImpl();

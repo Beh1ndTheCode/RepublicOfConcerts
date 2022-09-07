@@ -8,7 +8,7 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface TariffeService {
 
-	void addTariffe(Concerto concerto) throws BusinessException;
+	void addTariffa(Tariffa tariffa) throws BusinessException;
 
 	void setTariffa(Tariffa tariffa) throws BusinessException;
 

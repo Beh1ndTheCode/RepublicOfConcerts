@@ -1,11 +1,11 @@
 package it.univaq.disim.oop.roc.business;
 
-import it.univaq.disim.oop.roc.business.impl.ram.RAMRocBusinessFactoryImpl;
+import it.univaq.disim.oop.roc.business.impl.file.FileRocBusinessFactoryImpl;
 
 public abstract class RocBusinessFactory {
 
-	private static RocBusinessFactory factory = new RAMRocBusinessFactoryImpl();
-	// private static RocBusinessFactory factory = new FileRocBusinessFactoryImpl();
+	// private static RocBusinessFactory factory = new RAMRocBusinessFactoryImpl();
+	private static RocBusinessFactory factory = new FileRocBusinessFactoryImpl();
 
 	public static RocBusinessFactory getInstance() {
 		return factory;

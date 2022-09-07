@@ -3,6 +3,7 @@ package it.univaq.disim.oop.roc.business;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
+import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -13,9 +14,10 @@ public interface MetodiService {
 	void deleteMetodo(MetodoDiPagamento metodo) throws BusinessException;
 
 	List<MetodoDiPagamento> findAllMetodi(Utente utente) throws BusinessException;
-	
+
 	List<MetodoDiPagamento> findAllCarte(Utente utente) throws BusinessException;
-	
+
 	List<MetodoDiPagamento> findAllConti(Utente utente) throws BusinessException;
 
+	MetodoDiPagamento findMetodoPreferito(Spettatore spettatore) throws BusinessException;
 }

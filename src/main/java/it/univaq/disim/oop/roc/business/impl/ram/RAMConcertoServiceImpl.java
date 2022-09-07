@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -15,17 +14,11 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 
 	private static int idCounterConcerti = 0;
 
-	private TariffeService tariffeService;
-
-	public RAMConcertoServiceImpl(TariffeService tariffeService) {
-		this.tariffeService = tariffeService;
-	}
-
 	@Override
-	public void addConcerto(Concerto concerto) throws BusinessException {
+	public Concerto addConcerto(Concerto concerto) throws BusinessException {
 		concerto.setId(idCounterConcerti++);
 		concertiAggiunti.add(concerto);
-		tariffeService.addTariffe(concerto);
+		return concerto;
 	}
 
 	@Override

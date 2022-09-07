@@ -6,10 +6,13 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.RocBusinessFactory;
+import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
+import it.univaq.disim.oop.roc.domain.Settore;
+import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
@@ -44,11 +47,14 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	private LuogoService luoghiService;
 
+	private TariffeService tariffeService;
+
 	public AggiungiConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		concertoService = factory.getConcertoService();
 		luoghiService = factory.getLuogoService();
+		tariffeService = factory.getTariffeService();
 	}
 
 	public void initialize() {
@@ -94,8 +100,15 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 			concerto.setArtista(artistaTextField.getText());
 			concerto.setLuogo(luoghiListView.getSelectionModel().getSelectedItem());
 			concerto.setData(data);
-			concertoService.addConcerto(concerto);
-
+			concerto = concertoService.addConcerto(concerto);
+			List<Settore> settoriLuogo = luoghiService.findAllSettori(concerto.getLuogo());
+			
+			for(Settore settore : settoriLuogo) {
+				Tariffa tariffa = new Tariffa();
+				tariffa.setConcerto(concerto);
+				tariffa.setSettore(settore);
+				tariffeService.addTariffa(tariffa);
+			}
 			luoghiListView.getSelectionModel().clearSelection();
 			luogoLabel.setText("");
 			dataErrorLabel.setText("");

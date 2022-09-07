@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
-
 public class Concerto {
 
 	private Integer id;
@@ -14,7 +12,7 @@ public class Concerto {
 	private Luogo luogo;
 	private LocalDate data;
 	private String scaletta;
-	private TipoMetodoDiPagamento tipoMetodo;
+	private TipologiaMetodoDiPagamento tipoMetodo;
 	private Tour tour;
 
 	private Set<Tariffa> tariffe = new HashSet<>();
@@ -60,11 +58,11 @@ public class Concerto {
 		this.luogo = luogo;
 	}
 
-	public TipoMetodoDiPagamento getTipoMetodo() {
+	public TipologiaMetodoDiPagamento getTipoMetodo() {
 		return tipoMetodo;
 	}
 
-	public void setTipoMetodo(TipoMetodoDiPagamento tipoMetodo) {
+	public void setTipoMetodo(TipologiaMetodoDiPagamento tipoMetodo) {
 		this.tipoMetodo = tipoMetodo;
 	}
 

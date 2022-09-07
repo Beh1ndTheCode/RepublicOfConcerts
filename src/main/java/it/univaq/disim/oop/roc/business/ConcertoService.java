@@ -8,7 +8,7 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface ConcertoService {
 
-	void addConcerto(Concerto concerto) throws BusinessException;
+	Concerto addConcerto(Concerto concerto) throws BusinessException;
 
 	void updateConcerto(Concerto concerto) throws BusinessException;
 

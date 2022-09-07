@@ -11,6 +11,7 @@ import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
+import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -192,6 +193,37 @@ public class FileMetodiServiceImpl implements MetodiService {
 			throw new BusinessException(e);
 		}
 
+		return result;
+	}
+
+	@Override
+	public MetodoDiPagamento findMetodoPreferito(Spettatore spettatore) throws BusinessException {
+		MetodoDiPagamento result = null;
+		try {
+			FileData fileData = Utility.readAllRows(metodiFilename);
+			for (String[] colonne : fileData.getRighe()) {
+				if (Integer.parseInt(colonne[1]) == spettatore.getId()) {
+					if (Integer.parseInt(colonne[0]) == spettatore.getMetodoPreferito().getId()) {
+						result.setId(Integer.parseInt(colonne[0]));
+						result.setUtente(spettatore);
+						result.setNome(colonne[3]);
+						result.setIntestatario(colonne[5]);
+						if (colonne[2].equals("Carta")) {
+							((Carta) result).setNumero(Long.parseLong(colonne[4]));
+							((Carta) result).setScadenza(LocalDate.parse(colonne[6]));
+							((Carta) result).setCvv(Integer.parseInt(colonne[7]));
+						}
+						if (colonne[2].equals("Conto")) {
+							((Conto) result).setIban(colonne[4]);
+						}
+						return result;
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
 		return result;
 	}
 }

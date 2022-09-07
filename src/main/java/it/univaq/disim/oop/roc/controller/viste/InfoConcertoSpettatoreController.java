@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.TipologiaMetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Utente;
-import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.fxml.FXML;
@@ -43,11 +43,11 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 
-		if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta) {
+		if (concerto.getTipoMetodo() == TipologiaMetodoDiPagamento.Carta) {
 			metodoText.setText("Metodo di pagamento");
 			metodoLabel.setText("Carta");
 
-		} else if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto) {
+		} else if (concerto.getTipoMetodo() == TipologiaMetodoDiPagamento.Conto) {
 			metodoText.setText("Metodo di pagamento");
 			metodoLabel.setText("Bonifico");
 		} else {

@@ -3,8 +3,6 @@ package it.univaq.disim.oop.roc.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.univaq.disim.oop.roc.tipi.TipologiaLuogo;
-
 public class Luogo {
 
 	private Integer id;

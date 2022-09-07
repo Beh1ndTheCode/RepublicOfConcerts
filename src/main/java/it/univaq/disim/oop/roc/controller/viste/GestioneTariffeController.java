@@ -121,8 +121,6 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 			} catch (NumberFormatException n) {
 				errorLabel.setText("tariffa non valida");
 			}
-			tariffa.getConcerto().getTariffe().add(tariffa);
-			tariffa.getSettore().getTariffe().add(tariffa);
 			tariffeService.setTariffa(tariffa);
 
 			dispatcher.renderView("gestionetariffe", concerto);

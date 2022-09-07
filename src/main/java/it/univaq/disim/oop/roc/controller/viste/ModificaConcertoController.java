@@ -10,11 +10,11 @@ import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Luogo;
+import it.univaq.disim.oop.roc.domain.TipologiaMetodoDiPagamento;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
 import it.univaq.disim.oop.roc.exceptions.SelectionException;
-import it.univaq.disim.oop.roc.tipi.TipoMetodoDiPagamento;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,10 +78,10 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 
-		if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Carta)
+		if (concerto.getTipoMetodo() == TipologiaMetodoDiPagamento.Carta)
 			cartaRadioButton.setSelected(true);
 
-		if (concerto.getTipoMetodo() == TipoMetodoDiPagamento.Conto)
+		if (concerto.getTipoMetodo() == TipologiaMetodoDiPagamento.Conto)
 			contoRadioButton.setSelected(true);
 
 		if (!(concerto.getScaletta() == null))
@@ -114,12 +114,12 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	@FXML
 	public void setContoAction(ActionEvent event) {
-		concerto.setTipoMetodo(TipoMetodoDiPagamento.Conto);
+		concerto.setTipoMetodo(TipologiaMetodoDiPagamento.Conto);
 	}
 
 	@FXML
 	public void setCartaAction(ActionEvent event) {
-		concerto.setTipoMetodo(TipoMetodoDiPagamento.Carta);
+		concerto.setTipoMetodo(TipologiaMetodoDiPagamento.Carta);
 	}
 
 	@FXML

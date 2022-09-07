@@ -27,28 +27,24 @@ public class FileTariffeServiceImpl implements TariffeService {
 	}
 
 	@Override
-	public void addTariffe(Concerto concerto) throws BusinessException {
+	public void addTariffa(Tariffa tariffa) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(tariffeFilename);
-			List<Settore> settoriLuogo = luogoService.findAllSettori(concerto.getLuogo());
-			for (Settore settore : settoriLuogo) {
-				try (PrintWriter writer = new PrintWriter(new File(tariffeFilename))) {
-					Long contatore = fileData.getContatore();
-					writer.println(contatore + 1);
-					for (String[] righe : fileData.getRighe()) {
-						writer.println(String.join(Utility.SEPARATORE, righe));
-					}
-					StringBuilder row = new StringBuilder();
-					row.append(contatore);
-					row.append(Utility.SEPARATORE);
-					row.append(concerto.getId());
-					row.append(Utility.SEPARATORE);
-					row.append(settore.getId());
-					row.append(Utility.SEPARATORE);
-					row.append("null");
-					writer.println(row.toString());
-					return;
+			try (PrintWriter writer = new PrintWriter(new File(tariffeFilename))) {
+				Long contatore = fileData.getContatore();
+				writer.println(contatore + 1);
+				for (String[] righe : fileData.getRighe()) {
+					writer.println(String.join(Utility.SEPARATORE, righe));
 				}
+				StringBuilder row = new StringBuilder();
+				row.append(contatore);
+				row.append(Utility.SEPARATORE);
+				row.append(tariffa.getConcerto().getId());
+				row.append(Utility.SEPARATORE);
+				row.append(tariffa.getSettore().getId());
+				row.append(Utility.SEPARATORE);
+				row.append("null");
+				writer.println(row.toString());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

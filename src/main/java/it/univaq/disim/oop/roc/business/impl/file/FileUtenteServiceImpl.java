@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.business.UtenteService;
 import it.univaq.disim.oop.roc.domain.Amministratore;
+import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
@@ -14,9 +16,11 @@ import it.univaq.disim.oop.roc.exceptions.UtenteNotFoundException;
 public class FileUtenteServiceImpl implements UtenteService {
 
 	private String utentiFilename;
+	private MetodiService metodiService;
 
-	public FileUtenteServiceImpl(String utentiFilename) {
+	public FileUtenteServiceImpl(String utentiFilename, MetodiService metodiService) {
 		this.utentiFilename = utentiFilename;
+		this.metodiService = metodiService;
 	}
 
 	@Override
@@ -46,7 +50,10 @@ public class FileUtenteServiceImpl implements UtenteService {
 					} else {
 						throw new BusinessException("errore nella lettura del file");
 					}
-
+					if (utente instanceof Spettatore) {
+						MetodoDiPagamento metodoPreferito = metodiService.findMetodoPreferito((Spettatore) utente);
+						((Spettatore) utente).setMetodoPreferito(metodoPreferito);
+					}
 					return utente;
 				}
 			}

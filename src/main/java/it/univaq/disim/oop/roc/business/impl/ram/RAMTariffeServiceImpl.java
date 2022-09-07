@@ -5,7 +5,6 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -15,15 +14,9 @@ public class RAMTariffeServiceImpl implements TariffeService {
 
 	private static int idCounterTariffe = 0;
 
-	public void addTariffe(Concerto concerto) throws BusinessException {
-		for (Settore settore : concerto.getLuogo().getSettori()) {
-			Tariffa tariffa = new Tariffa();
-			tariffa.setId(idCounterTariffe++);
-			tariffa.setConcerto(concerto);
-			tariffa.setSettore(settore);
-			tariffa.setPrezzo(null);
-			tariffeAggiunte.add(tariffa);
-		}
+	public void addTariffa(Tariffa tariffa) throws BusinessException {
+		tariffa.setId(idCounterTariffe++);
+		tariffeAggiunte.add(tariffa);
 	}
 
 	@Override

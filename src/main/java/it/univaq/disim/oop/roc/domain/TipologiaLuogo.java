@@ -1,4 +1,4 @@
-package it.univaq.disim.oop.roc.tipi;
+package it.univaq.disim.oop.roc.domain;
 
 public enum TipologiaLuogo {
 	Teatro, Stadio;

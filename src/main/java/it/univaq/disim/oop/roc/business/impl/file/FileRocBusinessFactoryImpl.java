@@ -36,14 +36,14 @@ public class FileRocBusinessFactoryImpl extends RocBusinessFactory {
 	private static final String UTENTI_FILE_NAME = REPOSITORY_BASE + File.separator + "utenti.txt";
 
 	public FileRocBusinessFactoryImpl() {
-		utenteService = new FileUtenteServiceImpl(UTENTI_FILE_NAME);
+		utenteService = new FileUtenteServiceImpl(UTENTI_FILE_NAME, metodiService);
 		luogoService = new FileLuogoServiceImpl(LUOGHI_FILE_NAME, SETTORI_FILE_NAME);
-		concertoService = new FileConcertoServiceImpl(CONCERTI_FILE_NAME, luogoService, tourService, tariffeService);
+		concertoService = new FileConcertoServiceImpl(CONCERTI_FILE_NAME, luogoService, tourService);
+		tourService = new FileTourServiceImpl(TOUR_FILE_NAME);
 		metodiService = new FileMetodiServiceImpl(METODI_FILE_NAME);
 		bigliettoService = new FileBigliettoServiceImpl(BIGLIETTI_FILE_NAME, concertoService, tariffeService);
 		recensioniService = new FileRecensioniServiceImpl(RECENSIONI_FILE_NAME, utenteService, concertoService);
 		tariffeService = new FileTariffeServiceImpl(TARIFFE_FILE_NAME, concertoService, luogoService);
-		tourService = new FileTourServiceImpl(TOUR_FILE_NAME);
 	}
 
 	@Override

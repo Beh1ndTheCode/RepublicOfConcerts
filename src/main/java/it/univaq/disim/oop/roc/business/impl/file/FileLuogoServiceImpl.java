@@ -9,8 +9,8 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Settore;
+import it.univaq.disim.oop.roc.domain.TipologiaLuogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
-import it.univaq.disim.oop.roc.tipi.TipologiaLuogo;
 
 public class FileLuogoServiceImpl implements LuogoService {
 
@@ -235,7 +235,7 @@ public class FileLuogoServiceImpl implements LuogoService {
 		try {
 			FileData fileData = Utility.readAllRows(settoriFilename);
 			for (String[] colonne : fileData.getRighe()) {
-				if (colonne[1].equals(luogo.getId().toString())) {
+				if (Integer.parseInt(colonne[1]) == luogo.getId()) {
 					Settore settore = new Settore();
 					settore.setId(Integer.parseInt(colonne[0]));
 					settore.setLuogo(luogo);
@@ -244,12 +244,10 @@ public class FileLuogoServiceImpl implements LuogoService {
 					result.add(settore);
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
-
 		return result;
 	}
 
