@@ -3,9 +3,11 @@ package it.univaq.disim.oop.roc.controller.viste;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import it.univaq.disim.oop.roc.business.BigliettoService;
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
+import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
@@ -38,15 +40,18 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 
 	private ViewDispatcher dispatcher;
 
-	private ConcertoService concertiService;
+	private BigliettoService bigliettoService;
+	
+	private ConcertoService concertoService;
 	
 	private Spettatore spettatore;
 
 	public ITuoiConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
-		concertiService = factory.getConcertoService();
-	}
+		bigliettoService = factory.getBigliettoService();
+		concertoService = factory.getConcertoService();
+		}
 
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
@@ -86,7 +91,23 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 		});
 		
 		try {
-			List<Concerto> concerti = concertiService.findConcertiBySpettatore(spettatore);
+			List<Biglietto> biglietti = bigliettoService.findAllBiglietti(spettatore);
+			List<Concerto> concerti = null;
+			boolean ripetuto = false;
+			for(Biglietto ticket : biglietti) {
+				for (Concerto concert : concertoService.findAllConcerti()) {
+					if (concert == ticket.getConcerto()) {
+						if (concerti != null) {
+							for (Concerto checkConcert : concerti) {
+								if (concert == checkConcert)
+								ripetuto = true;
+							}
+						}
+						if (!ripetuto)
+							concerti.add(concert);
+					}	
+				}
+			}	
 			ObservableList<Concerto> concertiData = FXCollections.observableArrayList(concerti);
 			concertiTableView.setItems(concertiData);
 		} catch (BusinessException e) {

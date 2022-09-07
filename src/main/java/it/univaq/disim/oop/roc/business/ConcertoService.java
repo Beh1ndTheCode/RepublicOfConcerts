@@ -18,8 +18,6 @@ public interface ConcertoService {
 	List<Concerto> findAllConcerti() throws BusinessException;
 
 	List<Concerto> findConcertiByArtista(String artista) throws BusinessException;
-	
-	List<Concerto> findConcertiBySpettatore(Spettatore spettatore) throws BusinessException;
 
 	List<Concerto> findConcertiByTour(Tour tour) throws BusinessException;
 

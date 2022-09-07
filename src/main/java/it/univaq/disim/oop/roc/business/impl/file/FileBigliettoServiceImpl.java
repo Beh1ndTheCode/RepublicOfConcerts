@@ -82,4 +82,11 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 
 		return result;
 	}
+
+	@Override
+	public List<Biglietto> findBigliettiByConcertoAndSpettatore(Concerto concerto, Utente utente)
+			throws BusinessException {
+		
+		return null;
+	}
 }

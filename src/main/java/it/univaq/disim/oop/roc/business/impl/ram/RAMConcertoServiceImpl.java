@@ -62,24 +62,6 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		}
 		return concertiArtista;
 	}
-	
-	public List<Concerto> findConcertiBySpettatore(Spettatore spettatore) throws BusinessException {
-		List<Concerto> concertiUtente = new ArrayList<>();
-		
-		for (Concerto concert : concertiAggiunti) {
-			boolean ripetizione = false;
-			for (Biglietto ticket : spettatore.getBigliettiPrenotati()) {
-				if (ticket.getConcerto() == concert) {
-					for (Concerto checkConcert : concertiUtente)
-						if (checkConcert == concert)
-							ripetizione = true;
-					if (!ripetizione)
-					concertiUtente.add(concert);
-				}	
-			}
-		}
-		return concertiUtente;
-	}
 
 	@Override
 	public List<Concerto> findConcertiByTour(Tour tour) throws BusinessException {
