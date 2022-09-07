@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="it.univaq.disim.oop.roc.controller.viste.InfoTourController">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="585.0">
+         <children>
+            <TableView fx:id="concertiTableView" layoutX="11.0" layoutY="57.0" prefHeight="540.0" prefWidth="560.0">
+               <columns>
+                  <TableColumn fx:id="luogoTableColumn" prefWidth="281.0" text="Luogo" />
+                  <TableColumn fx:id="dataTableColumn" prefWidth="202.0" text="Data" />
+                  <TableColumn fx:id="prenotaTableColumn" prefWidth="76.0" text="Prenota" />
+               </columns>
+            </TableView>
+            <Label fx:id="tourLabel" layoutX="11.0" layoutY="14.0" prefHeight="35.0" prefWidth="289.0" text="Tour :">
+               <font>
+                  <Font name="Arial Black" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="artistaLabel" layoutX="323.0" layoutY="14.0" prefHeight="35.0" prefWidth="247.0">
+               <font>
+                  <Font name="Arial Black" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

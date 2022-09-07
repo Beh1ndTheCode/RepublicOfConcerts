@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
+import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -59,6 +61,24 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 				concertiArtista.add(concert);
 		}
 		return concertiArtista;
+	}
+	
+	public List<Concerto> findConcertiBySpettatore(Spettatore spettatore) throws BusinessException {
+		List<Concerto> concertiUtente = new ArrayList<>();
+		
+		for (Concerto concert : concertiAggiunti) {
+			boolean ripetizione = false;
+			for (Biglietto ticket : spettatore.getBigliettiPrenotati()) {
+				if (ticket.getConcerto() == concert) {
+					for (Concerto checkConcert : concertiUtente)
+						if (checkConcert == concert)
+							ripetizione = true;
+					if (!ripetizione)
+					concertiUtente.add(concert);
+				}	
+			}
+		}
+		return concertiUtente;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package it.univaq.disim.oop.roc.business;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -17,6 +18,8 @@ public interface ConcertoService {
 	List<Concerto> findAllConcerti() throws BusinessException;
 
 	List<Concerto> findConcertiByArtista(String artista) throws BusinessException;
+	
+	List<Concerto> findConcertiBySpettatore(Spettatore spettatore) throws BusinessException;
 
 	List<Concerto> findConcertiByTour(Tour tour) throws BusinessException;
 

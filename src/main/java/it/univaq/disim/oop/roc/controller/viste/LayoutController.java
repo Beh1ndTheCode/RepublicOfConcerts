@@ -38,9 +38,9 @@ public class LayoutController implements DataInitializable<Utente> {
 
 	private Utente utente;
 
-	private static final MenuItem[] MENU_AMMINISTRATORE = { new MenuItem("concerti"), new MenuItem("tour"),
-			new MenuItem("luoghi"), new MenuItem("recensioni") };
-	private static final MenuItem[] MENU_SPETTATORE = { new MenuItem("concerti"), new MenuItem("tour") };
+	private static final MenuItem[] MENU_AMMINISTRATORE = { new MenuItem("Concerti"), new MenuItem("Tour"),
+			new MenuItem("Luoghi"), new MenuItem("Recensioni") };
+	private static final MenuItem[] MENU_SPETTATORE = { new MenuItem("Concerti"), new MenuItem("Tour"), new MenuItem("I tuoi concerti") };
 
 	public LayoutController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -53,7 +53,7 @@ public class LayoutController implements DataInitializable<Utente> {
 			for (MenuItem menu : MENU_AMMINISTRATORE) {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {
-					dispatcher.renderView("gestione" + menu.getText());
+					dispatcher.renderView("gestione" + menu.getText().toLowerCase());
 					titoloPagina.setText(menu.getText().toUpperCase());
 				});
 			}
@@ -64,7 +64,7 @@ public class LayoutController implements DataInitializable<Utente> {
 			for (MenuItem menu : MENU_SPETTATORE) {
 				bottoneMenu.getItems().add(menu);
 				menu.setOnAction(e -> {
-					dispatcher.renderView(menu.getText(), utente);
+					dispatcher.renderView(menu.getText().toLowerCase().replaceAll(" ",""), utente);
 					titoloPagina.setText(menu.getText().toUpperCase());
 				});
 			}
