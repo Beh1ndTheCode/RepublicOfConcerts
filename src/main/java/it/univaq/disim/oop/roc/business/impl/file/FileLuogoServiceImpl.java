@@ -264,7 +264,7 @@ public class FileLuogoServiceImpl implements LuogoService {
 					result.setNome(colonne[2]);
 					result.setCapienza(Integer.parseInt(colonne[3]));
 
-					Luogo luogo = findLuogoById(Integer.parseInt(colonne[2]));
+					Luogo luogo = findLuogoById(Integer.parseInt(colonne[1]));
 					result.setLuogo(luogo);
 
 					return result;

@@ -6,7 +6,6 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.RocBusinessFactory;
-import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
@@ -43,18 +42,13 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 
 	private ConcertoService concertoService;
 
-	private TariffeService tariffeService;
-
 	private LuogoService luoghiService;
-
-	private Luogo luogo;
 
 	public AggiungiConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		concertoService = factory.getConcertoService();
 		luoghiService = factory.getLuogoService();
-		tariffeService = factory.getTariffeService();
 	}
 
 	public void initialize() {
@@ -100,9 +94,7 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 			concerto.setArtista(artistaTextField.getText());
 			concerto.setLuogo(luoghiListView.getSelectionModel().getSelectedItem());
 			concerto.setData(data);
-			concerto = concertoService.addConcerto(concerto);
-			luogo = luoghiListView.getSelectionModel().getSelectedItem();
-			tariffeService.addTariffe(concerto, luogo);
+			concertoService.addConcerto(concerto);
 
 			luoghiListView.getSelectionModel().clearSelection();
 			luogoLabel.setText("");

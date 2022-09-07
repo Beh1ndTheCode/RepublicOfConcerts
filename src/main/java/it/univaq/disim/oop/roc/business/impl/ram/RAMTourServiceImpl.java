@@ -39,6 +39,11 @@ public class RAMTourServiceImpl implements TourService {
 	}
 
 	@Override
+	public Tour findTourById(int id) throws BusinessException {
+		return tourAggiunti.get(id);
+	}
+
+	@Override
 	public void deleteTour(Tour tour) throws BusinessException {
 		for (Tour t : tourAggiunti) {
 			if (t.getId() == tour.getId()) {

@@ -116,4 +116,24 @@ public class FileTourServiceImpl implements TourService {
 		return result;
 	}
 
+	@Override
+	public Tour findTourById(int id) throws BusinessException {
+		Tour result = new Tour();
+		try {
+			FileData fileData = Utility.readAllRows(tourFilename);
+			for (String[] colonne : fileData.getRighe()) {
+				if (Integer.parseInt(colonne[0]) == id) {
+					result.setId(id);
+					result.setArtista(colonne[1]);
+					result.setNome(colonne[2]);
+					return result;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
+		return result;
+	}
+
 }

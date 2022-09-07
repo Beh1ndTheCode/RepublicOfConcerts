@@ -15,4 +15,6 @@ public interface TourService {
 
 	List<Tour> findAllTours() throws BusinessException;
 
+	Tour findTourById(int id) throws BusinessException;
+
 }

@@ -3,13 +3,12 @@ package it.univaq.disim.oop.roc.business;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface TariffeService {
 
-	void addTariffe(Concerto concerto, Luogo luogo) throws BusinessException;
+	void addTariffe(Concerto concerto) throws BusinessException;
 
 	void setTariffa(Tariffa tariffa) throws BusinessException;
 

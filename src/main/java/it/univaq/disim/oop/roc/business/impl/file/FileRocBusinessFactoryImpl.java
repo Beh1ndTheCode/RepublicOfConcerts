@@ -38,7 +38,7 @@ public class FileRocBusinessFactoryImpl extends RocBusinessFactory {
 	public FileRocBusinessFactoryImpl() {
 		utenteService = new FileUtenteServiceImpl(UTENTI_FILE_NAME);
 		luogoService = new FileLuogoServiceImpl(LUOGHI_FILE_NAME, SETTORI_FILE_NAME);
-		concertoService = new FileConcertoServiceImpl(CONCERTI_FILE_NAME, luogoService);
+		concertoService = new FileConcertoServiceImpl(CONCERTI_FILE_NAME, luogoService, tourService, tariffeService);
 		metodiService = new FileMetodiServiceImpl(METODI_FILE_NAME);
 		bigliettoService = new FileBigliettoServiceImpl(BIGLIETTI_FILE_NAME, concertoService, tariffeService);
 		recensioniService = new FileRecensioniServiceImpl(RECENSIONI_FILE_NAME, utenteService, concertoService);
