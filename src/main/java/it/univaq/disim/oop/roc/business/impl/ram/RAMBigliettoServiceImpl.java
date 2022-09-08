@@ -6,6 +6,7 @@ import java.util.List;
 import it.univaq.disim.oop.roc.business.BigliettoService;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
+import it.univaq.disim.oop.roc.domain.Settore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -18,8 +19,16 @@ public class RAMBigliettoServiceImpl implements BigliettoService {
 	@Override
 	public void prenotaBiglietto(Biglietto biglietto) throws BusinessException {
 		biglietto.setNumeroBiglietto(contNumBiglietti++);
-		biglietto.setPosto(null);
 		bigliettiPrenotati.add(biglietto);
+	}
+	
+	@Override
+	public void updatePostoBiglietto(Biglietto biglietto) throws BusinessException {
+		for (Biglietto ticket : bigliettiPrenotati) {
+			if (biglietto.getNumeroBiglietto() == ticket.getNumeroBiglietto()) {
+				ticket.setPosto(biglietto.getPosto());
+			}
+		}
 	}
 
 	@Override
@@ -37,6 +46,17 @@ public class RAMBigliettoServiceImpl implements BigliettoService {
 		List<Biglietto> biglietti = new ArrayList<>();
 		for (Biglietto ticket : bigliettiPrenotati) {
 			if (ticket.getUtente().getId() == utente.getId() && ticket.getConcerto().getId() == concerto.getId()) {
+				biglietti.add(ticket);
+			}
+		}
+		return biglietti;
+	}
+	
+	public List<Biglietto> findBigliettiByConcertoAndSettore(Concerto concerto, Settore settore)
+			throws BusinessException {
+		List<Biglietto> biglietti = new ArrayList<>();
+		for (Biglietto ticket : bigliettiPrenotati) {
+			if (ticket.getSettore().getId() == settore.getId() && ticket.getConcerto().getId() == concerto.getId()) {
 				biglietti.add(ticket);
 			}
 		}

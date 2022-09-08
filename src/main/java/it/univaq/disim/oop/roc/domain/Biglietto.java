@@ -3,10 +3,28 @@ package it.univaq.disim.oop.roc.domain;
 public class Biglietto {
 
 	private Integer numeroBiglietto;
+	private Settore settore;
 	private Float prezzo;
 	private Integer posto;
 	private Concerto concerto;
 	private Utente utente;
+	private TipoBiglietto tipo;
+	
+	public TipoBiglietto getTipoBiglietto() {
+		return tipo;
+	}
+
+	public void setTipoBiglietto(TipoBiglietto tipo) {
+		this.tipo = tipo;
+	}
+	
+	public Settore getSettore() {
+		return settore;
+	}
+
+	public void setSettore(Settore settore) {
+		this.settore = settore;
+	}
 
 	public Integer getNumeroBiglietto() {
 		return numeroBiglietto;

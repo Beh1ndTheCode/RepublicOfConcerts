@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.GestioneRecensioniController" />
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.GestioneRecensioniController">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="585.0">
+         <children>
+            <TableView fx:id="recensioniTableView" layoutX="13.0" layoutY="14.0" prefHeight="540.0" prefWidth="560.0">
+               <columns>
+                  <TableColumn fx:id="valutazioneTableColumn" prefWidth="71.0" text="Valutazione" />
+                  <TableColumn fx:id="titoloTableColumn" prefWidth="239.0" text="Titolo" />
+                  <TableColumn fx:id="concertoTableColumn" minWidth="0.0" prefWidth="194.0" text="Concerto" />
+                  <TableColumn fx:id="modificaTableColumn" minWidth="5.0" prefWidth="55.0" text="Modifica" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

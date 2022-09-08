@@ -42,6 +42,8 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 	private BigliettoService bigliettoService;
 
 	private Utente utente;
+	
+	private Concerto concerto;
 
 	public BigliettiController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -64,23 +66,24 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 	}
 
 	@Override
+	public void initializeData(Concerto concerto) {
+		this.concerto = concerto;
+	}
+	
+	@Override
 	public void initializeUtente(Utente utente) {
 		this.utente = utente;
 		cambiaPostoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, Button> param) -> {
 			final Button prenotaButton = new Button("Cambia Posto");
 			prenotaButton.setOnAction(e -> {
 				try {
-					dispatcher.openNewWindow("cambiaposto", param.getValue(), utente);
+					dispatcher.openNewWindow("selezioneposto", param.getValue(), null);
 				} catch (ViewException ex) {
 					ex.printStackTrace();
 				}
 			});
 			return new SimpleObjectProperty<Button>(prenotaButton);
 		});
-	}
-
-	@Override
-	public void initializeData(Concerto concerto) {
 		try {
 			List<Biglietto> biglietti = bigliettoService.findBigliettiByConcertoAndSpettatore(concerto, utente);
 			ObservableList<Biglietto> bigliettiData = FXCollections.observableArrayList(biglietti);

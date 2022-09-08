@@ -148,11 +148,11 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		}
 	}
 	
-	public void deleteTourAction(ActionEvent event) {
+	public void deleteAction(ActionEvent event) {
 		try {
 			recensioniService.deleteRecensione(recensione);
 			closeWindow();
-			dispatcher.renderView("infotour", concerto.getTour(), spettatore);
+			dispatcher.renderView("ituoiconcerti", spettatore);
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
