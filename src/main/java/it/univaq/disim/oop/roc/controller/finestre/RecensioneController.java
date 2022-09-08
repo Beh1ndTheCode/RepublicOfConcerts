@@ -14,6 +14,8 @@ import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class RecensioneController implements DataInitializable<Concerto>, UtenteInitializable<Utente> {
@@ -22,7 +24,13 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 	private Button salvaButton, eliminaButton;
 
 	@FXML
-	private TextField votoTextField, titoloTextField, recensioneTextArea;
+	private TextField votoTextField, titoloTextField;
+	
+	@FXML
+	private TextArea recensioneTextArea;
+	
+	@FXML
+	private Label approvatoLabel;
 
 	private ViewDispatcher dispatcher;
 
@@ -59,9 +67,13 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 	@Override
 	public void initializeUtente(Utente utente) {
 		this.spettatore = (Spettatore) utente;
-		for (Recensione rec : spettatore.getRecensioniLasciate()) {
-			if (rec.getConcerto() == concerto)
-				recensione = rec;
+		try {
+			for (Recensione rec : recensioniService.findRecensioniByUtente(utente)) {
+				if (rec.getConcerto() == concerto)
+					recensione = rec;
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
 		}
 		if (recensione != null) {
 			voto = recensione.getValutazione();
@@ -69,6 +81,10 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			votoTextField.setPromptText(voto.toString());
 			titoloTextField.setPromptText(recensione.getTitolo());
 			recensioneTextArea.setPromptText(recensione.getDescrizione());
+			if(recensione.getApprovato()) 
+				approvatoLabel.setText("Approvato: Si");
+			else
+				approvatoLabel.setText("Approvato: No");
 		}
 	}
 
@@ -111,6 +127,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 	@FXML
 	public void salvaButtonAction(ActionEvent event) {
 		if (recensione == null) {
+			recensione = new Recensione();
 			recensione.setUtente(spettatore);
 			recensione.setConcerto(concerto);
 			recensione.setTitolo(titoloTextField.getText());

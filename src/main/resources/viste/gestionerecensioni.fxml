@@ -13,8 +13,8 @@
                <columns>
                   <TableColumn fx:id="valutazioneTableColumn" prefWidth="71.0" text="Valutazione" />
                   <TableColumn fx:id="titoloTableColumn" prefWidth="239.0" text="Titolo" />
-                  <TableColumn fx:id="concertoTableColumn" minWidth="0.0" prefWidth="194.0" text="Concerto" />
-                  <TableColumn fx:id="modificaTableColumn" minWidth="5.0" prefWidth="55.0" text="Modifica" />
+                  <TableColumn fx:id="concertoTableColumn" minWidth="0.0" prefWidth="175.0" text="Concerto" />
+                  <TableColumn fx:id="modificaTableColumn" minWidth="5.0" prefWidth="74.0" text="Modifica" />
                </columns>
             </TableView>
          </children>
