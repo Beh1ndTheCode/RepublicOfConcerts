@@ -17,46 +17,46 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class RecensioneController implements DataInitializable<Concerto>, UtenteInitializable<Utente> {
-	
+
 	@FXML
 	private Button salvaButton, eliminaButton;
-	
+
 	@FXML
 	private TextField votoTextField, titoloTextField, recensioneTextArea;
-	
+
 	private ViewDispatcher dispatcher;
-	
-	private RocBusinessFactory businessFactory;
-	
+
 	private RecensioniService recensioniService;
-	
+
 	private Recensione recensione;
-	
+
 	private Concerto concerto;
-	
+
 	private Spettatore spettatore;
-	
+
 	private Integer voto;
-	
+
 	private Boolean votoModificato;
-	
+
 	public RecensioneController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		recensioniService = factory.getRecensioniService();
 	}
-	
+
 	public void initialize() {
 		votoModificato = false;
 		voto = 0;
 		eliminaButton.setVisible(false);
 		salvaButton.setDisable(true);
 	}
-	
+
+	@Override
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 	}
-	
+
+	@Override
 	public void initializeUtente(Utente utente) {
 		this.spettatore = (Spettatore) utente;
 		for (Recensione rec : spettatore.getRecensioniLasciate()) {
@@ -71,7 +71,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			recensioneTextArea.setPromptText(recensione.getDescrizione());
 		}
 	}
-	
+
 	@FXML
 	public void piuAction(ActionEvent event) {
 		if (voto < 5) {
@@ -79,7 +79,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			votoModificato = true;
 		}
 		votoTextField.setText(voto.toString());
-		
+
 	}
 
 	@FXML
@@ -90,24 +90,25 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		}
 		votoTextField.setText(voto.toString());
 	}
-	
+
 	public void blockSalvaButton() {
 		if (recensione == null) {
 			String inputTitolo = titoloTextField.getText();
 			String inputRecensione = recensioneTextArea.getText();
-			
-			if (votoModificato  && !(inputTitolo.isEmpty() || inputRecensione.isEmpty()))
-					salvaButton.setDisable(false);
-		}
-		else {
+
+			if (votoModificato && !(inputTitolo.isEmpty() || inputRecensione.isEmpty()))
+				salvaButton.setDisable(false);
+		} else {
 			String inputTitolo = titoloTextField.getPromptText();
 			String inputRecensione = recensioneTextArea.getPromptText();
-			
-			if (votoModificato  || !inputTitolo.equals(recensione.getTitolo()) || inputRecensione.equals(recensione.getDescrizione()))
+
+			if (votoModificato || !inputTitolo.equals(recensione.getTitolo())
+					|| inputRecensione.equals(recensione.getDescrizione()))
 				salvaButton.setDisable(false);
 		}
 	}
-	
+
+	@FXML
 	public void salvaButtonAction(ActionEvent event) {
 		if (recensione == null) {
 			recensione.setUtente(spettatore);
@@ -127,8 +128,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			} catch (ViewException e) {
 				e.printStackTrace();
 			}
-		}
-		else {
+		} else {
 			if (!titoloTextField.getText().isEmpty())
 				recensione.setTitolo(titoloTextField.getText());
 			if (!recensioneTextArea.getText().isEmpty())
@@ -147,7 +147,8 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			}
 		}
 	}
-	
+
+	@FXML
 	public void deleteAction(ActionEvent event) {
 		try {
 			recensioniService.deleteRecensione(recensione);
@@ -157,10 +158,9 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			dispatcher.renderError(e);
 		}
 	}
-	
+
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}
-	
-	
+
 }

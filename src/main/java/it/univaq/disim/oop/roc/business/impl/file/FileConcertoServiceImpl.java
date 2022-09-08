@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.LuogoService;
@@ -88,9 +90,6 @@ public class FileConcertoServiceImpl implements ConcertoService {
 							row.append("null");
 						row.append(Utility.SEPARATORE);
 
-						// Concerto concert = findConcertoById(concerto.getId());
-						// if ((righe[6].equals("null") && (concerto.getTour() != null)) ||
-						// !(Long.parseLong(righe[6]) == concerto.getTour().getId()))
 						if (!(concerto.getTour() == null)) {
 							if (righe[6].toString().equals("null")
 									|| !(Integer.parseInt(righe[6]) == concerto.getTour().getId()))
@@ -166,6 +165,21 @@ public class FileConcertoServiceImpl implements ConcertoService {
 			throw new BusinessException(e);
 		}
 
+		return result;
+	}
+
+	@Override
+	public Set<String> findAllArtisti() throws BusinessException {
+		Set<String> result = new HashSet<>();
+		try {
+			FileData fileData = Utility.readAllRows(concertiFilename);
+			for (String[] colonne : fileData.getRighe()) {
+				result.add(colonne[1]);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		}
 		return result;
 	}
 

@@ -8,14 +8,14 @@ public class Biglietto {
 	private Integer posto;
 	private Concerto concerto;
 	private Utente utente;
-	private TipoBiglietto tipo;
+	private TipologiaBiglietto tipologiaBiglietto;
 	
-	public TipoBiglietto getTipoBiglietto() {
-		return tipo;
+	public TipologiaBiglietto getTipologiaBiglietto() {
+		return tipologiaBiglietto;
 	}
 
-	public void setTipoBiglietto(TipoBiglietto tipo) {
-		this.tipo = tipo;
+	public void setTipologiaBiglietto(TipologiaBiglietto tipo) {
+		this.tipologiaBiglietto = tipo;
 	}
 	
 	public Settore getSettore() {

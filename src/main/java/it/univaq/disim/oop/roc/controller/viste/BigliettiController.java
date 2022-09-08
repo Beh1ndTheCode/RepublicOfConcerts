@@ -41,8 +41,6 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 
 	private BigliettoService bigliettoService;
 
-	private Utente utente;
-	
 	private Concerto concerto;
 
 	public BigliettiController() {
@@ -69,10 +67,9 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 	}
-	
+
 	@Override
 	public void initializeUtente(Utente utente) {
-		this.utente = utente;
 		cambiaPostoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, Button> param) -> {
 			final Button prenotaButton = new Button("Cambia Posto");
 			prenotaButton.setOnAction(e -> {
@@ -85,7 +82,7 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 			return new SimpleObjectProperty<Button>(prenotaButton);
 		});
 		try {
-			List<Biglietto> biglietti = bigliettoService.findBigliettiByConcertoAndSpettatore(concerto, utente);
+			List<Biglietto> biglietti = bigliettoService.findBigliettiByConcertoAndUtente(concerto, utente);
 			ObservableList<Biglietto> bigliettiData = FXCollections.observableArrayList(biglietti);
 			bigliettiTableView.setItems(bigliettiData);
 		} catch (BusinessException e) {

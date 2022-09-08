@@ -44,14 +44,14 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 		this.concerto = concerto;
 
 		if (concerto.getTipoMetodo() == TipologiaMetodoDiPagamento.Carta) {
-			metodoText.setText("Metodo di pagamento");
+			metodoText.setText("Metodo di pagamento abilitato");
 			metodoLabel.setText("Carta");
 
 		} else if (concerto.getTipoMetodo() == TipologiaMetodoDiPagamento.Conto) {
-			metodoText.setText("Metodo di pagamento");
+			metodoText.setText("Metodo di pagamento abilitato");
 			metodoLabel.setText("Bonifico");
 		} else {
-			metodoText.setText("Metodi di pagamento");
+			metodoText.setText("Metodi di pagamento abilitati");
 			metodoLabel.setText("Carta, Bonifico");
 		}
 
@@ -67,7 +67,7 @@ public class InfoConcertoSpettatoreController implements DataInitializable<Conce
 		artistiLabel.setText(concerto.getArtista());
 		scalettaLabel.setText(concerto.getScaletta());
 		dataLabel.setText(concerto.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-		luogoLabel.setText(concerto.getLuogo().toString());
+		luogoLabel.setText(concerto.getLuogo().getCitta() + ", " + concerto.getLuogo().getNome());
 
 	}
 

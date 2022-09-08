@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.Pane?>
@@ -23,36 +22,36 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <TextArea fx:id="scalettaTextArea" layoutX="14.0" layoutY="127.0" prefHeight="199.0" prefWidth="200.0" promptText="inserisci scaletta" />
-      <Text layoutX="243.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" textAlignment="RIGHT" wrappingWidth="66.9931640625">
+      <TextField fx:id="scalettaTextField" layoutX="14.0" layoutY="127.0" prefHeight="25.0" prefWidth="200.0" />
+      <Text layoutX="280.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" textAlignment="RIGHT" wrappingWidth="66.9931640625">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="giornoTextField" layoutX="325.0" layoutY="36.0" prefHeight="25.0" prefWidth="39.0" />
-      <Text fx:id="luogoText" layoutX="364.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="RIGHT" wrappingWidth="11.43359375">
+      <TextField fx:id="giornoTextField" layoutX="307.0" layoutY="61.0" prefHeight="25.0" prefWidth="39.0" />
+      <Text fx:id="luogoText" layoutX="350.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="RIGHT" wrappingWidth="11.43359375">
          <font>
             <Font name="Arial Black" size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="meseTextField" layoutX="382.0" layoutY="36.0" prefHeight="25.0" prefWidth="39.0" />
-      <Text fx:id="luogoText2" layoutX="421.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="RIGHT" wrappingWidth="11.43359375">
+      <TextField fx:id="meseTextField" layoutX="370.0" layoutY="61.0" prefHeight="25.0" prefWidth="39.0" />
+      <Text fx:id="luogoText2" layoutX="409.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="RIGHT" wrappingWidth="11.43359375">
          <font>
             <Font name="Arial Black" size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="annoTextField" layoutX="439.0" layoutY="36.0" prefHeight="25.0" prefWidth="51.0" />
-      <Text layoutX="243.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour" textAlignment="RIGHT" wrappingWidth="66.9931640625">
+      <TextField fx:id="annoTextField" layoutX="431.0" layoutY="61.0" prefHeight="25.0" prefWidth="51.0" />
+      <Text layoutX="280.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour" textAlignment="RIGHT" wrappingWidth="66.9931640625">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="263.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento" textAlignment="RIGHT" wrappingWidth="94.0">
+      <Text layoutX="280.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento" textAlignment="CENTER" wrappingWidth="94.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <RadioButton fx:id="cartaRadioButton" layoutX="383.0" layoutY="91.0" mnemonicParsing="false" onAction="#setCartaAction" text="Carta" textAlignment="RIGHT">
+      <RadioButton fx:id="cartaRadioButton" layoutX="389.0" layoutY="141.0" mnemonicParsing="false" onAction="#setCartaAction" text="Carta" textAlignment="RIGHT">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -60,40 +59,35 @@
             <ToggleGroup fx:id="MetodoDiPagamento" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="contoRadioButton" layoutX="383.0" layoutY="115.0" mnemonicParsing="false" onAction="#setContoAction" text="Conto" textAlignment="RIGHT" toggleGroup="$MetodoDiPagamento">
+      <RadioButton fx:id="contoRadioButton" layoutX="388.0" layoutY="167.0" mnemonicParsing="false" onAction="#setContoAction" text="Conto" textAlignment="RIGHT" toggleGroup="$MetodoDiPagamento">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </RadioButton>
-      <Text layoutX="243.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luogo" wrappingWidth="100.0">
+      <Text layoutX="14.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luogo" wrappingWidth="100.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <Label fx:id="luogoLabel" layoutX="296.0" layoutY="156.0" opacity="0.7" prefHeight="17.0" prefWidth="150.0">
+      <Label fx:id="luogoLabel" layoutX="71.0" layoutY="170.0" opacity="0.7" prefHeight="17.0" prefWidth="150.0">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
       </Label>
-      <ListView fx:id="luoghiListView" layoutX="243.0" layoutY="175.0" onMouseReleased="#luogoSelezionato" prefHeight="151.0" prefWidth="165.0" />
-      <Button fx:id="modificaButton" layoutX="465.0" layoutY="202.0" mnemonicParsing="false" onAction="#updateConcertoAction" prefHeight="39.0" prefWidth="101.0" text="Modifica">
+      <ListView fx:id="luoghiListView" layoutX="14.0" layoutY="188.0" onMouseReleased="#luogoSelezionato" prefHeight="145.0" prefWidth="200.0" />
+      <Button fx:id="modificaButton" layoutX="282.0" layoutY="280.0" mnemonicParsing="false" onAction="#updateConcertoAction" prefHeight="39.0" prefWidth="101.0" text="Modifica">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="eliminaButton" layoutX="465.0" layoutY="260.0" mnemonicParsing="false" onAction="#deleteConcertoAction" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: ed5e68;" text="Elimina" textFill="WHITE">
+      <Button fx:id="eliminaButton" layoutX="423.0" layoutY="280.0" mnemonicParsing="false" onAction="#deleteConcertoAction" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: ed5e68;" text="Elimina" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="luogoLabel1" layoutX="441.0" layoutY="148.0" opacity="0.7" prefHeight="30.0" prefWidth="150.0">
-         <font>
-            <Font name="Arial Black" size="11.0" />
-         </font>
-      </Label>
       <Label fx:id="dataErrorLabel" layoutX="325.0" layoutY="17.0" prefHeight="17.0" prefWidth="165.0" />
-      <Label fx:id="luogoErrorLabel" layoutX="243.0" layoutY="140.0" prefHeight="17.0" prefWidth="165.0" />
-      <Label fx:id="tourLabel" layoutX="326.0" layoutY="65.0" opacity="0.7" prefHeight="17.0" prefWidth="165.0">
+      <Label fx:id="luogoErrorLabel" layoutX="218.0" layoutY="211.0" prefHeight="17.0" prefWidth="165.0" />
+      <Label fx:id="tourLabel" layoutX="350.0" layoutY="110.0" opacity="0.7" prefHeight="17.0" prefWidth="165.0">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>

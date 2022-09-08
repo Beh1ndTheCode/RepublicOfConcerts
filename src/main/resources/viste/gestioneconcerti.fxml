@@ -14,9 +14,9 @@
             <TableView fx:id="concertiTableView" layoutX="11.0" layoutY="57.0" prefHeight="540.0" prefWidth="560.0">
                <columns>
                   <TableColumn fx:id="artistaTableColumn" prefWidth="134.0" text="Artista" />
-                  <TableColumn fx:id="luogoTableColumn" prefWidth="188.0" text="Luogo" />
-                  <TableColumn fx:id="dataTableColumn" prefWidth="120.0" text="Data" />
-                  <TableColumn fx:id="infoTableColumn" prefWidth="47.0" text="Info" />
+                  <TableColumn fx:id="luogoTableColumn" prefWidth="177.50949096679688" text="Luogo" />
+                  <TableColumn fx:id="dataTableColumn" prefWidth="115.9244384765625" text="Data" />
+                  <TableColumn fx:id="infoTableColumn" prefWidth="62.4906005859375" text="Modifica" />
                   <TableColumn fx:id="tariffeTableColumn" prefWidth="71.0" text="Tariffe" />
                </columns>
             </TableView>

@@ -10,7 +10,7 @@ import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
 import it.univaq.disim.oop.roc.domain.Tariffa;
-import it.univaq.disim.oop.roc.domain.TipoBiglietto;
+import it.univaq.disim.oop.roc.domain.TipologiaBiglietto;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import it.univaq.disim.oop.roc.viste.ViewException;
@@ -107,63 +107,66 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 
 	@FXML
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
-		
-		if(tariffa.getSettore().getCapienza() < (bigliettoService.findBigliettiByConcertoAndSettore(tariffa.getConcerto(),
-				tariffa.getSettore()).size() + numBigliettiInteri + numBigliettiRidotti)) 
+
+		if (tariffa.getSettore()
+				.getCapienza() < (bigliettoService
+						.findBigliettiByConcertoAndSettore(tariffa.getConcerto(), tariffa.getSettore()).size()
+						+ numBigliettiInteri + numBigliettiRidotti))
 			errorLabel.setText("posti tutti occupati, cambia settore e riprova");
 		else {
 			List<Biglietto> bigliettiAggiunti = new ArrayList<>();
 			List<Biglietto> bigliettiEsistenti = new ArrayList<>();
-			bigliettiEsistenti = bigliettoService.findBigliettiByConcertoAndSettore(tariffa.getConcerto(), tariffa.getSettore());
-			
+			bigliettiEsistenti = bigliettoService.findBigliettiByConcertoAndSettore(tariffa.getConcerto(),
+					tariffa.getSettore());
+
 			for (int i = 1; i <= numBigliettiInteri; i++) {
 				Integer posto = 0;
 				for (int j = 1; j <= tariffa.getSettore().getCapienza(); j++) {
 					Boolean postoLibero = true;
 					for (Biglietto ticket : bigliettiEsistenti) {
-						if(ticket.getPosto() == j) {
+						if (ticket.getPosto() == j) {
 							postoLibero = false;
 							break;
-						}		
+						}
 					}
 					if (postoLibero) {
 						posto = j;
 						break;
-					}	
+					}
 				}
 				Biglietto biglietto = new Biglietto();
 				biglietto.setConcerto(tariffa.getConcerto());
 				biglietto.setSettore(tariffa.getSettore());
 				biglietto.setUtente(metodo.getUtente());
 				biglietto.setPrezzo(tariffa.getPrezzoIntero());
-				biglietto.setTipoBiglietto(TipoBiglietto.Intero);
+				biglietto.setTipologiaBiglietto(TipologiaBiglietto.Intero);
 				biglietto.setPosto(posto);
 				bigliettoService.prenotaBiglietto(biglietto);
 				bigliettiEsistenti.add(biglietto);
 				bigliettiAggiunti.add(biglietto);
 			}
-			
+
 			for (int i = 1; i <= numBigliettiRidotti; i++) {
 				int posto = 0;
 				for (int j = 1; j <= tariffa.getSettore().getCapienza(); j++) {
 					Boolean postoLibero = true;
 					for (Biglietto ticket : bigliettiEsistenti) {
-						if(ticket.getPosto() == j) {
+						if (ticket.getPosto() == j) {
 							postoLibero = false;
 							break;
-						}		
+						}
 					}
 					if (postoLibero) {
 						posto = j;
 						break;
-					}	
+					}
 				}
 				Biglietto biglietto = new Biglietto();
 				biglietto.setConcerto(tariffa.getConcerto());
 				biglietto.setSettore(tariffa.getSettore());
 				biglietto.setUtente(metodo.getUtente());
 				biglietto.setPrezzo(tariffa.getPrezzoRidotto());
-				biglietto.setTipoBiglietto(TipoBiglietto.Ridotto);
+				biglietto.setTipologiaBiglietto(TipologiaBiglietto.Ridotto);
 				biglietto.setPosto(Integer.valueOf(posto));
 				bigliettoService.prenotaBiglietto(biglietto);
 				bigliettiEsistenti.add(biglietto);
@@ -171,13 +174,13 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 			}
 			try {
 				dispatcher.closeWindowView();
-				dispatcher.openNewWindow("selezioneposto",bigliettiAggiunti.get(0), bigliettiAggiunti);
+				dispatcher.openNewWindow("selezioneposto", bigliettiAggiunti.get(0), bigliettiAggiunti);
 			} catch (ViewException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();

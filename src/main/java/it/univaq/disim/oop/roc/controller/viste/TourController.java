@@ -33,9 +33,7 @@ public class TourController implements DataInitializable<Utente> {
 	private ViewDispatcher dispatcher;
 
 	private TourService tourService;
-	
-	private Utente utente;
-	
+
 	public TourController() {
 		dispatcher = ViewDispatcher.getInstance();
 		tourService = new RAMTourServiceImpl();
@@ -49,9 +47,9 @@ public class TourController implements DataInitializable<Utente> {
 			return new SimpleStringProperty(param.getValue().getNome());
 		});
 	}
-	
+
+	@Override
 	public void initializeData(Utente utente) {
-		this.utente = utente;
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Tour, Button> param) -> {
 			final Button infoButton = new Button("Info");
 			infoButton.setOnAction(e -> {

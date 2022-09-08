@@ -24,16 +24,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	@FXML
-	private TextArea scalettaTextArea;
-
-	@FXML
-	private TextField giornoTextField, meseTextField, annoTextField, artistiTextField;
+	private TextField giornoTextField, meseTextField, annoTextField, artistiTextField, scalettaTextField;
 
 	@FXML
 	private RadioButton cartaRadioButton, contoRadioButton;
@@ -85,7 +81,7 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 			contoRadioButton.setSelected(true);
 
 		if (!(concerto.getScaletta() == null))
-			scalettaTextArea.setPromptText(concerto.getScaletta());
+			scalettaTextField.setPromptText(concerto.getScaletta());
 
 		if (!(concerto.getTour() == null))
 			tourLabel.setText(concerto.getTour().toString());
@@ -147,8 +143,8 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 				}
 			}
 
-			if (!scalettaTextArea.getText().isEmpty())
-				concerto.setScaletta(scalettaTextArea.getText());
+			if (!scalettaTextField.getText().isEmpty())
+				concerto.setScaletta(scalettaTextField.getText());
 			if (!artistiTextField.getText().isEmpty())
 				concerto.setArtista(artistiTextField.getText());
 			concerto.setLuogo(luogo);

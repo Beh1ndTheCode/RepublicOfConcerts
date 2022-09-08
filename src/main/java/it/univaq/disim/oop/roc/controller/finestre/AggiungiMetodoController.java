@@ -26,7 +26,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 			meseScadenzaField, annoScadenzaField, cvvField, nomeContoField, ibanField, intestatarioContoField;
 
 	@FXML
-	private Label ibanErrorLabel, numErrorLabel, dataErrorLabel;
+	private Label numErrorLabel, dataErrorLabel;
 
 	@FXML
 	private Button aggiungiCartaButton, aggiungiContoButton;
@@ -71,7 +71,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		String nomeConto = nomeContoField.getText();
 		String intestatarioConto = intestatarioContoField.getText();
 		String iban = ibanField.getText();
-		boolean isDisable = nomeConto.isEmpty() || intestatarioConto.isEmpty() || iban.isEmpty();
+		boolean isDisable = nomeConto.isEmpty() || intestatarioConto.isEmpty() || iban.length() < 27;
 		aggiungiContoButton.setDisable(isDisable);
 	}
 
@@ -95,7 +95,6 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 					LocalDate data = Utility.VerificaData("01", meseScadenzaField.getText(),
 							annoScadenzaField.getText());
-
 					Carta carta = new Carta();
 					carta.setNome(nomeCartaField.getText());
 					carta.setUtente(utente);
@@ -116,7 +115,6 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 					annoScadenzaField.setText("");
 					cvvField.setText("");
 					blockAggiungiCartaButton();
-
 					return;
 				}
 				throw new IntegerFormatException();
@@ -136,8 +134,6 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 
 	@FXML
 	public void aggiungiContoAction(ActionEvent event) {
-		ibanErrorLabel.setText("");
-
 		try {
 			if (ibanField.getText().length() == 27) {
 				Conto conto = new Conto();
@@ -152,13 +148,8 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 				ibanField.setText("");
 				intestatarioContoField.setText("");
 				blockAggiungiContoButton();
-
 				return;
 			}
-			throw new IntegerFormatException();
-
-		} catch (IntegerFormatException e) {
-			ibanErrorLabel.setText("Iban non valido");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
@@ -168,4 +159,5 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}
+
 }

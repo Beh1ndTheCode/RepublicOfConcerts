@@ -15,53 +15,53 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="585.0">
          <children>
-            <Text fx:id="datiText" layoutX="16.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI DATI" wrappingWidth="108.43359375">
+            <Text fx:id="datiText" layoutX="42.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI DATI" wrappingWidth="108.43359375">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="modificaDatiButton" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" onAction="#updateDatiAction" onMouseClicked="#blockModificaDatiButton" prefHeight="25.0" prefWidth="100.0" text="modifica">
+            <Button fx:id="modificaDatiButton" layoutX="156.0" layoutY="21.0" mnemonicParsing="false" onAction="#updateDatiAction" onMouseClicked="#blockModificaDatiButton" prefHeight="25.0" prefWidth="100.0" text="Modifica">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <Text fx:id="oldPswText" layoutX="16.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vecchia password" wrappingWidth="139.43359375">
+            <Text fx:id="oldPswText" layoutX="10.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" textAlignment="RIGHT" wrappingWidth="139.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <PasswordField fx:id="oldPswField" layoutX="156.0" layoutY="62.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="newPswText" layoutX="19.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nuova password" wrappingWidth="133.43359375">
+            <PasswordField fx:id="oldPswField" layoutX="156.0" layoutY="62.0" onKeyReleased="#blockModificaDatiButton" prefHeight="25.0" prefWidth="147.0" />
+            <Text fx:id="newPswText" layoutX="17.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuova Password" textAlignment="RIGHT" wrappingWidth="133.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <PasswordField fx:id="newPswField" layoutX="156.0" layoutY="97.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="repeatPswText" layoutX="19.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ripeti password" wrappingWidth="133.43359375">
+            <PasswordField fx:id="newPswField" layoutX="156.0" layoutY="108.0" onKeyReleased="#blockModificaDatiButton" />
+            <Text fx:id="repeatPswText" layoutX="17.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ripeti Password" textAlignment="RIGHT" wrappingWidth="133.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
-            <PasswordField fx:id="repeatPswField" layoutX="156.0" layoutY="119.0" />
-            <Text fx:id="usernameText" layoutX="332.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="username" wrappingWidth="103.43359375">
+            <PasswordField fx:id="repeatPswField" layoutX="156.0" layoutY="133.0" />
+            <Text fx:id="usernameText" layoutX="305.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" textAlignment="RIGHT" wrappingWidth="103.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
             <TextField fx:id="usernameField" layoutX="413.0" layoutY="62.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="nameText" layoutX="332.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nome" wrappingWidth="103.43359375">
+            <Text fx:id="nameText" layoutX="305.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" textAlignment="RIGHT" wrappingWidth="103.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
             <TextField fx:id="nameField" layoutX="413.0" layoutY="86.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="surnameText" layoutX="332.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cognome" wrappingWidth="90.43359375">
+            <Text fx:id="surnameText" layoutX="319.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome" textAlignment="RIGHT" wrappingWidth="90.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Text>
             <TextField fx:id="surnameField" layoutX="413.0" layoutY="109.0" onKeyReleased="#blockModificaDatiButton" />
-            <Text fx:id="ageText" layoutX="332.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="età" wrappingWidth="90.43359375">
+            <Text fx:id="ageText" layoutX="317.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Età" textAlignment="RIGHT" wrappingWidth="90.43359375">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
@@ -70,12 +70,12 @@
             <Label fx:id="oldPswErrorLabel" layoutX="21.0" layoutY="150.0" />
             <Label fx:id="repeatPswErrorLabel" layoutX="153.0" layoutY="149.0" />
             <Label fx:id="ageErrorLabel" layoutX="403.0" layoutY="167.0" />
-            <Text fx:id="metodiText" layoutX="35.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI METODI DI PAGAMENTO" wrappingWidth="274.43359375">
+            <Text fx:id="metodiText" layoutX="42.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I TUOI METODI DI PAGAMENTO" wrappingWidth="274.43359375">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="aggiungiMetodiButton" layoutX="316.0" layoutY="221.0" mnemonicParsing="false" onAction="#openAggiungiMetodoWindow" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
+            <Button fx:id="aggiungiMetodiButton" layoutX="319.0" layoutY="221.0" mnemonicParsing="false" onAction="#openAggiungiMetodoWindow" prefHeight="32.0" prefWidth="97.0" text="Aggiungi">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
@@ -88,7 +88,7 @@
                   <TableColumn fx:id="preferitoTableColumn" prefWidth="82.0" resizable="false" text="Preferito" />
               </columns>
             </TableView>
-            <Text fill="#7c7c7c" layoutX="258.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="per modificare i dati inserire la vecchia password" wrappingWidth="147.13671875" />
+            <Text fill="#7c7c7c" layoutX="293.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Per modificare i dati, inserire la password" wrappingWidth="110.004638671875" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

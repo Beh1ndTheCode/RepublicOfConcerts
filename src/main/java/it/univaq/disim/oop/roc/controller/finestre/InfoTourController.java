@@ -11,18 +11,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 public class InfoTourController implements DataInitializable<Tour> {
 
 	@FXML
-	private Text nomeText, artistaText;
+	private Label artistaLabel;
 
 	@FXML
-	private Label nomeLabel, artistaLabel;
-
-	@FXML
-	private TextField nomeTextField, artistaTextField;
+	private TextField nomeTextField;
 
 	@FXML
 	private Button modificaButton, eliminaButton;
@@ -43,32 +39,28 @@ public class InfoTourController implements DataInitializable<Tour> {
 		modificaButton.setDisable(true);
 	}
 
+	@Override
 	public void initializeData(Tour tour) {
 		this.tour = tour;
-		nomeLabel.setText(tour.getNome());
 		nomeTextField.setPromptText(tour.getNome());
 		artistaLabel.setText(tour.getArtista());
-		artistaTextField.setPromptText(tour.getArtista());
 	}
 
 	public void blockModificaButton() {
 		String nome = nomeTextField.getText();
-		String artista = artistaTextField.getText();
-		boolean isDisable = nome.isEmpty() && artista.isEmpty();
+		boolean isDisable = nome.isEmpty();
 		modificaButton.setDisable(isDisable);
 	}
 
+	@FXML
 	public void updateTourAction(ActionEvent event) {
 		try {
-			if (!artistaTextField.getText().isEmpty())
-				tour.setArtista(artistaTextField.getText());
 			if (!nomeTextField.getText().isEmpty())
 				tour.setNome(nomeTextField.getText());
 			tourService.updateTour(tour);
 
 			initializeData(tour);
 			nomeTextField.setText("");
-			artistaTextField.setText("");
 			blockModificaButton();
 			dispatcher.renderView("gestionetour");
 		} catch (BusinessException e) {
@@ -76,6 +68,7 @@ public class InfoTourController implements DataInitializable<Tour> {
 		}
 	}
 
+	@FXML
 	public void deleteTourAction(ActionEvent event) {
 		try {
 			tourService.deleteTour(tour);

@@ -11,28 +11,22 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.InfoTourController">
    <children>
-      <Text fx:id="cittaText" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artista" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text fx:id="cittaText" layoutX="54.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artista" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial Italic" size="15.0" />
          </font>
       </Text>
-      <Label fx:id="artistaLabel" layoutX="99.0" layoutY="75.0" prefHeight="23.0" prefWidth="171.0">
+      <Label fx:id="artistaLabel" layoutX="152.0" layoutY="63.0" prefHeight="23.0" prefWidth="146.0">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="artistaTextField" layoutX="278.0" layoutY="75.0" onKeyReleased="#blockModificaButton" />
-      <Text fx:id="nomeText" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" textAlignment="RIGHT" wrappingWidth="88.43359375">
+      <Text fx:id="nomeText" layoutX="54.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" textAlignment="RIGHT" wrappingWidth="88.43359375">
          <font>
             <Font name="Arial Italic" size="15.0" />
          </font>
       </Text>
-      <Label fx:id="nomeLabel" layoutX="99.0" layoutY="101.0" prefHeight="23.0" prefWidth="171.0">
-         <font>
-            <Font name="Arial Black" size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="nomeTextField" layoutX="278.0" layoutY="100.0" onKeyReleased="#blockModificaButton" />
+      <TextField fx:id="nomeTextField" layoutX="152.0" layoutY="97.0" onKeyReleased="#blockModificaButton" />
       <Button fx:id="modificaButton" layoutX="288.0" layoutY="177.0" mnemonicParsing="false" onAction="#updateTourAction" prefHeight="39.0" prefWidth="101.0" text="Modifica">
          <font>
             <Font name="Arial Black" size="15.0" />

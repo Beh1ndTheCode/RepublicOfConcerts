@@ -1,12 +1,12 @@
 package it.univaq.disim.oop.roc.business.impl.ram;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Tour;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -50,6 +50,15 @@ public class RAMConcertoServiceImpl implements ConcertoService {
 		}
 
 		return concerti;
+	}
+
+	@Override
+	public Set<String> findAllArtisti() throws BusinessException {
+		Set<String> artisti = new HashSet<>();
+		for (Concerto concert : concertiAggiunti) {
+			artisti.add(concert.getArtista());
+		}
+		return artisti;
 	}
 
 	@Override
