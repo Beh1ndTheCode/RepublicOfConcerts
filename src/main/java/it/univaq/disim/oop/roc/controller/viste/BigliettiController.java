@@ -1,6 +1,5 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.BigliettoService;
@@ -9,7 +8,6 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
@@ -22,58 +20,57 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableView;
 
-public class BigliettiController implements DataInitializable<Concerto>, UtenteInitializable<Utente>{
-	
+public class BigliettiController implements DataInitializable<Concerto>, UtenteInitializable<Utente> {
+
 	@FXML
 	private TableView<Biglietto> bigliettiTableView;
-	
+
 	@FXML
-	private TableColumn<Biglietto, String> tariffaTableColumn, numeroBigliettoTableColumn, postoTableColumn;
-	
+	private TableColumn<Biglietto, String> prezzoTableColumn, numeroBigliettoTableColumn, postoTableColumn;
+
 	@FXML
 	private TableColumn<Biglietto, Button> cambiaPostoTableColumn;
-	
+
 	@FXML
 	private Label concertoLabel;
-	
+
 	private ViewDispatcher dispatcher;
 
 	private BigliettoService bigliettoService;
-	
-	private Spettatore spettatore;
-	
-	private Concerto concerto;
-	
+
+	private Utente utente;
+
 	public BigliettiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		bigliettoService = factory.getBigliettoService();
 	}
-	
+
 	public void initialize() {
-		tariffaTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, String> param) -> {
-			return new SimpleStringProperty(param.getValue().getTariffa().toString());
+		prezzoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, String> param) -> {
+			return new SimpleStringProperty(param.getValue().getPrezzo().toString());
 		});
 
 		numeroBigliettoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getNumeroBiglietto().toString());
 		});
-		
+
 		postoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getPosto().toString());
 		});
 	}
-	
+
+	@Override
 	public void initializeUtente(Utente utente) {
-		this.spettatore = (Spettatore) utente;
+		this.utente = utente;
 		cambiaPostoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, Button> param) -> {
 			final Button prenotaButton = new Button("Cambia Posto");
 			prenotaButton.setOnAction(e -> {
 				try {
-					dispatcher.openNewWindow("cambiaposto", param.getValue(), spettatore);
+					dispatcher.openNewWindow("cambiaposto", param.getValue(), utente);
 				} catch (ViewException ex) {
 					ex.printStackTrace();
 				}
@@ -81,12 +78,11 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 			return new SimpleObjectProperty<Button>(prenotaButton);
 		});
 	}
-	
+
+	@Override
 	public void initializeData(Concerto concerto) {
-		this.concerto = concerto;
-		
 		try {
-			List<Biglietto> biglietti = bigliettoService.findBigliettiByConcertoAndSpettatore(concerto, spettatore);
+			List<Biglietto> biglietti = bigliettoService.findBigliettiByConcertoAndSpettatore(concerto, utente);
 			ObservableList<Biglietto> bigliettiData = FXCollections.observableArrayList(biglietti);
 			bigliettiTableView.setItems(bigliettiData);
 		} catch (BusinessException e) {

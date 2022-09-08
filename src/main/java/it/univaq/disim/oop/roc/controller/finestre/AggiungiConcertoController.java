@@ -89,6 +89,7 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		aggiungiConcertoButton.setDisable(isDisable);
 	}
 
+	@FXML
 	public void addConcertoAction(ActionEvent event) {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
@@ -102,13 +103,14 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 			concerto.setData(data);
 			concerto = concertoService.addConcerto(concerto);
 			List<Settore> settoriLuogo = luoghiService.findAllSettori(concerto.getLuogo());
-			
-			for(Settore settore : settoriLuogo) {
+			for (Settore settore : settoriLuogo) {
 				Tariffa tariffa = new Tariffa();
 				tariffa.setConcerto(concerto);
 				tariffa.setSettore(settore);
+				tariffa.setPrezzo(0f);
 				tariffeService.addTariffa(tariffa);
 			}
+
 			luoghiListView.getSelectionModel().clearSelection();
 			luogoLabel.setText("");
 			dataErrorLabel.setText("");
@@ -130,6 +132,7 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		}
 	}
 
+	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

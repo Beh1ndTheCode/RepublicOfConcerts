@@ -8,10 +8,8 @@ import java.util.List;
 
 import it.univaq.disim.oop.roc.business.BigliettoService;
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.business.TariffeService;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Tariffa;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -19,13 +17,10 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 
 	private String bigliettiFilename;
 	private ConcertoService concertoService;
-	private TariffeService tariffeService;
 
-	public FileBigliettoServiceImpl(String bigliettiFilename, ConcertoService concertoService,
-			TariffeService tariffeService) {
+	public FileBigliettoServiceImpl(String bigliettiFilename, ConcertoService concertoService) {
 		this.bigliettiFilename = bigliettiFilename;
 		this.concertoService = concertoService;
-		this.tariffeService = tariffeService;
 	}
 
 	@Override
@@ -45,7 +40,7 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 				row.append(Utility.SEPARATORE);
 				row.append(biglietto.getUtente().getId());
 				row.append(Utility.SEPARATORE);
-				row.append(biglietto.getTariffa().getId());
+				row.append(biglietto.getPrezzo());
 				writer.println(row.toString());
 			}
 		} catch (IOException e) {
@@ -64,12 +59,10 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 					Biglietto biglietto = new Biglietto();
 					biglietto.setNumeroBiglietto(Integer.parseInt(colonne[0]));
 					biglietto.setUtente(utente);
+					biglietto.setPrezzo(Float.parseFloat(colonne[3]));
 
 					Concerto concerto = concertoService.findConcertoById(Integer.parseInt(colonne[2]));
 					biglietto.setConcerto(concerto);
-
-					Tariffa tariffa = tariffeService.findTariffaById(Integer.parseInt(colonne[2]));
-					biglietto.setTariffa(tariffa);
 
 					result.add(biglietto);
 				}
@@ -86,7 +79,7 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 	@Override
 	public List<Biglietto> findBigliettiByConcertoAndSpettatore(Concerto concerto, Utente utente)
 			throws BusinessException {
-		
+
 		return null;
 	}
 }

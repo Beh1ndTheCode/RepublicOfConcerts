@@ -14,7 +14,7 @@
             <TableView fx:id="bigliettiTableView" layoutX="11.0" layoutY="57.0" prefHeight="540.0" prefWidth="560.0">
                <columns>
                   <TableColumn fx:id="numeroBigliettoTableColumn" prefWidth="188.0" text="Numero biglietto" />
-                  <TableColumn fx:id="tariffaTableColumn" prefWidth="138.0" text="Tariffa" />
+                  <TableColumn fx:id="prezzoTableColumn" prefWidth="138.0" text="Prezzo" />
                   <TableColumn fx:id="postoTableColumn" prefWidth="124.0" text="Posto" />
                   <TableColumn fx:id="cambiaPostoTableColumn" prefWidth="109.0" text="Cambia Posto" />
                </columns>

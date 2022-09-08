@@ -1,4 +1,5 @@
 package it.univaq.disim.oop.roc.controller.viste;
+
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -33,17 +34,13 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 
 	@FXML
 	private TableColumn<Concerto, Button> prenotaTableColumn;
-	
+
 	@FXML
 	private Label tourLabel, artistaLabel;
 
 	private ViewDispatcher dispatcher;
 
 	private ConcertoService concertiService;
-	
-	private Tour tour;
-	
-	private Utente utente;
 
 	public InfoTourController() {
 		dispatcher = ViewDispatcher.getInstance();
@@ -61,13 +58,14 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 			return new SimpleStringProperty(data);
 		});
 	}
-	
+
+	@Override
 	public void initializeUtente(Utente utente) {
 		prenotaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button prenotaButton = new Button("Prenota");
 			prenotaButton.setOnAction(e -> {
 				try {
-					dispatcher.openNewWindow("prenotabiglietto", param.getValue(),utente);
+					dispatcher.openNewWindow("prenotabiglietto", param.getValue(), utente);
 				} catch (ViewException ex) {
 					ex.printStackTrace();
 				}
@@ -75,9 +73,9 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 			return new SimpleObjectProperty<Button>(prenotaButton);
 		});
 	}
-	
+
+	@Override
 	public void initializeData(Tour tour) {
-		this.tour = tour;
 		tourLabel.setText(tourLabel.getText() + " " + tour.getNome());
 		artistaLabel.setText(tour.getArtista());
 		try {
@@ -88,6 +86,5 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 			dispatcher.renderError(e);
 		}
 	}
-	
-	
+
 }

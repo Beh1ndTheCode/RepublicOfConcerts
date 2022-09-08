@@ -1,6 +1,7 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import it.univaq.disim.oop.roc.business.BigliettoService;
@@ -9,7 +10,6 @@ import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Biglietto;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
@@ -41,17 +41,15 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 	private ViewDispatcher dispatcher;
 
 	private BigliettoService bigliettoService;
-	
+
 	private ConcertoService concertoService;
-	
-	private Spettatore spettatore;
 
 	public ITuoiConcertiController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		bigliettoService = factory.getBigliettoService();
 		concertoService = factory.getConcertoService();
-		}
+	}
 
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
@@ -69,7 +67,6 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 
 	@Override
 	public void initializeData(Utente utente) {
-		this.spettatore = (Spettatore) utente;
 		bigliettiTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button bigliettiButton = new Button("Biglietti");
 			bigliettiButton.setOnAction(e -> {
@@ -77,7 +74,6 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 			});
 			return new SimpleObjectProperty<Button>(bigliettiButton);
 		});
-		
 		recensioneTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button recensioneButton = new Button("Recensione");
 			recensioneButton.setOnAction(e -> {
@@ -89,25 +85,17 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 			});
 			return new SimpleObjectProperty<Button>(recensioneButton);
 		});
-		
 		try {
-			List<Biglietto> biglietti = bigliettoService.findAllBiglietti(spettatore);
-			List<Concerto> concerti = null;
-			boolean ripetuto = false;
-			for(Biglietto ticket : biglietti) {
-				for (Concerto concert : concertoService.findAllConcerti()) {
-					if (concert == ticket.getConcerto()) {
-						if (concerti != null) {
-							for (Concerto checkConcert : concerti) {
-								if (concert == checkConcert)
-								ripetuto = true;
-							}
-						}
-						if (!ripetuto)
-							concerti.add(concert);
-					}	
+			List<Concerto> concerti = new ArrayList<>();
+			for (Concerto concert : concertoService.findAllConcerti()) {
+				for (Biglietto ticket : bigliettoService.findAllBiglietti(utente)) {
+					if (concert.getId() == ticket.getConcerto().getId()) {
+						concerti.add(concert);
+						break;
+					}
 				}
-			}	
+				continue;
+			}
 			ObservableList<Concerto> concertiData = FXCollections.observableArrayList(concerti);
 			concertiTableView.setItems(concertiData);
 		} catch (BusinessException e) {

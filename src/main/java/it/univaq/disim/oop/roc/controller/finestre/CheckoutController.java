@@ -103,11 +103,20 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 	@FXML
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
 		try {
-			Biglietto biglietto = new Biglietto();
-			biglietto.setConcerto(tariffa.getConcerto());
-			biglietto.setUtente(metodo.getUtente());
-			biglietto.setTariffa(tariffa);
-			bigliettoService.prenotaBiglietto(biglietto);
+			for (int i = 0; i < numBigliettiInteri; i++) {
+				Biglietto biglietto = new Biglietto();
+				biglietto.setConcerto(tariffa.getConcerto());
+				biglietto.setUtente(metodo.getUtente());
+				biglietto.setPrezzo(tariffa.getPrezzoIntero());
+				bigliettoService.prenotaBiglietto(biglietto);
+			}
+			for (int i = 0; i < numBigliettiRidotti; i++) {
+				Biglietto biglietto = new Biglietto();
+				biglietto.setConcerto(tariffa.getConcerto());
+				biglietto.setUtente(metodo.getUtente());
+				biglietto.setPrezzo(tariffa.getPrezzoRidotto());
+				bigliettoService.prenotaBiglietto(biglietto);
+			}
 			dispatcher.closeWindowView();
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);

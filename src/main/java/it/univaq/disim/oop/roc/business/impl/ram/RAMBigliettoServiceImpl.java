@@ -18,6 +18,7 @@ public class RAMBigliettoServiceImpl implements BigliettoService {
 	@Override
 	public void prenotaBiglietto(Biglietto biglietto) throws BusinessException {
 		biglietto.setNumeroBiglietto(contNumBiglietti++);
+		biglietto.setPosto(null);
 		bigliettiPrenotati.add(biglietto);
 	}
 
@@ -25,24 +26,21 @@ public class RAMBigliettoServiceImpl implements BigliettoService {
 	public List<Biglietto> findAllBiglietti(Utente utente) throws BusinessException {
 		List<Biglietto> biglietti = new ArrayList<>();
 		for (Biglietto ticket : bigliettiPrenotati) {
-			if (ticket.getUtente().equals(utente))
+			if (ticket.getUtente().getId() == utente.getId())
 				biglietti.add(ticket);
 		}
 		return biglietti;
 	}
-	
-	public List<Biglietto> findBigliettiByConcertoAndSpettatore(Concerto concerto,Utente utente) throws BusinessException {
-		RAMConcertoServiceImpl concertoService = new RAMConcertoServiceImpl();
+
+	public List<Biglietto> findBigliettiByConcertoAndSpettatore(Concerto concerto, Utente utente)
+			throws BusinessException {
 		List<Biglietto> biglietti = new ArrayList<>();
 		for (Biglietto ticket : bigliettiPrenotati) {
-			if (ticket.getUtente().equals(utente)) {
-				for (Concerto concert : concertoService.findAllConcerti()) {
-					if (ticket.getConcerto() == concert)
-						biglietti.add(ticket);
-				}
+			if (ticket.getUtente().getId() == utente.getId() && ticket.getConcerto().getId() == concerto.getId()) {
+				biglietti.add(ticket);
 			}
-				
 		}
 		return biglietti;
 	}
+
 }

@@ -1,4 +1,4 @@
 4
 1,admin,admin,amministratore,Mario,Rossi,35
 2,spettatore,spettatore,spettatore,Luigi,Bianchi,31
-3,marcociucci,psw,marco,ciucci,20
+3,marcociucci,psw,marco,ciucci,20,null

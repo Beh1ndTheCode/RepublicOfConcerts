@@ -73,10 +73,6 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 		try {
 			List<Tariffa> tariffe = tariffeService.findAllTariffe(concerto);
-			for (Tariffa fee : tariffe) {
-				if (fee.getPrezzoIntero() == null)
-					tariffe.remove(fee);
-			}
 			ObservableList<Tariffa> tariffeData = FXCollections.observableArrayList(tariffe);
 			settoriListView.setItems(tariffeData);
 		} catch (BusinessException e) {

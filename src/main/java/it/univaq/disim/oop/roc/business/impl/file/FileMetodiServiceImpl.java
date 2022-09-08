@@ -34,7 +34,6 @@ public class FileMetodiServiceImpl implements MetodiService {
 					writer.println(String.join(Utility.SEPARATORE, righe));
 				}
 				StringBuilder row = new StringBuilder();
-
 				if (metodo instanceof Carta) {
 					Carta carta = (Carta) metodo;
 					row.append(contatore);
@@ -54,7 +53,6 @@ public class FileMetodiServiceImpl implements MetodiService {
 					row.append(carta.getCvv());
 					writer.println(row.toString());
 				}
-
 				if (metodo instanceof Conto) {
 					Conto conto = (Conto) metodo;
 					row.append(contatore);
@@ -107,37 +105,41 @@ public class FileMetodiServiceImpl implements MetodiService {
 			FileData fileData = Utility.readAllRows(metodiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (colonne[1].equals(utente.getId().toString())) {
-
-					if (colonne[2].equals("Carta")) {
-						Carta carta = new Carta();
-						carta.setId(Integer.parseInt(colonne[0]));
-						carta.setUtente(utente);
-						carta.setNome(colonne[3]);
-						carta.setNumero(Long.parseLong(colonne[4]));
-						carta.setIntestatario(colonne[5]);
-						carta.setScadenza(LocalDate.parse(colonne[6]));
-						carta.setCvv(Integer.parseInt(colonne[7]));
-						result.add(carta);
+					MetodoDiPagamento metodo = null;
+					switch (colonne[2]) {
+					case "Carta":
+						metodo = new Carta();
+						break;
+					case "Conto":
+						metodo = new Conto();
+						break;
+					default:
+						break;
 					}
-
-					if (colonne[2].equals("Conto")) {
-						Conto conto = new Conto();
-						conto.setId(Integer.parseInt(colonne[0]));
-						conto.setUtente(utente);
-						conto.setNome(colonne[3]);
-						conto.setIban(colonne[4]);
-						conto.setIntestatario(colonne[5]);
-						result.add(conto);
+					if (metodo != null) {
+						metodo.setId(Integer.parseInt(colonne[0]));
+						metodo.setUtente(utente);
+						metodo.setNome(colonne[3]);
+						metodo.setIntestatario(colonne[5]);
+					} else {
+						throw new BusinessException("errore nella lettura del file");
 					}
+					if (metodo instanceof Carta) {
+						((Carta) metodo).setNumero(Long.parseLong(colonne[4]));
+						((Carta) metodo).setScadenza(LocalDate.parse(colonne[6]));
+						((Carta) metodo).setCvv(Integer.parseInt(colonne[7]));
+					}
+					if (metodo instanceof Conto) {
+						((Conto) metodo).setIban(colonne[4]);
+					}
+					result.add(metodo);
 				}
 			}
-
+			return result;
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
-
-		return result;
 	}
 
 	@Override
@@ -160,12 +162,10 @@ public class FileMetodiServiceImpl implements MetodiService {
 					}
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
-
 		return result;
 	}
 
@@ -187,43 +187,55 @@ public class FileMetodiServiceImpl implements MetodiService {
 					}
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
-
 		return result;
 	}
 
 	@Override
 	public MetodoDiPagamento findMetodoPreferito(Spettatore spettatore) throws BusinessException {
-		MetodoDiPagamento result = null;
 		try {
 			FileData fileData = Utility.readAllRows(metodiFilename);
 			for (String[] colonne : fileData.getRighe()) {
 				if (Integer.parseInt(colonne[1]) == spettatore.getId()) {
 					if (Integer.parseInt(colonne[0]) == spettatore.getMetodoPreferito().getId()) {
-						result.setId(Integer.parseInt(colonne[0]));
-						result.setUtente(spettatore);
-						result.setNome(colonne[3]);
-						result.setIntestatario(colonne[5]);
-						if (colonne[2].equals("Carta")) {
+						MetodoDiPagamento result = null;
+						switch (colonne[2]) {
+						case "Carta":
+							result = new Carta();
+							break;
+						case "Conto":
+							result = new Conto();
+							break;
+						default:
+							break;
+						}
+						if (result != null) {
+							result.setId(Integer.parseInt(colonne[0]));
+							result.setUtente(spettatore);
+							result.setNome(colonne[3]);
+							result.setIntestatario(colonne[5]);
+						} else {
+							throw new BusinessException("errore nella lettura del file");
+						}
+						if (result instanceof Carta) {
 							((Carta) result).setNumero(Long.parseLong(colonne[4]));
 							((Carta) result).setScadenza(LocalDate.parse(colonne[6]));
 							((Carta) result).setCvv(Integer.parseInt(colonne[7]));
 						}
-						if (colonne[2].equals("Conto")) {
+						if (result instanceof Conto) {
 							((Conto) result).setIban(colonne[4]);
 						}
 						return result;
 					}
 				}
 			}
+			throw new BusinessException();
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
-		return result;
 	}
 }
