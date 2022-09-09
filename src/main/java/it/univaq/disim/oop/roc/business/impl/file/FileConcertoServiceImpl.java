@@ -90,13 +90,9 @@ public class FileConcertoServiceImpl implements ConcertoService {
 							row.append("null");
 						row.append(Utility.SEPARATORE);
 
-						if (!(concerto.getTour() == null)) {
-							if (righe[6].toString().equals("null")
-									|| !(Integer.parseInt(righe[6]) == concerto.getTour().getId()))
-								row.append(concerto.getTour().getId());
-							else
-								row.append("null");
-						} else
+						if (!(concerto.getTour() == null))
+							row.append(concerto.getTour().getId());
+						else
 							row.append("null");
 
 						writer.println(row.toString());

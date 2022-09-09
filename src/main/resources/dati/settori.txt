@@ -1,15 +1,23 @@
-16
-1,1,Curva Nord,15000
-2,1,Curva Sud,15000
-3,1,VIP,1000
-4,1,Ospiti,10000
-6,1,Spalti,18500
-7,2,Standard,525
-8,2,Spalti,175
-9,1,Stampa,500
-10,4,Gradinata,10500
-11,4,Poltrona,4900
-12,3,Tevere,22500
-13,3,Monte Mario,22500
-14,3,Curva Nord,13500
-15,3,Curva Sud,13500
+23
+1,6,Spalti,175
+2,6,Platea,490
+3,6,Loggioni,105
+4,2,Tevere,22500
+5,2,Monte Mario,22500
+6,2,Curva Sud,13000
+7,2,Curva Nord,13000
+8,2,Stampa,1000
+9,3,Platea,665
+10,3,Loggioni,175
+11,1,Verde,14000
+12,1,Rosso,14000
+13,1,Giallo,14000
+14,1,Blu,14000
+15,1,Tribuna d'onore,2000
+16,1,Stampa,2000
+17,5,Distinti,15000
+18,5,Curva Nord,10000
+19,5,Curva Sud,10000
+20,5,Tribuna,11000
+21,5,Posilipo,4500
+22,5,Ospiti,4500

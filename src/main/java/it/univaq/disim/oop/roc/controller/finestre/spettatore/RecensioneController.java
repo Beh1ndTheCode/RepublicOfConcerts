@@ -6,11 +6,9 @@ import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
 import it.univaq.disim.oop.roc.domain.Recensione;
-import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
-import it.univaq.disim.oop.roc.viste.ViewException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,10 +23,10 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 
 	@FXML
 	private TextField votoTextField, titoloTextField;
-	
+
 	@FXML
 	private TextArea recensioneTextArea;
-	
+
 	@FXML
 	private Label approvatoLabel;
 
@@ -40,7 +38,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 
 	private Concerto concerto;
 
-	private Spettatore spettatore;
+	private Utente utente;
 
 	private Integer voto;
 
@@ -66,11 +64,11 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 
 	@Override
 	public void initializeUtente(Utente utente) {
-		this.spettatore = (Spettatore) utente;
+		this.utente = utente;
 		try {
-			for (Recensione rec : recensioniService.findRecensioniByUtente(utente)) {
-				if (rec.getConcerto() == concerto)
-					recensione = rec;
+			for (Recensione review : recensioniService.findRecensioniByUtente(utente)) {
+				if (review.getConcerto().getId() == concerto.getId())
+					recensione = review;
 			}
 		} catch (BusinessException e) {
 			e.printStackTrace();
@@ -80,8 +78,8 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			eliminaButton.setVisible(true);
 			votoTextField.setPromptText(voto.toString());
 			titoloTextField.setPromptText(recensione.getTitolo());
-			recensioneTextArea.setPromptText(recensione.getDescrizione());
-			if(recensione.getApprovato()) 
+			recensioneTextArea.setPromptText(recensione.getDescrizione().replace("_", " "));
+			if (recensione.getApprovato())
 				approvatoLabel.setText("Approvato: Si");
 			else
 				approvatoLabel.setText("Approvato: No");
@@ -107,6 +105,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		votoTextField.setText(voto.toString());
 	}
 
+	@FXML
 	public void blockSalvaButton() {
 		if (recensione == null) {
 			String inputTitolo = titoloTextField.getText();
@@ -128,10 +127,11 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 	public void salvaButtonAction(ActionEvent event) {
 		if (recensione == null) {
 			recensione = new Recensione();
-			recensione.setUtente(spettatore);
+			recensione.setUtente(utente);
 			recensione.setConcerto(concerto);
 			recensione.setTitolo(titoloTextField.getText());
-			recensione.setDescrizione(recensioneTextArea.getText());
+			String descrizione = recensioneTextArea.getText().replace("\n", "_");
+			recensione.setDescrizione(descrizione);
 			recensione.setValutazione(voto);
 			recensione.setApprovato(false);
 			try {
@@ -139,29 +139,22 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
-			closeWindow();
-			try {
-				dispatcher.openNewWindow("recensione", concerto, spettatore);
-			} catch (ViewException e) {
-				e.printStackTrace();
-			}
+			dispatcher.closeWindowView();
+			dispatcher.renderView("ituoiconcerti", utente);
 		} else {
 			if (!titoloTextField.getText().isEmpty())
 				recensione.setTitolo(titoloTextField.getText());
 			if (!recensioneTextArea.getText().isEmpty())
-				recensione.setDescrizione(recensioneTextArea.getText());
+				recensione.setDescrizione(recensioneTextArea.getText().replace("\n", "_"));
 			recensione.setValutazione(voto);
+			recensione.setApprovato(false);
 			try {
 				recensioniService.updateRecensione(recensione);
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
-			closeWindow();
-			try {
-				dispatcher.openNewWindow("recensione", concerto, spettatore);
-			} catch (ViewException e) {
-				e.printStackTrace();
-			}
+			dispatcher.closeWindowView();
+			dispatcher.renderView("ituoiconcerti", utente);
 		}
 	}
 
@@ -169,13 +162,14 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 	public void deleteAction(ActionEvent event) {
 		try {
 			recensioniService.deleteRecensione(recensione);
-			closeWindow();
-			dispatcher.renderView("ituoiconcerti", spettatore);
+			dispatcher.closeWindowView();
+			dispatcher.renderView("ituoiconcerti", utente);
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}
 	}
 
+	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

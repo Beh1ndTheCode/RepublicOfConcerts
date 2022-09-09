@@ -29,10 +29,11 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 		this.bigliettiFilename = bigliettiFilename;
 		this.concertoService = concertoService;
 		this.luogoService = luogoService;
+		this.utenteService = utenteService;
 	}
 
 	@Override
-	public void prenotaBiglietto(Biglietto biglietto) throws BusinessException {
+	public Biglietto prenotaBiglietto(Biglietto biglietto) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(bigliettiFilename);
 			try (PrintWriter writer = new PrintWriter(new File(bigliettiFilename))) {
@@ -56,11 +57,13 @@ public class FileBigliettoServiceImpl implements BigliettoService {
 				row.append(Utility.SEPARATORE);
 				row.append(biglietto.getPosto());
 				writer.println(row.toString());
+				biglietto.setNumeroBiglietto(Integer.parseInt(contatore.toString()));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);
 		}
+		return biglietto;
 	}
 
 	@Override

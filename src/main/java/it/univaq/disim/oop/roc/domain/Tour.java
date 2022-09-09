@@ -35,10 +35,6 @@ public class Tour {
 		this.artista = artista;
 	}
 
-	public String toString() {
-		return nome + ", " + artista;
-	}
-
 	public Set<Concerto> getConcerti() {
 		return concerti;
 	}

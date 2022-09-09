@@ -49,7 +49,7 @@ public class GestioneTourController implements DataInitializable<Object> {
 			return new SimpleStringProperty(param.getValue().getNome());
 		});
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Tour, Button> param) -> {
-			final Button infoButton = new Button("modifica");
+			final Button infoButton = new Button("Modifica");
 			infoButton.setOnAction(e -> {
 				try {
 					dispatcher.openNewWindow("modificatour", param.getValue());
@@ -60,7 +60,7 @@ public class GestioneTourController implements DataInitializable<Object> {
 			return new SimpleObjectProperty<Button>(infoButton);
 		});
 		concertiTableColumn.setCellValueFactory((CellDataFeatures<Tour, Button> param) -> {
-			final Button infoButton = new Button("concerti");
+			final Button infoButton = new Button("Concerti");
 			infoButton.setOnAction(e -> dispatcher.renderView("tourgestioneconcerti", param.getValue()));
 			return new SimpleObjectProperty<Button>(infoButton);
 		});

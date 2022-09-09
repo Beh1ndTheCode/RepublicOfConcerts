@@ -16,7 +16,7 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="approvaButton" layoutX="313.0" layoutY="196.0" mnemonicParsing="false" onAction="#approvaButtonAction" prefHeight="39.0" prefWidth="105.0" text="Approva">
+      <Button fx:id="eliminaButton" layoutX="313.0" layoutY="196.0" mnemonicParsing="false" onAction="#eliminaButtonAction" prefHeight="39.0" prefWidth="105.0" style="-fx-background-color: ed5e68;" text="Elimina" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
@@ -36,7 +36,7 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recensione" wrappingWidth="105.43359375">
+      <Text layoutX="14.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrizione" wrappingWidth="105.43359375">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
@@ -48,5 +48,10 @@
       </ScrollPane>
       <Label fx:id="titoloLabel" layoutX="74.0" layoutY="45.0" prefHeight="17.0" prefWidth="182.0" />
       <Label fx:id="votoLabel" layoutX="74.0" layoutY="16.0" prefHeight="17.0" prefWidth="85.0" />
+      <Button fx:id="approvaButton" layoutX="313.0" layoutY="150.0" mnemonicParsing="false" onAction="#approvaButtonAction" prefHeight="39.0" prefWidth="105.0" text="Approva">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

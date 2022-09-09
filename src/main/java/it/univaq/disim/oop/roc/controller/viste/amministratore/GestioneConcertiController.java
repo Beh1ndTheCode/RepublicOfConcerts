@@ -53,7 +53,7 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 		});
 
 		dataTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
-			String data = param.getValue().getData().format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+			String data = param.getValue().getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 			return new SimpleStringProperty(data);
 		});
 
@@ -82,6 +82,7 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 		}
 	}
 
+	@FXML
 	public void openAggiungiConcertoWindow(ActionEvent event) throws Exception {
 		dispatcher.openNewWindow("aggiungiconcerto");
 	}

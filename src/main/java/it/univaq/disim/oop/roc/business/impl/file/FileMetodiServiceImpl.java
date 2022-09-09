@@ -228,7 +228,7 @@ public class FileMetodiServiceImpl implements MetodiService {
 					return result;
 				}
 			}
-			throw new BusinessException();
+			throw new BusinessException("Impossibile trovare il metodo preferito");
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);

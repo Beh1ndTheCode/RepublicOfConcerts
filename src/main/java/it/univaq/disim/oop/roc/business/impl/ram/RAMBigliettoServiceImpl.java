@@ -17,9 +17,10 @@ public class RAMBigliettoServiceImpl implements BigliettoService {
 	private static int contNumBiglietti = 0;
 
 	@Override
-	public void prenotaBiglietto(Biglietto biglietto) throws BusinessException {
+	public Biglietto prenotaBiglietto(Biglietto biglietto) throws BusinessException {
 		biglietto.setNumeroBiglietto(contNumBiglietti++);
 		bigliettiPrenotati.add(biglietto);
+		return biglietto;
 	}
 
 	@Override

@@ -1,13 +1,13 @@
 package it.univaq.disim.oop.roc.controller.viste.amministratore;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
 import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Concerto;
-import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.domain.TipologiaMetodoDiPagamento;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
@@ -40,8 +40,6 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 
 	private Concerto concerto;
 
-	private Luogo luogo;
-
 	public ModificaConcertoController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
@@ -66,16 +64,15 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 			scalettaTextField.setPromptText(concerto.getScaletta());
 
 		if (!(concerto.getTour() == null))
-			tourLabel.setText(concerto.getTour().toString());
+			tourLabel.setText(concerto.getTour().getNome());
 		else
 			tourLabel.setText("Nessuno");
 
 		artistiTextField.setPromptText(concerto.getArtista());
-		giornoTextField.setPromptText(((Integer) concerto.getData().getDayOfMonth()).toString());
-		meseTextField.setPromptText(((Integer) concerto.getData().getMonthValue()).toString());
-		annoTextField.setPromptText(((Integer) concerto.getData().getYear()).toString());
+		giornoTextField.setPromptText(concerto.getData().format(DateTimeFormatter.ofPattern("dd")));
+		meseTextField.setPromptText(concerto.getData().format(DateTimeFormatter.ofPattern("MM")));
+		annoTextField.setPromptText(concerto.getData().format(DateTimeFormatter.ofPattern("yyyy")));
 		luogoLabel.setText(concerto.getLuogo().toString());
-
 	}
 
 	@FXML
@@ -105,14 +102,13 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 				concerto.setScaletta(scalettaTextField.getText());
 			if (!artistiTextField.getText().isEmpty())
 				concerto.setArtista(artistiTextField.getText());
-			concerto.setLuogo(luogo);
 			concertoService.updateConcerto(concerto);
 
 			dispatcher.renderView("gestioneconcerti");
 		} catch (IntegerFormatException e) {
-			dataErrorLabel.setText("data non valida");
+			dataErrorLabel.setText("Data non valida");
 		} catch (InvalidDateException e) {
-			dataErrorLabel.setText("data non valida");
+			dataErrorLabel.setText("Data non valida");
 		}
 	}
 

@@ -97,6 +97,7 @@ public class FileUtenteServiceImpl implements UtenteService {
 				row.append(Utility.SEPARATORE);
 				row.append("null");
 				writer.println(row.toString());
+				spettatore.setId(Integer.parseInt(contatore.toString()));
 				return spettatore;
 			}
 		} catch (IOException e) {

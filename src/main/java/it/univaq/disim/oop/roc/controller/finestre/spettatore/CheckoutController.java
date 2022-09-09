@@ -168,7 +168,7 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 				biglietto.setPrezzo(tariffa.getPrezzoRidotto());
 				biglietto.setTipologiaBiglietto(TipologiaBiglietto.Ridotto);
 				biglietto.setPosto(Integer.valueOf(posto));
-				bigliettoService.prenotaBiglietto(biglietto);
+				biglietto = bigliettoService.prenotaBiglietto(biglietto);
 				bigliettiEsistenti.add(biglietto);
 				bigliettiAggiunti.add(biglietto);
 			}

@@ -59,7 +59,7 @@ public class InfoConcertoController implements DataInitializable<Concerto>, Uten
 			scalettaLabel.setText(concerto.getScaletta());
 
 		if (!(concerto.getTour() == null))
-			tourLabel.setText(concerto.getTour().toString());
+			tourLabel.setText(concerto.getTour().getNome());
 
 		else
 			tourLabel.setText("nessuno");

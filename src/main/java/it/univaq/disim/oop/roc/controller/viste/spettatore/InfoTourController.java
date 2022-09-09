@@ -54,7 +54,7 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 		});
 
 		dataTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
-			String data = param.getValue().getData().format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+			String data = param.getValue().getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 			return new SimpleStringProperty(data);
 		});
 	}

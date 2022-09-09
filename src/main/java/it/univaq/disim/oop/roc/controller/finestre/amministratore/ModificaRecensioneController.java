@@ -12,48 +12,61 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
-public class ModificaRecensioneController implements DataInitializable<Recensione>{
-	
+public class ModificaRecensioneController implements DataInitializable<Recensione> {
+
 	@FXML
 	private Label votoLabel, titoloLabel;
-	
+
 	@FXML
 	private Text recensioneText;
-	
+
 	@FXML
-	private Button approvaButton;
-	
+	private Button approvaButton, eliminaButton;
+
 	private ViewDispatcher dispatcher;
-	
+
 	private RecensioniService recensioniService;
-	
+
 	private Recensione recensione;
 
-	
 	public ModificaRecensioneController() {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		recensioniService = factory.getRecensioniService();
 	}
-	
-	public void initializeData(Recensione recensione){
+
+	@Override
+	public void initializeData(Recensione recensione) {
 		this.recensione = recensione;
-		votoLabel.setText(recensione.getValutazione().toString() + " su 5");
+		votoLabel.setText(recensione.getValutazione().toString() + "/5");
 		titoloLabel.setText(recensione.getTitolo());
-		recensioneText.setText(recensione.getDescrizione());
+		recensioneText.setText(recensione.getDescrizione().replace("\n", " "));
 	}
-	
+
+	@FXML
 	public void approvaButtonAction(ActionEvent event) {
 		recensione.setApprovato(true);
 		try {
 			recensioniService.updateRecensione(recensione);
 		} catch (BusinessException e) {
-			e.printStackTrace();
+			dispatcher.renderError(e);
 		}
 		dispatcher.closeWindowView();
 		dispatcher.renderView("gestionerecensioni");
 	}
-	
+
+	@FXML
+	public void eliminaButtonAction(ActionEvent event) {
+		try {
+			recensioniService.deleteRecensione(recensione);
+		} catch (BusinessException e) {
+			dispatcher.renderError(e);
+		}
+		dispatcher.closeWindowView();
+		dispatcher.renderView("gestionerecensioni");
+	}
+
+	@FXML
 	public void closeWindow() {
 		dispatcher.closeWindowView();
 	}

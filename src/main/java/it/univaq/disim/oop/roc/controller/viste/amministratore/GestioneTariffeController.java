@@ -118,18 +118,18 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 				throw new SelectionException();
 			Float inputPrezzo;
 			try {
-				inputPrezzo = Float.parseFloat(prezzoTextField.getText());
+				inputPrezzo = Float.parseFloat(prezzoTextField.getText().replace(",", "."));
 				if (inputPrezzo < 0)
 					throw new NumberFormatException();
 				tariffa.setPrezzo(inputPrezzo);
 			} catch (NumberFormatException n) {
-				errorLabel.setText("tariffa non valida");
+				errorLabel.setText("Tariffa non valida");
 			}
 			tariffeService.setTariffa(tariffa);
 
 			dispatcher.renderView("gestionetariffe", concerto);
 		} catch (SelectionException e) {
-			errorLabel.setText("settore non selezionato");
+			errorLabel.setText("Settore non selezionato");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
 		}

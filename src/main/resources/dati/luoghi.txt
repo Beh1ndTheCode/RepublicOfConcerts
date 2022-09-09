@@ -1,5 +1,7 @@
-5
+7
 1,Stadio,San Siro,Milano,60000
-2,Teatro,La Fenice,Venezia,1000
-3,Stadio,Olimpico,Roma,72000
-4,Teatro,Arena di Verona,Verona,22000
+2,Stadio,Olimpico,Roma,72000
+3,Teatro,Alla Scala,Milano,1200
+4,Stadio,Arena di Verona,Verona,22000
+5,Stadio,Maradona,Napoli,55000
+6,Teatro,La Fenice,Venezia,1100

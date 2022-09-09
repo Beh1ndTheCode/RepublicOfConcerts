@@ -10,7 +10,7 @@ import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
 public interface BigliettoService {
 
-	void prenotaBiglietto(Biglietto biglietto) throws BusinessException;
+	Biglietto prenotaBiglietto(Biglietto biglietto) throws BusinessException;
 
 	void updateBiglietto(Biglietto biglietto) throws BusinessException;
 
