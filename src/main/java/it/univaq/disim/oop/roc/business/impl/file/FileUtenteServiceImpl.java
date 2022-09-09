@@ -51,11 +51,12 @@ public class FileUtenteServiceImpl implements UtenteService {
 						throw new BusinessException("errore nella lettura del file");
 					}
 					if (utente instanceof Spettatore) {
-						if (colonne[6].equals("null"))
-							((Spettatore) utente).setMetodoPreferito(null);
-						else {
-							MetodoDiPagamento metodoPreferito = metodiService.findMetodoPreferito((Spettatore) utente);
+						if (!(colonne[7].equals("null"))) {
+							MetodoDiPagamento metodoPreferito = metodiService
+									.findMetodoPreferito(Integer.parseInt(colonne[7]));
 							((Spettatore) utente).setMetodoPreferito(metodoPreferito);
+						} else {
+							((Spettatore) utente).setMetodoPreferito(null);
 						}
 					}
 					return utente;
@@ -119,6 +120,8 @@ public class FileUtenteServiceImpl implements UtenteService {
 						row.append(Utility.SEPARATORE);
 						row.append(spettatore.getPassword());
 						row.append(Utility.SEPARATORE);
+						row.append("spettatore");
+						row.append(Utility.SEPARATORE);
 						row.append(spettatore.getNome());
 						row.append(Utility.SEPARATORE);
 						row.append(spettatore.getCognome());
@@ -152,9 +155,17 @@ public class FileUtenteServiceImpl implements UtenteService {
 					result.setId(Integer.parseInt(colonne[0]));
 					result.setUsername(colonne[1]);
 					result.setPassword(colonne[2]);
-					result.setNome(colonne[3]);
-					result.setCognome(colonne[4]);
-					result.setEta(Integer.parseInt(colonne[5]));
+					result.setNome(colonne[4]);
+					result.setCognome(colonne[5]);
+					result.setEta(Integer.parseInt(colonne[6]));
+					if (!(colonne[7].equals("null"))) {
+						MetodoDiPagamento metodoPreferito = metodiService
+								.findMetodoPreferito(Integer.parseInt(colonne[7]));
+						result.setMetodoPreferito(metodoPreferito);
+					} else {
+						result.setMetodoPreferito(null);
+					}
+
 					return result;
 				}
 			}

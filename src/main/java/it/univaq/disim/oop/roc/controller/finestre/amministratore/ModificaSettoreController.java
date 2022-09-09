@@ -44,6 +44,7 @@ public class ModificaSettoreController implements DataInitializable<Settore> {
 		modificaButton.setDisable(true);
 	}
 
+	@Override
 	public void initializeData(Settore settore) {
 		this.settore = settore;
 		nomeLabel.setText(settore.getNome());
@@ -59,6 +60,7 @@ public class ModificaSettoreController implements DataInitializable<Settore> {
 		modificaButton.setDisable(isDisable);
 	}
 
+	@FXML
 	public void updateSettoreAction(ActionEvent event) {
 		errorLabel.setText("");
 		try {
@@ -82,11 +84,7 @@ public class ModificaSettoreController implements DataInitializable<Settore> {
 			if (!nomeTextField.getText().isEmpty())
 				settore.setNome(nomeTextField.getText());
 			luogoService.updateSettore(settore);
-
-			initializeData(settore);
-			nomeTextField.setText("");
-			capienzaTextField.setText("");
-			blockModificaButton();
+			dispatcher.closeWindowView();
 			dispatcher.renderView("gestionesettori", settore.getLuogo());
 
 		} catch (BusinessException e) {

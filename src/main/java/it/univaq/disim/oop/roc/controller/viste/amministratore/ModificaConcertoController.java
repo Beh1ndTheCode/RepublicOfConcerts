@@ -1,10 +1,8 @@
 package it.univaq.disim.oop.roc.controller.viste.amministratore;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import it.univaq.disim.oop.roc.business.ConcertoService;
-import it.univaq.disim.oop.roc.business.LuogoService;
 import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.business.Utility;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
@@ -14,15 +12,11 @@ import it.univaq.disim.oop.roc.domain.TipologiaMetodoDiPagamento;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 import it.univaq.disim.oop.roc.exceptions.IntegerFormatException;
 import it.univaq.disim.oop.roc.exceptions.InvalidDateException;
-import it.univaq.disim.oop.roc.exceptions.SelectionException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
@@ -35,10 +29,7 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	private RadioButton cartaRadioButton, contoRadioButton;
 
 	@FXML
-	private Label luogoLabel, dataErrorLabel, luogoErrorLabel, tourLabel;
-
-	@FXML
-	private ListView<Luogo> luoghiListView;
+	private Label luogoLabel, dataErrorLabel, tourLabel;
 
 	@FXML
 	private Button modificaButton, eliminaButton;
@@ -46,8 +37,6 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	private ViewDispatcher dispatcher;
 
 	private ConcertoService concertoService;
-
-	private LuogoService luoghiService;
 
 	private Concerto concerto;
 
@@ -57,17 +46,10 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		dispatcher = ViewDispatcher.getInstance();
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		concertoService = factory.getConcertoService();
-		luoghiService = factory.getLuogoService();
 	}
 
 	public void initialize() {
-		try {
-			List<Luogo> luoghi = luoghiService.findAllLuoghi();
-			ObservableList<Luogo> luoghiData = FXCollections.observableArrayList(luoghi);
-			luoghiListView.setItems(luoghiData);
-		} catch (BusinessException e) {
-			dispatcher.renderError(e);
-		}
+
 	}
 
 	@Override
@@ -86,7 +68,7 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		if (!(concerto.getTour() == null))
 			tourLabel.setText(concerto.getTour().toString());
 		else
-			tourLabel.setText("nessuno");
+			tourLabel.setText("Nessuno");
 
 		artistiTextField.setPromptText(concerto.getArtista());
 		giornoTextField.setPromptText(((Integer) concerto.getData().getDayOfMonth()).toString());
@@ -94,18 +76,6 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		annoTextField.setPromptText(((Integer) concerto.getData().getYear()).toString());
 		luogoLabel.setText(concerto.getLuogo().toString());
 
-	}
-
-	@FXML
-	public void luogoSelezionato() {
-		try {
-			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
-				throw new SelectionException();
-			luogoErrorLabel.setText(null);
-			luogoLabel.setText(luoghiListView.getSelectionModel().getSelectedItem().toString());
-		} catch (SelectionException e) {
-			luogoErrorLabel.setText("Seleziona un luogo");
-		}
 	}
 
 	@FXML
@@ -121,28 +91,16 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 	@FXML
 	public void updateConcertoAction(ActionEvent event) throws BusinessException {
 		try {
-			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
-				luogo = concerto.getLuogo();
-			else
-				luogo = luoghiListView.getSelectionModel().getSelectedItem();
-
 			if (giornoTextField.getText().isEmpty() || meseTextField.getText().isEmpty()
 					|| annoTextField.getText().isEmpty()) {
 				if (!(giornoTextField.getText().isEmpty() && meseTextField.getText().isEmpty()
 						&& annoTextField.getText().isEmpty()))
 					throw new InvalidDateException();
 			} else {
-				try {
-					LocalDate data = Utility.VerificaData(giornoTextField.getText(), meseTextField.getText(),
-							annoTextField.getText());
-					concerto.setData(data);
-				} catch (IntegerFormatException e) {
-					throw new IntegerFormatException();
-				} catch (InvalidDateException e) {
-					throw new InvalidDateException();
-				}
+				LocalDate data = Utility.VerificaData(giornoTextField.getText(), meseTextField.getText(),
+						annoTextField.getText());
+				concerto.setData(data);
 			}
-
 			if (!scalettaTextField.getText().isEmpty())
 				concerto.setScaletta(scalettaTextField.getText());
 			if (!artistiTextField.getText().isEmpty())

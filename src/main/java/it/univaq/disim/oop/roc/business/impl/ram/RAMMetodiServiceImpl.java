@@ -7,7 +7,6 @@ import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
-import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -63,7 +62,7 @@ public class RAMMetodiServiceImpl implements MetodiService {
 	}
 
 	@Override
-	public MetodoDiPagamento findMetodoPreferito(Spettatore spettatore) throws BusinessException {
+	public MetodoDiPagamento findMetodoPreferito(int id) throws BusinessException {
 		Carta carta = new Carta();
 		return carta;
 	}

@@ -96,16 +96,24 @@ public class ProfiloController implements DataInitializable<Utente> {
 		});
 		preferitoTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, Button> param) -> {
 			final Button preferitoButton = new Button("Seleziona");
-			if (!param.getValue().equals(spettatore.getMetodoPreferito())) {
+			if (spettatore.getMetodoPreferito() == null
+					|| !param.getValue().getId().equals(spettatore.getMetodoPreferito().getId())) {
 				preferitoButton.setOnAction(e -> {
-					spettatore.setMetodoPreferito(param.getValue());
-					dispatcher.renderView("profilo", spettatore);
+					try {
+						spettatore.setMetodoPreferito(param.getValue());
+						utenteService.updateDati(spettatore);
+						dispatcher.renderView("profilo", spettatore);
+					} catch (BusinessException ex) {
+						dispatcher.renderError(ex);
+					}
 				});
-			} else
+			} else {
+				preferitoButton.setText("Preferito");
 				preferitoButton.setDisable(true);
-
+			}
 			return new SimpleObjectProperty<Button>(preferitoButton);
 		});
+
 	}
 
 	@Override

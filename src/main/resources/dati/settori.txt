@@ -1,8 +1,15 @@
-9
+16
 1,1,Curva Nord,15000
 2,1,Curva Sud,15000
 3,1,VIP,1000
 4,1,Ospiti,10000
-6,1,Altro,19000
+6,1,Spalti,18500
 7,2,Standard,525
 8,2,Spalti,175
+9,1,Stampa,500
+10,4,Gradinata,10500
+11,4,Poltrona,4900
+12,3,Tevere,22500
+13,3,Monte Mario,22500
+14,3,Curva Nord,13500
+15,3,Curva Sud,13500

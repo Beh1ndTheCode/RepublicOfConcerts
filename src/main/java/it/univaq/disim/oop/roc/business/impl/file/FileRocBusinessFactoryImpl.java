@@ -14,14 +14,14 @@ import it.univaq.disim.oop.roc.business.UtenteService;
 
 public class FileRocBusinessFactoryImpl extends RocBusinessFactory {
 
-	private UtenteService utenteService;
-	private LuogoService luogoService;
-	private ConcertoService concertoService;
 	private MetodiService metodiService;
+	private TourService tourService;
+	private LuogoService luogoService;
+	private UtenteService utenteService;
+	private ConcertoService concertoService;
 	private BigliettoService bigliettoService;
 	private RecensioniService recensioniService;
 	private TariffeService tariffeService;
-	private TourService tourService;
 
 	private static final String REPOSITORY_BASE = "src" + File.separator + "main" + File.separator + "resources"
 			+ File.separator + "dati";
@@ -36,11 +36,11 @@ public class FileRocBusinessFactoryImpl extends RocBusinessFactory {
 	private static final String UTENTI_FILE_NAME = REPOSITORY_BASE + File.separator + "utenti.txt";
 
 	public FileRocBusinessFactoryImpl() {
-		utenteService = new FileUtenteServiceImpl(UTENTI_FILE_NAME, metodiService);
-		luogoService = new FileLuogoServiceImpl(LUOGHI_FILE_NAME, SETTORI_FILE_NAME);
-		concertoService = new FileConcertoServiceImpl(CONCERTI_FILE_NAME, luogoService, tourService);
-		tourService = new FileTourServiceImpl(TOUR_FILE_NAME);
 		metodiService = new FileMetodiServiceImpl(METODI_FILE_NAME);
+		tourService = new FileTourServiceImpl(TOUR_FILE_NAME);
+		luogoService = new FileLuogoServiceImpl(LUOGHI_FILE_NAME, SETTORI_FILE_NAME);
+		utenteService = new FileUtenteServiceImpl(UTENTI_FILE_NAME, metodiService);
+		concertoService = new FileConcertoServiceImpl(CONCERTI_FILE_NAME, luogoService, tourService);
 		bigliettoService = new FileBigliettoServiceImpl(BIGLIETTI_FILE_NAME, concertoService, luogoService,
 				utenteService);
 		recensioniService = new FileRecensioniServiceImpl(RECENSIONI_FILE_NAME, utenteService, concertoService);
@@ -48,8 +48,13 @@ public class FileRocBusinessFactoryImpl extends RocBusinessFactory {
 	}
 
 	@Override
-	public UtenteService getUtenteService() {
-		return utenteService;
+	public MetodiService getMetodiService() {
+		return metodiService;
+	}
+
+	@Override
+	public TourService getTourService() {
+		return tourService;
 	}
 
 	@Override
@@ -58,13 +63,13 @@ public class FileRocBusinessFactoryImpl extends RocBusinessFactory {
 	}
 
 	@Override
-	public ConcertoService getConcertoService() {
-		return concertoService;
+	public UtenteService getUtenteService() {
+		return utenteService;
 	}
 
 	@Override
-	public MetodiService getMetodiService() {
-		return metodiService;
+	public ConcertoService getConcertoService() {
+		return concertoService;
 	}
 
 	@Override
@@ -80,11 +85,6 @@ public class FileRocBusinessFactoryImpl extends RocBusinessFactory {
 	@Override
 	public TariffeService getTariffeService() {
 		return tariffeService;
-	}
-
-	@Override
-	public TourService getTourService() {
-		return tourService;
 	}
 
 }

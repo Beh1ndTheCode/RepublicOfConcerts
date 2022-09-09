@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 public class GestioneTariffeController implements DataInitializable<Concerto> {
 
@@ -38,7 +39,10 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 	private Button modificaButton;
 
 	@FXML
-	private Label settoreLabel, errorLabel, concertoLabel;
+	private Text settoreText;
+
+	@FXML
+	private Label errorLabel, concertoLabel;
 
 	@FXML
 	private TextField prezzoTextField;
@@ -71,7 +75,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 		selezionaTableColumn.setCellValueFactory((CellDataFeatures<Tariffa, Button> param) -> {
 			final Button selezionaButton = new Button("Seleziona");
 			selezionaButton.setOnAction(e -> {
-				settoreLabel.setText(param.getValue().getSettore().getNome());
+				settoreText.setText(param.getValue().getSettore().getNome());
 				this.tariffa = param.getValue();
 			});
 			return new SimpleObjectProperty<Button>(selezionaButton);
@@ -102,7 +106,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 			if (settoriTableView.getSelectionModel().getSelectedItem() == null)
 				throw new SelectionException();
 			errorLabel.setText(null);
-			settoreLabel.setText(settoriTableView.getSelectionModel().getSelectedItem().getSettore().getNome());
+			settoreText.setText(settoriTableView.getSelectionModel().getSelectedItem().getSettore().getNome());
 		} catch (SelectionException e) {
 			errorLabel.setText("Nessun settore selezionato");
 		}

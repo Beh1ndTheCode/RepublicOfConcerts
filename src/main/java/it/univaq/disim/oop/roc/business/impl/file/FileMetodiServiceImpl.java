@@ -11,7 +11,6 @@ import it.univaq.disim.oop.roc.business.MetodiService;
 import it.univaq.disim.oop.roc.domain.Carta;
 import it.univaq.disim.oop.roc.domain.Conto;
 import it.univaq.disim.oop.roc.domain.MetodoDiPagamento;
-import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
 
@@ -195,41 +194,38 @@ public class FileMetodiServiceImpl implements MetodiService {
 	}
 
 	@Override
-	public MetodoDiPagamento findMetodoPreferito(Spettatore spettatore) throws BusinessException {
+	public MetodoDiPagamento findMetodoPreferito(int id) throws BusinessException {
 		try {
 			FileData fileData = Utility.readAllRows(metodiFilename);
 			for (String[] colonne : fileData.getRighe()) {
-				if (Integer.parseInt(colonne[1]) == spettatore.getId()) {
-					if (Integer.parseInt(colonne[0]) == spettatore.getMetodoPreferito().getId()) {
-						MetodoDiPagamento result = null;
-						switch (colonne[2]) {
-						case "Carta":
-							result = new Carta();
-							break;
-						case "Conto":
-							result = new Conto();
-							break;
-						default:
-							break;
-						}
-						if (result != null) {
-							result.setId(Integer.parseInt(colonne[0]));
-							result.setUtente(spettatore);
-							result.setNome(colonne[3]);
-							result.setIntestatario(colonne[5]);
-						} else {
-							throw new BusinessException("errore nella lettura del file");
-						}
-						if (result instanceof Carta) {
-							((Carta) result).setNumero(Long.parseLong(colonne[4]));
-							((Carta) result).setScadenza(LocalDate.parse(colonne[6]));
-							((Carta) result).setCvv(Integer.parseInt(colonne[7]));
-						}
-						if (result instanceof Conto) {
-							((Conto) result).setIban(colonne[4]);
-						}
-						return result;
+				if (Integer.parseInt(colonne[0]) == id) {
+					MetodoDiPagamento result = null;
+					switch (colonne[2]) {
+					case "Carta":
+						result = new Carta();
+						break;
+					case "Conto":
+						result = new Conto();
+						break;
+					default:
+						break;
 					}
+					if (result != null) {
+						result.setId(Integer.parseInt(colonne[0]));
+						result.setNome(colonne[3]);
+						result.setIntestatario(colonne[5]);
+					} else {
+						throw new BusinessException("errore nella lettura del file");
+					}
+					if (result instanceof Carta) {
+						((Carta) result).setNumero(Long.parseLong(colonne[4]));
+						((Carta) result).setScadenza(LocalDate.parse(colonne[6]));
+						((Carta) result).setCvv(Integer.parseInt(colonne[7]));
+					}
+					if (result instanceof Conto) {
+						((Conto) result).setIban(colonne[4]);
+					}
+					return result;
 				}
 			}
 			throw new BusinessException();

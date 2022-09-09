@@ -43,7 +43,7 @@ public class FileTariffeServiceImpl implements TariffeService {
 				row.append(Utility.SEPARATORE);
 				row.append(tariffa.getSettore().getId());
 				row.append(Utility.SEPARATORE);
-				row.append("null");
+				row.append(0.0f);
 				writer.println(row.toString());
 			}
 		} catch (IOException e) {

@@ -12,29 +12,34 @@ import it.univaq.disim.oop.roc.business.UtenteService;
 
 public class RAMRocBusinessFactoryImpl extends RocBusinessFactory {
 
-	private UtenteService utenteService;
-	private LuogoService luogoService;
-	private ConcertoService concertoService;
 	private MetodiService metodiService;
+	private TourService tourService;
+	private LuogoService luogoService;
+	private UtenteService utenteService;
+	private ConcertoService concertoService;
 	private BigliettoService bigliettoService;
 	private RecensioniService recensioniService;
 	private TariffeService tariffeService;
-	private TourService tourService;
 
 	public RAMRocBusinessFactoryImpl() {
-		utenteService = new RAMUtenteServiceImpl();
-		luogoService = new RAMLuogoServiceImpl();
-		concertoService = new RAMConcertoServiceImpl();
 		metodiService = new RAMMetodiServiceImpl();
+		tourService = new RAMTourServiceImpl();
+		luogoService = new RAMLuogoServiceImpl();
+		utenteService = new RAMUtenteServiceImpl();
+		concertoService = new RAMConcertoServiceImpl();
 		bigliettoService = new RAMBigliettoServiceImpl();
 		recensioniService = new RAMRecensioniServiceImpl();
 		tariffeService = new RAMTariffeServiceImpl();
-		tourService = new RAMTourServiceImpl();
 	}
 
 	@Override
-	public UtenteService getUtenteService() {
-		return utenteService;
+	public MetodiService getMetodiService() {
+		return metodiService;
+	}
+
+	@Override
+	public TourService getTourService() {
+		return tourService;
 	}
 
 	@Override
@@ -43,13 +48,13 @@ public class RAMRocBusinessFactoryImpl extends RocBusinessFactory {
 	}
 
 	@Override
-	public ConcertoService getConcertoService() {
-		return concertoService;
+	public UtenteService getUtenteService() {
+		return utenteService;
 	}
 
 	@Override
-	public MetodiService getMetodiService() {
-		return metodiService;
+	public ConcertoService getConcertoService() {
+		return concertoService;
 	}
 
 	@Override
@@ -65,11 +70,6 @@ public class RAMRocBusinessFactoryImpl extends RocBusinessFactory {
 	@Override
 	public TariffeService getTariffeService() {
 		return tariffeService;
-	}
-
-	@Override
-	public TourService getTourService() {
-		return tourService;
 	}
 
 }

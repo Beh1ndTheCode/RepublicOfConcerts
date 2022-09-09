@@ -5,6 +5,7 @@ import it.univaq.disim.oop.roc.business.RocBusinessFactory;
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.domain.Luogo;
 import it.univaq.disim.oop.roc.exceptions.BusinessException;
+import it.univaq.disim.oop.roc.exceptions.NumberOutOfBoundsException;
 import it.univaq.disim.oop.roc.viste.ViewDispatcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,9 +69,13 @@ public class ModificaLuogoController implements DataInitializable<Luogo> {
 				Integer capienzaInput;
 				try {
 					capienzaInput = Integer.parseInt(capienzaTextField.getText());
+					if(capienzaInput < luogo.getCapienza())
+						throw new NumberOutOfBoundsException();
 					luogo.setCapienza(capienzaInput);
-				} catch (NumberFormatException n) {
-					capienzaErrorLabel.setText("capienza non valida!");
+				} catch (NumberOutOfBoundsException e) {
+					capienzaErrorLabel.setText("Inserire una capienza maggiore alla precedente");
+				} catch (NumberFormatException e) {
+					capienzaErrorLabel.setText("Capienza non valida!");
 				}
 			}
 
