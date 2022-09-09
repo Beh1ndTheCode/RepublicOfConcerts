@@ -47,7 +47,8 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 		aggiungiTeatroButton.setDisable(isDisable);
 		aggiungiStadioButton.setDisable(isDisable);
 	}
-
+	
+	// verifica che ogni campo sia riempito correttamente e crea un Teatro
 	public void addTeatroAction(ActionEvent event) {
 		capienzaErrorLabel.setText("");
 		Integer capienzaInput;
@@ -79,6 +80,7 @@ public class AggiungiLuogoController implements DataInitializable<Luogo> {
 		}
 	}
 
+	// verifica che ogni campo sia riempito correttamente e crea uno Stadio
 	public void addStadioAction(ActionEvent event) {
 		capienzaErrorLabel.setText("");
 		Integer capienzaInput;

@@ -51,7 +51,10 @@ public class AggiungiSettoreController implements DataInitializable<Luogo> {
 		boolean isDisable = nome.isEmpty() || capienza.isEmpty();
 		aggiungiSettoreButton.setDisable(isDisable);
 	}
-
+	
+	//si attiva con il pulsante Aggiungi e prima verifica che la capienza sia un numero
+	//poi che non sfori la capienza del Luogo e poi viene creato il settore 
+	//impostando la capienza al 70% se si tratta di un Teatro
 	public void addSettoreAction(ActionEvent event) {
 		capienzaErrorLabel.setText("");
 		try {

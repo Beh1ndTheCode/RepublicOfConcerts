@@ -35,7 +35,7 @@ public class ModificaRecensioneController implements DataInitializable<Recension
 		recensioniService = factory.getRecensioniService();
 	}
 
-	@Override
+	@Override	//inizializza le Label e i Text in base al concerto
 	public void initializeData(Recensione recensione) {
 		this.recensione = recensione;
 		votoLabel.setText(recensione.getValutazione().toString() + "/5");
@@ -43,7 +43,7 @@ public class ModificaRecensioneController implements DataInitializable<Recension
 		recensioneText.setText(recensione.getDescrizione().replace("\n", " "));
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Approva, approva la recensione fa l'update e chiude la finestra
 	public void approvaButtonAction(ActionEvent event) {
 		recensione.setApprovato(true);
 		try {
@@ -55,7 +55,7 @@ public class ModificaRecensioneController implements DataInitializable<Recension
 		dispatcher.renderView("gestionerecensioni");
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Elimina, elimina la recensione e chiude la finestra
 	public void eliminaButtonAction(ActionEvent event) {
 		try {
 			recensioniService.deleteRecensione(recensione);

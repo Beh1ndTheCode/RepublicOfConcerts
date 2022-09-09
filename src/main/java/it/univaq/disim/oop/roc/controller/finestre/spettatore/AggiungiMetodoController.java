@@ -53,6 +53,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		this.utente = utente;
 	}
 
+	//blocca il bottone Aggiungi Carta se non sono stati inseriti tutti i campi necessari
 	public void blockAggiungiCartaButton() {
 		String nomeCarta = nomeCartaField.getText();
 		String intestatarioCarta = intestatarioCartaField.getText();
@@ -67,6 +68,7 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		aggiungiCartaButton.setDisable(isDisable);
 	}
 
+	//blocca il bottone Aggiungi Conto se non sono stati inseriti tutti i campi necessari
 	public void blockAggiungiContoButton() {
 		String nomeConto = nomeContoField.getText();
 		String intestatarioConto = intestatarioContoField.getText();
@@ -75,7 +77,8 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		aggiungiContoButton.setDisable(isDisable);
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Aggiungi Carta, verifica TUTTI i numeri che devono essere della giusta lunghezza
+			//verifica la data che deve essere valida (in caso lancia eccezioni con le ErrorLabel)e crea una nuova Carta 
 	public void aggiungiCartaAction(ActionEvent event) {
 		numErrorLabel.setText("");
 		dataErrorLabel.setText("");
@@ -132,7 +135,8 @@ public class AggiungiMetodoController implements DataInitializable<Utente> {
 		}
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Aggiungi Carta, verifica che l'iban sia della lunghezza giusta
+			//(in caso lancia eccezioni con le ErrorLabel) e crea un nuovo Conto
 	public void aggiungiContoAction(ActionEvent event) {
 		try {
 			if (ibanField.getText().length() == 27) {

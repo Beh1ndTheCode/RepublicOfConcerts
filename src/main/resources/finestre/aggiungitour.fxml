@@ -39,7 +39,7 @@
             <Font name="Arial Italic" size="15.0" />
          </font>
       </Text>
-      <ListView fx:id="artistiListView" editable="true" layoutX="130.0" layoutY="106.0" onMouseReleased="#luogoSelezionato" prefHeight="61.0" prefWidth="187.0" />
+      <ListView fx:id="artistiListView" editable="true" layoutX="130.0" layoutY="106.0" onMouseReleased="#artistaSelezionato" prefHeight="61.0" prefWidth="187.0" />
       <Label fx:id="artistaLabel" layoutX="132.0" layoutY="87.0" prefHeight="17.0" prefWidth="187.0" />
       <Label fx:id="artistaErrorLabel" layoutX="324.0" layoutY="117.0" prefHeight="39.0" prefWidth="120.0" />
    </children>

@@ -46,6 +46,7 @@ public class AggiungiTourController implements DataInitializable<Object> {
 		concertoService = factory.getConcertoService();
 	}
 
+	//inizializza la ListView degli Artisti
 	public void initialize() {
 		aggiungiButton.setDisable(true);
 		try {
@@ -56,8 +57,9 @@ public class AggiungiTourController implements DataInitializable<Object> {
 			dispatcher.renderError(e);
 		}
 	}
-
-	public void luogoSelezionato() {
+	
+	//verifica se viene selezionato un Artista e imposta artistaLabel per conferma
+	public void artistaSelezionato() {
 		try {
 			if (artistiListView.getSelectionModel().getSelectedItem() == null)
 				throw new SelectionException();
@@ -74,7 +76,8 @@ public class AggiungiTourController implements DataInitializable<Object> {
 		aggiungiButton.setDisable(isDisable);
 	}
 
-	@FXML
+			//si Attiva con il pulsante Aggiungi, verifica che sia selezionato un Artista
+	@FXML	//e crea un Tour
 	public void addTourAction(ActionEvent event) {
 		try {
 			if (artistiListView.getSelectionModel().getSelectedItem() == null)

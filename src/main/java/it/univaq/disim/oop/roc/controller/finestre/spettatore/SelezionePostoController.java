@@ -41,12 +41,12 @@ public class SelezionePostoController implements DataInitializable<Biglietto>, U
 		bigliettoService = factory.getBigliettoService();
 	}
 
-	@Override
+	@Override	//inizializza tutta la lista di biglietti che sono stati creati nella finestra di checkout
 	public void initializeUtente(List<Biglietto> bigliettiAggiunti) {
 		this.bigliettiAggiunti = bigliettiAggiunti;
 	}
 
-	@Override
+	@Override	//inizializza le Label e TextField in base al Biglietto
 	public void initializeData(Biglietto biglietto) {
 		this.biglietto = biglietto;
 		bigliettoLabel.setText(
@@ -55,7 +55,9 @@ public class SelezionePostoController implements DataInitializable<Biglietto>, U
 		postoTextField.setPromptText(biglietto.getPosto().toString());
 	}
 
-	@FXML
+			//verifica se viene inserito un valore valido Es.(non sfora la capienza, non è occupato, o se non è un valore numerico)
+	@FXML	//se non viene inserito nessun valore si mantiene il posto generato automaticamente, altrimenti si modifica il posto e si fa l'update
+			//dopo di che verifica se ci sono altri biglietti, se si chiude la finestra e ne riapre un'altra con il biglietto successivo
 	public void salvaPostoAction(ActionEvent event) {
 		Integer posto;
 		try {

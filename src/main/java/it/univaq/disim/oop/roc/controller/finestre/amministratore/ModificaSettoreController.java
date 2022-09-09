@@ -44,7 +44,7 @@ public class ModificaSettoreController implements DataInitializable<Settore> {
 		modificaButton.setDisable(true);
 	}
 
-	@Override
+	@Override	//inizializza le Label e i TextField in base al Settore
 	public void initializeData(Settore settore) {
 		this.settore = settore;
 		nomeLabel.setText(settore.getNome());
@@ -60,7 +60,8 @@ public class ModificaSettoreController implements DataInitializable<Settore> {
 		modificaButton.setDisable(isDisable);
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Modifica, verifica la capienza che, aggiunta a quella degli
+			//altri settori non deve superare quella del luogo, modifica la capienza e fa l'update
 	public void updateSettoreAction(ActionEvent event) {
 		errorLabel.setText("");
 		try {
@@ -91,7 +92,8 @@ public class ModificaSettoreController implements DataInitializable<Settore> {
 			dispatcher.renderError(e);
 		}
 	}
-
+	
+	//si attiva cliccando su Elimina, elimina il Settore e chiude la finistra
 	public void deleteSettoreAction(ActionEvent event) {
 		try {
 			luogoService.deleteSettore(settore);

@@ -48,7 +48,8 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		bigliettoService = factory.getBigliettoService();
 	}
-
+	
+	//disabilita il bottone Compra e imposta tutti i numeri a 0
 	public void initialize() {
 		compraButton.setDisable(true);
 		numBigliettiRidotti = 0;
@@ -70,33 +71,34 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 		metodoLabel.setText(metodo.toString());
 	}
 
-	@FXML
+	@FXML	//aumenta il numero di biglietti ridotti
 	public void piuRidottoAction(ActionEvent event) {
 		numBigliettiRidotti++;
 		ridottoTextField.setText(numBigliettiRidotti.toString());
 	}
 
-	@FXML
+	@FXML	//diminuisce il numero di biglietti ridotti verificando che non scenda sotto lo 0
 	public void menoRidottoAction(ActionEvent event) {
 		if (numBigliettiRidotti > 0)
 			numBigliettiRidotti--;
 		ridottoTextField.setText(numBigliettiRidotti.toString());
 	}
 
-	@FXML
+	@FXML	//aumenta il numero di biglietti interi
 	public void piuInteroAction(ActionEvent event) {
 		numBigliettiInteri++;
 		interoTextField.setText(numBigliettiInteri.toString());
 	}
 
-	@FXML
+	@FXML	//diminuisce il numero di biglietti interi verificando che non scenda sotto lo 0
 	public void menoInteroAction(ActionEvent event) {
 		if (numBigliettiInteri > 0)
 			numBigliettiInteri--;
 		interoTextField.setText(numBigliettiInteri.toString());
 	}
 
-	// viene usato anche per aggiornare il prezzo totale
+	//sblocca il pulsante Compra se è inserito almeno un biglietto
+	//e viene usato anche per aggiornare il prezzo totale
 	public void blockCompraButton() {
 		prezzo = (tariffa.getPrezzoIntero() * numBigliettiInteri) + (tariffa.getPrezzoRidotto() * numBigliettiRidotti)
 				+ "€";
@@ -105,9 +107,10 @@ public class CheckoutController implements DataInitializable<Tariffa>, UtenteIni
 			compraButton.setDisable(false);
 	}
 
-	@FXML
+			// si attiva con il pulsante Compra, verifica se ci sono posti nel settore, se ci sono
+			// crea, inizializza e assegna automaticamente dei posti liberi ai biglietti
+	@FXML	// e apre la vista di selezione dei posti
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
-
 		if (tariffa.getSettore()
 				.getCapienza() < (bigliettoService
 						.findBigliettiByConcertoAndSettore(tariffa.getConcerto(), tariffa.getSettore()).size()

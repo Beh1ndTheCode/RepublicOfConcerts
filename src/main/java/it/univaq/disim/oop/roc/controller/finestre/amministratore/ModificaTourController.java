@@ -39,7 +39,7 @@ public class ModificaTourController implements DataInitializable<Tour> {
 		modificaButton.setDisable(true);
 	}
 
-	@Override
+	@Override //inizializza Label e TextField in base al Tour
 	public void initializeData(Tour tour) {
 		this.tour = tour;
 		nomeTextField.setPromptText(tour.getNome());
@@ -52,7 +52,7 @@ public class ModificaTourController implements DataInitializable<Tour> {
 		modificaButton.setDisable(isDisable);
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Modifica, ti permette di cambiare il nome del Tour
 	public void updateTourAction(ActionEvent event) {
 		try {
 			if (!nomeTextField.getText().isEmpty())
@@ -68,7 +68,7 @@ public class ModificaTourController implements DataInitializable<Tour> {
 		}
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Elimina, elimina il Tour e chiude la finestra
 	public void deleteTourAction(ActionEvent event) {
 		try {
 			tourService.deleteTour(tour);

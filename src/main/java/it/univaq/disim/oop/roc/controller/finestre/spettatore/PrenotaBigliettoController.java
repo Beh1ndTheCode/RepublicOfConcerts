@@ -61,7 +61,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		compraButton.setDisable(true);
 	}
 
-	@Override
+	@Override	//inizializza i Text e la ListView delle tariffe in base al Concerto
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 		if (concerto.getTipoMetodo() == TipologiaMetodoDiPagamento.Carta) {
@@ -80,7 +80,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
-	@Override
+	@Override	//inizializza la ListView dei metodi di pagamento in base al concerto e all'utente
 	public void initializeUtente(Utente utente) {
 		List<MetodoDiPagamento> metodi;
 		try {
@@ -98,7 +98,8 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
-	@FXML
+			//verifica che sia selezionato un Settore, lo scrive in settoreLabel per conferma
+	@FXML	//e scrive il prezzo del biglietto Intero e per il Ridotto del Settore scelto
 	public void settoreSelezionato() {
 		try {
 			if (settoriListView.getSelectionModel().getSelectedItem() == null)
@@ -115,7 +116,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
-	@FXML
+	@FXML	//verifica che sia selezionato un Metodo di pagamento, lo scrive in metodoLabel per conferma
 	public void metodoSelezionato() {
 		try {
 			if (metodiListView.getSelectionModel().getSelectedItem() == null)
@@ -140,7 +141,7 @@ public class PrenotaBigliettoController implements DataInitializable<Concerto>, 
 		}
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Compra, chiude la finestra corrente e apre la finestra di checkout
 	public void CompraBigliettoAction(ActionEvent event) throws BusinessException {
 		try {
 			dispatcher.closeWindowView();

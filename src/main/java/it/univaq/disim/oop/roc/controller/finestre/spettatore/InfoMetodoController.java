@@ -43,7 +43,7 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 		metodiService = factory.getMetodiService();
 	}
 
-	@Override
+	@Override	//inizializza la Carta o il conto e tutte le Label e i Text in base al Metodo di pagamento selezionato
 	public void initializeData(MetodoDiPagamento metodo) {
 		this.metodo = metodo;
 		if (metodo instanceof Carta) {
@@ -71,7 +71,7 @@ public class InfoMetodoController implements DataInitializable<MetodoDiPagamento
 		}
 	}
 
-	@FXML
+	@FXML	//si attiva con il pulsante Elimine, elimina il metodo di pagamento e chiude la pagina
 	public void deleteAction(ActionEvent event) {
 		try {
 			metodiService.deleteMetodo(metodo);

@@ -43,7 +43,8 @@ public class ModificaLuogoController implements DataInitializable<Luogo> {
 	public void initialize() {
 		modificaButton.setDisable(true);
 	}
-
+	
+	//inizializza tutte le Label in base al luogo dato
 	public void initializeData(Luogo luogo) {
 		this.luogo = luogo;
 		nomeLabel.setText(luogo.getNome());
@@ -62,18 +63,22 @@ public class ModificaLuogoController implements DataInitializable<Luogo> {
 		modificaButton.setDisable(isDisable);
 	}
 
+	// verifica che la capienza sia inserita correttamente e aggiorna il Luogo
+	// la capienza non può essere minore della somma della capienza dei settori del Luogo
 	public void updateLuogoAction(ActionEvent event) {
 		capienzaErrorLabel.setText("");
 		try {
 			if (capienzaTextField.getText().length() > 0) {
 				Integer capienzaInput;
+				Integer capienzaRimanente;
 				try {
 					capienzaInput = Integer.parseInt(capienzaTextField.getText());
-					if(capienzaInput < luogo.getCapienza())
-						throw new NumberOutOfBoundsException();
-					luogo.setCapienza(capienzaInput);
+					capienzaRimanente = luogoService.getCapienzaRimanente(luogo);
+						if(capienzaInput < luogo.getCapienza()-capienzaRimanente)
+							throw new NumberOutOfBoundsException();
+						luogo.setCapienza(capienzaInput);
 				} catch (NumberOutOfBoundsException e) {
-					capienzaErrorLabel.setText("Inserire una capienza maggiore alla precedente");
+					capienzaErrorLabel.setText("capienza troppo bassa per i settori inseriti");
 				} catch (NumberFormatException e) {
 					capienzaErrorLabel.setText("Capienza non valida!");
 				}

@@ -57,6 +57,7 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		tariffeService = factory.getTariffeService();
 	}
 
+	//ricerca di tutti i luoghi e inseriti dentro la ListView
 	public void initialize() {
 		aggiungiConcertoButton.setDisable(true);
 		try {
@@ -67,7 +68,8 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 			dispatcher.renderError(e);
 		}
 	}
-
+	
+	//verifica se si è selezionato un luogo e lo mostra su LuogoLabel per conferma
 	public void luogoSelezionato() {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)
@@ -89,7 +91,9 @@ public class AggiungiConcertoController implements DataInitializable<Concerto> {
 		aggiungiConcertoButton.setDisable(isDisable);
 	}
 
-	@FXML
+	@FXML	//si attiva quando clicchi sul buttone Aggiungi, verifica che ogni campo sia riempito
+			//correttamente (altrimenti lancia eccezioni nelle ErrorLabel) e crea il concerto
+			//e le tariffe in base ai settori del concerto
 	public void addConcertoAction(ActionEvent event) {
 		try {
 			if (luoghiListView.getSelectionModel().getSelectedItem() == null)

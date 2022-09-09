@@ -62,7 +62,8 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		this.concerto = concerto;
 	}
 
-	@Override
+				//cerca se esiste una recensione di questo utente per questo concerto
+	@Override	//se esiste inizializza tutti i Field, fa apparire il pulsante Elimina e la Label approvato
 	public void initializeUtente(Utente utente) {
 		this.utente = utente;
 		try {
@@ -86,7 +87,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		}
 	}
 
-	@FXML
+	@FXML	//aumenta il voto e verifica che non superi 5
 	public void piuAction(ActionEvent event) {
 		if (voto < 5) {
 			voto++;
@@ -96,7 +97,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 
 	}
 
-	@FXML
+	@FXML	//diminuisce il voto e verifica che non scenda sotto lo 0
 	public void menoAction(ActionEvent event) {
 		if (voto > 0) {
 			voto--;
@@ -105,7 +106,8 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		votoTextField.setText(voto.toString());
 	}
 
-	@FXML
+			//se non c'è una recensione necessita che ogni campo sia riempito per sbloccare il bottone
+	@FXML	//altrimenti basta che ne venga modificato uno
 	public void blockSalvaButton() {
 		if (recensione == null) {
 			String inputTitolo = titoloTextField.getText();
@@ -123,7 +125,8 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		}
 	}
 
-	@FXML
+	@FXML	//si attiva cliccando su Salva, salva i dati della recensione e imposta l'approvazione su False
+			//se la recenisone non esisteva la crea, se esisteva fa l'update, infine chiude la finestra
 	public void salvaButtonAction(ActionEvent event) {
 		if (recensione == null) {
 			recensione = new Recensione();
@@ -158,7 +161,7 @@ public class RecensioneController implements DataInitializable<Concerto>, Utente
 		}
 	}
 
-	@FXML
+	@FXML	//si attiva con il pulsante Elimina, elimina la recensione e chiude la finestra
 	public void deleteAction(ActionEvent event) {
 		try {
 			recensioniService.deleteRecensione(recensione);

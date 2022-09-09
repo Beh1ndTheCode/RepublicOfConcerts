@@ -77,7 +77,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 	public void initializeData(Luogo luogo) {
 		try {
 			this.luogo = luogo;
-			if (luoghiService.getCapienzaRimanente(luogo) > 2) 
+			if (luoghiService.getCapienzaRimanente(luogo) > 1) 
 				capienzaRimanenteLabel.setText("Capienza rimanente: " + luoghiService.getCapienzaRimanente(luogo).toString());
 			else {
 				capienzaRimanenteLabel.setText("Capienza massima raggiunta");
