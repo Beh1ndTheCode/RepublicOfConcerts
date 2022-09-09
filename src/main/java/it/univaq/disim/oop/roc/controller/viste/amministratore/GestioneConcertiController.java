@@ -43,7 +43,8 @@ public class GestioneConcertiController implements DataInitializable<Object> {
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		concertiService = factory.getConcertoService();
 	}
-
+	
+	//creazione di tutta la Tabella dei Concerti
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());

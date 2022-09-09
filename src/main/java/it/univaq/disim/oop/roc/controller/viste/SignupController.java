@@ -61,7 +61,7 @@ public class SignupController implements DataInitializable<Utente> {
 		signupButton.setDisable(isDisable);
 	}
 
-	@FXML
+	@FXML	//controllo sull'età con eventuale ErrorLabel e creazione dello spettatore
 	public void signupAction(ActionEvent event) {
 		passwordErrorLabel.setText("");
 		etaErrorLabel.setText("");

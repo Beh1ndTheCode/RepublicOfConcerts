@@ -51,6 +51,7 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 		concertoService = factory.getConcertoService();
 	}
 
+	// creazione colonne Artista, Luogo e Data
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());
@@ -65,7 +66,8 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 		});
 	}
 
-	@Override
+	@Override	//creazione colonne con bottoni Biglietti e Recensione
+				//e ricerca dei concerti tramite i biglietti dell'utente
 	public void initializeData(Utente utente) {
 		bigliettiTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button bigliettiButton = new Button("Biglietti");

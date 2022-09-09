@@ -20,7 +20,7 @@ public class HomeController implements UtenteInitializable<Utente>, DataInitiali
 		 benvenutoLabel.setText(testo.toString()); 
 	 }
 	 
-	 public void initializeBool(boolean registrazione) {
+	 public void initializeData(Boolean registrazione) {
 		 if (registrazione) {
 			 registrazioneLabel.setText("Registrazione avvenuta con successo");
 		 }

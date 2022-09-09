@@ -72,6 +72,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 		metodiService = factory.getMetodiService();
 	}
 
+	//creazione di tutta la tabella dei Metodi di pagamento
 	public void initialize() {
 		modificaDatiButton.setDisable(true);
 		tipoTableColumn.setCellValueFactory((CellDataFeatures<MetodoDiPagamento, String> param) -> {
@@ -116,7 +117,7 @@ public class ProfiloController implements DataInitializable<Utente> {
 
 	}
 
-	@Override
+	@Override	//inizializzazione delle Label e ricerca dei Metodi di pagamento tramite Utente
 	public void initializeData(Utente utente) {
 		this.spettatore = (Spettatore) utente;
 		usernameField.setPromptText(utente.getUsername());
@@ -143,7 +144,9 @@ public class ProfiloController implements DataInitializable<Utente> {
 				&& username.isEmpty() && età.isEmpty());
 		modificaDatiButton.setDisable(isDisable);
 	}
-
+	
+	//esegue l'update dei dati quando viene cliccato il bottone Modifica
+	//vengono fatte le verifiche e se necessario blocca l'update e attiva le ErrorLabel
 	public void updateDatiAction(ActionEvent event) {
 		ageErrorLabel.setText("");
 		oldPswErrorLabel.setText("");

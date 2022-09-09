@@ -40,7 +40,8 @@ public class GestioneTourController implements DataInitializable<Object> {
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		tourService = factory.getTourService();
 	}
-
+	
+	// creazione di tutta la tabella dei Tour
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Tour, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());

@@ -40,7 +40,8 @@ public class GestioneRecensioniController implements DataInitializable<Object> {
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		recensioniService = factory.getRecensioniService();
 	}
-
+	
+	// creazione di tutta la tabella delle Recensioni
 	public void initialize() {
 		valutazioneTableColumn.setCellValueFactory((CellDataFeatures<Recensione, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getValutazione().toString());

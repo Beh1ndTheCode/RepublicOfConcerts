@@ -50,7 +50,8 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		luoghiService = factory.getLuogoService();
 	}
-
+	
+	// creazione di tutta la tabella dei settori
 	public void initialize() {
 		nomeTableColumn.setCellValueFactory((CellDataFeatures<Settore, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getNome());
@@ -60,7 +61,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 		});
 
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Settore, Button> param) -> {
-			final Button infoButton = new Button("Info");
+			final Button infoButton = new Button("Modifica");
 			infoButton.setOnAction(e -> {
 				try {
 					dispatcher.openNewWindow("modificasettore", param.getValue());
@@ -72,7 +73,7 @@ public class GestioneSettoriController implements DataInitializable<Luogo> {
 		});
 	}
 
-	@Override
+	@Override	//inizializzazione Label in e ricerca dei settori tramite Luogo
 	public void initializeData(Luogo luogo) {
 		try {
 			this.luogo = luogo;

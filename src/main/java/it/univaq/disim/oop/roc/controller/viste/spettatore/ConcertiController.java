@@ -43,7 +43,8 @@ public class ConcertiController implements DataInitializable<Utente> {
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		concertiService = factory.getConcertoService();
 	}
-
+	
+	//creazione colonne Artista, Luogo e Data
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());
@@ -58,7 +59,7 @@ public class ConcertiController implements DataInitializable<Utente> {
 		});
 	}
 
-	@Override
+	@Override	//creazione colonna con bottone Info e ricerca di tutti i Concerti
 	public void initializeData(Utente utente) {
 		azioniTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button infoButton = new Button("Info");

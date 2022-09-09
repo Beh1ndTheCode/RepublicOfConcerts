@@ -1,3 +1,7 @@
-3
+7
 1,admin,admin,amministratore,Mario,Rossi,35
 2,spettatore,spettatore,spettatore,Giovanni,Bianchi,31,1
+3,asd,asd,spettatore,asd,asd,12,null
+4,asd,asd,spettatore,asd,asd,12,null
+5,asd,asd,spettatore,asd,asd,12,null
+6,asd,asd,spettatore,asd,asd1,21,null

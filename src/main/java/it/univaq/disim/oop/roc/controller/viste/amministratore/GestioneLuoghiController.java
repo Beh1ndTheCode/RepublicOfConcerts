@@ -41,6 +41,7 @@ public class GestioneLuoghiController implements DataInitializable<Luogo> {
 		luoghiService = factory.getLuogoService();
 	}
 
+	// creazione di tutta la tabella dei Luoghi
 	public void initialize() {
 		tipoTableColumn.setCellValueFactory((CellDataFeatures<Luogo, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getTipologiaLuogo().toString());

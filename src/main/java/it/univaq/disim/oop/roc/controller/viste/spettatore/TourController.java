@@ -39,7 +39,8 @@ public class TourController implements DataInitializable<Utente> {
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		tourService = factory.getTourService();
 	}
-
+	
+	// creazione colonne Artista e Nome
 	public void initialize() {
 		artistaTableColumn.setCellValueFactory((CellDataFeatures<Tour, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getArtista());
@@ -49,7 +50,7 @@ public class TourController implements DataInitializable<Utente> {
 		});
 	}
 
-	@Override
+	@Override	//creazione colonna con Bottone Info e ricerca di tutti i Tour
 	public void initializeData(Utente utente) {
 		modificaTableColumn.setCellValueFactory((CellDataFeatures<Tour, Button> param) -> {
 			final Button infoButton = new Button("Info");

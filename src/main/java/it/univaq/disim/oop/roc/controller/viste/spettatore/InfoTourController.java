@@ -48,6 +48,7 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 		concertiService = factory.getConcertoService();
 	}
 
+	// creazione colonne Luogo e Data
 	public void initialize() {
 		luogoTableColumn.setCellValueFactory((CellDataFeatures<Concerto, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getLuogo().toString());
@@ -59,7 +60,7 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 		});
 	}
 
-	@Override
+	@Override	//creazione colonna con bottone Prenota
 	public void initializeUtente(Utente utente) {
 		prenotaTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button prenotaButton = new Button("Prenota");
@@ -74,7 +75,7 @@ public class InfoTourController implements DataInitializable<Tour>, UtenteInitia
 		});
 	}
 
-	@Override
+	@Override	//inizializzazione Label e ricerca dei Concerti tramite il Tour
 	public void initializeData(Tour tour) {
 		tourLabel.setText(tourLabel.getText() + " " + tour.getNome());
 		artistaLabel.setText(tour.getArtista());

@@ -46,11 +46,7 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		concertoService = factory.getConcertoService();
 	}
 
-	public void initialize() {
-
-	}
-
-	@Override
+	@Override	//dato un concerto imposta tutte le Label, i TextFiel e i bottoni
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 
@@ -85,7 +81,8 @@ public class ModificaConcertoController implements DataInitializable<Concerto> {
 		concerto.setTipoMetodo(TipologiaMetodoDiPagamento.Carta);
 	}
 
-	@FXML
+			//si attiva al click del pulsante Modifica verifica quali dati sono da modificare
+	@FXML	//se i dati non sono corretti imposta le ErrorLabel altrimenti li modifica e fa l'update
 	public void updateConcertoAction(ActionEvent event) throws BusinessException {
 		try {
 			if (giornoTextField.getText().isEmpty() || meseTextField.getText().isEmpty()

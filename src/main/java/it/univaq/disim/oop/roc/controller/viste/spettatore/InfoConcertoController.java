@@ -35,11 +35,7 @@ public class InfoConcertoController implements DataInitializable<Concerto>, Uten
 		dispatcher = ViewDispatcher.getInstance();
 	}
 
-	public void initialize() {
-
-	}
-
-	@Override
+	@Override	//inizializzazione delle varie Label dato il concerto
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
 

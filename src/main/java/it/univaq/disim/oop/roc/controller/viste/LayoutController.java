@@ -1,6 +1,7 @@
 package it.univaq.disim.oop.roc.controller.viste;
 
 import it.univaq.disim.oop.roc.controller.DataInitializable;
+import it.univaq.disim.oop.roc.controller.UtenteInitializable;
 import it.univaq.disim.oop.roc.domain.Amministratore;
 import it.univaq.disim.oop.roc.domain.Spettatore;
 import it.univaq.disim.oop.roc.domain.Utente;
@@ -14,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class LayoutController implements DataInitializable<Utente> {
+public class LayoutController implements DataInitializable<Object>, UtenteInitializable<Utente> {
 
 	@FXML
 	private BorderPane layout;
@@ -45,8 +46,9 @@ public class LayoutController implements DataInitializable<Utente> {
 	public LayoutController() {
 		dispatcher = ViewDispatcher.getInstance();
 	}
-
-	public void initializeData(Utente utente) {
+	
+	//creazione dinamica del menù a tendina in base al tipo di Utente(amministratore o spettatore)
+	public void initializeUtente(Utente utente) {
 		this.utente = utente;
 		if (utente instanceof Amministratore) {
 			bottoneMenu.setText("Gestisci");

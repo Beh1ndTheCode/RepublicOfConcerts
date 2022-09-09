@@ -36,7 +36,8 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		concertoService = factory.getConcertoService();
 	}
-
+	
+	//blocca i bottoni e da la possibilità di selezionare più elementi contemporaneamente nelle List View
 	public void initialize() {
 		aggiungiButton.setDisable(true);
 		eliminaConcertiButton.setDisable(true);
@@ -44,7 +45,7 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 		tourConcertiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 
-	@Override
+	@Override	//inizializza le ListView cercando i concerti per Artista e per Tour
 	public void initializeData(Tour tour) {
 		this.tour = tour;
 		try {
@@ -72,7 +73,8 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 			eliminaConcertiButton.setDisable(false);
 	}
 
-	@FXML
+			//si attiva premento il bottone Aggiungi
+	@FXML	//prende i concerti selezionati e li aggiunge al Tour
 	public void addConcertiAction(ActionEvent event) {
 		try {
 			for (Concerto concert : allConcertiArtistaListView.getSelectionModel().getSelectedItems()) {
@@ -87,7 +89,8 @@ public class TourGestioneConcertiController implements DataInitializable<Tour> {
 		}
 	}
 
-	@FXML
+			//si attiva premento il bottone Elimina
+	@FXML	//prende i concerti selezionati e li elimina dal Tour
 	public void deleteConcertiAction(ActionEvent event) {
 		try {
 			for (Concerto concert : tourConcertiListView.getSelectionModel().getSelectedItems()) {

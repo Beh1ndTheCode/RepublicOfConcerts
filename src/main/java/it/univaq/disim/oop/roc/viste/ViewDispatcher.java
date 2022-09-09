@@ -39,13 +39,16 @@ public class ViewDispatcher {
 		stage.setScene(scene);
 	}
 
-	public void loggedIn(Utente utente) {
+	public<T> void loggedIn(T utente) {
 		try {
-			View<Utente> layoutView = loadView("layout");
-			DataInitializable<Utente> layoutController = layoutView.getController();
-			layoutController.initializeData(utente);
+			Boolean registrazione = false;
+			View<T> layoutView = loadView("layout");
+			DataInitializable<T> layoutController = layoutView.getController();
+			layoutController.initializeData((T) registrazione);
+			UtenteInitializable<T> controllerUtente = (UtenteInitializable<T>) layoutView.getController();
+			controllerUtente.initializeUtente(utente);
 			layout = (BorderPane) layoutView.getView();
-			renderView("home",false,utente);
+			renderView("home",registrazione,utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
 		} catch (ViewException e) {
@@ -122,13 +125,16 @@ public class ViewDispatcher {
 		stage.setScene(scene);
 	}
 
-	public void signedUp(Utente utente) {
+	public<T> void signedUp(T utente) {
 		try {
-			View<Utente> layoutView = loadView("layout");
-			DataInitializable<Utente> layoutController = layoutView.getController();
-			layoutController.initializeData(utente);
+			Boolean registrazione = true;
+			View<T> layoutView = loadView("layout");
+			DataInitializable<T> layoutController = layoutView.getController();
+			layoutController.initializeData((T) registrazione);
+			UtenteInitializable<T> controllerUtente = (UtenteInitializable<T>) layoutView.getController();
+			controllerUtente.initializeUtente(utente);
 			layout = (BorderPane) layoutView.getView();
-			renderView("home",true,utente);
+			renderView("home",registrazione,utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
 		} catch (ViewException e) {

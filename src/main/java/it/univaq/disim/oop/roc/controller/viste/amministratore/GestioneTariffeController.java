@@ -61,6 +61,7 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 		tariffeService = factory.getTariffeService();
 	}
 
+	// creazione di tutta la tabella delle tariffe
 	public void initialize() {
 		settoreTableColumn.setCellValueFactory((CellDataFeatures<Tariffa, String> param) -> {
 			return new SimpleStringProperty(param.getValue().getSettore().getNome());
@@ -81,7 +82,8 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 			return new SimpleObjectProperty<Button>(selezionaButton);
 		});
 	}
-
+	
+	//inizializzazione della Label concerto e ricerca delle Tariffe tramite Concerto
 	public void initializeData(Concerto concerto) {
 		modificaButton.setDisable(true);
 		this.concerto = concerto;
@@ -100,7 +102,8 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 		boolean isDisable = tariffa.isEmpty();
 		modificaButton.setDisable(isDisable);
 	}
-
+	
+	//verifica se viene selezionata una tariffa e cambia il testo per confermare la scelta
 	public void tariffaSelezionata() {
 		try {
 			if (settoriTableView.getSelectionModel().getSelectedItem() == null)
@@ -112,26 +115,25 @@ public class GestioneTariffeController implements DataInitializable<Concerto> {
 		}
 	}
 
+	//verifica che il prezzo selezionato sia valido e che sia selezionata una tariffa
+	//imposta il prezzo alla tariffa per poi fare l'update
 	public void setTariffaAction(ActionEvent event) {
 		try {
 			if (tariffa == null)
 				throw new SelectionException();
 			Float inputPrezzo;
-			try {
-				inputPrezzo = Float.parseFloat(prezzoTextField.getText().replace(",", "."));
-				if (inputPrezzo < 0)
-					throw new NumberFormatException();
-				tariffa.setPrezzo(inputPrezzo);
-			} catch (NumberFormatException n) {
-				errorLabel.setText("Tariffa non valida");
-			}
+			inputPrezzo = Float.parseFloat(prezzoTextField.getText().replace(",", "."));
+			if (inputPrezzo < 0)
+				throw new NumberFormatException();
+			tariffa.setPrezzo(inputPrezzo);
 			tariffeService.setTariffa(tariffa);
-
 			dispatcher.renderView("gestionetariffe", concerto);
 		} catch (SelectionException e) {
 			errorLabel.setText("Settore non selezionato");
 		} catch (BusinessException e) {
 			dispatcher.renderError(e);
+		} catch (NumberFormatException n) {
+			errorLabel.setText("Tariffa non valida");
 		}
 	}
 
