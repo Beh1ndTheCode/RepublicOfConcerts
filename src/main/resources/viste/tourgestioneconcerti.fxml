@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.TourGestioneConcertiController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.viste.amministratore.TourGestioneConcertiController">
    <children>
       <ListView fx:id="allConcertiArtistaListView" layoutX="14.0" layoutY="59.0" onMouseReleased="#blockAggiungiButton" prefHeight="268.0" prefWidth="273.0" />
       <ListView fx:id="tourConcertiListView" layoutX="313.0" layoutY="59.0" onMouseReleased="#blockEliminaConcertiAction" prefHeight="268.0" prefWidth="273.0" />

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.CheckoutController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.roc.controller.finestre.spettatore.CheckoutController">
    <children>
       <Button fx:id="compraButton" layoutX="297.0" layoutY="63.0" mnemonicParsing="false" onAction="#CompraBigliettoAction" prefHeight="20.0" prefWidth="87.0" text="Compra">
          <font>
