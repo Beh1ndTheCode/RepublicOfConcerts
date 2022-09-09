@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import it.univaq.disim.oop.roc.controller.DataInitializable;
 import it.univaq.disim.oop.roc.controller.UtenteInitializable;
-import it.univaq.disim.oop.roc.domain.Utente;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,7 +18,7 @@ public class ViewDispatcher {
 
 	private static ViewDispatcher instance = new ViewDispatcher();
 
-	private Stage stage,window;
+	private Stage stage, window;
 	private BorderPane layout;
 
 	private ViewDispatcher() {
@@ -39,7 +38,8 @@ public class ViewDispatcher {
 		stage.setScene(scene);
 	}
 
-	public<T> void loggedIn(T utente) {
+	@SuppressWarnings("unchecked")
+	public <T> void loggedIn(T utente) {
 		try {
 			Boolean registrazione = false;
 			View<T> layoutView = loadView("layout");
@@ -48,7 +48,7 @@ public class ViewDispatcher {
 			UtenteInitializable<T> controllerUtente = (UtenteInitializable<T>) layoutView.getController();
 			controllerUtente.initializeUtente(utente);
 			layout = (BorderPane) layoutView.getView();
-			renderView("home",registrazione,utente);
+			renderView("home", registrazione, utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
 		} catch (ViewException e) {
@@ -76,12 +76,13 @@ public class ViewDispatcher {
 			renderError(e);
 		}
 	}
-	
+
 	public <T> void renderView(String viewName, T data, T utente) {
 		try {
 			View<T> view = loadView(viewName);
 			DataInitializable<T> controllerData = view.getController();
 			controllerData.initializeData(data);
+			@SuppressWarnings("unchecked")
 			UtenteInitializable<T> controllerUtente = (UtenteInitializable<T>) view.getController();
 			controllerUtente.initializeUtente(utente);
 			layout.setCenter(view.getView());
@@ -89,7 +90,7 @@ public class ViewDispatcher {
 			renderError(e);
 		}
 	}
-	
+
 	public <T> void renderView(String viewName) {
 		try {
 			View<T> view = loadView(viewName);
@@ -125,7 +126,8 @@ public class ViewDispatcher {
 		stage.setScene(scene);
 	}
 
-	public<T> void signedUp(T utente) {
+	@SuppressWarnings("unchecked")
+	public <T> void signedUp(T utente) {
 		try {
 			Boolean registrazione = true;
 			View<T> layoutView = loadView("layout");
@@ -134,14 +136,14 @@ public class ViewDispatcher {
 			UtenteInitializable<T> controllerUtente = (UtenteInitializable<T>) layoutView.getController();
 			controllerUtente.initializeUtente(utente);
 			layout = (BorderPane) layoutView.getView();
-			renderView("home",registrazione,utente);
+			renderView("home", registrazione, utente);
 			Scene scene = new Scene(layout);
 			stage.setScene(scene);
 		} catch (ViewException e) {
 			renderError(e);
 		}
 	}
-	
+
 	public <T> void openNewWindow(String windowName, T data) throws ViewException {
 		window = new Stage();
 		View<T> windowController = loadWindow(windowName);
@@ -152,7 +154,8 @@ public class ViewDispatcher {
 		window.setScene(scene);
 		window.show();
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public <T> void openNewWindow(String windowName, T data, T utente) throws ViewException {
 		window = new Stage();
 		View<T> windowController = loadWindow(windowName);
@@ -165,7 +168,7 @@ public class ViewDispatcher {
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	public <T> void openNewWindow(String windowName) throws ViewException {
 		window = new Stage();
 		Parent windowView = loadWindow(windowName).getView();
@@ -173,7 +176,7 @@ public class ViewDispatcher {
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	private <T> View<T> loadWindow(String windowName) throws ViewException {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(FINESTRE_BASE + windowName + FXML_SUFFIX));
@@ -183,7 +186,7 @@ public class ViewDispatcher {
 			throw new ViewException(ex);
 		}
 	}
-	
+
 	public void closeWindowView() {
 		window.close();
 	}

@@ -1,5 +1,6 @@
 package it.univaq.disim.oop.roc.controller.viste.spettatore;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,9 @@ public class ITuoiConcertiController implements DataInitializable<Utente> {
 		});
 		recensioneTableColumn.setCellValueFactory((CellDataFeatures<Concerto, Button> param) -> {
 			final Button recensioneButton = new Button("Recensione");
+			LocalDate localDate = LocalDate.now();
+			if (param.getValue().getData().isAfter(localDate))
+				recensioneButton.setDisable(true);
 			recensioneButton.setOnAction(e -> {
 				try {
 					dispatcher.openNewWindow("recensione", param.getValue(), utente);

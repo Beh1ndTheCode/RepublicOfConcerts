@@ -17,6 +17,7 @@ public interface ConcertoService {
 
 	List<Concerto> findAllConcerti() throws BusinessException;
 
+	// Viene invocato per selezionare un artista nel momento della creazione di un tour
 	List<Concerto> findConcertiByArtista(String artista) throws BusinessException;
 
 	List<Concerto> findConcertiByTour(Tour tour) throws BusinessException;

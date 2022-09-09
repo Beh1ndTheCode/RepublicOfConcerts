@@ -48,6 +48,7 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 		RocBusinessFactory factory = RocBusinessFactory.getInstance();
 		bigliettoService = factory.getBigliettoService();
 	}
+
 	// creazione colonna Prezzo, Numero biglietta e Posto
 	public void initialize() {
 		prezzoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, String> param) -> {
@@ -66,9 +67,11 @@ public class BigliettiController implements DataInitializable<Concerto>, UtenteI
 	@Override
 	public void initializeData(Concerto concerto) {
 		this.concerto = concerto;
+		concertoLabel.setText(concerto.getArtista() + ", " + concerto.toString());
 	}
 
-	@Override	//crazione colonna con bottone Cambia posto e ricerca dei Biglietti tramite Utente
+				// creazione colonna con bottone Cambia posto e ricerca dei Biglietti tramite Utente
+	@Override		
 	public void initializeUtente(Utente utente) {
 		cambiaPostoTableColumn.setCellValueFactory((CellDataFeatures<Biglietto, Button> param) -> {
 			final Button prenotaButton = new Button("Cambia Posto");

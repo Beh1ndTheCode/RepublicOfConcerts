@@ -1,4 +1,4 @@
-8
+9
 1,Tiziano Ferro,2,2022-12-10,Sere nere - Rosso relativo - Non me lo so spiegare,Carta,2
 2,Tiziano Ferro,5,2022-12-15,Sere nere - Rosso relativo - Non me lo so spiegare,Carta,2
 3,Tiziano Ferro,1,2022-12-05,Sere nere - Rosso relativo - Non me lo so spiegare,Conto,2
@@ -6,3 +6,4 @@
 5,Gemitaiz,5,2023-03-08,Davide - Veleno 7 - Bene - Senza di me,null,1
 6,Gianni Morandi,6,2022-10-22,Apri tutte le porte - Scende la pioggia,Carta,3
 7,Gianni Morandi,3,2022-10-25,Apri tutte le porte - Scende la pioggia,null,3
+8,Tiziano Ferro,1,2022-09-05,Inserisci una scaletta,null,null

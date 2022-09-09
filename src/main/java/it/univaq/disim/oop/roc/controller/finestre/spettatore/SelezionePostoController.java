@@ -50,7 +50,7 @@ public class SelezionePostoController implements DataInitializable<Biglietto>, U
 	public void initializeData(Biglietto biglietto) {
 		this.biglietto = biglietto;
 		bigliettoLabel.setText(
-				"Biglietto: " + biglietto.getTipologiaBiglietto().toString() + ",     Posto: " + biglietto.getPosto());
+				"Biglietto: " + biglietto.getTipologiaBiglietto().toString() + "     Posto: " + biglietto.getPosto());
 		postiLabel.setText("min 0   max " + biglietto.getSettore().getCapienza());
 		postoTextField.setPromptText(biglietto.getPosto().toString());
 	}

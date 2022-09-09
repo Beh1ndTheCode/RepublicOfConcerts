@@ -8,8 +8,10 @@ public interface UtenteService {
 
 	Utente authenticate(String username, String password) throws BusinessException;
 
+	// Viene restituito un Utente per passare alla schermata Home dopo la registrazione
 	Utente registration(Spettatore spettatore) throws BusinessException;
 
+	// Viene invocato sia quando si aggiornano dei dati personali sia quando si cambia meotdo preferito
 	void updateDati(Spettatore spettatore) throws BusinessException;
 
 	Utente findUtenteById(int id) throws BusinessException;
